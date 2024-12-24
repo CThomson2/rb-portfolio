@@ -16,17 +16,17 @@ export default function Home() {
       <Flex as="main" className={styles.main} direction="column" align="center">
         <ChakraImage
           className={styles.logo}
-          src="/next.svg"
+          src="/media/logo-banner.png"
           alt="Next.js logo"
           width={180}
           height={38}
         />
-        <List>
+        {/* <List>
           <ListItem>
-            Get started by editing <code>src/app/page.tsx</code>.
+            Get started by altering <code>src/app/page.tsx</code>.
           </ListItem>
           <ListItem>Save and see your changes instantly.</ListItem>
-        </List>
+        </List> */}
 
         <Flex className={styles.ctas} direction="column" align="center">
           <ChakraLink
@@ -45,7 +45,7 @@ export default function Home() {
             Deploy now
           </ChakraLink>
           <ChakraLink
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+            href=""
             target="_blank"
             rel="noopener noreferrer"
             className={styles.secondary}
