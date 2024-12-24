@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model bottle_sizes {
+  id             Int              @id @default(autoincrement())
+  volume         String?          @db.VarChar(10)
+  product_prices product_prices[]
+}
+
+model chemical_groups {
+  group_id Int    @id @default(autoincrement())
+  name     String @db.VarChar(30)
+}
+
+model product_prices {
+  product_id     Int
+  bottle_size_id Int
+  price          Decimal?     @db.Decimal(10, 2)
+  bottle_sizes   bottle_sizes @relation(fields: [bottle_size_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_bottle_size")
+  products       products     @relation(fields: [product_id], references: [product_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_product")
+
+  @@id([product_id, bottle_size_id])
+}
+
+model products {
+  product_id      Int              @id @default(autoincrement())
+  name            String?          @db.VarChar(50)
+  sku             String?          @unique(map: "product_sku_key") @db.VarChar(20)
+  raw_material_id Int?
+  grade           String?          @db.VarChar(10)
+  product_prices  product_prices[]
+}
+
+model raw_materials {
+  raw_material_id Int     @id @default(autoincrement())
+  name            String  @db.VarChar(100)
+  cas_number      String  @db.VarChar(20)
+  chemical_group  String? @default("Hydrocarbon") @db.VarChar(50)
+  description     String? @db.VarChar(150)
+  un_code         String? @db.Char(4)
+  flash_point     Int?
+}
