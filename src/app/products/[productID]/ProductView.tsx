@@ -13,7 +13,7 @@ interface ProductCardProps {
   product: ProductPrice;
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductView({ product }: ProductCardProps) {
   return (
     <Box border="1px" borderColor="gray.300" borderRadius="md" p={4}>
       <Heading as="h2" size="md" mb={4}>

@@ -6,13 +6,17 @@ export interface Product {
   sku: string;
   grade: string;
 }
+export interface ProductRow extends Product {
+  cas_number: string;
+}
 
-export interface ProductPrice {
-  product_id: number;
-  name: string;
-  sku: string;
-  raw_material_id: number | null;
-  grade: string;
+export interface ProductModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  product: ProductRow | null;
+}
+
+export interface ProductPrice extends Product {
   product_prices: {
     bottle_sizes: {
       id: number;

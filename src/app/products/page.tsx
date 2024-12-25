@@ -7,18 +7,37 @@ import {
   Flex,
 } from "@chakra-ui/react";
 
-import type { Product } from "./types";
+import type { ProductRow } from "./types";
 import SearchTableOverview from "./components/SearchTableOverview";
 import Banner from "./components/Banner";
 
 export default async function ProductsPage() {
-  const products = await prisma.products.findMany();
+  const products: ProductRow[] = await prisma.products
+    .findMany({
+      select: {
+        product_id: true,
+        name: true,
+        sku: true,
+        grade: true,
+        raw_materials: {
+          select: {
+            cas_number: true,
+          },
+        },
+      },
+    })
+    .then((products) =>
+      products.map((product) => ({
+        ...product,
+        cas_number: product.raw_materials?.cas_number ?? "",
+      }))
+    );
 
   return (
     <Box as="main" p={4}>
       {/* <Banner /> */}
       <Heading as="h1" size="lg" mb={4}>
-        Our Products
+        Product Range
       </Heading>
       <SearchTableOverview tableData={products} />
     </Box>

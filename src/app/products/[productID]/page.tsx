@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { Box, Heading, Text, Flex } from "@chakra-ui/react";
-import ProductCard from "./ProductCard";
+import ProductCard from "./ProductView";
 
 // Server component to display product details
 export default async function ProductPage({
