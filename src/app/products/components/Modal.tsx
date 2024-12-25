@@ -19,8 +19,6 @@ import {
   DialogHeader,
 } from "@/components/ui/dialog";
 import { ProductPrice } from "../types";
-import { prisma } from "@/lib/prisma";
-import { useRouter } from "next/navigation";
 
 interface ProductModalProps {
   isOpen: boolean;
@@ -44,11 +42,16 @@ export default function ProductModal({
         <DialogBody>
           <Text>SKU: {product.sku}</Text>
           <Text>Grade: {product.grade}</Text>
-          <Flex mt={4}>
+          <Flex mt={4} justify="space-between">
             {product.product_prices.map((price) => (
-              <Box key={price.bottle_size_id} p={2}>
-                <Text>{price.bottle_sizes.volume}</Text>
-                <Text>£{price.price.toString()}</Text>
+              <Box
+                key={price.bottle_size_id}
+                p={2}
+                borderWidth="1px"
+                borderRadius="md"
+              >
+                <Text>Volume: {price.bottle_sizes.volume}</Text>
+                <Text>Price: £{price.price.toString()}</Text>
               </Box>
             ))}
           </Flex>
