@@ -1,49 +1,46 @@
-"use client";
+import { prisma } from "@/lib/prisma";
+import {
+  Heading,
+  ListRoot as List,
+  ListItem,
+  Box,
+  Flex,
+} from "@chakra-ui/react";
 
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { Heading, ListRoot as List, ListItem, Box } from "@chakra-ui/react";
+import type { Product } from "./types";
+import SearchTableOverview from "./components/SearchTableOverview";
+import Banner from "./components/Banner";
 
-// src/app/products/page.tsx
-export default function ProductsPage() {
-  const [products, setProducts] = useState<
-    { product_id: number; name: string; grade: string }[]
-  >([]);
-
-  useEffect(() => {
-    async function fetchProducts() {
-      try {
-        const response = await axios.get("/api/products");
-        setProducts(response.data);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    }
-    fetchProducts();
-  }, []);
+export default async function ProductsPage() {
+  const products = await prisma.products.findMany();
 
   return (
     <Box as="main" p={4}>
+      {/* <Banner /> */}
       <Heading as="h1" size="lg" mb={4}>
         Our Products
       </Heading>
-      <List>
-        {products.map((product) => (
-          <ListItem
-            key={product.product_id}
-            p={4}
-            border="1px"
-            borderColor="gray.200"
-            borderRadius="md"
-            _hover={{ bg: "gray.50" }}
-          >
-            <Heading as="h3" size="md">
-              {product.name}
-            </Heading>
-            <Box as="p">{product.grade}</Box>
-          </ListItem>
-        ))}
-      </List>
+      <SearchTableOverview tableData={products} />
     </Box>
   );
 }
+
+/*
+// Chakra imports
+import { Flex } from '@chakra-ui/react';
+// import Card from 'components/card/Card';
+import React from 'react';
+import Banner from 'views/admin/main/ecommerce/overviewProduct/components/Banner';
+import SearchTableOverview from 'views/admin/main/ecommerce/overviewProduct/components/SearchTableOverview';
+import tableDataOverview from 'views/admin/main/ecommerce/overviewProduct/variable/tableDataOverview';
+
+export default function ProductOverview() {
+	return (
+		<Flex direction='column' pt={{ sm: '125px', lg: '75px' }}>
+			<Banner />
+			<SearchTableOverview tableData={tableDataOverview} />
+		</Flex>
+	);
+}
+
+*/

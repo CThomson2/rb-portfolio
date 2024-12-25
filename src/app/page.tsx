@@ -9,10 +9,13 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
+import Header from "@/components/static/Header";
+import Footer from "@/components/static/Footer";
 
 export default function Home() {
   return (
     <Box className={styles.page}>
+      <Header />
       <Flex as="main" className={styles.main} direction="column" align="center">
         <ChakraImage
           className={styles.logo}
@@ -31,7 +34,7 @@ export default function Home() {
         <Flex className={styles.ctas} direction="column" align="center">
           <ChakraLink
             className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+            href="/products"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -42,22 +45,14 @@ export default function Home() {
               width={20}
               height={20}
             />
-            Deploy now
+            Products
           </ChakraLink>
-          <ChakraLink
-            href=""
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </ChakraLink>
+          <Link href="/products" passHref>
+            <ChakraLink className={styles.secondary}>Product Range</ChakraLink>
+          </Link>
         </Flex>
-
-        <Link href="/products" passHref>
-          <ChakraLink className={styles.secondary}>Go to Products</ChakraLink>
-        </Link>
       </Flex>
+      <Footer />
     </Box>
   );
 }
