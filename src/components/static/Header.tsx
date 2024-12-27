@@ -14,13 +14,7 @@ import { SearchBar } from "@/components/navbar/SearchBar";
 function WhiteStrip() {
   return (
     <Box bg="white" color="black" py={6} boxShadow="sm">
-      <Flex
-        justify="space-between"
-        align="center"
-        maxW="1200px"
-        mx="auto"
-        px={8}
-      >
+      <Flex justify="space-between" align="center" mx="auto" px={8}>
         <Image
           src="/logo-banner.png"
           alt="Rathburn Chemicals"
@@ -45,16 +39,14 @@ function RedStrip() {
       <Flex
         justify="space-between"
         align="center"
-        maxW="1200px"
+        h="fit-content"
         mx="auto"
         px={8}
       >
         <SearchBar />
-        <HStack>
-          <Button colorScheme="green" size="md" variant="solid">
-            Request a Quote
-          </Button>
-        </HStack>
+        <Button colorScheme="green" size="md" variant="solid">
+          Request a Quote
+        </Button>
       </Flex>
     </Box>
   );
@@ -62,8 +54,9 @@ function RedStrip() {
 
 export default function Header() {
   return (
-    <>
+    <Box>
+      <WhiteStrip />
       <RedStrip />
-    </>
+    </Box>
   );
 }

@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <Box bg="gray.900" color="white" py={6}>
-      <Flex direction="column" align="center" maxW="1200px" mx="auto">
+      <Flex direction="column" align="center" w="100vw">
         <Flex gap={4} mb={4}>
           <Link href="/terms-and-conditions" className="hover:underline">
             Terms & Conditions

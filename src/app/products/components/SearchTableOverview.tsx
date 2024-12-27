@@ -31,13 +31,13 @@ import { system } from "@/theme/theme";
 import type { ProductRow, ProductPrice } from "../types";
 
 const cellStyles = {
-  px: "12px", // Padding
-  py: "16px", // Padding for taller cells
-  fontSize: "md", // Medium font size
-  fontFamily: "body", // Default Chakra font family
-  whiteSpace: "nowrap", // Prevent text wrapping
-  textAlign: "left", // Align text to left
-  // borderBottom: "0", // Subtle border
+  px: "12px",
+  py: "16px",
+  fontSize: "md",
+  fontFamily: "body",
+  whiteSpace: "nowrap",
+  textAlign: "left",
+  borderRight: "1px solid",
   borderColor: "gray.300",
 };
 
@@ -113,30 +113,30 @@ export default function SearchTableOverview({
     columnHelper.accessor("name", {
       header: () => <Text color="gray.400">NAME</Text>,
       cell: (info) => (
-        <Text color={system.token("colors.navy.700")}>{info.getValue()}</Text>
+        <Text color={system.token("colors.brand.100")}>{info.getValue()}</Text>
       ),
-      meta: { width: "40%", flexGrow: 0, minWidth: "40%" },
+      meta: { width: "40%", flexGrow: 1, minWidth: "30%" },
     }),
     columnHelper.accessor("grade", {
       header: () => <Text color="gray.400">GRADE</Text>,
       cell: (info) => (
-        <Text color={system.token("colors.navy.700")}>{info.getValue()}</Text>
+        <Text color={system.token("colors.brand.500")}>{info.getValue()}</Text>
       ),
-      meta: { width: "30%", flexGrow: 0, minWidth: "30%" },
+      meta: { width: "20%", flexGrow: 1, minWidth: "20%" },
     }),
     columnHelper.accessor("sku", {
       header: () => <Text color="gray.400">Lot No.</Text>,
       cell: (info) => (
-        <Text color={system.token("colors.navy.700")}>{info.getValue()}</Text>
+        <Text color={system.token("colors.brand.300")}>{info.getValue()}</Text>
       ),
-      meta: { width: "30%", flexGrow: 0, minWidth: "30%" },
+      meta: { width: "20%", flexGrow: 1, minWidth: "25%" },
     }),
     columnHelper.accessor("cas_number", {
       header: () => <Text color="gray.400">CAS No.</Text>,
       cell: (info) => (
-        <Text color={system.token("colors.navy.700")}>{info.getValue()}</Text>
+        <Text color={system.token("colors.brand.300")}>{info.getValue()}</Text>
       ),
-      meta: { width: "30%", flexGrow: 0, minWidth: "30%" },
+      meta: { width: "20%", flexGrow: 1, minWidth: "25%" },
     }),
   ];
 
@@ -164,7 +164,7 @@ export default function SearchTableOverview({
   };
 
   return (
-    <Flex direction="column" w="80%" mx="auto" overflow="hidden">
+    <Flex direction="column" w="100%" mx="auto" overflow="hidden">
       <Flex
         align="flex-start"
         justify="flex-start"
@@ -204,16 +204,42 @@ export default function SearchTableOverview({
                 ? table.getRowModel().rows[index + 1]
                 : null;
 
+            const getFirstWord = (name: string) => name.split(" ")[0];
+
+            const isPetSpirit = (name: string) =>
+              name.toLowerCase().includes("pet spirit");
+
             const isDifferentFromPrev =
-              prevRow && prevRow.original.name !== row.original.name;
+              prevRow &&
+              (getFirstWord(prevRow.original.name) !==
+                getFirstWord(row.original.name) ||
+                prevRow.original.cas_number !== row.original.cas_number) &&
+              !(
+                isPetSpirit(prevRow.original.name) &&
+                isPetSpirit(row.original.name)
+              );
+
             const isDifferentFromNext =
-              nextRow && nextRow.original.name !== row.original.name;
+              nextRow &&
+              (getFirstWord(nextRow.original.name) !==
+                getFirstWord(row.original.name) ||
+                nextRow.original.cas_number !== row.original.cas_number) &&
+              !(
+                isPetSpirit(nextRow.original.name) &&
+                isPetSpirit(row.original.name)
+              );
 
             return (
               <Row
                 key={row.id}
                 onClick={() => handleRowClick(row.original.product_id)}
-                _hover={{ bg: "gray.200", cursor: "pointer" }}
+                _hover={{
+                  bg: "gray.700",
+                  "& td:first-of-type": {
+                    fontWeight: "bold",
+                  },
+                  cursor: "pointer",
+                }}
               >
                 {row.getVisibleCells().map((cell) => (
                   <Cell
@@ -223,8 +249,8 @@ export default function SearchTableOverview({
                     borderTop={isDifferentFromPrev ? "1px solid #000" : "none"}
                     borderBottom={
                       isDifferentFromNext
-                        ? "1px solid #001D53"
-                        : "1px solid #B2B8E6"
+                        ? "1px solid #B2B8E6"
+                        : "1px solid #001D53"
                     }
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}

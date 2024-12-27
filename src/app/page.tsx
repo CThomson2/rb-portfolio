@@ -24,7 +24,11 @@ import { SearchIcon } from "@chakra-ui/icons";
 
 export default function Home() {
   return (
-    <Box as="body" className={styles.page}>
+    <Box
+      as="body"
+      className={`${styles.page} relative bg-black-100 flex justify-center items-center 
+        flex-col overflow-hidden mx-auto sm:px-10 px-5`}
+    >
       <Header />
 
       {/* Product Categories */}
@@ -37,7 +41,9 @@ export default function Home() {
           align="center"
         >
           <Link href="/products" passHref>
-            <ChakraLink className={styles.secondary}>Product Range</ChakraLink>
+            <ChakraLink className={`${styles.secondary} text-white`}>
+              Product Range
+            </ChakraLink>
           </Link>
         </Flex>
       </SimpleGrid>

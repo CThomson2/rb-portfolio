@@ -10,7 +10,7 @@ import {
 import type { ProductRow } from "./types";
 import SearchTableOverview from "./components/SearchTableOverview";
 import Banner from "./components/Banner";
-
+import styles from "../page.module.css";
 export default async function ProductsPage() {
   const products: ProductRow[] = await prisma.products
     .findMany({
@@ -34,7 +34,13 @@ export default async function ProductsPage() {
     );
 
   return (
-    <Box as="main" p={4} overflow="hidden">
+    <Box
+      as="main"
+      p={4}
+      overflow="hidden"
+      className={`${styles.page} relative bg-black-100 flex justify-center items-center 
+    flex-col overflow-hidden mx-auto sm:px-10 px-5`}
+    >
       {/* <Banner /> */}
       <Heading as="h1" size="lg" mb={4}>
         Product Range

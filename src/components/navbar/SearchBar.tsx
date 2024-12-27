@@ -11,6 +11,14 @@ export function SearchBar({
   value?: string | number;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 } & React.InputHTMLAttributes<HTMLInputElement>) {
+  const { size, ...uiProps } = props;
+
+  const inputSize =
+    typeof size === "string" &&
+    ["sm", "md", "lg", "xl", "2xl", "2xs", "xs"].includes(size)
+      ? size
+      : "md";
+
   return (
     <Box
       w="30%"
@@ -29,6 +37,7 @@ export function SearchBar({
           value={value ? value : ""}
           onChange={onChange}
           placeholder="Search our catalogue..."
+          size={inputSize}
           border="none"
           bg="white"
           pr="3rem"
@@ -36,8 +45,7 @@ export function SearchBar({
             outline: "none",
             boxShadow: "none",
           }}
-          {...props}
-          // size="lg"
+          {...uiProps}
         />
       </InputGroup>
     </Box>
