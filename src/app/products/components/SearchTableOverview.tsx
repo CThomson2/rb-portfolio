@@ -164,7 +164,7 @@ export default function SearchTableOverview({
   };
 
   return (
-    <Flex direction="column" w="100%">
+    <Flex direction="column" w="80%" mx="auto" overflow="hidden">
       <Flex
         align="flex-start"
         justify="flex-start"

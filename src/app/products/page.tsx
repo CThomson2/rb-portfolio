@@ -34,7 +34,7 @@ export default async function ProductsPage() {
     );
 
   return (
-    <Box as="main" p={4}>
+    <Box as="main" p={4} overflow="hidden">
       {/* <Banner /> */}
       <Heading as="h1" size="lg" mb={4}>
         Product Range
