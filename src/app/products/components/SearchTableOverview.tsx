@@ -320,9 +320,6 @@ function DebouncedInput({
       {...props}
       value={value}
       onChange={(e: any) => setValue(e.target.value)}
-      h="44px"
-      w={{ lg: "390px" }}
-      borderRadius="6px"
     />
   );
 }

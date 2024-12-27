@@ -1,34 +1,69 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
-import Link from "next/link";
+import {
+  Button,
+  Input,
+  Flex,
+  Box,
+  Text,
+  HStack,
+  VStack,
+} from "@chakra-ui/react";
+import { InputGroup } from "@/components/ui/input-group";
+import Image from "next/image";
+import { SearchBar } from "@/components/navbar/SearchBar";
 
-export default function Header() {
+function WhiteStrip() {
   return (
-    <Box bg="gray.900" color="white" py={4}>
+    <Box bg="white" color="black" py={6} boxShadow="sm">
       <Flex
         justify="space-between"
         align="center"
         maxW="1200px"
         mx="auto"
-        px={6}
+        px={8}
       >
-        <Text fontWeight="bold" fontSize="lg">
-          Rathburn Chemicals
-        </Text>
-        <Flex gap={4}>
-          <Link href="/" className="hover:underline">
-            Home
-          </Link>
-          <Link href="/products" className="hover:underline">
-            Products
-          </Link>
-          <Link href="/about" className="hover:underline">
-            About Us
-          </Link>
-          <Link href="/contact" className="hover:underline">
-            Contact
-          </Link>
-        </Flex>
+        <Image
+          src="/logo-banner.png"
+          alt="Rathburn Chemicals"
+          width={585}
+          height={75}
+        />
+        <VStack align="flex-end" bg="gray.100" p={4} borderRadius="md">
+          <Text fontSize="sm">(+44) 1896 870 651</Text>
+          <Text fontSize="sm">sales@rathburn.co.uk</Text>
+          <Text fontSize="sm">
+            Caberston Road, Walkerburn, Scotland EH43 6AU
+          </Text>
+        </VStack>
       </Flex>
     </Box>
+  );
+}
+
+function RedStrip() {
+  return (
+    <Box bg="red.600" py={3} boxShadow="sm">
+      <Flex
+        justify="space-between"
+        align="center"
+        maxW="1200px"
+        mx="auto"
+        px={8}
+      >
+        <SearchBar />
+        <HStack>
+          <Button colorScheme="green" size="md" variant="solid">
+            Request a Quote
+          </Button>
+        </HStack>
+      </Flex>
+    </Box>
+  );
+}
+
+export default function Header() {
+  return (
+    <>
+      <RedStrip />
+    </>
   );
 }

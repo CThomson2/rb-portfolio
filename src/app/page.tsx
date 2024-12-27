@@ -2,57 +2,100 @@ import {
   Box,
   Flex,
   Link as ChakraLink,
+  Container,
+  HStack,
+  Text,
+  Input,
+  InputElement,
+  SimpleGrid,
+  Grid,
+  IconButton,
   ListRoot as List,
   ListItem,
   Image as ChakraImage,
 } from "@chakra-ui/react";
+import { InputGroup } from "@/components/ui/input-group";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
 import Header from "@/components/static/Header";
 import Footer from "@/components/static/Footer";
+import { SearchIcon } from "@chakra-ui/icons";
 
 export default function Home() {
   return (
-    <Box className={styles.page}>
+    <Box as="body" className={styles.page}>
       <Header />
-      <Flex as="main" className={styles.main} direction="column" align="center">
-        <ChakraImage
-          className={styles.logo}
-          src="/media/logo-banner.png"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-        />
-        {/* <List>
-          <ListItem>
-            Get started by altering <code>src/app/page.tsx</code>.
-          </ListItem>
-          <ListItem>Save and see your changes instantly.</ListItem>
-        </List> */}
 
-        <Flex className={styles.ctas} direction="column" align="center">
-          <ChakraLink
-            className={styles.primary}
-            href="/products"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <ChakraImage
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Products
-          </ChakraLink>
+      {/* Product Categories */}
+      <SimpleGrid columns={[1, 2, 4]} gap={8}>
+        {/* Product category cards */}
+        <Flex
+          as="main"
+          className={styles.main}
+          direction="column"
+          align="center"
+        >
           <Link href="/products" passHref>
             <ChakraLink className={styles.secondary}>Product Range</ChakraLink>
           </Link>
         </Flex>
-      </Flex>
+      </SimpleGrid>
       <Footer />
     </Box>
   );
+  // <Box as="body" className={styles.page}>
+  //   <Box as="main" className={styles.main}>
+  //     {/* Header */}
+  //     <Flex as="header" justify="space-between" align="center">
+  //       <Header />
+  //     </Flex>
+
+  //     {/* Navigation */}
+  //     <Flex as="nav" bg="red.600">
+  //       <Container maxW="container.xl">
+  //         <HStack gap={6}>{/* Navigation items */}</HStack>
+  //       </Container>
+  //     </Flex>
+
+  //     {/* Search Bar */}
+  //     <Container maxW="container.xl">
+  //       <InputGroup>
+  //         <Input placeholder="Search our catalogue..." />
+  //         <InputRightElement>
+  //           <IconButton aria-label="Search" icon={<SearchIcon />} />
+  //         </InputRightElement>
+  //       </InputGroup>
+  //     </Container>
+
+  //     {/* Hero Carousel */}
+  //     <Box position="relative">
+  //       {/* We can use Chakra's components with a carousel library like react-slick */}
+  //     </Box>
+
+  //     {/* Product Categories */}
+  //     <SimpleGrid columns={[1, 2, 4]} gap={8}>
+  //       {/* Product category cards */}
+  //       <Flex
+  //         as="main"
+  //         className={styles.main}
+  //         direction="column"
+  //         align="center"
+  //       >
+  //         <Link href="/products" passHref>
+  //           <ChakraLink className={styles.secondary}>
+  //             Product Range
+  //           </ChakraLink>
+  //         </Link>
+  //       </Flex>
+  //     </SimpleGrid>
+
+  //     {/* Information Sections */}
+  //     <Grid templateColumns={["1fr", "1fr", "1fr 1fr"]} gap={8}>
+  //       {/* Container size and delivery sections */}
+  //     </Grid>
+  //   </Box>
+
+  //   <Footer />
+  // </Box>
 }
