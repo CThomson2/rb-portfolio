@@ -9,7 +9,6 @@ import {
 
 import type { ProductRow } from "./types";
 import SearchTableOverview from "./components/SearchTableOverview";
-import Banner from "./components/Banner";
 import styles from "../page.module.css";
 export default async function ProductsPage() {
   const products: ProductRow[] = await prisma.products

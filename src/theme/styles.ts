@@ -177,14 +177,14 @@ export const globalStyles = {
       body: {
         overflowX: "hidden",
         bg: mode("background.100", "background.900")(props),
-        fontFamily: "DM Sans",
+        fontFamily: "Inter",
         letterSpacing: "-0.5px",
       },
       input: {
         color: "gray.700",
       },
       html: {
-        fontFamily: "DM Sans",
+        fontFamily: "Inter",
       },
     }),
   },

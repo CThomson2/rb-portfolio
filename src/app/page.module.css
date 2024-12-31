@@ -12,7 +12,7 @@
   min-height: 100vh;
   padding: 0;
   gap: 64px;
-  font-family: var(--font-geist-sans);
+  font-family: Inter, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {

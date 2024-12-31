@@ -34,14 +34,14 @@ const config = defineConfig({
     body: {
       overflowX: "hidden",
       bg: "white",
-      fontFamily: "body",
+      fontFamily: "Inter",
       letterSpacing: "wide",
     },
     input: {
       color: "black",
     },
     html: {
-      fontFamily: "body",
+      fontFamily: "Inter",
     },
   },
   theme: {

@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { InputGroup } from "@/components/ui/input-group";
 import Image from "next/image";
+// import { SearchBar } from "@/components/navbar/SearchBar";
 import { SearchBar } from "@/components/navbar/SearchBar";
 
 function WhiteStrip() {
@@ -16,7 +17,7 @@ function WhiteStrip() {
     <Box bg="white" color="black" py={6} boxShadow="sm">
       <Flex justify="space-between" align="center" mx="auto" px={8}>
         <Image
-          src="/logo-banner.png"
+          src="/img/logo.png"
           alt="Rathburn Chemicals"
           width={585}
           height={75}

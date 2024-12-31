@@ -1,10 +1,9 @@
 "use client";
 
-import { Text, Flex, Box, VStack } from "@chakra-ui/react";
 import Image from "next/image";
 import { useEffect } from "react";
 import { X, ExternalLink, ShoppingCart } from "lucide-react";
-import { DataListItem, DataListRoot } from "@/components/ui/data-list";
+import { Text, Flex, Box, VStack } from "@chakra-ui/react";
 import {
   DialogBody,
   DialogCloseTrigger,
@@ -14,12 +13,13 @@ import {
   DialogContent,
   DialogHeader,
 } from "@/components/ui/dialog";
+import { DataListItem, DataListRoot } from "@/components/ui/data-list";
 import { Button } from "@/components/ui/button";
 import { ProductPrice } from "../types";
 // Import SVG graphic icons
-import modalLg from "../../../../public/media/modal-lg.png";
-import modalMd from "../../../../public/media/modal-md.png";
-import modalSm from "../../../../public/media/modal-sm.png";
+import modalLg from "@public/img/product/modal-lg.png";
+import modalMd from "@public/img/product/modal-md.png";
+import modalSm from "@public/img/product/modal-sm.png";
 import { useRouter } from "next/navigation";
 import styles from "./modal.module.css";
 interface ProductModalProps {
@@ -34,8 +34,6 @@ export default function ProductModal({
   product,
 }: ProductModalProps) {
   const router = useRouter();
-
-  if (!product) return null;
 
   // Disable scroll on the body while the modal is open
   useEffect(() => {
@@ -56,6 +54,8 @@ export default function ProductModal({
     onClose();
     router.push(`/products/${productId}`);
   };
+
+  if (!product) return null;
 
   return (
     <DialogRoot

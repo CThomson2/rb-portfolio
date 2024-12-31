@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { SearchBar } from "@/components/navbar/SearchBar";
+import { SearchBar } from "@/components/navbar/searchBar/SearchBarOld";
 import {
   createColumnHelper,
   useReactTable,
@@ -249,8 +249,8 @@ export default function SearchTableOverview({
                     borderTop={isDifferentFromPrev ? "1px solid #000" : "none"}
                     borderBottom={
                       isDifferentFromNext
-                        ? "1px solid #B2B8E6"
-                        : "1px solid #001D53"
+                        ? "2px solid #B2B8E6"
+                        : `1px solid ${system.token("colors.brand.500")}`
                     }
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}

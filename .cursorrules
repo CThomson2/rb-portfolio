@@ -24,6 +24,7 @@ You are assisting with the complete rebuild of my company website, Rathburn Chem
    - Design a clean, modern navigation bar and footer.
    - Implement reusable components for cards, lists, buttons, and forms.
    - Integrate responsive images using Next.js `Image` component for performance.
+   - Use Chakra UI v3 components, with their correct imports e.g. `import { InputGroup } from "@/components/ui/input-group";`, and `import { Input } from "@chakra-ui/react";`. Note that some components are imported from `@chakra-ui/react` and some are imported from `@/components/ui/component-name`.
 
 2. **Backend**:
 
