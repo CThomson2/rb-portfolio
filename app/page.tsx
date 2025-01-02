@@ -1,14 +1,14 @@
 "use client";
 
-import { navItems } from "@/data/main";
+import { navItems } from "@/content/main";
 
-import Hero from "@/components/Hero";
-import Grid from "@/components/Grid";
-import Footer from "@/components/Footer";
-import Clients from "@/components/Clients";
-import ApproachGrid from "@/components/Approach";
-import Experience from "@/components/Experience";
-import RecentProjects from "@/components/RecentProjects";
+import Hero from "@/components/home/Hero";
+import Grid from "@/components/home/Grid";
+import Footer from "@/components/home/Footer";
+import Clients from "@/components/home/Clients";
+import ApproachGrid from "@/components/home/Approach";
+import Experience from "@/components/home/Experience";
+import RecentProjects from "@/components/home/RecentProjects";
 import { FloatingNav } from "@/components/ui/FloatingNavbar";
 
 const Home = () => {
