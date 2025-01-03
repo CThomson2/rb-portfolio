@@ -10,11 +10,17 @@ You are assisting with the complete rebuild of my company website, Rathburn Chem
   - **Backend**: Next.js for server-side rendering (SSR) and API routes.
   - **Database**: PostgreSQL with Prisma ORM for efficient data management.
 - **Features**:
-  - A responsive and visually appealing homepage.
-  - Interactive product catalog with search, filtering, and product details.
-  - "About Us" and "Contact" pages with dynamic content.
-  - Static pages for Terms and Conditions.
-  - Potential future integration for user accounts and e-commerce.
+  - **Inventory Management**:
+    - A client component that displays the inventory transactions table, taking data from the database and displaying it with live updates.
+    - There will also be the ability to manage inventory transactions.
+    - This means adding records to the table - not modifying or deleting existing records.
+    - Adding a record involves an input form, which will confirm that all required fields are filled out, and will utilise type safety to ensure that the data is valid with the database constraints.
+  - **Product Range & Public Home Page**:
+    - A responsive and visually appealing homepage.
+    - Interactive product catalog with search, filtering, and product details.
+    - "About Us" and "Contact" pages with dynamic content.
+    - Static pages for Terms and Conditions.
+    - Potential future integration for user accounts and e-commerce.
 
 ### **Tasks**
 
