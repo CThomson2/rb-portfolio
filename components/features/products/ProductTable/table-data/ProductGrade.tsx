@@ -35,7 +35,7 @@ const ProductGrade = ({
 }) => {
   return (
     <div
-      className={`flex items-center justify-center w-fit h-6 px-3 gap-2 rounded-sm text-sm font-normal ${gradeBackgroundColors[grade]} ${gradeTextColors[grade]}`}
+      className={`flex items-center justify-center h-6 px-3 mx-auto gap-2 rounded-sm text-sm font-normal ${gradeBackgroundColors[grade]} ${gradeTextColors[grade]}`}
     >
       <div
         className={`w-2 h-2 rounded-[2px] ${gradeDotBackgroundColors[grade]}`}

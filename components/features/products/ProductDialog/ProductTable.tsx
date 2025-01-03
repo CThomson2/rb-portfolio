@@ -1,5 +1,5 @@
 "use client";
-
+/*
 // import {
 //   TableBody as Body,
 //   TableHeader as Header,
@@ -56,11 +56,7 @@ const headerStyles = {
 
 // Initialize the SearchTableOrders component
 // This component renders a table with search and pagination features
-export default function SearchTableOverview({
-  tableData,
-}: {
-  tableData: ProductTableRow[];
-}) {
+function SearchTableOverview({ tableData }: { tableData: ProductTableRow[] }) {
   // const textColor = system.token("colors.navy.700");
   // const borderColor = system.token("colors.gray.200");
   // const brandColor = system.token("colors.brand.500");
@@ -310,6 +306,8 @@ export default function SearchTableOverview({
  * Debouncing prevents excessive API calls or expensive operations while the user is actively typing
  * by waiting until they pause before triggering the onChange callback.
  */
+
+/*
 function DebouncedInput({
   value: initialValue,
   onChange,
@@ -348,3 +346,6 @@ function DebouncedInput({
     />
   );
 }
+*/
+
+export {};

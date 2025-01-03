@@ -58,7 +58,7 @@ interface ProductCardProps {
   product: ProductWithPrices;
 }
 
-export function ProductView({ product }: ProductCardProps) {
+function ProductView({ product }: ProductCardProps) {
   return (
     <Card className="border-1 border-gray-300 rounded-md p-4">
       <CardHeader>

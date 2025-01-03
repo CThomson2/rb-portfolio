@@ -58,6 +58,7 @@ export const BackgroundGradientAnimation = ({
     document.body.style.setProperty("--blending-value", blendingValue);
   }, []);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     function move() {
       if (!interactiveRef.current) {

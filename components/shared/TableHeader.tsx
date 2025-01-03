@@ -6,28 +6,33 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Table } from "@tanstack/react-table";
+import { cn } from "@/lib/utils";
+import { TABLE_GRID_LAYOUT } from "@/lib/constants/table";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const TableHeader = <TData, _>({ table }: { table: Table<TData> }) => {
   return (
     <ShadTableHeader className="bg-[hsl(var(--table-header))] text-[hsl(var(--table-header-foreground))]">
       {table.getHeaderGroups().map((headerGroup) => (
-        <TableRow key={headerGroup.id}>
-          {headerGroup.headers.map((header) => {
-            return (
-              <TableHead
-                key={header.id}
-                className="max-h-fit font-normal uppercase text-xs"
-              >
-                {header.isPlaceholder
-                  ? null
-                  : flexRender(
-                      header.column.columnDef.header,
-                      header.getContext()
-                    )}
-              </TableHead>
-            );
-          })}
+        <TableRow
+          key={headerGroup.id}
+          className={cn(
+            // TABLE_GRID_LAYOUT,
+            "border-b border-[hsl(var(--table-header))]"
+          )}
+        >
+          {headerGroup.headers.map((header) => (
+            <TableHead
+              key={header.id}
+              className="px-2 py-3 text-left font-medium text-muted-foreground uppercase text-xs tracking-wide min-w-0 overflow-hidden"
+            >
+              {header.isPlaceholder
+                ? null
+                : flexRender(
+                    header.column.columnDef.header,
+                    header.getContext()
+                  )}
+            </TableHead>
+          ))}
         </TableRow>
       ))}
     </ShadTableHeader>

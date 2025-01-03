@@ -1,5 +1,6 @@
 "use client";
 
+/*
 import Image from "next/image";
 import { useEffect } from "react";
 import { X, ExternalLink, ShoppingCart } from "lucide-react";
@@ -28,11 +29,7 @@ interface ProductModalProps {
   product: ProductWithPrices | null;
 }
 
-export default function ProductDialog({
-  isOpen,
-  onClose,
-  product,
-}: ProductModalProps) {
+function ProductDialog({ isOpen, onClose, product }: ProductModalProps) {
   const router = useRouter();
 
   // Disable scroll on the body while the modal is open
@@ -88,8 +85,8 @@ export default function ProductDialog({
 
         <DialogBody className="p-6 max-h-[80vh] overflow-y-auto">
           <div className="space-y-2 text-center">
-            {/* Product Details */}
-            <div className="space-y-2">
+            {/* Product Details */
+/*          <div className="space-y-2">
               <Text className="text-lg font-medium pt-2 mb-2 mt-2 uppercase tracking-wide block text-center">
                 {product.sku}
               </Text>
@@ -154,3 +151,7 @@ export default function ProductDialog({
     </DialogRoot>
   );
 }
+
+*/
+
+export {};

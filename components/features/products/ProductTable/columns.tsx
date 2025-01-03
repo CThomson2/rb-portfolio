@@ -46,43 +46,47 @@ export const columns: ColumnDef<ProductTableRow>[] = [
     // Checkbox column for row selection
     id: "select",
     header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value: boolean) =>
-          table.toggleAllPageRowsSelected(!!value)
-        }
-        aria-label="Select all"
-        className="border-border bg-white shadow-lg border data-[state=checked]:border-0"
-      />
+      <div className="flex items-center justify-center">
+        <Checkbox
+          checked={
+            table.getIsAllPageRowsSelected() ||
+            (table.getIsSomePageRowsSelected() && "indeterminate")
+          }
+          onCheckedChange={(value: boolean) =>
+            table.toggleAllPageRowsSelected(!!value)
+          }
+          aria-label="Select all"
+          className="border-border bg-white shadow-lg border data-[state=checked]:border-0"
+        />
+      </div>
     ),
     cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value: boolean) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-        className="border-border bg-white shadow-lg border data-[state=checked]:border-0"
-      />
+      <div className="flex items-center justify-center">
+        <Checkbox
+          checked={row.getIsSelected()}
+          onCheckedChange={(value: boolean) => row.toggleSelected(!!value)}
+          aria-label="Select row"
+          className="border-border bg-white shadow-lg border data-[state=checked]:border-0"
+        />
+      </div>
     ),
     enableSorting: false,
     enableHiding: false,
   },
   {
     // ID column with sorting enabled
-    accessorKey: "product_id",
-    header: ({ column }) => (
-      <SortableHeader column={column} title="ID #" className="w-[50px]" />
-    ),
-    cell: ({ row }) => (
-      <div className="w-[50px]">
-        {row.getValue<number>("product_id").toString()}
-      </div>
-    ),
-    enableSorting: true,
-  },
-  {
+    //   accessorKey: "product_id",
+    //   header: ({ column }) => (
+    //     <SortableHeader column={column} title="ID #" className="w-[50px]" />
+    //   ),
+    //   cell: ({ row }) => (
+    //     <div className="min-w-0 overflow-hidden text-ellipsis whitespace-nowrap">
+    //       {row.getValue<number>("product_id").toString()}
+    //     </div>
+    //   ),
+    //   enableSorting: true,
+    // },
+    // {
     // Product name column with sorting enabled
     // accessorKey: Specifies which property from the data object to use for this column ('name' in this case)
     // header: Renders the column header using SortableHeader component, passing the column object and title
@@ -91,7 +95,7 @@ export const columns: ColumnDef<ProductTableRow>[] = [
     accessorKey: "name",
     header: ({ column }) => <SortableHeader column={column} title="Product" />,
     cell: ({ row }) => (
-      <div className="flex items-center justify-between w-full text-xs">
+      <div className="min-w-0 overflow-hidden whitespace-nowrap">
         <ProductName name={row.getValue("name")} />
       </div>
     ),
@@ -100,20 +104,21 @@ export const columns: ColumnDef<ProductTableRow>[] = [
   {
     // Grade column - traffic light icons to show varying quality
     accessorKey: "grade",
-    header: "Grade",
+    header: ({ column }) => <SortableHeader column={column} title="Grade" />,
     cell: ({ row }) => (
-      <div className="flex items-center justify-between w-full">
+      <div className="min-w-fit max-w-[90px] overflow-hidden">
         <ProductGrade grade={row.getValue("grade")} />
       </div>
     ),
+    enableSorting: true,
   },
   {
     // Product lot number (SKU) column
     accessorKey: "sku",
     header: "Lot number",
     cell: ({ row }) => (
-      <div className="flex items-center justify-between w-full">
-        <ProductName name={row.getValue("sku")} />
+      <div className="min-w-0 overflow-hidden text-left">
+        {row.getValue("sku")}
       </div>
     ),
   },
@@ -124,7 +129,7 @@ export const columns: ColumnDef<ProductTableRow>[] = [
       <SortableHeader column={column} title="CAS number" />
     ),
     cell: ({ row }) => (
-      <div className="flex items-center justify-between w-full">
+      <div className="min-w-0 overflow-hidden">
         <ProjectLastUpdate date={row.getValue("cas_number")} />
       </div>
     ),
@@ -137,7 +142,7 @@ export const columns: ColumnDef<ProductTableRow>[] = [
     accessorKey: "actions",
     header: "Actions",
     cell: () => (
-      <div className="flex items-center justify-between w-full">
+      <div className="min-w-0 overflow-hidden">
         <ProjectActions />
       </div>
     ),
@@ -147,7 +152,7 @@ export const columns: ColumnDef<ProductTableRow>[] = [
     accessorKey: "stock_level",
     header: "Stock level",
     cell: ({ row }) => (
-      <div className="flex items-center justify-between w-full">
+      <div className="min-w-0 overflow-hidden">
         <ProductStockLevel stockLevel={row.getValue("stock_level")} />
       </div>
     ),

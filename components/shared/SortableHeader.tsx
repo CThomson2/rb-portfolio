@@ -34,7 +34,12 @@ export function SortableHeader<TData, TValue>({
 
   // Render sortable header with dropdown menu for sort options
   return (
-    <div className={cn("flex items-center space-x-2 h-full", className)}>
+    <div
+      className={cn(
+        "min-w-0 flex items-center gap-2 overflow-hidden",
+        className
+      )}
+    >
       <DropdownMenu>
         {/* Trigger button shows current sort state with appropriate icon */}
         <DropdownMenuTrigger asChild>
@@ -42,11 +47,13 @@ export function SortableHeader<TData, TValue>({
             variant="ghost"
             size="sm"
             className={cn(
-              "-ml-3 h-full data-[state=open]:bg-primary/10 uppercase text-xs",
+              "h-8 min-w-0 truncate",
+              "data-[state=open]:bg-primary/10 uppercase text-xs",
+              "active:outline-none",
               column.getIsSorted() && "bg-primary/10"
             )}
           >
-            <span>{title}</span>
+            <span className="min-w-fit">{title}</span>
             {/* Show appropriate sort direction icon based on current state */}
             {column.getIsSorted() === "desc" && <ArrowDown />}
             {column.getIsSorted() === "asc" && <ArrowUp />}

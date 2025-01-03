@@ -2,7 +2,7 @@
 // types/database/products.ts
 import { Decimal } from "@prisma/client/runtime/library";
 
-export const enum GRADE {
+export enum GRADE {
   GD = "GD",
   HPLC = "HPLC",
   LCMS = "LCMS",

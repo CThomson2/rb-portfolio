@@ -4,12 +4,22 @@ import {
   countAllProducts,
 } from "@/lib/products/countProductsByGrade";
 import { GRADE } from "@/types/database/products";
-import { prisma } from "@/database/client";
+import { productRepository } from "@/database/repositories";
+import { NextResponse } from "next/server";
 
-// Since GRADE is a const enum, we need to handle it as a type rather than an object
-// Create a const array of valid grades to check against
-const VALID_GRADES = ["GD", "HPLC", "LCMS", "PTS_DS"] as const;
+export async function GET() {
+  try {
+    const counts = await productRepository.getProductCounts();
+    return NextResponse.json(counts);
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Failed to fetch product counts" },
+      { status: 500 }
+    );
+  }
+}
 
+/*
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -37,3 +47,4 @@ export default async function handler(
     res.status(500).json({ error: "Failed to fetch product count" });
   }
 }
+*/
