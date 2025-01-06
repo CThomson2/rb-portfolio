@@ -1,1 +1,3 @@
-export * from "./queries";
+import * as transactions from "./queries/transactions";
+
+export { transactions };

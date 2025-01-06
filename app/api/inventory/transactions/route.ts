@@ -1,7 +1,7 @@
 // app/api/inventory/transactions/route.ts
 import { prisma } from "@/database/client";
 import { NextResponse } from "next/server";
-import { inventoryRepository } from "@/database/repositories";
+import { transactions } from "@/database/repositories/inventory";
 
 export async function GET() {
   try {

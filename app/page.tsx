@@ -20,8 +20,8 @@ const Home = () => {
         {/* <Grid /> */}
         {/* <RecentProjects /> */}
         {/* <Clients /> */}
-        <ApproachGrid />
         <Experience />
+        <ApproachGrid />
         <Footer />
       </div>
     </main>

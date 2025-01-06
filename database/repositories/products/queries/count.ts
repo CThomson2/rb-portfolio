@@ -1,5 +1,6 @@
 // database/repositories/products/queries.ts
 import { prisma } from "@/database/client";
+import type { ProductTableRow } from "@/types/components/products";
 import { GRADE } from "@/types/database/products";
 
 // interface FetchProductsOptions {
@@ -18,22 +19,10 @@ import { GRADE } from "@/types/database/products";
  * Or if no grade provided:
  * SELECT COUNT(*) FROM products
  */
-export async function getTransactions() {
-  return prisma.$queryRaw`
-    SELECT 
-      t.*, 
-      CASE 
-        WHEN t.import_id IS NOT NULL THEN i.supplier_name
-        WHEN t.drum_id IS NOT NULL THEN nd.material_type
-        WHEN t.repro_id IS NOT NULL THEN rd.material_type
-      END as material_name
-    FROM inventory.transactions t
-    LEFT JOIN inventory.imports i ON t.import_id = i.import_id
-    LEFT JOIN inventory.new_drums nd ON t.drum_id = nd.drum_id
-    LEFT JOIN inventory.repro_drums rd ON t.repro_id = rd.repro_drum_id
-    ORDER BY t.created_at DESC
-    LIMIT 100
-  `;
+export async function byGrade(grade?: GRADE): Promise<number> {
+  return prisma.products.count({
+    where: grade ? { grade } : undefined,
+  });
 }
 
 /**
@@ -76,29 +65,29 @@ export async function getProductCounts() {
   };
 }
 
-// export async function fetchProducts(): Promise<ProductTableRow[]> {
-//   const products = await prisma.products.findMany({
-//     select: {
-//       product_id: true,
-//       name: true,
-//       sku: true,
-//       grade: true,
-//       raw_materials: {
-//         select: {
-//           cas_number: true,
-//         },
-//       },
-//     },
-//   });
+export async function fetchProducts(): Promise<ProductTableRow[]> {
+  const products = await prisma.products.findMany({
+    select: {
+      product_id: true,
+      name: true,
+      sku: true,
+      grade: true,
+      raw_materials: {
+        select: {
+          cas_number: true,
+        },
+      },
+    },
+  });
 
-//   return products.map((product) => {
-//     // console.log(product.grade);
-//     return {
-//       ...product,
-//       cas_number: product.raw_materials?.cas_number ?? "",
-//     };
-//   });
-// }
+  return products.map((product) => {
+    // console.log(product.grade);
+    return {
+      ...product,
+      cas_number: product.raw_materials?.cas_number ?? "",
+    };
+  });
+}
 
 // export async function fetchProducts(
 //   options?: FetchProductsOptions
@@ -140,5 +129,3 @@ export async function getProductCounts() {
 //     },
 //   });
 // }
-
-// database/repositories/index.ts
