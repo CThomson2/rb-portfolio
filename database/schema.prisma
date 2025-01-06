@@ -62,19 +62,6 @@ model raw_materials {
 }
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
-model stills {
-  code           String      @id @unique(map: "stills_still_code_key") @db.Char
-  site           String      @db.Char(2)
-  power          Int
-  capacity       Int
-  is_vacuum      Boolean?    @default(false)
-  is_operational Boolean?    @default(true)
-  processes      processes[]
-
-  @@schema("public")
-}
-
-/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 model batches {
   batch_id        Int            @id(map: "internal_batches_pkey") @default(autoincrement())
   distillation_id Int?
@@ -90,13 +77,13 @@ model batches {
 }
 
 model deliveries {
-  delivery_id       Int       @id @default(autoincrement())
+  delivery_id       Int       @id(map: "drum_deliveries_pkey") @default(autoincrement())
   order_id          Int?
   quantity_received Int
   date_received     DateTime  @default(dbgenerated("CURRENT_DATE")) @db.Date
-  batch_code        String?   @db.VarChar
+  batch_code        String?   @db.VarChar(50)
   location          String?   @db.VarChar(15)
-  notes             String?   @db.VarChar(100)
+  delivery_notes    String?
   created_at        DateTime? @default(now()) @db.Timestamptz(6)
   updated_at        DateTime? @default(now()) @db.Timestamptz(6)
   orders            orders?   @relation(fields: [order_id], references: [order_id], onDelete: NoAction, onUpdate: NoAction)
@@ -179,16 +166,18 @@ model new_drums {
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 model orders {
-  order_id     Int          @id @default(autoincrement())
-  supplier     String       @db.VarChar(100)
-  material     String       @db.VarChar(100)
-  quantity     Int
-  date_ordered DateTime?    @default(dbgenerated("CURRENT_DATE")) @db.Date
-  notes        String?
-  created_at   DateTime?    @default(now()) @db.Timestamptz(6)
-  updated_at   DateTime?    @default(now()) @db.Timestamptz(6)
-  status       String?      @default("pending") @db.VarChar(20)
-  deliveries   deliveries[]
+  order_id          Int          @id @default(autoincrement())
+  supplier          String       @db.VarChar(100)
+  material          String       @db.VarChar(100)
+  quantity          Int
+  date_ordered      DateTime?    @default(dbgenerated("CURRENT_DATE")) @db.Date
+  notes             String?
+  created_at        DateTime?    @default(now()) @db.Timestamptz(6)
+  updated_at        DateTime?    @default(now()) @db.Timestamptz(6)
+  status            String?      @default("pending") @db.VarChar(20)
+  quantity_received Int?         @default(0)
+  delivery_status   String?      @default("pending") @db.VarChar(20)
+  deliveries        deliveries[]
 
   @@schema("inventory")
 }
@@ -262,10 +251,24 @@ model transactions {
   created_at  DateTime?    @default(now()) @db.Timestamptz(6)
   updated_at  DateTime?    @default(now()) @db.Timestamptz(6)
   process_id  Int?
+  direction   String?      @default(dbgenerated("\nCASE tx_type\n    WHEN 'import'::text THEN 'IN'::text\n    WHEN 'processing'::text THEN 'OUT'::text\n    WHEN 'reprocessing'::text THEN 'OUT'::text\n    WHEN 'disposal'::text THEN 'OUT'::text\n    WHEN 'loss'::text THEN 'OUT'::text\n    ELSE NULL::text\nEND")) @db.VarChar(3)
   new_drums   new_drums?   @relation(fields: [drum_id], references: [drum_id], onDelete: NoAction, onUpdate: NoAction)
   imports     imports?     @relation(fields: [import_id], references: [import_id], onDelete: NoAction, onUpdate: NoAction)
   processes   processes?   @relation(fields: [process_id], references: [process_id], onDelete: NoAction, onUpdate: NoAction)
   repro_drums repro_drums? @relation(fields: [repro_id], references: [repro_drum_id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@schema("inventory")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model stills {
+  code           String      @id @unique(map: "stills_still_code_key") @db.Char
+  site           String      @db.Char(2)
+  power          Int
+  capacity       Int
+  is_vacuum      Boolean?    @default(false)
+  is_operational Boolean?    @default(true)
+  processes      processes[]
 
   @@schema("inventory")
 }

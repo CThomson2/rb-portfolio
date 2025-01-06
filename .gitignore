@@ -41,3 +41,6 @@ next-env.d.ts
 
 # output
 *.txt
+
+# database
+database/generated/
