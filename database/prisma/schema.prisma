@@ -128,18 +128,17 @@ model drum_distillations {
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 model imports {
-  import_id           Int         @id @default(autoincrement())
-  supplier_name       String      @db.VarChar(100)
-  material_type       String      @db.VarChar(100)
+  import_id           Int       @id @default(autoincrement())
+  supplier_name       String    @db.VarChar(100)
+  material_type       String    @db.VarChar(100)
   quantity            Int
-  supplier_batch_code String?     @unique(map: "unique_supplier_batch_code") @db.VarChar(50)
-  date_ordered        DateTime?   @db.Date
-  date_received       DateTime    @db.Date
-  created_at          DateTime?   @default(now()) @db.Timestamptz(6)
-  updated_at          DateTime?   @default(now()) @db.Timestamptz(6)
-  notes               String?     @db.VarChar(100)
-  location            String?     @db.VarChar(10)
-  new_drums           new_drums[]
+  supplier_batch_code String?   @unique(map: "unique_supplier_batch_code") @db.VarChar(50)
+  date_ordered        DateTime? @db.Date
+  date_received       DateTime  @db.Date
+  created_at          DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at          DateTime? @default(now()) @db.Timestamptz(6)
+  notes               String?   @db.VarChar(100)
+  location            String?   @db.VarChar(10)
 
   @@schema("inventory")
 }
@@ -153,9 +152,9 @@ model new_drums {
   location           String?              @default("new-site") @db.VarChar(20)
   created_at         DateTime?            @default(now()) @db.Timestamptz(6)
   updated_at         DateTime?            @default(now()) @db.Timestamptz(6)
-  id_h_code          Int?
+  order_id           Int?
   drum_distillations drum_distillations[]
-  imports            imports?             @relation(fields: [import_id], references: [import_id], onDelete: NoAction, onUpdate: NoAction, map: "drum_import_id_fkey")
+  orders             orders?              @relation(fields: [order_id], references: [order_id], onDelete: NoAction, onUpdate: NoAction)
   processes          processes[]
   transactions       transactions[]
 
@@ -176,6 +175,7 @@ model orders {
   quantity_received Int          @default(0)
   status            String       @default("pending") @db.VarChar(20)
   deliveries        deliveries[]
+  new_drums         new_drums[]
 
   @@schema("inventory")
 }

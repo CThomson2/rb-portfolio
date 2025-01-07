@@ -43,10 +43,10 @@ CREATE OR REPLACE FUNCTION inventory.update_order_delivery_status()
 RETURNS TRIGGER AS $$
 BEGIN
     -- Update quantity_received in orders
-    UPDATE inventory.orders 
+    UPDATE public.orders 
     SET quantity_received = (
         SELECT COALESCE(SUM(quantity_received), 0)
-        FROM inventory.deliveries
+        FROM public.deliveries
         WHERE order_id = NEW.order_id
     ),
     delivery_status = CASE 
@@ -64,6 +64,103 @@ $$ LANGUAGE plpgsql;
 -- Create trigger that runs the update function after any insert/update on deliveries
 -- This ensures order status stays in sync with its deliveries automatically
 CREATE TRIGGER trigger_update_order_delivery_status
-AFTER INSERT OR UPDATE ON inventory.deliveries
+AFTER INSERT OR UPDATE ON public.deliveries
 FOR EACH ROW
-EXECUTE FUNCTION inventory.update_order_delivery_status();
+EXECUTE FUNCTION public.update_order_delivery_status();
+
+---
+
+CREATE OR REPLACE FUNCTION public.handle_import_transaction()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Insert multiple new drum records using generate_series()
+    -- For each number from 1 to import.quantity, create a new drum record
+    -- All drums get the same import_id and material_type from the import record
+    INSERT INTO public.new_drums (order_id, material_type)
+    SELECT
+        NEW.order_id,
+        i.material_type
+    FROM
+        public.imports i,
+        generate_series(1, i.quantity) AS drum_count -- Creates N rows where N = import quantity
+    WHERE
+        i.import_id = NEW.import_id;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_handle_import_transaction
+AFTER INSERT ON public.transactions
+FOR EACH ROW
+EXECUTE FUNCTION public.handle_import_transaction();
+
+---
+
+CREATE OR REPLACE FUNCTION public.handle_disposal_loss_transaction()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- On rare occasion of stock disposal or loss, remove the source drum or repro drum
+    IF NEW.drum_id IS NOT NULL THEN
+        DELETE FROM inventory.new_drums
+        WHERE drum_id = NEW.drum_id;
+    ELSIF NEW.repro_source_id IS NOT NULL THEN
+        DELETE FROM inventory.repro_drums
+        WHERE repro_drum_id = NEW.repro_source_id;
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_handle_disposal_loss_transaction
+AFTER INSERT ON public.transactions
+FOR EACH ROW
+EXECUTE FUNCTION public.handle_disposal_loss_transaction();
+
+---
+
+CREATE OR REPLACE FUNCTION public.handle_processing_transaction()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- On processing, remove the source drum
+    IF NEW.tx_type = 'processing' THEN
+        -- Update the corresponding new_drums record to set status to 'processed'    
+        UPDATE public.new_drums
+        SET status = 'processed',
+            date_processed = NEW.tx_date,
+            updated_at = CURRENT_TIMESTAMP
+        WHERE drum_id = NEW.drum_id;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_handle_processing_transaction
+AFTER INSERT ON public.transactions
+FOR EACH ROW
+EXECUTE FUNCTION public.handle_processing_transaction();
+
+---
+
+CREATE OR REPLACE FUNCTION public.set_material_type()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Set material_type based on which drum source ID is not null
+    NEW.material_type := CASE
+        WHEN NEW.import_id IS NOT NULL THEN
+            (SELECT material_type FROM public.imports WHERE import_id = NEW.import_id)
+        WHEN NEW.drum_id IS NOT NULL THEN
+            (SELECT material_type FROM public.new_drums WHERE drum_id = NEW.drum_id)
+        WHEN NEW.repro_source_id IS NOT NULL THEN
+            (SELECT material_type FROM public.repro_drums WHERE repro_drum_id = NEW.repro_source_id)
+    END;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_set_material_type
+AFTER INSERT ON public.transactions
+FOR EACH ROW
+EXECUTE FUNCTION public.set_material_type();

@@ -1,11 +1,7 @@
-import { fetchProducts } from "@/lib/products/fetchProducts";
-
-import type { ProductTableRow } from "@/types/components/products";
-
 import { DataTable } from "@/components/features/products/ProductTable";
-import TopHeader from "@/components/features/products/ProductTable/header";
-
 import { columns } from "@/components/features/products/ProductTable/columns";
+import type { ProductTableRow } from "@/types/components/products";
+import { fetchProducts } from "@/lib/products/fetchProducts";
 
 // This is a SSC. Use prisma to fetch products and the table header grades and associated counts
 // Make a `headers` prop for DataTable that is an array of objects with `grade` and `count`
@@ -13,12 +9,11 @@ import { columns } from "@/components/features/products/ProductTable/columns";
 //   prisma.products.findMany();
 //   prisma.products.groupBy({
 
-const IndexPage = async () => {
+const IndexPage = async ({ data }: { data: ProductTableRow[] }) => {
   const products = await fetchProducts();
 
   return (
     <div className="flex flex-col w-full gap-5">
-      <TopHeader />
       <DataTable data={products} columns={columns} />
     </div>
   );

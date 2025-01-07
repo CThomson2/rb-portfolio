@@ -3,16 +3,16 @@
 // Import necessary dependencies for table functionality
 import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/checkbox";
-import { SortableHeader } from "@/components/shared/SortableHeader";
+import { SortableHeader } from "@/components/shared/table/SortableHeader";
 // Import individual cell components for better organization
 import ProductName from "@/components/features/products/ProductTable/table-data/ProductName";
 import ProductGrade from "@/components/features/products/ProductTable/table-data/ProductGrade";
 
 import ProductStockLevel from "@/components/features/products/ProductTable/table-data/ProductStockLevel";
 
-import ProjectLastUpdate from "@/components/features/projects/LastUpdate";
+import ProjectLastUpdate from "@/components/shared/projects/LastUpdate";
 import { ProjectActions } from "@/components/shared/Actions";
-import ProjectTimeLine from "@/components/shared/Timeline";
+import ProjectTimeLine from "@/components/shared/projects/Timeline";
 import type { ProductTableRow } from "@/types/components/products";
 
 /*

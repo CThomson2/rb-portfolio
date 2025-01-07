@@ -1,18 +1,36 @@
 import { Button } from "@/components/ui/button";
-import SearchBar from "./SearchBar";
 import { PlusIcon } from "lucide-react";
 
-const TopHeader = () => {
-  return (
-    <div className="max-h-fit flex flex-row justify-between items-center px-8 py-8 bg-slate-700 rounded-md">
-      <SearchBar />
+import Link from "next/link";
 
-      <Button className="bg-emerald-600 text-white hover:bg-emerald-400 hover:text-emerald-700">
-        <PlusIcon className="w-4 h-8 mr-1" />
-        New Product
-      </Button>
-    </div>
+interface ActionButtonProps {
+  text: string;
+  href?: string;
+}
+
+const ActionButton = ({ text, href }: ActionButtonProps) => {
+  const buttonContent = (
+    <>
+      <PlusIcon className="w-4 h-8 mr-1" />
+      {text}
+    </>
+  );
+
+  if (href) {
+    return (
+      <Link href={href}>
+        <Button className="bg-emerald-600 text-white hover:bg-emerald-400 hover:text-emerald-700">
+          {buttonContent}
+        </Button>
+      </Link>
+    );
+  }
+
+  return (
+    <Button className="bg-emerald-600 text-white hover:bg-emerald-400 hover:text-emerald-700">
+      {buttonContent}
+    </Button>
   );
 };
 
-export default TopHeader;
+export default ActionButton;

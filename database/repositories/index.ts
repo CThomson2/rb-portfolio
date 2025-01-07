@@ -1,2 +1,2 @@
 export * as productRepository from "./products";
-export * as inventoryRepository from "./inventory";
+export * as inventoryRepository from "./orders";

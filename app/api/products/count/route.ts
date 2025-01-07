@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { count } from "@/database/repositories/products";
+import { queries } from "@/database/repositories/products";
 import { NextResponse } from "next/server";
 
 export async function GET(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const counts = await count.byGrade();
+    const counts = await queries.count.getProductCounts();
     return NextResponse.json(counts);
   } catch (error) {
     return NextResponse.json(

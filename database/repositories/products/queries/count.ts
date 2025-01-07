@@ -47,21 +47,31 @@ export async function byGrade(grade?: GRADE): Promise<number> {
  *   PTS_DS: number  // Count of PTS-DS grade products
  * }
  */
+// Type for the result of prisma.products.groupBy()
+interface GradeCount {
+  grade: GRADE;
+  _count: number;
+}
+
 export async function getProductCounts() {
   // Fetch all counts in a single query using GroupBy
   const gradeCounts = await prisma.products.groupBy({
     by: ["grade"],
     _count: true,
+    orderBy: {
+      grade: "asc",
+    },
   });
 
   const totalCount = await prisma.products.count();
 
   return {
     all: totalCount,
-    GD: gradeCounts.find((count) => count.grade === "GD")?._count ?? 0,
-    HPLC: gradeCounts.find((count) => count.grade === "HPLC")?._count ?? 0,
-    LCMS: gradeCounts.find((count) => count.grade === "LCMS")?._count ?? 0,
-    PTS_DS: gradeCounts.find((count) => count.grade === "PTS-DS")?._count ?? 0,
+    GD: gradeCounts.find((count) => count.grade === GRADE.GD)?._count ?? 0,
+    HPLC: gradeCounts.find((count) => count.grade === GRADE.HPLC)?._count ?? 0,
+    LCMS: gradeCounts.find((count) => count.grade === GRADE.LCMS)?._count ?? 0,
+    PTS_DS:
+      gradeCounts.find((count) => count.grade === GRADE.PTS_DS)?._count ?? 0,
   };
 }
 
@@ -80,6 +90,7 @@ export async function fetchProducts(): Promise<ProductTableRow[]> {
     },
   });
 
+  console.log(products);
   return products.map((product) => {
     // console.log(product.grade);
     return {
