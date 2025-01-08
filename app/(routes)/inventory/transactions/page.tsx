@@ -1,14 +1,28 @@
 "use client";
-import React from "react";
+import React, { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
+import {
+  useReactTable,
+  getCoreRowModel,
+  getSortedRowModel,
+  getPaginationRowModel,
+  getFilteredRowModel,
+  SortingState,
+  PaginationState,
+} from "@tanstack/react-table";
 import {
   Table,
   TableBody,
   TableCell,
   TableHead,
-  TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import TableHeader from "@/components/shared/table/TableHeader";
+import SearchBar from "@/components/shared/table/SearchBar";
+import TableFooter from "@/components/shared/table/footer";
+import { columns } from "@/components/features/inventory/TransactionsTable/columns";
+import type { Transaction } from "@/types/database/transactions";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,6 +34,13 @@ import { Button } from "@/components/ui/button";
 import { PlusCircle, MoreHorizontal } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
+const filterOptions = [
+  { label: "All", value: "all" },
+  { label: "By Type", value: "type" },
+  { label: "By Material", value: "material" },
+  { label: "By Date", value: "date" },
+];
+
 /*
 This client component will display the inventory transactions table,
 taking data from the database and displaying it with live updates.
@@ -30,7 +51,19 @@ This means adding records to the table - not modifying or deleting existing reco
 Adding a record involves an input form, which will confirm that all required fields are filled out, and will utilise type safety to ensure that the data is valid with the database constraints.
 */
 
-const TransactionsPage = () => {
+export default function TransactionsPage() {
+  // Table State
+  const [sorting, setSorting] = useState<SortingState>([]);
+  // const [pagination, setPagination] = useState<PaginationState>({
+  //   pageIndex: 0,
+  //   pageSize: 10,
+  // });
+  const [rowSelection, setRowSelection] = useState({});
+
+  // Filter/Search State
+  const [selectedFilter, setSelectedFilter] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
+
   // Fetch transactions data from the database
   // useQuery is a React hook from TanStack Query that handles data fetching, caching, and state management
   // It takes an object with queryKey (unique identifier for caching) and queryFn (async function to fetch data)
@@ -56,6 +89,90 @@ const TransactionsPage = () => {
       : "bg-red-100 text-red-800";
   };
 
+  const filteredData = useMemo(() => {
+    if (!transactions) return [];
+    let filtered: Transaction[] = transactions;
+
+    if (searchQuery) {
+      filtered = filtered.filter((tx) => {
+        if (selectedFilter === "all") {
+          return (
+            tx.tx_type.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            tx.material?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            tx.tx_notes?.toLowerCase().includes(searchQuery.toLowerCase())
+          );
+        }
+        switch (selectedFilter) {
+          case "type":
+            return tx.tx_type.toLowerCase().includes(searchQuery.toLowerCase());
+          case "material":
+            return tx.material
+              ?.toLowerCase()
+              .includes(searchQuery.toLowerCase());
+          case "date":
+            return tx.tx_date?.includes(searchQuery);
+          default:
+            return false;
+        }
+      });
+    }
+
+    return filtered;
+  }, [transactions, searchQuery, selectedFilter]);
+
+  // Initialize table
+  const table = useReactTable({
+    data: filteredData ?? [],
+    columns,
+    state: {
+      sorting,
+      rowSelection,
+    },
+    enableSorting: true,
+    getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    onSortingChange: setSorting,
+    onRowSelectionChange: setRowSelection,
+    initialState: {
+      pagination: { pageSize: 30, pageIndex: 0 },
+    },
+  });
+
+  if (isLoading) {
+    return <div>Loading transactions...</div>;
+  }
+
+  return (
+    <div className="container mx-auto py-6">
+      <div className="flex justify-between items-center mb-6">
+        <SearchBar
+          filterOptions={filterOptions}
+          selectedFilter={selectedFilter}
+          onFilterChange={setSelectedFilter}
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
+        />
+        <Button className="flex items-center gap-2">
+          <PlusCircle className="w-4 h-4" />
+          New Transaction
+        </Button>
+      </div>
+
+      <div className="rounded-md border-x-2 border-[hsl(var(--table-header))] relative bg-slate-700">
+        <Table>
+          <TableHeader table={table} />
+          <TableBody>
+            {/* Table body implementation similar to your product table */}
+          </TableBody>
+        </Table>
+      </div>
+      <TableFooter table={table} />
+    </div>
+  );
+
+  /*
   return (
     <div className="container mx-auto py-6">
       <div className="flex justify-between items-center mb-6">
@@ -130,6 +247,5 @@ const TransactionsPage = () => {
       </div>
     </div>
   );
-};
-
-export default TransactionsPage;
+  */
+}

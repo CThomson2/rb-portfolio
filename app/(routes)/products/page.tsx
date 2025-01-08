@@ -9,7 +9,7 @@ import { fetchProducts } from "@/lib/products/fetchProducts";
 //   prisma.products.findMany();
 //   prisma.products.groupBy({
 
-const IndexPage = async ({ data }: { data: ProductTableRow[] }) => {
+const IndexPage = async () => {
   const products = await fetchProducts();
 
   return (

@@ -1,7 +1,7 @@
-import { Table } from "@tanstack/react-table";
 import SearchBar from "./SearchBar";
-interface TableHeaderProps<TData> {
-  table: Table<TData>;
+import { FilterOption } from "@/types/components/products";
+
+interface TopHeaderProps<TData> {
   title?: string;
   filterOptions: FilterOption[];
   actionButton?: React.ReactNode;
@@ -12,7 +12,6 @@ interface TableHeaderProps<TData> {
 }
 
 const TopHeader = <TData, _>({
-  table,
   title,
   actionButton,
   filterOptions,
@@ -20,7 +19,7 @@ const TopHeader = <TData, _>({
   onFilterChange,
   searchQuery,
   onSearchChange,
-}: TableHeaderProps<TData>) => {
+}: TopHeaderProps<TData>) => {
   return (
     <div className="flex items-center justify-between px-8 py-8 bg-slate-700 rounded-md">
       <div className="space-y-4">

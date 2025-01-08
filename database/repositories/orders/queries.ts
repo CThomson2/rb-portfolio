@@ -2,7 +2,7 @@ import { prisma } from "@/database/client";
 import type { Order, OrderCreate } from "./types";
 import { OrderStatus } from "../shared/types";
 
-export const queries = {
+const queries = {
   /**
    * Creates a new order in the database.
    * Sets initial status to "pending" and quantity_received to 0.
@@ -47,3 +47,5 @@ export const queries = {
     });
   },
 };
+
+export default queries;

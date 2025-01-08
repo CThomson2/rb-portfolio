@@ -9,3 +9,8 @@ export interface ProductModalProps {
   onClose: () => void;
   product: ProductWithPrices | null;
 }
+
+export interface FilterOption {
+  label: string;
+  value: string;
+}

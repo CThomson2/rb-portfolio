@@ -16,7 +16,7 @@ import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 
 import TableTabs from "./tabs";
 import TableHeader from "@/components/shared/table/TableHeader";
-import TableFooter from "@/components/features/products/ProductTable/footer";
+import TableFooter from "@/components/shared/table/footer";
 import type { ProductTableRow } from "@/types/components/products";
 import { GRADE } from "@/types/database/products";
 import { cn } from "@/lib/utils";

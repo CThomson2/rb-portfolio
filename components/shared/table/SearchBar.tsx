@@ -8,11 +8,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import { ChevronDown, FilterIcon, SearchIcon } from "lucide-react";
-
-interface FilterOption {
-  label: string;
-  value: string;
-}
+import { FilterOption } from "@/types/components/products";
 
 interface SearchBarProps {
   filterOptions: FilterOption[];

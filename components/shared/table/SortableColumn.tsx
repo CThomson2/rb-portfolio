@@ -8,25 +8,24 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  // DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
 // Define props interface for the SortableHeader component
 // Extends HTMLDivElement props and requires a table column and title
-interface SortableHeaderProps<TData, TValue>
+interface SortableColumnProps<TData, TValue>
   extends React.HTMLAttributes<HTMLDivElement> {
   column: Column<TData, TValue>;
   title: string;
 }
 
-// SortableHeader component - Creates a sortable column header with dropdown menu
+// SortableColumn component - Creates a sortable column header with dropdown menu
 // Generic types TData and TValue represent the data type and value type of the column
-export function SortableHeader<TData, TValue>({
+export function SortableColumn<TData, TValue>({
   column,
   title,
   className,
-}: SortableHeaderProps<TData, TValue>) {
+}: SortableColumnProps<TData, TValue>) {
   // If column is not sortable, render just the title
   if (!column.getCanSort()) {
     return <div className={cn(className)}>{title}</div>;

@@ -1,12 +1,21 @@
 // database/repositories/inventory/types.ts
-export interface BaseTransaction {
+export interface Transaction {
   tx_id: number;
   tx_type: string;
   tx_date: string;
-  material: string;
-  drum_id: number;
-  repro_id: number;
-  tx_notes: string;
+  direction: string;
+  material: string | null;
+  delivery_id: number | null;
+  drum_id: number | null;
+  repro_id: number | null;
+  process_id: number | null;
+  tx_notes: string | null;
+  batch_code: string | null;
+}
+
+export interface TransactionRow extends Transaction {
+  material_name: string;
+  total_count: number;
 }
 
 /*

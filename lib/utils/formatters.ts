@@ -35,3 +35,18 @@ export function getTxTypeColor(txType: TxType): string {
   };
   return styles[txType] || "bg-gray-100 text-gray-800";
 }
+
+export function getTxTypeVariant(
+  txType: TxType
+): "default" | "secondary" | "outline" {
+  switch (txType.toLowerCase()) {
+    case "import":
+      return "default";
+    case "processing":
+      return "secondary";
+    case "reprocessing":
+      return "outline";
+    default:
+      return "default";
+  }
+}
