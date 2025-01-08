@@ -14,7 +14,6 @@ export interface Transaction {
 }
 
 export interface TransactionRow extends Transaction {
-  material_name: string;
   total_count: number;
 }
 
