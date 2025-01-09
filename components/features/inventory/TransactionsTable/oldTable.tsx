@@ -11,8 +11,8 @@ import {
   TableRow,
   TableFooter,
 } from "@/components/ui/table";
-import SearchBar from "@/components/shared/table/SearchBar";
-import TopHeader from "@/components/shared/table/TopHeader";
+import SearchBar from "@/components/shared/table/header/SearchBar";
+import TopHeader from "@/components/shared/table/header/TopHeader";
 // import ActionButton from "@/components/shared/table";
 
 export function TransactionsTable() {

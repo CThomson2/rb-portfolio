@@ -1,4 +1,4 @@
-import { TransactionsTable } from "@/components/features/inventory/TransactionsTable";
+import { TransactionsTable } from "@/components/features/inventory/TransactionsTable/index";
 
 const TransactionsPage = () => {
   return <TransactionsTable />;

@@ -20,8 +20,8 @@ import TableFooter from "@/components/shared/table/footer";
 import type { ProductTableRow } from "@/types/components/products";
 import { GRADE } from "@/types/database/products";
 import { cn } from "@/lib/utils";
-import ActionButton from "./header";
-import SearchBar from "@/components/shared/table/SearchBar";
+import ActionButton from "../../../shared/table/header/ActionButton";
+import SearchBar from "@/components/shared/table/header/SearchBar";
 
 export interface DataTableProps {
   columns: ColumnDef<ProductTableRow, any>[];

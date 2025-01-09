@@ -13,7 +13,7 @@ const queries = {
     return prisma.orders.create({
       data: {
         ...data,
-        status: "pending",
+        delivery_status: "pending",
         quantity_received: 0,
       },
     });
@@ -36,13 +36,13 @@ const queries = {
     });
   },
 
-  updateStatus: async (orderId: number, status: OrderStatus) => {
+  updateDeliveryStatus: async (orderId: number, status: OrderStatus) => {
     return prisma.orders.update({
       where: {
         order_id: orderId,
       },
       data: {
-        status,
+        delivery_status: status,
       },
     });
   },

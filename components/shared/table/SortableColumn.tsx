@@ -35,7 +35,7 @@ export function SortableColumn<TData, TValue>({
   return (
     <div
       className={cn(
-        "min-w-0 flex items-center gap-2 overflow-hidden",
+        "min-w-0 flex justify-center items-center gap-2 overflow-hidden",
         className
       )}
     >

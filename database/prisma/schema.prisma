@@ -173,7 +173,7 @@ model orders {
   created_at        DateTime?    @default(now()) @db.Timestamptz(6)
   updated_at        DateTime?    @default(now()) @db.Timestamptz(6)
   quantity_received Int          @default(0)
-  status            String       @default("pending") @db.VarChar(20)
+  delivery_status   String       @default("pending") @db.VarChar(20)
   deliveries        deliveries[]
   new_drums         new_drums[]
 

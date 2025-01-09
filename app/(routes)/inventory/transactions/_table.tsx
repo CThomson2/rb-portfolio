@@ -18,7 +18,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import TableHeader from "@/components/shared/table/TableHeader";
-import SearchBar from "@/components/shared/table/SearchBar";
+import SearchBar from "@/components/shared/table/header/SearchBar";
 import TableFooter from "@/components/shared/table/footer";
 import { columns } from "@/components/features/inventory/TransactionsTable/columns";
 import type { Transaction } from "@/types/database/transactions";

@@ -23,7 +23,7 @@ const TableHeader = <TData, _>({ table }: { table: Table<TData> }) => {
           {headerGroup.headers.map((header) => (
             <TableHead
               key={header.id}
-              className="px-2 py-3 text-left font-medium text-muted-foreground uppercase text-xs tracking-wide min-w-0 overflow-hidden"
+              className="px-3 py-3 text-center font-medium text-muted-foreground uppercase text-xs tracking-wide min-w-0 overflow-hidden"
             >
               {header.isPlaceholder
                 ? null

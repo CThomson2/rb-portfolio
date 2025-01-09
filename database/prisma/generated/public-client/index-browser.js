@@ -17,12 +17,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.1.0
- * Query Engine version: 11f085a2012c0f4778414c8db2651556ee0ef959
+ * Prisma Client JS version: 6.2.1
+ * Query Engine version: 4123509d24aa4dede1e864b46351bf2790323b69
  */
 Prisma.prismaVersion = {
-  client: "6.1.0",
-  engine: "11f085a2012c0f4778414c8db2651556ee0ef959"
+  client: "6.2.1",
+  engine: "4123509d24aa4dede1e864b46351bf2790323b69"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -232,7 +232,7 @@ exports.Prisma.OrdersScalarFieldEnum = {
   created_at: 'created_at',
   updated_at: 'updated_at',
   quantity_received: 'quantity_received',
-  status: 'status'
+  delivery_status: 'delivery_status'
 };
 
 exports.Prisma.ProcessesScalarFieldEnum = {
@@ -268,7 +268,7 @@ exports.Prisma.Repro_drumsScalarFieldEnum = {
   updated_at: 'updated_at',
   status: 'status',
   volume_status: 'volume_status',
-  drum_code: 'drum_code',
+  notes: 'notes',
   location: 'location'
 };
 

@@ -16,7 +16,7 @@ import ProjectTimeLine from "@/components/shared/projects/Timeline";
 
 // Formatters
 import { format } from "date-fns";
-import { getTxTypeColor, getTxTypeVariant } from "@/lib/utils/formatters";
+import { getTxTypeVariant } from "@/lib/utils/formatters";
 
 // UI Components
 import { Badge } from "@/components/ui/badge";
@@ -78,6 +78,12 @@ export const columns: ColumnDef<Transaction>[] = [
     enableSorting: true,
   },
   {
+    accessorKey: "material",
+    header: ({ column }) => <SortableColumn column={column} title="Material" />,
+    cell: ({ row }) => row.getValue("material"),
+    enableSorting: true,
+  },
+  {
     accessorKey: "tx_type",
     header: ({ column }) => <SortableColumn column={column} title="Type" />,
     cell: ({ row }) => (
@@ -103,10 +109,16 @@ export const columns: ColumnDef<Transaction>[] = [
     enableSorting: true,
   },
   {
-    accessorKey: "material",
-    header: ({ column }) => <SortableColumn column={column} title="Material" />,
-    cell: ({ row }) => row.getValue("material"),
-    enableSorting: true,
+    // Actions column for row operations:
+    // Expand info | View product Modal
+    // Add to cart | Go to Checkout | Favourite
+    accessorKey: "actions",
+    header: "Actions",
+    cell: () => (
+      <div className="min-w-0 overflow-hidden">
+        <ProjectActions />
+      </div>
+    ),
   },
   // Column for "Source" - either "Import", "New Drum", or "Repro Drum". Use a JOIN query to get the name of the source (depending on the tx_type))
   //   {
@@ -115,23 +127,23 @@ export const columns: ColumnDef<Transaction>[] = [
   //     cell: ({ row }) => row.getValue("source"),
   //     enableSorting: true,
   //   },
-  {
-    id: "actions",
-    header: "",
-    cell: (row: any) => (
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="h-8 w-8 p-0">
-            <MoreHorizontal className="h-4 w-4" />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          <DropdownMenuItem>View Details</DropdownMenuItem>
-          <DropdownMenuItem className="text-red-600">Delete</DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    ),
-  },
+  //   {
+  //     id: "actions",
+  //     header: "",
+  //     cell: (row: any) => (
+  //       <DropdownMenu>
+  //         <DropdownMenuTrigger asChild>
+  //           <Button variant="ghost" className="h-8 w-8 p-0">
+  //             <MoreHorizontal className="h-4 w-4" />
+  //           </Button>
+  //         </DropdownMenuTrigger>
+  //         <DropdownMenuContent align="end">
+  //           <DropdownMenuItem>View Details</DropdownMenuItem>
+  //           <DropdownMenuItem className="text-red-600">Delete</DropdownMenuItem>
+  //         </DropdownMenuContent>
+  //       </DropdownMenu>
+  //     ),
+  //   },
 ];
 
 /*
