@@ -1,4 +1,4 @@
-import { STOCK_LEVEL } from "@/types/database/products";
+import { STOCK_LEVEL } from "@/types/enums/products";
 
 const stockLevelBackgroundColors = {
   [STOCK_LEVEL.LOW_STOCK]: "bg-red-100",

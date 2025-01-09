@@ -18,6 +18,7 @@ export const navItems: NavItem[] = [
   { name: "Projects", link: "#projects" },
   { name: "Testimonials", link: "#testimonials" },
   { name: "Contact", link: "#contact" },
+  { name: "Inventory", link: "/inventory" },
 ];
 
 export const gradeInfo: GradeInfo[] = [

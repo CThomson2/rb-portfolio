@@ -19,7 +19,7 @@ BEGIN
             WHERE order_id = NEW.order_id;
         ELSIF total_received < (
             -- If the received quantity is less than the ordered quantity, set status to 'partial'
-            SELECT quantity_ordered
+            SELECT quantity
             FROM inventory.orders
             WHERE order_id = NEW.order_id
         ) THEN

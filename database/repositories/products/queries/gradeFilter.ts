@@ -1,7 +1,7 @@
 // database/repositories/products/queries.ts
 import { prisma } from "@/database/client";
 import type { ProductTableRow } from "@/types/components/products";
-import { GRADE } from "@/types/database/products";
+import { GRADE } from "@/types/enums/products";
 
 // interface FetchProductsOptions {
 //   grade?: string;
@@ -47,11 +47,6 @@ export async function byGrade(grade?: GRADE): Promise<number> {
  *   PTS_DS: number  // Count of PTS-DS grade products
  * }
  */
-// Type for the result of prisma.products.groupBy()
-interface GradeCount {
-  grade: GRADE;
-  _count: number;
-}
 
 export async function getProductCounts() {
   // Fetch all counts in a single query using GroupBy
@@ -75,30 +70,14 @@ export async function getProductCounts() {
   };
 }
 
-export async function fetchProducts(): Promise<ProductTableRow[]> {
-  const products = await prisma.products.findMany({
-    select: {
-      product_id: true,
-      name: true,
-      sku: true,
-      grade: true,
-      raw_materials: {
-        select: {
-          cas_number: true,
-        },
-      },
-    },
-  });
-
-  console.log(products);
-  return products.map((product) => {
-    // console.log(product.grade);
-    return {
-      ...product,
-      cas_number: product.raw_materials?.cas_number ?? "",
-    };
-  });
-}
+// export async function countProductsByGrade(grade: GRADE): Promise<number> {
+//   const count = await prisma.products.count({
+//     where: {
+//       grade,
+//     },
+//   });
+//   return count;
+// }
 
 // export async function fetchProducts(
 //   options?: FetchProductsOptions

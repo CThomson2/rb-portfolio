@@ -1,4 +1,4 @@
-import { OrderStatus } from "../shared/types";
+import { OrderStatus } from "../../database/repositories/shared/types";
 
 export interface OrderCreate {
   supplier: string;
