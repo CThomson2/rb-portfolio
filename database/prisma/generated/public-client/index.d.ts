@@ -9386,7 +9386,7 @@ export namespace Prisma {
 
   export type DeliveriesGroupByOutputType = {
     delivery_id: number
-    order_id: number | null
+    order_id: number
     quantity_received: number
     date_received: Date
     batch_code: string | null
@@ -9425,7 +9425,7 @@ export namespace Prisma {
     delivery_notes?: boolean
     created_at?: boolean
     updated_at?: boolean
-    orders?: boolean | deliveries$ordersArgs<ExtArgs>
+    orders?: boolean | ordersDefaultArgs<ExtArgs>
     transactions?: boolean | deliveries$transactionsArgs<ExtArgs>
     _count?: boolean | DeliveriesCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["deliveries"]>
@@ -9440,7 +9440,7 @@ export namespace Prisma {
     delivery_notes?: boolean
     created_at?: boolean
     updated_at?: boolean
-    orders?: boolean | deliveries$ordersArgs<ExtArgs>
+    orders?: boolean | ordersDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["deliveries"]>
 
   export type deliveriesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -9453,7 +9453,7 @@ export namespace Prisma {
     delivery_notes?: boolean
     created_at?: boolean
     updated_at?: boolean
-    orders?: boolean | deliveries$ordersArgs<ExtArgs>
+    orders?: boolean | ordersDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["deliveries"]>
 
   export type deliveriesSelectScalar = {
@@ -9470,26 +9470,26 @@ export namespace Prisma {
 
   export type deliveriesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"delivery_id" | "order_id" | "quantity_received" | "date_received" | "batch_code" | "location" | "delivery_notes" | "created_at" | "updated_at", ExtArgs["result"]["deliveries"]>
   export type deliveriesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    orders?: boolean | deliveries$ordersArgs<ExtArgs>
+    orders?: boolean | ordersDefaultArgs<ExtArgs>
     transactions?: boolean | deliveries$transactionsArgs<ExtArgs>
     _count?: boolean | DeliveriesCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type deliveriesIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    orders?: boolean | deliveries$ordersArgs<ExtArgs>
+    orders?: boolean | ordersDefaultArgs<ExtArgs>
   }
   export type deliveriesIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    orders?: boolean | deliveries$ordersArgs<ExtArgs>
+    orders?: boolean | ordersDefaultArgs<ExtArgs>
   }
 
   export type $deliveriesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "deliveries"
     objects: {
-      orders: Prisma.$ordersPayload<ExtArgs> | null
+      orders: Prisma.$ordersPayload<ExtArgs>
       transactions: Prisma.$transactionsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       delivery_id: number
-      order_id: number | null
+      order_id: number
       quantity_received: number
       date_received: Date
       batch_code: string | null
@@ -9891,7 +9891,7 @@ export namespace Prisma {
    */
   export interface Prisma__deliveriesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    orders<T extends deliveries$ordersArgs<ExtArgs> = {}>(args?: Subset<T, deliveries$ordersArgs<ExtArgs>>): Prisma__ordersClient<$Result.GetResult<Prisma.$ordersPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    orders<T extends ordersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ordersDefaultArgs<ExtArgs>>): Prisma__ordersClient<$Result.GetResult<Prisma.$ordersPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
     transactions<T extends deliveries$transactionsArgs<ExtArgs> = {}>(args?: Subset<T, deliveries$transactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$transactionsPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -10312,25 +10312,6 @@ export namespace Prisma {
      * Filter which deliveries to delete
      */
     where?: deliveriesWhereInput
-  }
-
-  /**
-   * deliveries.orders
-   */
-  export type deliveries$ordersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the orders
-     */
-    select?: ordersSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the orders
-     */
-    omit?: ordersOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ordersInclude<ExtArgs> | null
-    where?: ordersWhereInput
   }
 
   /**
@@ -13823,20 +13804,17 @@ export namespace Prisma {
 
   export type New_drumsAvgAggregateOutputType = {
     drum_id: number | null
-    import_id: number | null
     order_id: number | null
   }
 
   export type New_drumsSumAggregateOutputType = {
     drum_id: number | null
-    import_id: number | null
     order_id: number | null
   }
 
   export type New_drumsMinAggregateOutputType = {
     drum_id: number | null
-    import_id: number | null
-    material_type: string | null
+    material: string | null
     date_processed: Date | null
     status: string | null
     location: string | null
@@ -13847,8 +13825,7 @@ export namespace Prisma {
 
   export type New_drumsMaxAggregateOutputType = {
     drum_id: number | null
-    import_id: number | null
-    material_type: string | null
+    material: string | null
     date_processed: Date | null
     status: string | null
     location: string | null
@@ -13859,8 +13836,7 @@ export namespace Prisma {
 
   export type New_drumsCountAggregateOutputType = {
     drum_id: number
-    import_id: number
-    material_type: number
+    material: number
     date_processed: number
     status: number
     location: number
@@ -13873,20 +13849,17 @@ export namespace Prisma {
 
   export type New_drumsAvgAggregateInputType = {
     drum_id?: true
-    import_id?: true
     order_id?: true
   }
 
   export type New_drumsSumAggregateInputType = {
     drum_id?: true
-    import_id?: true
     order_id?: true
   }
 
   export type New_drumsMinAggregateInputType = {
     drum_id?: true
-    import_id?: true
-    material_type?: true
+    material?: true
     date_processed?: true
     status?: true
     location?: true
@@ -13897,8 +13870,7 @@ export namespace Prisma {
 
   export type New_drumsMaxAggregateInputType = {
     drum_id?: true
-    import_id?: true
-    material_type?: true
+    material?: true
     date_processed?: true
     status?: true
     location?: true
@@ -13909,8 +13881,7 @@ export namespace Prisma {
 
   export type New_drumsCountAggregateInputType = {
     drum_id?: true
-    import_id?: true
-    material_type?: true
+    material?: true
     date_processed?: true
     status?: true
     location?: true
@@ -14008,8 +13979,7 @@ export namespace Prisma {
 
   export type New_drumsGroupByOutputType = {
     drum_id: number
-    import_id: number | null
-    material_type: string
+    material: string
     date_processed: Date | null
     status: string
     location: string | null
@@ -14039,8 +14009,7 @@ export namespace Prisma {
 
   export type new_drumsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     drum_id?: boolean
-    import_id?: boolean
-    material_type?: boolean
+    material?: boolean
     date_processed?: boolean
     status?: boolean
     location?: boolean
@@ -14056,8 +14025,7 @@ export namespace Prisma {
 
   export type new_drumsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     drum_id?: boolean
-    import_id?: boolean
-    material_type?: boolean
+    material?: boolean
     date_processed?: boolean
     status?: boolean
     location?: boolean
@@ -14069,8 +14037,7 @@ export namespace Prisma {
 
   export type new_drumsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     drum_id?: boolean
-    import_id?: boolean
-    material_type?: boolean
+    material?: boolean
     date_processed?: boolean
     status?: boolean
     location?: boolean
@@ -14082,8 +14049,7 @@ export namespace Prisma {
 
   export type new_drumsSelectScalar = {
     drum_id?: boolean
-    import_id?: boolean
-    material_type?: boolean
+    material?: boolean
     date_processed?: boolean
     status?: boolean
     location?: boolean
@@ -14092,7 +14058,7 @@ export namespace Prisma {
     order_id?: boolean
   }
 
-  export type new_drumsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"drum_id" | "import_id" | "material_type" | "date_processed" | "status" | "location" | "created_at" | "updated_at" | "order_id", ExtArgs["result"]["new_drums"]>
+  export type new_drumsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"drum_id" | "material" | "date_processed" | "status" | "location" | "created_at" | "updated_at" | "order_id", ExtArgs["result"]["new_drums"]>
   export type new_drumsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     drum_distillations?: boolean | new_drums$drum_distillationsArgs<ExtArgs>
     orders?: boolean | new_drums$ordersArgs<ExtArgs>
@@ -14117,8 +14083,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       drum_id: number
-      import_id: number | null
-      material_type: string
+      material: string
       date_processed: Date | null
       status: string
       location: string | null
@@ -14553,8 +14518,7 @@ export namespace Prisma {
    */ 
   interface new_drumsFieldRefs {
     readonly drum_id: FieldRef<"new_drums", 'Int'>
-    readonly import_id: FieldRef<"new_drums", 'Int'>
-    readonly material_type: FieldRef<"new_drums", 'String'>
+    readonly material: FieldRef<"new_drums", 'String'>
     readonly date_processed: FieldRef<"new_drums", 'DateTime'>
     readonly status: FieldRef<"new_drums", 'String'>
     readonly location: FieldRef<"new_drums", 'String'>
@@ -16271,7 +16235,7 @@ export namespace Prisma {
 
   export type ProcessesMinAggregateOutputType = {
     process_id: number | null
-    material_type: string | null
+    material: string | null
     drum_id: number | null
     supplier: string | null
     still_code: string | null
@@ -16283,7 +16247,7 @@ export namespace Prisma {
 
   export type ProcessesMaxAggregateOutputType = {
     process_id: number | null
-    material_type: string | null
+    material: string | null
     drum_id: number | null
     supplier: string | null
     still_code: string | null
@@ -16295,7 +16259,7 @@ export namespace Prisma {
 
   export type ProcessesCountAggregateOutputType = {
     process_id: number
-    material_type: number
+    material: number
     drum_id: number
     supplier: number
     still_code: number
@@ -16319,7 +16283,7 @@ export namespace Prisma {
 
   export type ProcessesMinAggregateInputType = {
     process_id?: true
-    material_type?: true
+    material?: true
     drum_id?: true
     supplier?: true
     still_code?: true
@@ -16331,7 +16295,7 @@ export namespace Prisma {
 
   export type ProcessesMaxAggregateInputType = {
     process_id?: true
-    material_type?: true
+    material?: true
     drum_id?: true
     supplier?: true
     still_code?: true
@@ -16343,7 +16307,7 @@ export namespace Prisma {
 
   export type ProcessesCountAggregateInputType = {
     process_id?: true
-    material_type?: true
+    material?: true
     drum_id?: true
     supplier?: true
     still_code?: true
@@ -16442,7 +16406,7 @@ export namespace Prisma {
 
   export type ProcessesGroupByOutputType = {
     process_id: number
-    material_type: string | null
+    material: string | null
     drum_id: number | null
     supplier: string | null
     still_code: string
@@ -16473,7 +16437,7 @@ export namespace Prisma {
 
   export type processesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     process_id?: boolean
-    material_type?: boolean
+    material?: boolean
     drum_id?: boolean
     supplier?: boolean
     still_code?: boolean
@@ -16489,7 +16453,7 @@ export namespace Prisma {
 
   export type processesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     process_id?: boolean
-    material_type?: boolean
+    material?: boolean
     drum_id?: boolean
     supplier?: boolean
     still_code?: boolean
@@ -16503,7 +16467,7 @@ export namespace Prisma {
 
   export type processesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     process_id?: boolean
-    material_type?: boolean
+    material?: boolean
     drum_id?: boolean
     supplier?: boolean
     still_code?: boolean
@@ -16517,7 +16481,7 @@ export namespace Prisma {
 
   export type processesSelectScalar = {
     process_id?: boolean
-    material_type?: boolean
+    material?: boolean
     drum_id?: boolean
     supplier?: boolean
     still_code?: boolean
@@ -16527,7 +16491,7 @@ export namespace Prisma {
     date_processed?: boolean
   }
 
-  export type processesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"process_id" | "material_type" | "drum_id" | "supplier" | "still_code" | "operator" | "loader" | "transporter" | "date_processed", ExtArgs["result"]["processes"]>
+  export type processesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"process_id" | "material" | "drum_id" | "supplier" | "still_code" | "operator" | "loader" | "transporter" | "date_processed", ExtArgs["result"]["processes"]>
   export type processesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     new_drums?: boolean | processes$new_drumsArgs<ExtArgs>
     stills?: boolean | stillsDefaultArgs<ExtArgs>
@@ -16552,7 +16516,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       process_id: number
-      material_type: string | null
+      material: string | null
       drum_id: number | null
       supplier: string | null
       still_code: string
@@ -16987,7 +16951,7 @@ export namespace Prisma {
    */ 
   interface processesFieldRefs {
     readonly process_id: FieldRef<"processes", 'Int'>
-    readonly material_type: FieldRef<"processes", 'String'>
+    readonly material: FieldRef<"processes", 'String'>
     readonly drum_id: FieldRef<"processes", 'Int'>
     readonly supplier: FieldRef<"processes", 'String'>
     readonly still_code: FieldRef<"processes", 'String'>
@@ -18648,7 +18612,7 @@ export namespace Prisma {
   export type Repro_drumsMinAggregateOutputType = {
     repro_drum_id: number | null
     date_created: Date | null
-    material_type: string | null
+    material: string | null
     capacity: number | null
     current_volume: number | null
     created_at: Date | null
@@ -18662,7 +18626,7 @@ export namespace Prisma {
   export type Repro_drumsMaxAggregateOutputType = {
     repro_drum_id: number | null
     date_created: Date | null
-    material_type: string | null
+    material: string | null
     capacity: number | null
     current_volume: number | null
     created_at: Date | null
@@ -18676,7 +18640,7 @@ export namespace Prisma {
   export type Repro_drumsCountAggregateOutputType = {
     repro_drum_id: number
     date_created: number
-    material_type: number
+    material: number
     capacity: number
     current_volume: number
     created_at: number
@@ -18704,7 +18668,7 @@ export namespace Prisma {
   export type Repro_drumsMinAggregateInputType = {
     repro_drum_id?: true
     date_created?: true
-    material_type?: true
+    material?: true
     capacity?: true
     current_volume?: true
     created_at?: true
@@ -18718,7 +18682,7 @@ export namespace Prisma {
   export type Repro_drumsMaxAggregateInputType = {
     repro_drum_id?: true
     date_created?: true
-    material_type?: true
+    material?: true
     capacity?: true
     current_volume?: true
     created_at?: true
@@ -18732,7 +18696,7 @@ export namespace Prisma {
   export type Repro_drumsCountAggregateInputType = {
     repro_drum_id?: true
     date_created?: true
-    material_type?: true
+    material?: true
     capacity?: true
     current_volume?: true
     created_at?: true
@@ -18833,7 +18797,7 @@ export namespace Prisma {
   export type Repro_drumsGroupByOutputType = {
     repro_drum_id: number
     date_created: Date
-    material_type: string
+    material: string
     capacity: number
     current_volume: number
     created_at: Date | null
@@ -18866,7 +18830,7 @@ export namespace Prisma {
   export type repro_drumsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     repro_drum_id?: boolean
     date_created?: boolean
-    material_type?: boolean
+    material?: boolean
     capacity?: boolean
     current_volume?: boolean
     created_at?: boolean
@@ -18883,7 +18847,7 @@ export namespace Prisma {
   export type repro_drumsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     repro_drum_id?: boolean
     date_created?: boolean
-    material_type?: boolean
+    material?: boolean
     capacity?: boolean
     current_volume?: boolean
     created_at?: boolean
@@ -18897,7 +18861,7 @@ export namespace Prisma {
   export type repro_drumsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     repro_drum_id?: boolean
     date_created?: boolean
-    material_type?: boolean
+    material?: boolean
     capacity?: boolean
     current_volume?: boolean
     created_at?: boolean
@@ -18911,7 +18875,7 @@ export namespace Prisma {
   export type repro_drumsSelectScalar = {
     repro_drum_id?: boolean
     date_created?: boolean
-    material_type?: boolean
+    material?: boolean
     capacity?: boolean
     current_volume?: boolean
     created_at?: boolean
@@ -18922,7 +18886,7 @@ export namespace Prisma {
     location?: boolean
   }
 
-  export type repro_drumsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"repro_drum_id" | "date_created" | "material_type" | "capacity" | "current_volume" | "created_at" | "updated_at" | "status" | "volume_status" | "notes" | "location", ExtArgs["result"]["repro_drums"]>
+  export type repro_drumsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"repro_drum_id" | "date_created" | "material" | "capacity" | "current_volume" | "created_at" | "updated_at" | "status" | "volume_status" | "notes" | "location", ExtArgs["result"]["repro_drums"]>
   export type repro_drumsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     repro_additions?: boolean | repro_drums$repro_additionsArgs<ExtArgs>
     transactions?: boolean | repro_drums$transactionsArgs<ExtArgs>
@@ -18940,7 +18904,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       repro_drum_id: number
       date_created: Date
-      material_type: string
+      material: string
       capacity: number
       current_volume: number
       created_at: Date | null
@@ -19376,7 +19340,7 @@ export namespace Prisma {
   interface repro_drumsFieldRefs {
     readonly repro_drum_id: FieldRef<"repro_drums", 'Int'>
     readonly date_created: FieldRef<"repro_drums", 'DateTime'>
-    readonly material_type: FieldRef<"repro_drums", 'String'>
+    readonly material: FieldRef<"repro_drums", 'String'>
     readonly capacity: FieldRef<"repro_drums", 'Int'>
     readonly current_volume: FieldRef<"repro_drums", 'Int'>
     readonly created_at: FieldRef<"repro_drums", 'DateTime'>
@@ -20867,7 +20831,7 @@ export namespace Prisma {
     /**
      * The data needed to create a transactions.
      */
-    data: XOR<transactionsCreateInput, transactionsUncheckedCreateInput>
+    data?: XOR<transactionsCreateInput, transactionsUncheckedCreateInput>
   }
 
   /**
@@ -22375,8 +22339,7 @@ export namespace Prisma {
 
   export const New_drumsScalarFieldEnum: {
     drum_id: 'drum_id',
-    import_id: 'import_id',
-    material_type: 'material_type',
+    material: 'material',
     date_processed: 'date_processed',
     status: 'status',
     location: 'location',
@@ -22406,7 +22369,7 @@ export namespace Prisma {
 
   export const ProcessesScalarFieldEnum: {
     process_id: 'process_id',
-    material_type: 'material_type',
+    material: 'material',
     drum_id: 'drum_id',
     supplier: 'supplier',
     still_code: 'still_code',
@@ -22436,7 +22399,7 @@ export namespace Prisma {
   export const Repro_drumsScalarFieldEnum: {
     repro_drum_id: 'repro_drum_id',
     date_created: 'date_created',
-    material_type: 'material_type',
+    material: 'material',
     capacity: 'capacity',
     current_volume: 'current_volume',
     created_at: 'created_at',
@@ -22926,7 +22889,7 @@ export namespace Prisma {
     OR?: deliveriesWhereInput[]
     NOT?: deliveriesWhereInput | deliveriesWhereInput[]
     delivery_id?: IntFilter<"deliveries"> | number
-    order_id?: IntNullableFilter<"deliveries"> | number | null
+    order_id?: IntFilter<"deliveries"> | number
     quantity_received?: IntFilter<"deliveries"> | number
     date_received?: DateTimeFilter<"deliveries"> | Date | string
     batch_code?: StringNullableFilter<"deliveries"> | string | null
@@ -22934,13 +22897,13 @@ export namespace Prisma {
     delivery_notes?: StringNullableFilter<"deliveries"> | string | null
     created_at?: DateTimeNullableFilter<"deliveries"> | Date | string | null
     updated_at?: DateTimeNullableFilter<"deliveries"> | Date | string | null
-    orders?: XOR<OrdersNullableScalarRelationFilter, ordersWhereInput> | null
+    orders?: XOR<OrdersScalarRelationFilter, ordersWhereInput>
     transactions?: TransactionsListRelationFilter
   }
 
   export type deliveriesOrderByWithRelationInput = {
     delivery_id?: SortOrder
-    order_id?: SortOrderInput | SortOrder
+    order_id?: SortOrder
     quantity_received?: SortOrder
     date_received?: SortOrder
     batch_code?: SortOrderInput | SortOrder
@@ -22958,7 +22921,7 @@ export namespace Prisma {
     AND?: deliveriesWhereInput | deliveriesWhereInput[]
     OR?: deliveriesWhereInput[]
     NOT?: deliveriesWhereInput | deliveriesWhereInput[]
-    order_id?: IntNullableFilter<"deliveries"> | number | null
+    order_id?: IntFilter<"deliveries"> | number
     quantity_received?: IntFilter<"deliveries"> | number
     date_received?: DateTimeFilter<"deliveries"> | Date | string
     batch_code?: StringNullableFilter<"deliveries"> | string | null
@@ -22966,13 +22929,13 @@ export namespace Prisma {
     delivery_notes?: StringNullableFilter<"deliveries"> | string | null
     created_at?: DateTimeNullableFilter<"deliveries"> | Date | string | null
     updated_at?: DateTimeNullableFilter<"deliveries"> | Date | string | null
-    orders?: XOR<OrdersNullableScalarRelationFilter, ordersWhereInput> | null
+    orders?: XOR<OrdersScalarRelationFilter, ordersWhereInput>
     transactions?: TransactionsListRelationFilter
   }, "delivery_id" | "order_id_batch_code">
 
   export type deliveriesOrderByWithAggregationInput = {
     delivery_id?: SortOrder
-    order_id?: SortOrderInput | SortOrder
+    order_id?: SortOrder
     quantity_received?: SortOrder
     date_received?: SortOrder
     batch_code?: SortOrderInput | SortOrder
@@ -22992,7 +22955,7 @@ export namespace Prisma {
     OR?: deliveriesScalarWhereWithAggregatesInput[]
     NOT?: deliveriesScalarWhereWithAggregatesInput | deliveriesScalarWhereWithAggregatesInput[]
     delivery_id?: IntWithAggregatesFilter<"deliveries"> | number
-    order_id?: IntNullableWithAggregatesFilter<"deliveries"> | number | null
+    order_id?: IntWithAggregatesFilter<"deliveries"> | number
     quantity_received?: IntWithAggregatesFilter<"deliveries"> | number
     date_received?: DateTimeWithAggregatesFilter<"deliveries"> | Date | string
     batch_code?: StringNullableWithAggregatesFilter<"deliveries"> | string | null
@@ -23245,8 +23208,7 @@ export namespace Prisma {
     OR?: new_drumsWhereInput[]
     NOT?: new_drumsWhereInput | new_drumsWhereInput[]
     drum_id?: IntFilter<"new_drums"> | number
-    import_id?: IntNullableFilter<"new_drums"> | number | null
-    material_type?: StringFilter<"new_drums"> | string
+    material?: StringFilter<"new_drums"> | string
     date_processed?: DateTimeNullableFilter<"new_drums"> | Date | string | null
     status?: StringFilter<"new_drums"> | string
     location?: StringNullableFilter<"new_drums"> | string | null
@@ -23261,8 +23223,7 @@ export namespace Prisma {
 
   export type new_drumsOrderByWithRelationInput = {
     drum_id?: SortOrder
-    import_id?: SortOrderInput | SortOrder
-    material_type?: SortOrder
+    material?: SortOrder
     date_processed?: SortOrderInput | SortOrder
     status?: SortOrder
     location?: SortOrderInput | SortOrder
@@ -23280,8 +23241,7 @@ export namespace Prisma {
     AND?: new_drumsWhereInput | new_drumsWhereInput[]
     OR?: new_drumsWhereInput[]
     NOT?: new_drumsWhereInput | new_drumsWhereInput[]
-    import_id?: IntNullableFilter<"new_drums"> | number | null
-    material_type?: StringFilter<"new_drums"> | string
+    material?: StringFilter<"new_drums"> | string
     date_processed?: DateTimeNullableFilter<"new_drums"> | Date | string | null
     status?: StringFilter<"new_drums"> | string
     location?: StringNullableFilter<"new_drums"> | string | null
@@ -23296,8 +23256,7 @@ export namespace Prisma {
 
   export type new_drumsOrderByWithAggregationInput = {
     drum_id?: SortOrder
-    import_id?: SortOrderInput | SortOrder
-    material_type?: SortOrder
+    material?: SortOrder
     date_processed?: SortOrderInput | SortOrder
     status?: SortOrder
     location?: SortOrderInput | SortOrder
@@ -23316,8 +23275,7 @@ export namespace Prisma {
     OR?: new_drumsScalarWhereWithAggregatesInput[]
     NOT?: new_drumsScalarWhereWithAggregatesInput | new_drumsScalarWhereWithAggregatesInput[]
     drum_id?: IntWithAggregatesFilter<"new_drums"> | number
-    import_id?: IntNullableWithAggregatesFilter<"new_drums"> | number | null
-    material_type?: StringWithAggregatesFilter<"new_drums"> | string
+    material?: StringWithAggregatesFilter<"new_drums"> | string
     date_processed?: DateTimeNullableWithAggregatesFilter<"new_drums"> | Date | string | null
     status?: StringWithAggregatesFilter<"new_drums"> | string
     location?: StringNullableWithAggregatesFilter<"new_drums"> | string | null
@@ -23416,7 +23374,7 @@ export namespace Prisma {
     OR?: processesWhereInput[]
     NOT?: processesWhereInput | processesWhereInput[]
     process_id?: IntFilter<"processes"> | number
-    material_type?: StringNullableFilter<"processes"> | string | null
+    material?: StringNullableFilter<"processes"> | string | null
     drum_id?: IntNullableFilter<"processes"> | number | null
     supplier?: StringNullableFilter<"processes"> | string | null
     still_code?: StringFilter<"processes"> | string
@@ -23431,7 +23389,7 @@ export namespace Prisma {
 
   export type processesOrderByWithRelationInput = {
     process_id?: SortOrder
-    material_type?: SortOrderInput | SortOrder
+    material?: SortOrderInput | SortOrder
     drum_id?: SortOrderInput | SortOrder
     supplier?: SortOrderInput | SortOrder
     still_code?: SortOrder
@@ -23449,7 +23407,7 @@ export namespace Prisma {
     AND?: processesWhereInput | processesWhereInput[]
     OR?: processesWhereInput[]
     NOT?: processesWhereInput | processesWhereInput[]
-    material_type?: StringNullableFilter<"processes"> | string | null
+    material?: StringNullableFilter<"processes"> | string | null
     drum_id?: IntNullableFilter<"processes"> | number | null
     supplier?: StringNullableFilter<"processes"> | string | null
     still_code?: StringFilter<"processes"> | string
@@ -23464,7 +23422,7 @@ export namespace Prisma {
 
   export type processesOrderByWithAggregationInput = {
     process_id?: SortOrder
-    material_type?: SortOrderInput | SortOrder
+    material?: SortOrderInput | SortOrder
     drum_id?: SortOrderInput | SortOrder
     supplier?: SortOrderInput | SortOrder
     still_code?: SortOrder
@@ -23484,7 +23442,7 @@ export namespace Prisma {
     OR?: processesScalarWhereWithAggregatesInput[]
     NOT?: processesScalarWhereWithAggregatesInput | processesScalarWhereWithAggregatesInput[]
     process_id?: IntWithAggregatesFilter<"processes"> | number
-    material_type?: StringNullableWithAggregatesFilter<"processes"> | string | null
+    material?: StringNullableWithAggregatesFilter<"processes"> | string | null
     drum_id?: IntNullableWithAggregatesFilter<"processes"> | number | null
     supplier?: StringNullableWithAggregatesFilter<"processes"> | string | null
     still_code?: StringWithAggregatesFilter<"processes"> | string
@@ -23575,7 +23533,7 @@ export namespace Prisma {
     NOT?: repro_drumsWhereInput | repro_drumsWhereInput[]
     repro_drum_id?: IntFilter<"repro_drums"> | number
     date_created?: DateTimeFilter<"repro_drums"> | Date | string
-    material_type?: StringFilter<"repro_drums"> | string
+    material?: StringFilter<"repro_drums"> | string
     capacity?: IntFilter<"repro_drums"> | number
     current_volume?: IntFilter<"repro_drums"> | number
     created_at?: DateTimeNullableFilter<"repro_drums"> | Date | string | null
@@ -23591,7 +23549,7 @@ export namespace Prisma {
   export type repro_drumsOrderByWithRelationInput = {
     repro_drum_id?: SortOrder
     date_created?: SortOrder
-    material_type?: SortOrder
+    material?: SortOrder
     capacity?: SortOrder
     current_volume?: SortOrder
     created_at?: SortOrderInput | SortOrder
@@ -23610,7 +23568,7 @@ export namespace Prisma {
     OR?: repro_drumsWhereInput[]
     NOT?: repro_drumsWhereInput | repro_drumsWhereInput[]
     date_created?: DateTimeFilter<"repro_drums"> | Date | string
-    material_type?: StringFilter<"repro_drums"> | string
+    material?: StringFilter<"repro_drums"> | string
     capacity?: IntFilter<"repro_drums"> | number
     current_volume?: IntFilter<"repro_drums"> | number
     created_at?: DateTimeNullableFilter<"repro_drums"> | Date | string | null
@@ -23626,7 +23584,7 @@ export namespace Prisma {
   export type repro_drumsOrderByWithAggregationInput = {
     repro_drum_id?: SortOrder
     date_created?: SortOrder
-    material_type?: SortOrder
+    material?: SortOrder
     capacity?: SortOrder
     current_volume?: SortOrder
     created_at?: SortOrderInput | SortOrder
@@ -23648,7 +23606,7 @@ export namespace Prisma {
     NOT?: repro_drumsScalarWhereWithAggregatesInput | repro_drumsScalarWhereWithAggregatesInput[]
     repro_drum_id?: IntWithAggregatesFilter<"repro_drums"> | number
     date_created?: DateTimeWithAggregatesFilter<"repro_drums"> | Date | string
-    material_type?: StringWithAggregatesFilter<"repro_drums"> | string
+    material?: StringWithAggregatesFilter<"repro_drums"> | string
     capacity?: IntWithAggregatesFilter<"repro_drums"> | number
     current_volume?: IntWithAggregatesFilter<"repro_drums"> | number
     created_at?: DateTimeNullableWithAggregatesFilter<"repro_drums"> | Date | string | null
@@ -24143,13 +24101,13 @@ export namespace Prisma {
     delivery_notes?: string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
-    orders?: ordersCreateNestedOneWithoutDeliveriesInput
+    orders: ordersCreateNestedOneWithoutDeliveriesInput
     transactions?: transactionsCreateNestedManyWithoutDeliveriesInput
   }
 
   export type deliveriesUncheckedCreateInput = {
     delivery_id?: number
-    order_id?: number | null
+    order_id: number
     quantity_received: number
     date_received?: Date | string
     batch_code?: string | null
@@ -24168,13 +24126,13 @@ export namespace Prisma {
     delivery_notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    orders?: ordersUpdateOneWithoutDeliveriesNestedInput
+    orders?: ordersUpdateOneRequiredWithoutDeliveriesNestedInput
     transactions?: transactionsUpdateManyWithoutDeliveriesNestedInput
   }
 
   export type deliveriesUncheckedUpdateInput = {
     delivery_id?: IntFieldUpdateOperationsInput | number
-    order_id?: NullableIntFieldUpdateOperationsInput | number | null
+    order_id?: IntFieldUpdateOperationsInput | number
     quantity_received?: IntFieldUpdateOperationsInput | number
     date_received?: DateTimeFieldUpdateOperationsInput | Date | string
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24187,7 +24145,7 @@ export namespace Prisma {
 
   export type deliveriesCreateManyInput = {
     delivery_id?: number
-    order_id?: number | null
+    order_id: number
     quantity_received: number
     date_received?: Date | string
     batch_code?: string | null
@@ -24209,7 +24167,7 @@ export namespace Prisma {
 
   export type deliveriesUncheckedUpdateManyInput = {
     delivery_id?: IntFieldUpdateOperationsInput | number
-    order_id?: NullableIntFieldUpdateOperationsInput | number | null
+    order_id?: IntFieldUpdateOperationsInput | number
     quantity_received?: IntFieldUpdateOperationsInput | number
     date_received?: DateTimeFieldUpdateOperationsInput | Date | string
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24476,8 +24434,7 @@ export namespace Prisma {
   }
 
   export type new_drumsCreateInput = {
-    import_id?: number | null
-    material_type: string
+    material: string
     date_processed?: Date | string | null
     status?: string
     location?: string | null
@@ -24491,8 +24448,7 @@ export namespace Prisma {
 
   export type new_drumsUncheckedCreateInput = {
     drum_id?: number
-    import_id?: number | null
-    material_type: string
+    material: string
     date_processed?: Date | string | null
     status?: string
     location?: string | null
@@ -24505,8 +24461,7 @@ export namespace Prisma {
   }
 
   export type new_drumsUpdateInput = {
-    import_id?: NullableIntFieldUpdateOperationsInput | number | null
-    material_type?: StringFieldUpdateOperationsInput | string
+    material?: StringFieldUpdateOperationsInput | string
     date_processed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24520,8 +24475,7 @@ export namespace Prisma {
 
   export type new_drumsUncheckedUpdateInput = {
     drum_id?: IntFieldUpdateOperationsInput | number
-    import_id?: NullableIntFieldUpdateOperationsInput | number | null
-    material_type?: StringFieldUpdateOperationsInput | string
+    material?: StringFieldUpdateOperationsInput | string
     date_processed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24535,8 +24489,7 @@ export namespace Prisma {
 
   export type new_drumsCreateManyInput = {
     drum_id?: number
-    import_id?: number | null
-    material_type: string
+    material: string
     date_processed?: Date | string | null
     status?: string
     location?: string | null
@@ -24546,8 +24499,7 @@ export namespace Prisma {
   }
 
   export type new_drumsUpdateManyMutationInput = {
-    import_id?: NullableIntFieldUpdateOperationsInput | number | null
-    material_type?: StringFieldUpdateOperationsInput | string
+    material?: StringFieldUpdateOperationsInput | string
     date_processed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24557,8 +24509,7 @@ export namespace Prisma {
 
   export type new_drumsUncheckedUpdateManyInput = {
     drum_id?: IntFieldUpdateOperationsInput | number
-    import_id?: NullableIntFieldUpdateOperationsInput | number | null
-    material_type?: StringFieldUpdateOperationsInput | string
+    material?: StringFieldUpdateOperationsInput | string
     date_processed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24664,7 +24615,7 @@ export namespace Prisma {
   }
 
   export type processesCreateInput = {
-    material_type?: string | null
+    material?: string | null
     supplier?: string | null
     operator?: string | null
     loader?: string | null
@@ -24677,7 +24628,7 @@ export namespace Prisma {
 
   export type processesUncheckedCreateInput = {
     process_id?: number
-    material_type?: string | null
+    material?: string | null
     drum_id?: number | null
     supplier?: string | null
     still_code: string
@@ -24689,7 +24640,7 @@ export namespace Prisma {
   }
 
   export type processesUpdateInput = {
-    material_type?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: NullableStringFieldUpdateOperationsInput | string | null
     supplier?: NullableStringFieldUpdateOperationsInput | string | null
     operator?: NullableStringFieldUpdateOperationsInput | string | null
     loader?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24702,7 +24653,7 @@ export namespace Prisma {
 
   export type processesUncheckedUpdateInput = {
     process_id?: IntFieldUpdateOperationsInput | number
-    material_type?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: NullableStringFieldUpdateOperationsInput | string | null
     drum_id?: NullableIntFieldUpdateOperationsInput | number | null
     supplier?: NullableStringFieldUpdateOperationsInput | string | null
     still_code?: StringFieldUpdateOperationsInput | string
@@ -24715,7 +24666,7 @@ export namespace Prisma {
 
   export type processesCreateManyInput = {
     process_id?: number
-    material_type?: string | null
+    material?: string | null
     drum_id?: number | null
     supplier?: string | null
     still_code: string
@@ -24726,7 +24677,7 @@ export namespace Prisma {
   }
 
   export type processesUpdateManyMutationInput = {
-    material_type?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: NullableStringFieldUpdateOperationsInput | string | null
     supplier?: NullableStringFieldUpdateOperationsInput | string | null
     operator?: NullableStringFieldUpdateOperationsInput | string | null
     loader?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24736,7 +24687,7 @@ export namespace Prisma {
 
   export type processesUncheckedUpdateManyInput = {
     process_id?: IntFieldUpdateOperationsInput | number
-    material_type?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: NullableStringFieldUpdateOperationsInput | string | null
     drum_id?: NullableIntFieldUpdateOperationsInput | number | null
     supplier?: NullableStringFieldUpdateOperationsInput | string | null
     still_code?: StringFieldUpdateOperationsInput | string
@@ -24820,7 +24771,7 @@ export namespace Prisma {
 
   export type repro_drumsCreateInput = {
     date_created?: Date | string
-    material_type: string
+    material: string
     capacity?: number
     current_volume?: number
     created_at?: Date | string | null
@@ -24836,7 +24787,7 @@ export namespace Prisma {
   export type repro_drumsUncheckedCreateInput = {
     repro_drum_id?: number
     date_created?: Date | string
-    material_type: string
+    material: string
     capacity?: number
     current_volume?: number
     created_at?: Date | string | null
@@ -24851,7 +24802,7 @@ export namespace Prisma {
 
   export type repro_drumsUpdateInput = {
     date_created?: DateTimeFieldUpdateOperationsInput | Date | string
-    material_type?: StringFieldUpdateOperationsInput | string
+    material?: StringFieldUpdateOperationsInput | string
     capacity?: IntFieldUpdateOperationsInput | number
     current_volume?: IntFieldUpdateOperationsInput | number
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -24867,7 +24818,7 @@ export namespace Prisma {
   export type repro_drumsUncheckedUpdateInput = {
     repro_drum_id?: IntFieldUpdateOperationsInput | number
     date_created?: DateTimeFieldUpdateOperationsInput | Date | string
-    material_type?: StringFieldUpdateOperationsInput | string
+    material?: StringFieldUpdateOperationsInput | string
     capacity?: IntFieldUpdateOperationsInput | number
     current_volume?: IntFieldUpdateOperationsInput | number
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -24883,7 +24834,7 @@ export namespace Prisma {
   export type repro_drumsCreateManyInput = {
     repro_drum_id?: number
     date_created?: Date | string
-    material_type: string
+    material: string
     capacity?: number
     current_volume?: number
     created_at?: Date | string | null
@@ -24896,7 +24847,7 @@ export namespace Prisma {
 
   export type repro_drumsUpdateManyMutationInput = {
     date_created?: DateTimeFieldUpdateOperationsInput | Date | string
-    material_type?: StringFieldUpdateOperationsInput | string
+    material?: StringFieldUpdateOperationsInput | string
     capacity?: IntFieldUpdateOperationsInput | number
     current_volume?: IntFieldUpdateOperationsInput | number
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -24910,7 +24861,7 @@ export namespace Prisma {
   export type repro_drumsUncheckedUpdateManyInput = {
     repro_drum_id?: IntFieldUpdateOperationsInput | number
     date_created?: DateTimeFieldUpdateOperationsInput | Date | string
-    material_type?: StringFieldUpdateOperationsInput | string
+    material?: StringFieldUpdateOperationsInput | string
     capacity?: IntFieldUpdateOperationsInput | number
     current_volume?: IntFieldUpdateOperationsInput | number
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -24922,7 +24873,7 @@ export namespace Prisma {
   }
 
   export type transactionsCreateInput = {
-    tx_type: string
+    tx_type?: string
     tx_date?: Date | string
     material?: string | null
     tx_notes?: string | null
@@ -24938,7 +24889,7 @@ export namespace Prisma {
 
   export type transactionsUncheckedCreateInput = {
     tx_id?: number
-    tx_type: string
+    tx_type?: string
     tx_date?: Date | string
     material?: string | null
     drum_id?: number | null
@@ -24985,7 +24936,7 @@ export namespace Prisma {
 
   export type transactionsCreateManyInput = {
     tx_id?: number
-    tx_type: string
+    tx_type?: string
     tx_date?: Date | string
     material?: string | null
     drum_id?: number | null
@@ -25548,9 +25499,9 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type OrdersNullableScalarRelationFilter = {
-    is?: ordersWhereInput | null
-    isNot?: ordersWhereInput | null
+  export type OrdersScalarRelationFilter = {
+    is?: ordersWhereInput
+    isNot?: ordersWhereInput
   }
 
   export type TransactionsListRelationFilter = {
@@ -25819,6 +25770,11 @@ export namespace Prisma {
     quantity?: SortOrder
   }
 
+  export type OrdersNullableScalarRelationFilter = {
+    is?: ordersWhereInput | null
+    isNot?: ordersWhereInput | null
+  }
+
   export type ProcessesListRelationFilter = {
     every?: processesWhereInput
     some?: processesWhereInput
@@ -25831,8 +25787,7 @@ export namespace Prisma {
 
   export type new_drumsCountOrderByAggregateInput = {
     drum_id?: SortOrder
-    import_id?: SortOrder
-    material_type?: SortOrder
+    material?: SortOrder
     date_processed?: SortOrder
     status?: SortOrder
     location?: SortOrder
@@ -25843,14 +25798,12 @@ export namespace Prisma {
 
   export type new_drumsAvgOrderByAggregateInput = {
     drum_id?: SortOrder
-    import_id?: SortOrder
     order_id?: SortOrder
   }
 
   export type new_drumsMaxOrderByAggregateInput = {
     drum_id?: SortOrder
-    import_id?: SortOrder
-    material_type?: SortOrder
+    material?: SortOrder
     date_processed?: SortOrder
     status?: SortOrder
     location?: SortOrder
@@ -25861,8 +25814,7 @@ export namespace Prisma {
 
   export type new_drumsMinOrderByAggregateInput = {
     drum_id?: SortOrder
-    import_id?: SortOrder
-    material_type?: SortOrder
+    material?: SortOrder
     date_processed?: SortOrder
     status?: SortOrder
     location?: SortOrder
@@ -25873,7 +25825,6 @@ export namespace Prisma {
 
   export type new_drumsSumOrderByAggregateInput = {
     drum_id?: SortOrder
-    import_id?: SortOrder
     order_id?: SortOrder
   }
 
@@ -25960,7 +25911,7 @@ export namespace Prisma {
 
   export type processesCountOrderByAggregateInput = {
     process_id?: SortOrder
-    material_type?: SortOrder
+    material?: SortOrder
     drum_id?: SortOrder
     supplier?: SortOrder
     still_code?: SortOrder
@@ -25977,7 +25928,7 @@ export namespace Prisma {
 
   export type processesMaxOrderByAggregateInput = {
     process_id?: SortOrder
-    material_type?: SortOrder
+    material?: SortOrder
     drum_id?: SortOrder
     supplier?: SortOrder
     still_code?: SortOrder
@@ -25989,7 +25940,7 @@ export namespace Prisma {
 
   export type processesMinOrderByAggregateInput = {
     process_id?: SortOrder
-    material_type?: SortOrder
+    material?: SortOrder
     drum_id?: SortOrder
     supplier?: SortOrder
     still_code?: SortOrder
@@ -26061,7 +26012,7 @@ export namespace Prisma {
   export type repro_drumsCountOrderByAggregateInput = {
     repro_drum_id?: SortOrder
     date_created?: SortOrder
-    material_type?: SortOrder
+    material?: SortOrder
     capacity?: SortOrder
     current_volume?: SortOrder
     created_at?: SortOrder
@@ -26081,7 +26032,7 @@ export namespace Prisma {
   export type repro_drumsMaxOrderByAggregateInput = {
     repro_drum_id?: SortOrder
     date_created?: SortOrder
-    material_type?: SortOrder
+    material?: SortOrder
     capacity?: SortOrder
     current_volume?: SortOrder
     created_at?: SortOrder
@@ -26095,7 +26046,7 @@ export namespace Prisma {
   export type repro_drumsMinOrderByAggregateInput = {
     repro_drum_id?: SortOrder
     date_created?: SortOrder
-    material_type?: SortOrder
+    material?: SortOrder
     capacity?: SortOrder
     current_volume?: SortOrder
     created_at?: SortOrder
@@ -26490,12 +26441,10 @@ export namespace Prisma {
     set?: Date | string
   }
 
-  export type ordersUpdateOneWithoutDeliveriesNestedInput = {
+  export type ordersUpdateOneRequiredWithoutDeliveriesNestedInput = {
     create?: XOR<ordersCreateWithoutDeliveriesInput, ordersUncheckedCreateWithoutDeliveriesInput>
     connectOrCreate?: ordersCreateOrConnectWithoutDeliveriesInput
     upsert?: ordersUpsertWithoutDeliveriesInput
-    disconnect?: ordersWhereInput | boolean
-    delete?: ordersWhereInput | boolean
     connect?: ordersWhereUniqueInput
     update?: XOR<XOR<ordersUpdateToOneWithWhereWithoutDeliveriesInput, ordersUpdateWithoutDeliveriesInput>, ordersUncheckedUpdateWithoutDeliveriesInput>
   }
@@ -27847,7 +27796,7 @@ export namespace Prisma {
   }
 
   export type transactionsCreateWithoutDeliveriesInput = {
-    tx_type: string
+    tx_type?: string
     tx_date?: Date | string
     material?: string | null
     tx_notes?: string | null
@@ -27862,7 +27811,7 @@ export namespace Prisma {
 
   export type transactionsUncheckedCreateWithoutDeliveriesInput = {
     tx_id?: number
-    tx_type: string
+    tx_type?: string
     tx_date?: Date | string
     material?: string | null
     drum_id?: number | null
@@ -28162,8 +28111,7 @@ export namespace Prisma {
   }
 
   export type new_drumsCreateWithoutDrum_distillationsInput = {
-    import_id?: number | null
-    material_type: string
+    material: string
     date_processed?: Date | string | null
     status?: string
     location?: string | null
@@ -28176,8 +28124,7 @@ export namespace Prisma {
 
   export type new_drumsUncheckedCreateWithoutDrum_distillationsInput = {
     drum_id?: number
-    import_id?: number | null
-    material_type: string
+    material: string
     date_processed?: Date | string | null
     status?: string
     location?: string | null
@@ -28251,8 +28198,7 @@ export namespace Prisma {
   }
 
   export type new_drumsUpdateWithoutDrum_distillationsInput = {
-    import_id?: NullableIntFieldUpdateOperationsInput | number | null
-    material_type?: StringFieldUpdateOperationsInput | string
+    material?: StringFieldUpdateOperationsInput | string
     date_processed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
@@ -28265,8 +28211,7 @@ export namespace Prisma {
 
   export type new_drumsUncheckedUpdateWithoutDrum_distillationsInput = {
     drum_id?: IntFieldUpdateOperationsInput | number
-    import_id?: NullableIntFieldUpdateOperationsInput | number | null
-    material_type?: StringFieldUpdateOperationsInput | string
+    material?: StringFieldUpdateOperationsInput | string
     date_processed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
@@ -28330,7 +28275,7 @@ export namespace Prisma {
   }
 
   export type processesCreateWithoutNew_drumsInput = {
-    material_type?: string | null
+    material?: string | null
     supplier?: string | null
     operator?: string | null
     loader?: string | null
@@ -28342,7 +28287,7 @@ export namespace Prisma {
 
   export type processesUncheckedCreateWithoutNew_drumsInput = {
     process_id?: number
-    material_type?: string | null
+    material?: string | null
     supplier?: string | null
     still_code: string
     operator?: string | null
@@ -28363,7 +28308,7 @@ export namespace Prisma {
   }
 
   export type transactionsCreateWithoutNew_drumsInput = {
-    tx_type: string
+    tx_type?: string
     tx_date?: Date | string
     material?: string | null
     tx_notes?: string | null
@@ -28378,7 +28323,7 @@ export namespace Prisma {
 
   export type transactionsUncheckedCreateWithoutNew_drumsInput = {
     tx_id?: number
-    tx_type: string
+    tx_type?: string
     tx_date?: Date | string
     material?: string | null
     repro_id?: number | null
@@ -28476,7 +28421,7 @@ export namespace Prisma {
     OR?: processesScalarWhereInput[]
     NOT?: processesScalarWhereInput | processesScalarWhereInput[]
     process_id?: IntFilter<"processes"> | number
-    material_type?: StringNullableFilter<"processes"> | string | null
+    material?: StringNullableFilter<"processes"> | string | null
     drum_id?: IntNullableFilter<"processes"> | number | null
     supplier?: StringNullableFilter<"processes"> | string | null
     still_code?: StringFilter<"processes"> | string
@@ -28536,8 +28481,7 @@ export namespace Prisma {
   }
 
   export type new_drumsCreateWithoutOrdersInput = {
-    import_id?: number | null
-    material_type: string
+    material: string
     date_processed?: Date | string | null
     status?: string
     location?: string | null
@@ -28550,8 +28494,7 @@ export namespace Prisma {
 
   export type new_drumsUncheckedCreateWithoutOrdersInput = {
     drum_id?: number
-    import_id?: number | null
-    material_type: string
+    material: string
     date_processed?: Date | string | null
     status?: string
     location?: string | null
@@ -28593,7 +28536,7 @@ export namespace Prisma {
     OR?: deliveriesScalarWhereInput[]
     NOT?: deliveriesScalarWhereInput | deliveriesScalarWhereInput[]
     delivery_id?: IntFilter<"deliveries"> | number
-    order_id?: IntNullableFilter<"deliveries"> | number | null
+    order_id?: IntFilter<"deliveries"> | number
     quantity_received?: IntFilter<"deliveries"> | number
     date_received?: DateTimeFilter<"deliveries"> | Date | string
     batch_code?: StringNullableFilter<"deliveries"> | string | null
@@ -28624,8 +28567,7 @@ export namespace Prisma {
     OR?: new_drumsScalarWhereInput[]
     NOT?: new_drumsScalarWhereInput | new_drumsScalarWhereInput[]
     drum_id?: IntFilter<"new_drums"> | number
-    import_id?: IntNullableFilter<"new_drums"> | number | null
-    material_type?: StringFilter<"new_drums"> | string
+    material?: StringFilter<"new_drums"> | string
     date_processed?: DateTimeNullableFilter<"new_drums"> | Date | string | null
     status?: StringFilter<"new_drums"> | string
     location?: StringNullableFilter<"new_drums"> | string | null
@@ -28635,8 +28577,7 @@ export namespace Prisma {
   }
 
   export type new_drumsCreateWithoutProcessesInput = {
-    import_id?: number | null
-    material_type: string
+    material: string
     date_processed?: Date | string | null
     status?: string
     location?: string | null
@@ -28649,8 +28590,7 @@ export namespace Prisma {
 
   export type new_drumsUncheckedCreateWithoutProcessesInput = {
     drum_id?: number
-    import_id?: number | null
-    material_type: string
+    material: string
     date_processed?: Date | string | null
     status?: string
     location?: string | null
@@ -28690,7 +28630,7 @@ export namespace Prisma {
   }
 
   export type transactionsCreateWithoutProcessesInput = {
-    tx_type: string
+    tx_type?: string
     tx_date?: Date | string
     material?: string | null
     tx_notes?: string | null
@@ -28705,7 +28645,7 @@ export namespace Prisma {
 
   export type transactionsUncheckedCreateWithoutProcessesInput = {
     tx_id?: number
-    tx_type: string
+    tx_type?: string
     tx_date?: Date | string
     material?: string | null
     drum_id?: number | null
@@ -28740,8 +28680,7 @@ export namespace Prisma {
   }
 
   export type new_drumsUpdateWithoutProcessesInput = {
-    import_id?: NullableIntFieldUpdateOperationsInput | number | null
-    material_type?: StringFieldUpdateOperationsInput | string
+    material?: StringFieldUpdateOperationsInput | string
     date_processed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
@@ -28754,8 +28693,7 @@ export namespace Prisma {
 
   export type new_drumsUncheckedUpdateWithoutProcessesInput = {
     drum_id?: IntFieldUpdateOperationsInput | number
-    import_id?: NullableIntFieldUpdateOperationsInput | number | null
-    material_type?: StringFieldUpdateOperationsInput | string
+    material?: StringFieldUpdateOperationsInput | string
     date_processed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
@@ -28853,7 +28791,7 @@ export namespace Prisma {
 
   export type repro_drumsCreateWithoutRepro_additionsInput = {
     date_created?: Date | string
-    material_type: string
+    material: string
     capacity?: number
     current_volume?: number
     created_at?: Date | string | null
@@ -28868,7 +28806,7 @@ export namespace Prisma {
   export type repro_drumsUncheckedCreateWithoutRepro_additionsInput = {
     repro_drum_id?: number
     date_created?: Date | string
-    material_type: string
+    material: string
     capacity?: number
     current_volume?: number
     created_at?: Date | string | null
@@ -28944,7 +28882,7 @@ export namespace Prisma {
 
   export type repro_drumsUpdateWithoutRepro_additionsInput = {
     date_created?: DateTimeFieldUpdateOperationsInput | Date | string
-    material_type?: StringFieldUpdateOperationsInput | string
+    material?: StringFieldUpdateOperationsInput | string
     capacity?: IntFieldUpdateOperationsInput | number
     current_volume?: IntFieldUpdateOperationsInput | number
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -28959,7 +28897,7 @@ export namespace Prisma {
   export type repro_drumsUncheckedUpdateWithoutRepro_additionsInput = {
     repro_drum_id?: IntFieldUpdateOperationsInput | number
     date_created?: DateTimeFieldUpdateOperationsInput | Date | string
-    material_type?: StringFieldUpdateOperationsInput | string
+    material?: StringFieldUpdateOperationsInput | string
     capacity?: IntFieldUpdateOperationsInput | number
     current_volume?: IntFieldUpdateOperationsInput | number
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -29001,7 +28939,7 @@ export namespace Prisma {
   }
 
   export type transactionsCreateWithoutRepro_drumsInput = {
-    tx_type: string
+    tx_type?: string
     tx_date?: Date | string
     material?: string | null
     tx_notes?: string | null
@@ -29016,7 +28954,7 @@ export namespace Prisma {
 
   export type transactionsUncheckedCreateWithoutRepro_drumsInput = {
     tx_id?: number
-    tx_type: string
+    tx_type?: string
     tx_date?: Date | string
     material?: string | null
     drum_id?: number | null
@@ -29079,12 +29017,12 @@ export namespace Prisma {
     delivery_notes?: string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
-    orders?: ordersCreateNestedOneWithoutDeliveriesInput
+    orders: ordersCreateNestedOneWithoutDeliveriesInput
   }
 
   export type deliveriesUncheckedCreateWithoutTransactionsInput = {
     delivery_id?: number
-    order_id?: number | null
+    order_id: number
     quantity_received: number
     date_received?: Date | string
     batch_code?: string | null
@@ -29100,8 +29038,7 @@ export namespace Prisma {
   }
 
   export type new_drumsCreateWithoutTransactionsInput = {
-    import_id?: number | null
-    material_type: string
+    material: string
     date_processed?: Date | string | null
     status?: string
     location?: string | null
@@ -29114,8 +29051,7 @@ export namespace Prisma {
 
   export type new_drumsUncheckedCreateWithoutTransactionsInput = {
     drum_id?: number
-    import_id?: number | null
-    material_type: string
+    material: string
     date_processed?: Date | string | null
     status?: string
     location?: string | null
@@ -29132,7 +29068,7 @@ export namespace Prisma {
   }
 
   export type processesCreateWithoutTransactionsInput = {
-    material_type?: string | null
+    material?: string | null
     supplier?: string | null
     operator?: string | null
     loader?: string | null
@@ -29144,7 +29080,7 @@ export namespace Prisma {
 
   export type processesUncheckedCreateWithoutTransactionsInput = {
     process_id?: number
-    material_type?: string | null
+    material?: string | null
     drum_id?: number | null
     supplier?: string | null
     still_code: string
@@ -29161,7 +29097,7 @@ export namespace Prisma {
 
   export type repro_drumsCreateWithoutTransactionsInput = {
     date_created?: Date | string
-    material_type: string
+    material: string
     capacity?: number
     current_volume?: number
     created_at?: Date | string | null
@@ -29176,7 +29112,7 @@ export namespace Prisma {
   export type repro_drumsUncheckedCreateWithoutTransactionsInput = {
     repro_drum_id?: number
     date_created?: Date | string
-    material_type: string
+    material: string
     capacity?: number
     current_volume?: number
     created_at?: Date | string | null
@@ -29212,12 +29148,12 @@ export namespace Prisma {
     delivery_notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    orders?: ordersUpdateOneWithoutDeliveriesNestedInput
+    orders?: ordersUpdateOneRequiredWithoutDeliveriesNestedInput
   }
 
   export type deliveriesUncheckedUpdateWithoutTransactionsInput = {
     delivery_id?: IntFieldUpdateOperationsInput | number
-    order_id?: NullableIntFieldUpdateOperationsInput | number | null
+    order_id?: IntFieldUpdateOperationsInput | number
     quantity_received?: IntFieldUpdateOperationsInput | number
     date_received?: DateTimeFieldUpdateOperationsInput | Date | string
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29239,8 +29175,7 @@ export namespace Prisma {
   }
 
   export type new_drumsUpdateWithoutTransactionsInput = {
-    import_id?: NullableIntFieldUpdateOperationsInput | number | null
-    material_type?: StringFieldUpdateOperationsInput | string
+    material?: StringFieldUpdateOperationsInput | string
     date_processed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29253,8 +29188,7 @@ export namespace Prisma {
 
   export type new_drumsUncheckedUpdateWithoutTransactionsInput = {
     drum_id?: IntFieldUpdateOperationsInput | number
-    import_id?: NullableIntFieldUpdateOperationsInput | number | null
-    material_type?: StringFieldUpdateOperationsInput | string
+    material?: StringFieldUpdateOperationsInput | string
     date_processed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29277,7 +29211,7 @@ export namespace Prisma {
   }
 
   export type processesUpdateWithoutTransactionsInput = {
-    material_type?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: NullableStringFieldUpdateOperationsInput | string | null
     supplier?: NullableStringFieldUpdateOperationsInput | string | null
     operator?: NullableStringFieldUpdateOperationsInput | string | null
     loader?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29289,7 +29223,7 @@ export namespace Prisma {
 
   export type processesUncheckedUpdateWithoutTransactionsInput = {
     process_id?: IntFieldUpdateOperationsInput | number
-    material_type?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: NullableStringFieldUpdateOperationsInput | string | null
     drum_id?: NullableIntFieldUpdateOperationsInput | number | null
     supplier?: NullableStringFieldUpdateOperationsInput | string | null
     still_code?: StringFieldUpdateOperationsInput | string
@@ -29312,7 +29246,7 @@ export namespace Prisma {
 
   export type repro_drumsUpdateWithoutTransactionsInput = {
     date_created?: DateTimeFieldUpdateOperationsInput | Date | string
-    material_type?: StringFieldUpdateOperationsInput | string
+    material?: StringFieldUpdateOperationsInput | string
     capacity?: IntFieldUpdateOperationsInput | number
     current_volume?: IntFieldUpdateOperationsInput | number
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -29327,7 +29261,7 @@ export namespace Prisma {
   export type repro_drumsUncheckedUpdateWithoutTransactionsInput = {
     repro_drum_id?: IntFieldUpdateOperationsInput | number
     date_created?: DateTimeFieldUpdateOperationsInput | Date | string
-    material_type?: StringFieldUpdateOperationsInput | string
+    material?: StringFieldUpdateOperationsInput | string
     capacity?: IntFieldUpdateOperationsInput | number
     current_volume?: IntFieldUpdateOperationsInput | number
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -29340,7 +29274,7 @@ export namespace Prisma {
   }
 
   export type processesCreateWithoutStillsInput = {
-    material_type?: string | null
+    material?: string | null
     supplier?: string | null
     operator?: string | null
     loader?: string | null
@@ -29352,7 +29286,7 @@ export namespace Prisma {
 
   export type processesUncheckedCreateWithoutStillsInput = {
     process_id?: number
-    material_type?: string | null
+    material?: string | null
     drum_id?: number | null
     supplier?: string | null
     operator?: string | null
@@ -29459,7 +29393,7 @@ export namespace Prisma {
 
   export type transactionsCreateManyDeliveriesInput = {
     tx_id?: number
-    tx_type: string
+    tx_type?: string
     tx_date?: Date | string
     material?: string | null
     drum_id?: number | null
@@ -29621,7 +29555,7 @@ export namespace Prisma {
 
   export type processesCreateManyNew_drumsInput = {
     process_id?: number
-    material_type?: string | null
+    material?: string | null
     supplier?: string | null
     still_code: string
     operator?: string | null
@@ -29632,7 +29566,7 @@ export namespace Prisma {
 
   export type transactionsCreateManyNew_drumsInput = {
     tx_id?: number
-    tx_type: string
+    tx_type?: string
     tx_date?: Date | string
     material?: string | null
     repro_id?: number | null
@@ -29661,7 +29595,7 @@ export namespace Prisma {
   }
 
   export type processesUpdateWithoutNew_drumsInput = {
-    material_type?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: NullableStringFieldUpdateOperationsInput | string | null
     supplier?: NullableStringFieldUpdateOperationsInput | string | null
     operator?: NullableStringFieldUpdateOperationsInput | string | null
     loader?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29673,7 +29607,7 @@ export namespace Prisma {
 
   export type processesUncheckedUpdateWithoutNew_drumsInput = {
     process_id?: IntFieldUpdateOperationsInput | number
-    material_type?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: NullableStringFieldUpdateOperationsInput | string | null
     supplier?: NullableStringFieldUpdateOperationsInput | string | null
     still_code?: StringFieldUpdateOperationsInput | string
     operator?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29685,7 +29619,7 @@ export namespace Prisma {
 
   export type processesUncheckedUpdateManyWithoutNew_drumsInput = {
     process_id?: IntFieldUpdateOperationsInput | number
-    material_type?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: NullableStringFieldUpdateOperationsInput | string | null
     supplier?: NullableStringFieldUpdateOperationsInput | string | null
     still_code?: StringFieldUpdateOperationsInput | string
     operator?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29751,8 +29685,7 @@ export namespace Prisma {
 
   export type new_drumsCreateManyOrdersInput = {
     drum_id?: number
-    import_id?: number | null
-    material_type: string
+    material: string
     date_processed?: Date | string | null
     status?: string
     location?: string | null
@@ -29795,8 +29728,7 @@ export namespace Prisma {
   }
 
   export type new_drumsUpdateWithoutOrdersInput = {
-    import_id?: NullableIntFieldUpdateOperationsInput | number | null
-    material_type?: StringFieldUpdateOperationsInput | string
+    material?: StringFieldUpdateOperationsInput | string
     date_processed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29809,8 +29741,7 @@ export namespace Prisma {
 
   export type new_drumsUncheckedUpdateWithoutOrdersInput = {
     drum_id?: IntFieldUpdateOperationsInput | number
-    import_id?: NullableIntFieldUpdateOperationsInput | number | null
-    material_type?: StringFieldUpdateOperationsInput | string
+    material?: StringFieldUpdateOperationsInput | string
     date_processed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29823,8 +29754,7 @@ export namespace Prisma {
 
   export type new_drumsUncheckedUpdateManyWithoutOrdersInput = {
     drum_id?: IntFieldUpdateOperationsInput | number
-    import_id?: NullableIntFieldUpdateOperationsInput | number | null
-    material_type?: StringFieldUpdateOperationsInput | string
+    material?: StringFieldUpdateOperationsInput | string
     date_processed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29834,7 +29764,7 @@ export namespace Prisma {
 
   export type transactionsCreateManyProcessesInput = {
     tx_id?: number
-    tx_type: string
+    tx_type?: string
     tx_date?: Date | string
     material?: string | null
     drum_id?: number | null
@@ -29903,7 +29833,7 @@ export namespace Prisma {
 
   export type transactionsCreateManyRepro_drumsInput = {
     tx_id?: number
-    tx_type: string
+    tx_type?: string
     tx_date?: Date | string
     material?: string | null
     drum_id?: number | null
@@ -29991,7 +29921,7 @@ export namespace Prisma {
 
   export type processesCreateManyStillsInput = {
     process_id?: number
-    material_type?: string | null
+    material?: string | null
     drum_id?: number | null
     supplier?: string | null
     operator?: string | null
@@ -30001,7 +29931,7 @@ export namespace Prisma {
   }
 
   export type processesUpdateWithoutStillsInput = {
-    material_type?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: NullableStringFieldUpdateOperationsInput | string | null
     supplier?: NullableStringFieldUpdateOperationsInput | string | null
     operator?: NullableStringFieldUpdateOperationsInput | string | null
     loader?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30013,7 +29943,7 @@ export namespace Prisma {
 
   export type processesUncheckedUpdateWithoutStillsInput = {
     process_id?: IntFieldUpdateOperationsInput | number
-    material_type?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: NullableStringFieldUpdateOperationsInput | string | null
     drum_id?: NullableIntFieldUpdateOperationsInput | number | null
     supplier?: NullableStringFieldUpdateOperationsInput | string | null
     operator?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30025,7 +29955,7 @@ export namespace Prisma {
 
   export type processesUncheckedUpdateManyWithoutStillsInput = {
     process_id?: IntFieldUpdateOperationsInput | number
-    material_type?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: NullableStringFieldUpdateOperationsInput | string | null
     drum_id?: NullableIntFieldUpdateOperationsInput | number | null
     supplier?: NullableStringFieldUpdateOperationsInput | string | null
     operator?: NullableStringFieldUpdateOperationsInput | string | null

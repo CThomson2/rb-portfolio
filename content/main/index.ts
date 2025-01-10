@@ -8,7 +8,27 @@ import {
   SocialMedia,
   // Additional Types
   GradeInfo,
+  UserDashboard,
 } from "@/types/content";
+
+import {
+  // Card 1
+  TicketCheck,
+  Truck,
+  BookOpenCheck,
+  // Card 2
+  ArrowLeftRight,
+  FlaskRound,
+  ClipboardPenLine,
+  // Card 3
+  LayoutList,
+  Info,
+  Download,
+  // Card 4
+  Rows3,
+  Boxes,
+  OctagonAlert,
+} from "lucide-react";
 
 // UK Manufacturer of Ultra High Purity Solvents and Reagents
 // Free of Interfering Impurities
@@ -18,6 +38,129 @@ export const navItems: NavItem[] = [
   { name: "Projects", link: "#projects" },
   { name: "Testimonials", link: "#testimonials" },
   { name: "Contact", link: "#contact" },
+  { name: "Inventory", link: "/inventory" },
+];
+
+export const userDashboard: UserDashboard[] = [
+  {
+    id: 1,
+    title: "Goods Inwards",
+    content: [
+      {
+        id: 1,
+        description: "Record New Order",
+        link: "/inventory",
+        icon: TicketCheck,
+      },
+      {
+        id: 2,
+        description: "Active Orders & Deliveries",
+        link: "/inventory",
+        icon: Truck,
+      },
+      {
+        id: 3,
+        description: "Inventory Overview",
+        link: "/inventory",
+        icon: BookOpenCheck,
+      },
+    ],
+    link: "/inventory",
+    // colors: [[24, 89, 124]],
+    colors: [[236, 226, 208]],
+    bgColor: "bg-slate-400",
+    animationSpeed: 3,
+    dotSize: 2,
+  },
+  {
+    id: 2,
+    title: "Inventory Events & Processes",
+    content: [
+      {
+        id: 1,
+        description: "Transactions",
+        link: "/inventory/transactions",
+        icon: ArrowLeftRight,
+      },
+      {
+        id: 2,
+        description: "Distillations",
+        link: "/inventory/distillations",
+        icon: FlaskRound,
+      },
+      {
+        id: 3,
+        description: "QRD Form",
+        link: "/inventory/qrd-form",
+        icon: ClipboardPenLine,
+      },
+    ],
+    link: "/inventory/transactions",
+    // colors: [[218, 133, 113]],
+    // bgColor: "bg-blue-[#DA8571]",
+    colors: [[102, 238, 213]],
+    bgColor: "bg-slate-500",
+    animationSpeed: 3,
+    dotSize: 2,
+  },
+  {
+    id: 3,
+    title: "Product Range",
+    content: [
+      {
+        id: 1,
+        description: "Overview",
+        link: "/products",
+        icon: LayoutList,
+      },
+      {
+        id: 2,
+        description: "Detailed Info",
+        link: "/products",
+        icon: Info,
+      },
+      {
+        id: 3,
+        description: "Sheets for Download",
+        link: "/products",
+        icon: Download,
+      },
+    ],
+    link: "/products",
+    colors: [[81, 136, 184]],
+    bgColor: "bg-slate-500",
+    animationSpeed: 3,
+    dotSize: 3,
+  },
+  {
+    id: 4,
+    title: "Raw Materials",
+    content: [
+      {
+        id: 1,
+        description: "Overview",
+        link: "/raw-materials",
+        icon: Rows3,
+      },
+      {
+        id: 2,
+        description: "Dangerous Goods",
+        link: "/raw-materials",
+        icon: OctagonAlert,
+      },
+      {
+        id: 3,
+        description: "Drum Inventory",
+        link: "/raw-materials",
+        icon: Boxes,
+      },
+    ],
+    link: "/raw-materials",
+    colors: [[255, 86, 102]],
+    bgColor: "bg-slate-500",
+    animationSpeed: 3,
+    dotSize: 3,
+  },
 ];
 
 export const gradeInfo: GradeInfo[] = [
@@ -28,10 +171,11 @@ export const gradeInfo: GradeInfo[] = [
     description:
       "Glass Distilled solvents are purified through a distillation process using glass apparatus to avoid contamination from metal ions. This grade ensures high purity and is suitable for sensitive analytical applications.",
     img: "/products/gd.png",
-    colors: [[47, 79, 79]],
-    bgColor: "bg-sky-600",
+    // colors: [[47, 79, 79]],
+    colors: [[0, 0, 255]],
+    bgColor: "bg-emerald-600",
     animationSpeed: 5.0,
-    dotSize: 4,
+    dotSize: 2,
   },
   {
     id: 2,

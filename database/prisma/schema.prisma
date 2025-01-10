@@ -78,15 +78,15 @@ model batches {
 
 model deliveries {
   delivery_id       Int            @id(map: "drum_deliveries_pkey") @default(autoincrement())
-  order_id          Int?
+  order_id          Int
   quantity_received Int
   date_received     DateTime       @default(dbgenerated("CURRENT_DATE")) @db.Date
   batch_code        String?        @db.VarChar(50)
-  location          String?        @db.VarChar(15)
+  location          String?        @default("new-site") @db.VarChar(15)
   delivery_notes    String?
   created_at        DateTime?      @default(now()) @db.Timestamptz(6)
   updated_at        DateTime?      @default(now()) @db.Timestamptz(6)
-  orders            orders?        @relation(fields: [order_id], references: [order_id], onDelete: NoAction, onUpdate: NoAction)
+  orders            orders         @relation(fields: [order_id], references: [order_id], onDelete: NoAction, onUpdate: NoAction)
   transactions      transactions[]
 
   @@unique([order_id, batch_code], map: "unique_order_batch")
@@ -145,8 +145,7 @@ model imports {
 
 model new_drums {
   drum_id            Int                  @id(map: "drums_pkey") @default(autoincrement())
-  import_id          Int?
-  material_type      String               @db.VarChar(100)
+  material           String               @db.VarChar(100)
   date_processed     DateTime?            @db.Date
   status             String               @default("available") @db.VarChar(20)
   location           String?              @default("new-site") @db.VarChar(20)
@@ -158,7 +157,7 @@ model new_drums {
   processes          processes[]
   transactions       transactions[]
 
-  @@index([material_type], map: "idx_drums_material_type")
+  @@index([material], map: "idx_drums_material_type")
   @@index([status], map: "idx_drums_status")
   @@schema("inventory")
 }
@@ -182,7 +181,7 @@ model orders {
 
 model processes {
   process_id     Int            @id(map: "records_pkey") @default(autoincrement())
-  material_type  String?        @db.VarChar(100)
+  material       String?        @db.VarChar(100)
   drum_id        Int?
   supplier       String?        @db.VarChar(100)
   still_code     String         @db.Char
@@ -215,19 +214,19 @@ model repro_additions {
 model repro_drums {
   repro_drum_id   Int               @id @default(autoincrement())
   date_created    DateTime          @default(dbgenerated("CURRENT_DATE")) @db.Date
-  material_type   String            @db.VarChar(100)
+  material        String            @db.VarChar(100)
   capacity        Int               @default(200)
   current_volume  Int               @default(0)
   created_at      DateTime?         @default(now()) @db.Timestamptz(6)
   updated_at      DateTime?         @default(now()) @db.Timestamptz(6)
   status          String            @default("available") @db.VarChar(20)
   volume_status   String            @default("partial") @db.VarChar(20)
-  drum_code       String?           @db.VarChar(20)
+  notes           String?           @db.VarChar(20)
   location        String?           @default("TBD") @db.VarChar(20)
   repro_additions repro_additions[]
   transactions    transactions[]
 
-  @@index([material_type], map: "idx_repro_drums_material_type")
+  @@index([material], map: "idx_repro_drums_material_type")
   @@index([status], map: "idx_repro_drums_status")
   @@index([volume_status], map: "idx_repro_drums_volume_status")
   @@schema("inventory")
@@ -236,7 +235,7 @@ model repro_drums {
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 model transactions {
   tx_id       Int          @id @default(autoincrement())
-  tx_type     String       @db.VarChar(20)
+  tx_type     String       @default("import") @db.VarChar(20)
   tx_date     DateTime     @default(dbgenerated("CURRENT_DATE")) @db.Date
   material    String?      @db.VarChar(100)
   drum_id     Int?

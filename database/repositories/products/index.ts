@@ -1,5 +1,5 @@
-import * as count from "./queries/count";
+import * as fetch from "./queries/fetch";
+import * as count from "./queries/gradeFilter";
 import * as update from "./queries/update";
-import * as addNew from "./queries/addNew";
 
-export const queries = { count, update, addNew };
+export const queries = { fetch, count, update };

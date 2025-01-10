@@ -1,6 +1,5 @@
 import { prisma } from "@/database/client";
 import { ProductTableRow } from "@/types/components/products";
-import { GRADE } from "@/types/database/products";
 
 export async function fetchProducts(): Promise<ProductTableRow[]> {
   const products = await prisma.products.findMany({
@@ -24,18 +23,4 @@ export async function fetchProducts(): Promise<ProductTableRow[]> {
       cas_number: product.raw_materials?.cas_number ?? "",
     };
   });
-}
-
-export async function countProductsByGrade(grade: GRADE): Promise<number> {
-  const count = await prisma.products.count({
-    where: {
-      grade,
-    },
-  });
-  return count;
-}
-
-export async function countAllProducts(): Promise<number> {
-  const count = await prisma.products.count();
-  return count;
 }

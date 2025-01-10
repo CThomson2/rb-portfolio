@@ -19,7 +19,7 @@ import SearchBar from "@/components/shared/table/header/SearchBar";
 import ActionButton from "@/components/shared/table/header/ActionButton";
 import type { TransactionRow } from "@/types/database/transactions";
 
-const ROW_HEIGHT = 50; // Adjust this value as needed
+const ROW_HEIGHT = 30; // Adjust this value as needed
 
 const filterOptions = [
   { label: "All", value: "all" },
@@ -127,7 +127,6 @@ export function TransactionsTable() {
     manualSorting: true,
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
-
     onRowSelectionChange: setRowSelection,
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),

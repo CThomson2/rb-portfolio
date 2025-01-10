@@ -15,6 +15,25 @@ export interface ProductInfo {
   img: string;
 }
 
+interface DashboardItem {
+  id: number;
+  description: string;
+  link: string;
+  icon?: React.ElementType;
+}
+
+export interface UserDashboard {
+  id: number;
+  title: string;
+  icon?: React.ReactNode;
+  content: DashboardItem[];
+  link: string;
+  colors?: number[][];
+  bgColor: string;
+  animationSpeed: number;
+  dotSize?: number;
+}
+
 export interface GradeInfo {
   id: number;
   title: string;

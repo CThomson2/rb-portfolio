@@ -28,7 +28,7 @@ const SearchBar = ({
   placeholder = "Search...",
 }: SearchBarProps) => {
   return (
-    <div className="flex flex-row items-center h-9 rounded-lg shadow-sm mb-4">
+    <div className="flex flex-row items-center h-10 rounded-lg shadow-sm">
       <DropdownMenu>
         <DropdownMenuTrigger className="flex flex-row items-center h-full px-5 rounded-l-lg border gap-2 text-sm bg-gray-900 text-gray-300 hover:bg-gray-800 hover:border-gray-300">
           <FilterIcon className="w-4 h-4" fill="currentColor" />

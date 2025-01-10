@@ -39,11 +39,14 @@ const config = {
           200: "#C1C2D3",
         },
         blue: {
-          "100": "#E4ECFF",
+          DEFAULT: "#E4ECFF",
+          100: "#18597C",
+          101: "#DA8571",
+          102: "#64AFD8",
+          103: "#612940",
         },
         purple: "#CBACF9",
-        // Grade card colors
-        grades: {},
+        // Card (homepage)) colors
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -76,6 +79,10 @@ const config = {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+          topLeft: "hsl(var(--card-top-left, 215 25% 27%))",
+          topRight: "hsl(var(--card-top-right, 217 33% 17%))",
+          bottomLeft: "hsl(var(--card-bottom-left, 219 39% 11%))",
+          bottomRight: "hsl(var(--card-bottom-right, 222 47% 11%))",
         },
       },
       typography: {

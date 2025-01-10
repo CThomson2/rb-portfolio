@@ -212,8 +212,7 @@ exports.Prisma.ImportsScalarFieldEnum = {
 
 exports.Prisma.New_drumsScalarFieldEnum = {
   drum_id: 'drum_id',
-  import_id: 'import_id',
-  material_type: 'material_type',
+  material: 'material',
   date_processed: 'date_processed',
   status: 'status',
   location: 'location',
@@ -237,7 +236,7 @@ exports.Prisma.OrdersScalarFieldEnum = {
 
 exports.Prisma.ProcessesScalarFieldEnum = {
   process_id: 'process_id',
-  material_type: 'material_type',
+  material: 'material',
   drum_id: 'drum_id',
   supplier: 'supplier',
   still_code: 'still_code',
@@ -261,7 +260,7 @@ exports.Prisma.Repro_additionsScalarFieldEnum = {
 exports.Prisma.Repro_drumsScalarFieldEnum = {
   repro_drum_id: 'repro_drum_id',
   date_created: 'date_created',
-  material_type: 'material_type',
+  material: 'material',
   capacity: 'capacity',
   current_volume: 'current_volume',
   created_at: 'created_at',

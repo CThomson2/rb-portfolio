@@ -18,7 +18,7 @@ import TableTabs from "./tabs";
 import TableHeader from "@/components/shared/table/TableHeader";
 import TableFooter from "@/components/shared/table/footer";
 import type { ProductTableRow } from "@/types/components/products";
-import { GRADE } from "@/types/database/products";
+import { GRADE } from "@/types/enums/products";
 import { cn } from "@/lib/utils";
 import ActionButton from "../../../shared/table/header/ActionButton";
 import SearchBar from "@/components/shared/table/header/SearchBar";

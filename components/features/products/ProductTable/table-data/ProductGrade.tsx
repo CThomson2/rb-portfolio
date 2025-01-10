@@ -1,4 +1,4 @@
-import { GRADE } from "@/types/database/products";
+import { GRADE } from "@/types/enums/products";
 
 const gradeBackgroundColors = {
   [GRADE.GD]: "bg-red-100",

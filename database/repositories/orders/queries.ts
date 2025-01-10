@@ -1,5 +1,5 @@
 import { prisma } from "@/database/client";
-import type { Order, OrderCreate } from "./types";
+import type { Order, OrderCreate } from "../../../types/database/orders";
 import { OrderStatus } from "../shared/types";
 
 const queries = {
