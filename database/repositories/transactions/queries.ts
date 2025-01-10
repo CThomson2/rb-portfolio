@@ -34,7 +34,7 @@ export async function getTransactions(
     LEFT JOIN inventory.orders o ON d.order_id = o.order_id
     LEFT JOIN inventory.new_drums nd ON t.drum_id = nd.drum_id
     LEFT JOIN inventory.repro_drums rd ON t.repro_id = rd.repro_drum_id
-    ORDER BY t.tx_date DESC
+    ORDER BY t.tx_id DESC
     LIMIT ${limit}
     OFFSET ${offset}
   `;

@@ -78,7 +78,7 @@ model batches {
 
 model deliveries {
   delivery_id       Int            @id(map: "drum_deliveries_pkey") @default(autoincrement())
-  order_id          Int?
+  order_id          Int
   quantity_received Int
   date_received     DateTime       @default(dbgenerated("CURRENT_DATE")) @db.Date
   batch_code        String?        @db.VarChar(50)
@@ -86,7 +86,7 @@ model deliveries {
   delivery_notes    String?
   created_at        DateTime?      @default(now()) @db.Timestamptz(6)
   updated_at        DateTime?      @default(now()) @db.Timestamptz(6)
-  orders            orders?        @relation(fields: [order_id], references: [order_id], onDelete: NoAction, onUpdate: NoAction)
+  orders            orders         @relation(fields: [order_id], references: [order_id], onDelete: NoAction, onUpdate: NoAction)
   transactions      transactions[]
 
   @@unique([order_id, batch_code], map: "unique_order_batch")
@@ -145,7 +145,6 @@ model imports {
 
 model new_drums {
   drum_id            Int                  @id(map: "drums_pkey") @default(autoincrement())
-  import_id          Int?
   material           String               @db.VarChar(100)
   date_processed     DateTime?            @db.Date
   status             String               @default("available") @db.VarChar(20)

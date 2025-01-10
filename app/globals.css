@@ -9,6 +9,10 @@
 
     --card: 0 0% 100%;
     --card-foreground: 240 10% 3.9%;
+    --card-top-left: 201 68% 29%;
+    --card-top-right: 11 59% 65%;
+    --card-bottom-left: 200 59% 70%;
+    --card-bottom-right: 335 41% 27%;
 
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;

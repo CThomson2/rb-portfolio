@@ -212,7 +212,6 @@ exports.Prisma.ImportsScalarFieldEnum = {
 
 exports.Prisma.New_drumsScalarFieldEnum = {
   drum_id: 'drum_id',
-  import_id: 'import_id',
   material: 'material',
   date_processed: 'date_processed',
   status: 'status',
