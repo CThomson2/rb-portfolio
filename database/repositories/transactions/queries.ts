@@ -26,8 +26,8 @@ export async function getTransactions(
       t.*,
       CASE
         WHEN t.delivery_id IS NOT NULL THEN o.material
-        WHEN t.drum_id IS NOT NULL THEN nd.material_type
-        WHEN t.repro_id IS NOT NULL THEN rd.material_type
+        WHEN t.drum_id IS NOT NULL THEN nd.material
+        WHEN t.repro_id IS NOT NULL THEN rd.material
       END as material_name
     FROM inventory.transactions t
     LEFT JOIN inventory.deliveries d ON t.delivery_id = d.delivery_id
@@ -51,9 +51,9 @@ export async function getTransactions(
   //       d.delivery_id,
   //       o.material as delivery_material,
   //       nd.drum_id,
-  //       nd.material_type as drum_material,
+  //       nd.material as drum_material,
   //       rd.repro_drum_id,
-  //       rd.material_type as repro_material
+  //       rd.material as repro_material
   //     FROM inventory.deliveries d
   //     LEFT JOIN inventory.orders o ON d.order_id = o.order_id
   //     LEFT JOIN inventory.new_drums nd ON nd.drum_id = nd.drum_id

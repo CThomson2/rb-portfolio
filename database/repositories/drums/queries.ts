@@ -34,7 +34,7 @@ export async function getDrums({
 
   const drums = rows.map((row) => ({
     drum_id: row.drum_id,
-    material_type: row.material_type,
+    material: row.material,
     status: row.status as DRUM_STATUS,
     location: row.location as DRUM_LOCATION,
     order_id: row.orders?.order_id,

@@ -4,7 +4,7 @@ import { DRUM_LOCATION, DRUM_STATUS } from "@/types/enums/drums";
 // Base type that matches the SQL/Prisma schema
 export interface NewDrumBase {
   drum_id: number;
-  material_type: string;
+  material: string;
   date_processed: Date | null;
   status: DRUM_STATUS;
   location: DRUM_LOCATION;

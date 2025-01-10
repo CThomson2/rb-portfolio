@@ -13,9 +13,9 @@ export const columns: ColumnDef<NewDrum>[] = [
     enableSorting: true,
   },
   {
-    accessorKey: "material_type",
+    accessorKey: "material",
     header: ({ column }) => <SortableColumn column={column} title="Material" />,
-    cell: ({ row }) => row.getValue("material_type"),
+    cell: ({ row }) => row.getValue("material"),
     enableSorting: true,
   },
   {
