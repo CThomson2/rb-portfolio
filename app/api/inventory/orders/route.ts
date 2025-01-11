@@ -5,24 +5,32 @@ export async function GET(req: Request) {
   // Extract search params from the request URL
   // For example, from: /api/inventory/transactions?page=2&limit=10
   const { searchParams } = new URL(req.url);
-
-  // Get page number from URL params, defaulting to 1 if not provided
-  // parseInt converts the string param to a number
   const page = parseInt(searchParams.get("page") || "1");
-
   // Get limit (items per page) from URL params, defaulting to 50
   // This allows requests like ?limit=10 to show 10 items per page
   const limit = parseInt(searchParams.get("limit") || "50");
 
   try {
-    // Fetch transactions from the database using the repository function
-    // TODO: Pass page and limit to getTransactions for pagination
     const orders = await queries.getOrders({ page, limit });
     return NextResponse.json(orders);
   } catch (error) {
-    // If database query fails, return 500 error response
+    console.error("Error fetching orders:", error);
     return NextResponse.json(
-      { error: "Failed to fetch transactions" },
+      { error: "Failed to fetch orders" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function POST(req: Request) {
+  try {
+    const newOrder = await req.json();
+    const createdOrder = await queries.createOrder(newOrder);
+    return NextResponse.json(createdOrder, { status: 201 });
+  } catch (error) {
+    console.error("Error creating order:", error);
+    return NextResponse.json(
+      { error: "Failed to create order" },
       { status: 500 }
     );
   }

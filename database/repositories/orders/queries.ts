@@ -42,7 +42,7 @@ export const queries = {
    * @param data The order data containing supplier, material, quantity and optional notes
    * @returns The created order record
    */
-  create: async (data: NewOrder) => {
+  createOrder: async (data: NewOrder) => {
     return prisma.orders.create({
       data: {
         ...data,

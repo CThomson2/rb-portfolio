@@ -105,7 +105,7 @@ export function DrumsTable() {
           </div>
           <ActionButton text="Manage Inventory" href="/inventory/drums/new" />
         </div>
-        <div className="flex flex-row gap-4 hidden lg:flex">
+        <div className="flex-row gap-4 hidden lg:flex">
           <Link href="/inventory/transactions" className="mx-auto">
             <button className="flex flex-col items-center px-6 py-3 bg-slate-600 rounded-md hover:bg-slate-500 transition-colors">
               <span className="text-xs text-gray-300">Go to</span>

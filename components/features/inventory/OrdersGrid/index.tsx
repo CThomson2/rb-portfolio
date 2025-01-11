@@ -1,4 +1,4 @@
-import Grid from "./grid";
+import Grid from "./GridBody";
 
 export function OrdersGrid() {
   return <Grid />;
