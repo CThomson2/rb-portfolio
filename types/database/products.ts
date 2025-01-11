@@ -10,6 +10,10 @@ export interface BaseProduct {
   grade: string;
 }
 
+export interface ProductTableRow extends BaseProduct {
+  cas_number: string;
+}
+
 // Extended product type with prices (result of JOIN)
 export interface ProductWithPrices extends BaseProduct {
   product_prices: {
@@ -21,4 +25,15 @@ export interface ProductWithPrices extends BaseProduct {
     bottle_size_id: number;
     price: Decimal;
   }[];
+}
+
+export interface ProductModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  product: ProductWithPrices | null;
+}
+
+export interface FilterOption {
+  label: string;
+  value: string;
 }

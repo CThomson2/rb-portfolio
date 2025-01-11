@@ -1,6 +1,6 @@
 // components/features/inventory/DrumsTable/columns.tsx
 import { ColumnDef } from "@tanstack/react-table";
-import { SortableColumn } from "@/components/shared/table/SortableColumn";
+import { SortableColumn } from "@/components/shared/table/ux/SortableColumn";
 import { Badge } from "@/components/ui/Badge";
 import { format } from "date-fns";
 import type { NewDrum } from "@/types/database/drums";

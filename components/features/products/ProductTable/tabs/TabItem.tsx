@@ -13,11 +13,13 @@ const TabItem = ({
 }: {
   grade: GRADE | "All";
   number: number;
-  activeTab: GRADE | "All";
-  setActiveTab: (value: GRADE | "All") => void;
+  activeTab: string;
+  setActiveTab: (value: string) => void;
 }) => {
   const handleClick = () => {
+    console.log("clicked", grade);
     setActiveTab(grade);
+    console.log("activeTab", activeTab);
   };
 
   const isActive = useMemo(() => activeTab === grade, [activeTab, grade]);

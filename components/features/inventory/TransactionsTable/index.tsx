@@ -1,5 +1,6 @@
 // components/features/inventory/TransactionTable/index.tsx
 "use client";
+import React from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useMemo, useRef } from "react";
@@ -13,11 +14,12 @@ import {
 } from "@tanstack/react-table";
 import { columns } from "./columns";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/Table";
-import TableHeader from "@/components/shared/table/TableHeader";
+import TableHeader from "@/components/shared/table/header/TableHeader";
 import TableFooter from "@/components/shared/table/footer";
 import SearchBar from "@/components/shared/table/header/SearchBar";
 import ActionButton from "@/components/shared/table/header/ActionButton";
 import type { TransactionRow } from "@/types/database/transactions";
+import { cn } from "@/lib/utils";
 
 const ROW_HEIGHT = 30; // Adjust this value as needed
 
@@ -28,7 +30,7 @@ const filterOptions = [
   { label: "By Date", value: "date" },
 ];
 
-export function TransactionsTable() {
+export const TransactionsTable = React.memo(() => {
   // State management
   const [sorting, setSorting] = useState<SortingState>([
     { id: "tx_date", desc: true },
@@ -112,7 +114,10 @@ export function TransactionsTable() {
         pageSize,
       },
     },
-    pageCount: Math.ceil((data?.total ?? 0) / pageSize),
+    enableSorting: true,
+    getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
     manualPagination: true,
     onPaginationChange: (updater) => {
       if (typeof updater === "function") {
@@ -124,12 +129,24 @@ export function TransactionsTable() {
         setPageSize(newState.pageSize);
       }
     },
-    manualSorting: true,
-    onSortingChange: setSorting,
-    getCoreRowModel: getCoreRowModel(),
+    onSortingChange: (updater) => {
+      setSorting((old) => {
+        console.log("Sorting state updated");
+        const newSorting =
+          typeof updater === "function" ? updater(old) : updater;
+        return newSorting;
+      });
+    },
     onRowSelectionChange: setRowSelection,
-    getSortedRowModel: getSortedRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
+
+    pageCount: Math.ceil((data?.total ?? 0) / pageSize),
+    initialState: {
+      pagination: {
+        pageSize: 30,
+        pageIndex: 0,
+      },
+    },
+    debugAll: true,
   });
 
   if (isLoading) {
@@ -137,7 +154,7 @@ export function TransactionsTable() {
   }
 
   return (
-    <div className="space-y-4">
+    <>
       <div className="max-h-fit flex flex-row justify-between items-center px-8 py-8 bg-slate-700 rounded-md">
         <SearchBar
           filterOptions={filterOptions}
@@ -148,34 +165,57 @@ export function TransactionsTable() {
         />
         <ActionButton text="New Transaction" href="/transactions/new" />
       </div>
-
-      <div className="rounded-md border-x-2 border-[hsl(var(--table-header))] relative bg-slate-600">
-        <Table>
-          <TableHeader table={table} />
-          <TableBody>
-            {isLoading ? (
-              <TableRow>
-                <TableCell colSpan={columns.length}>Loading...</TableCell>
-              </TableRow>
-            ) : (
-              table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id}>
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
+      <div className="flex flex-col m-5 pb-10">
+        <div className="rounded-md border-x-2 border-[hsl(var(--table-header))] relative bg-slate-600">
+          <Table>
+            <TableHeader table={table} />
+            <TableBody>
+              {/* {isLoading ? (
+                <TableRow>
+                  <TableCell colSpan={columns.length}>Loading...</TableCell>
                 </TableRow>
-              ))
-            )}
-          </TableBody>
-        </Table>
-      </div>
+              ) : ( */}
+              {table.getRowModel().rows?.length ? (
+                table.getRowModel().rows.map((row) => (
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                    className={cn(
+                      "w-full border-b transition-colors hover:bg-gray-700",
+                      "data-[state=selected]:bg-muted"
+                    )}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell
+                        key={cell.id}
+                        className="px-2 text-white min-w-0 max-w-full"
+                      >
+                        <div className="overflow-hidden text-ellipsis whitespace-nowrap">
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </div>
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell
+                    colSpan={columns.length}
+                    className="h-24 text-center"
+                  >
+                    No results.
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
 
-      <TableFooter table={table} />
-    </div>
+        <TableFooter table={table} />
+      </div>
+    </>
   );
-}
+});

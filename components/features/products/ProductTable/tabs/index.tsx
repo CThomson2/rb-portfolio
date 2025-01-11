@@ -12,8 +12,8 @@ interface GradeCounts {
 }
 
 interface TableTabsProps {
-  activeTab: GRADE | "All";
-  setActiveTab: (value: GRADE | "All") => void;
+  activeTab: string;
+  setActiveTab: (value: string) => void;
 }
 
 const TableTabs = ({ activeTab, setActiveTab }: TableTabsProps) => {

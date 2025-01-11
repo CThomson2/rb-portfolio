@@ -1,57 +1,109 @@
 "use client";
-import React, { useMemo, useState, useEffect } from "react";
-import {
-  ColumnDef,
-  SortingState,
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-  getSortedRowModel,
-  getPaginationRowModel,
-  getFilteredRowModel,
-  PaginationState,
-} from "@tanstack/react-table";
-
-import { Table, TableBody, TableCell, TableRow } from "@/components/ui/Table";
-
-import TableTabs from "./tabs";
-import TableHeader from "@/components/shared/table/TableHeader";
-import TableFooter from "@/components/shared/table/footer";
-import type { ProductTableRow } from "@/types/components/products";
-import { GRADE } from "@/types/enums/products";
-import { cn } from "@/lib/utils";
-import ActionButton from "../../../shared/table/header/ActionButton";
-import SearchBar from "@/components/shared/table/header/SearchBar";
+import React, { useEffect, useState } from "react";
+import { DataTable } from "@/components/shared/table/DataTable";
+import { ColumnDef, SortingState } from "@tanstack/react-table";
+import type { ProductTableRow } from "@/types/database/products";
 
 export interface DataTableProps {
-  columns: ColumnDef<ProductTableRow, any>[];
+  columns: ColumnDef<ProductTableRow>[];
   data: ProductTableRow[];
 }
 
 const filterOptions = [
-  { label: "All", value: "all" },
+  { label: "All", value: "All" },
   { label: "By Name", value: "name" },
-  { label: "By Lot No.", value: "category" },
-  { label: "By CAS Number", value: "cas" },
+  { label: "By Lot No.", value: "sku" },
+  { label: "By CAS Number", value: "cas_number" },
 ];
 
-export const DataTable = React.memo(({ columns, data }: DataTableProps) => {
+export const ProductTable = React.memo(({ columns, data }: DataTableProps) => {
   // React Table state
-  const [rowSelection, setRowSelection] = React.useState({});
   const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [gradeFilter, setGradeFilter] = React.useState<GRADE | "All">("All");
+  const [rowSelection, setRowSelection] = React.useState({});
+  // Specific filter for grades - currently only filtering by grade is supported
+  const [activeFilter, setActiveFilter] = React.useState<string>("All");
 
   // Search and Filtering
-  const [selectedFilter, setSelectedFilter] = useState("all");
+  // `selectedFilter` is used for the general search bar which can search by name, lot number, or CAS number
+  const [selectedFilter, setSelectedFilter] = useState<string>("All");
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Log the search query to the console when it changes
+  useEffect(() => {
+    console.log("ProductTable.tsx - search query:", searchQuery);
+  }, [searchQuery]);
+
+  return (
+    <DataTable
+      columns={columns}
+      data={data}
+      filterOptions={filterOptions}
+      newButtonText="New Product"
+      newButtonHref="/products/new"
+      filterFunction={(data, searchQuery, selectedFilter) => {
+        if (searchQuery.length >= 3) {
+          if (selectedFilter === "All") {
+            return data.filter((product) =>
+              filterOptions.some((option) => {
+                const value = product[option.value as keyof ProductTableRow];
+                return value
+                  ?.toString()
+                  .toLowerCase()
+                  .includes(searchQuery.toLowerCase());
+              })
+            );
+          } else {
+            return data.filter((product) => {
+              const value = product[selectedFilter as keyof ProductTableRow];
+              return value
+                ?.toString()
+                .toLowerCase()
+                .includes(searchQuery.toLowerCase());
+            });
+          }
+        }
+
+        // Then handle grade filtering
+        if (activeFilter !== "All") {
+          return data.filter((product) => product.grade === activeFilter);
+        }
+
+        return data;
+      }}
+      stateProps={{
+        sorting,
+        setSorting,
+        rowSelection,
+        setRowSelection,
+        searchQuery,
+        setSearchQuery,
+        selectedFilter,
+        setSelectedFilter,
+        activeFilter,
+        setActiveFilter,
+      }}
+    />
+  );
+});
+
+/*
+export const DataTable = React.memo(({ columns, data }: DataTableProps) => {
+  // React Table state
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [rowSelection, setRowSelection] = React.useState({});
+  const [filter, setFilter] = React.useState<GRADE | "All">("All");
+
+  // Search and Filtering
+  const [selectedFilter, setSelectedFilter] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
 
   const filteredData = useMemo(() => {
     // If "All" is selected, return all data
-    if (gradeFilter === "All") return data;
+    if (filter === "All") return data;
 
     // Otherwise, filter data to show only rows matching the selected grade
-    return data.filter((product) => product.grade === gradeFilter);
-  }, [data, gradeFilter]);
+    return data.filter((product) => product.grade === filter);
+  }, [data, filter]);
 
   // const filteredResponse = useMemo(() => {
   //   if (gradeFilter !== "All") return data;
@@ -105,9 +157,9 @@ export const DataTable = React.memo(({ columns, data }: DataTableProps) => {
   useEffect(() => {
     // We can directly use the sorting state from the dependency array since it's the same value
     console.log("Sorting state updated", sorting);
-    console.log("Grade filter updated", gradeFilter);
+    console.log("Grade filter updated", filter);
     console.log("Filtered data updated", filteredData);
-  }, [sorting, gradeFilter, filteredData]);
+  }, [sorting, filter, filteredData]);
 
   return (
     <>
@@ -124,10 +176,10 @@ export const DataTable = React.memo(({ columns, data }: DataTableProps) => {
 
       <div className="flex flex-col m-5 pb-10">
         <TableTabs
-          activeTab={gradeFilter}
+          activeTab={filter}
           setActiveTab={(value) => {
             console.log("Grade filter updated", value);
-            setGradeFilter(value);
+            setFilter(value);
           }}
         />
 
@@ -135,51 +187,40 @@ export const DataTable = React.memo(({ columns, data }: DataTableProps) => {
           <Table>
             <TableHeader table={table} />
             <TableBody>
-              {table.getRowModel().rows?.length ? (
-                table.getRowModel().rows.map((row) => (
-                  <TableRow
-                    key={row.id}
-                    data-state={row.getIsSelected() && "selected"}
-                    // Grid setup: 8 columns
-                    // 1st col (auto): Checkbox/selection
-                    // 2nd col (auto): ID
-                    // 3rd col (1fr): Product name - takes remaining space
-                    // 4th col (auto): CAS number
-                    // 5th col (auto): Grade
-                    // 6th col (auto): Pack size
-                    // 7th col (auto): Price
-                    // 8th col (auto): Actions
-                    // className="grid grid-cols-[auto_auto_auto_auto_auto_auto_auto_auto] border-b transition-colors data-[state=selected]:bg-muted hover:bg-gray-700"
-                    className={cn(
-                      "w-full border-b transition-colors hover:bg-gray-700",
-                      "data-[state=selected]:bg-muted"
-                    )}
-                  >
-                    {row.getVisibleCells().map((cell) => (
-                      <TableCell
-                        key={cell.id}
-                        className="px-2 text-white min-w-0 max-w-full"
-                      >
-                        <div className="overflow-hidden text-ellipsis whitespace-nowrap">
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext()
-                          )}
-                        </div>
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                ))
-              ) : (
-                <TableRow>
-                  <TableCell
-                    colSpan={columns.length}
-                    className="h-24 text-center"
-                  >
-                    No results.
-                  </TableCell>
+              {table.getRowModel().rows.map((row) => (
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() && "selected"}
+                  // Grid setup: 8 columns
+                  // 1st col (auto): Checkbox/selection
+                  // 2nd col (auto): ID
+                  // 3rd col (1fr): Product name - takes remaining space
+                  // 4th col (auto): CAS number
+                  // 5th col (auto): Grade
+                  // 6th col (auto): Pack size
+                  // 7th col (auto): Price
+                  // 8th col (auto): Actions
+                  // className="grid grid-cols-[auto_auto_auto_auto_auto_auto_auto_auto] border-b transition-colors data-[state=selected]:bg-muted hover:bg-gray-700"
+                  className={cn(
+                    "w-full border-b transition-colors hover:bg-gray-700",
+                    "data-[state=selected]:bg-muted"
+                  )}
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell
+                      key={cell.id}
+                      className="px-2 text-white min-w-0 max-w-full"
+                    >
+                      <div className="overflow-hidden text-ellipsis whitespace-nowrap">
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </div>
+                    </TableCell>
+                  ))}
                 </TableRow>
-              )}
+              ))}
             </TableBody>
           </Table>
         </div>
@@ -188,3 +229,4 @@ export const DataTable = React.memo(({ columns, data }: DataTableProps) => {
     </>
   );
 });
+*/

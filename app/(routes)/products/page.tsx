@@ -1,6 +1,6 @@
-import { DataTable } from "@/components/features/products/ProductTable";
+import { ProductTable } from "@/components/features/products/ProductTable";
 import { columns } from "@/components/features/products/ProductTable/columns";
-import type { ProductTableRow } from "@/types/components/products";
+import type { ProductTableRow } from "@/types/database/products";
 import { queries } from "@/database/repositories/products";
 
 // This is a SSC. Use prisma to fetch products and the table header grades and associated counts
@@ -14,7 +14,7 @@ const IndexPage = async () => {
 
   return (
     <div className="flex flex-col w-full gap-5">
-      <DataTable data={products} columns={columns} />
+      <ProductTable data={products} columns={columns} />
     </div>
   );
 };

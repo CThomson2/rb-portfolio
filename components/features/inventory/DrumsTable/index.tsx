@@ -13,7 +13,7 @@ import {
 } from "@tanstack/react-table";
 import { columns } from "./columns";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/Table";
-import TableHeader from "@/components/shared/table/TableHeader";
+import TableHeader from "@/components/shared/table/header/TableHeader";
 import TableFooter from "@/components/shared/table/footer";
 import SearchBar from "@/components/shared/table/header/SearchBar";
 import ActionButton from "@/components/shared/table/header/ActionButton";
