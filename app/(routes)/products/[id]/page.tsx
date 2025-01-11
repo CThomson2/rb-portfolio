@@ -6,9 +6,9 @@ import {
   CardTitle,
   CardContent,
   CardFooter,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { List, ListItem } from "@/components/ui/list";
+} from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
+import { List, ListItem } from "@/components/ui/List";
 
 // Server component to display product details
 export default async function ProductPage({

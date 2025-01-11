@@ -5,7 +5,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/ui/DropdownMenu";
 import { cn } from "@/lib/utils";
 import { ChevronDown, FilterIcon, SearchIcon } from "lucide-react";
 import { FilterOption } from "@/types/components/products";

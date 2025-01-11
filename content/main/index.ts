@@ -34,11 +34,10 @@ import {
 // Free of Interfering Impurities
 
 export const navItems: NavItem[] = [
-  { name: "About", link: "#about" },
-  { name: "Projects", link: "#projects" },
-  { name: "Testimonials", link: "#testimonials" },
-  { name: "Contact", link: "#contact" },
+  { name: "Manage", link: "#dashboard" },
+  { name: "Products", link: "/products" },
   { name: "Inventory", link: "/inventory" },
+  { name: "Contact", link: "#contact" },
 ];
 
 export const userDashboard: UserDashboard[] = [
@@ -49,13 +48,13 @@ export const userDashboard: UserDashboard[] = [
       {
         id: 1,
         description: "Record New Order",
-        link: "/inventory",
+        link: "/inventory/orders?form=new",
         icon: TicketCheck,
       },
       {
         id: 2,
         description: "Active Orders & Deliveries",
-        link: "/inventory",
+        link: "/inventory/orders",
         icon: Truck,
       },
       {
@@ -65,7 +64,7 @@ export const userDashboard: UserDashboard[] = [
         icon: BookOpenCheck,
       },
     ],
-    link: "/inventory",
+    // link: "/inventory",
     // colors: [[24, 89, 124]],
     colors: [[236, 226, 208]],
     bgColor: "bg-slate-400",
@@ -74,7 +73,7 @@ export const userDashboard: UserDashboard[] = [
   },
   {
     id: 2,
-    title: "Inventory Events & Processes",
+    title: "Inventory & Production",
     content: [
       {
         id: 1,
@@ -85,17 +84,17 @@ export const userDashboard: UserDashboard[] = [
       {
         id: 2,
         description: "Distillations",
-        link: "/inventory/distillations",
+        link: "/production/distillations",
         icon: FlaskRound,
       },
       {
         id: 3,
         description: "QRD Form",
-        link: "/inventory/qrd-form",
+        link: "/production/qrd-form",
         icon: ClipboardPenLine,
       },
     ],
-    link: "/inventory/transactions",
+    // link: "/inventory/transactions",
     // colors: [[218, 133, 113]],
     // bgColor: "bg-blue-[#DA8571]",
     colors: [[102, 238, 213]],
@@ -116,21 +115,20 @@ export const userDashboard: UserDashboard[] = [
       {
         id: 2,
         description: "Detailed Info",
-        link: "/products",
+        link: "/products?expanded=true",
         icon: Info,
       },
       {
         id: 3,
         description: "Sheets for Download",
-        link: "/products",
+        link: "/products?expanded=true",
         icon: Download,
       },
     ],
-    link: "/products",
     colors: [[81, 136, 184]],
     bgColor: "bg-slate-500",
     animationSpeed: 3,
-    dotSize: 3,
+    dotSize: 2,
   },
   {
     id: 4,
@@ -145,21 +143,20 @@ export const userDashboard: UserDashboard[] = [
       {
         id: 2,
         description: "Dangerous Goods",
-        link: "/raw-materials",
+        link: "/raw-materials/dgn",
         icon: OctagonAlert,
       },
       {
         id: 3,
         description: "Drum Inventory",
-        link: "/raw-materials",
+        link: "/inventory",
         icon: Boxes,
       },
     ],
-    link: "/raw-materials",
     colors: [[255, 86, 102]],
     bgColor: "bg-slate-500",
     animationSpeed: 3,
-    dotSize: 3,
+    dotSize: 2,
   },
 ];
 

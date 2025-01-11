@@ -3,7 +3,7 @@
 // import { Row } from "@tanstack/react-table";
 import { MoreVertical } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,7 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/ui/DropdownMenu";
 
 // interface ProjectActionsProps<TData> {
 //   row: Row<TData>;

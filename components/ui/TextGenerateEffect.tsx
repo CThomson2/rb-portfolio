@@ -36,7 +36,7 @@ export const TextGenerateEffect = ({
               // change here if idx is greater than 3, change the text color to #CBACF9
               className={` ${
                 2 < idx && idx < 6
-                  ? "text-purple"
+                  ? "text-violet-400"
                   : "dark:text-white text-black"
               } ${
                 idx > 5

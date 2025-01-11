@@ -1,3 +1,1 @@
-import * as get from "./queries";
-
-export const queries = { get };
+export { queries } from "./queries";

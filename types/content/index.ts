@@ -15,19 +15,17 @@ export interface ProductInfo {
   img: string;
 }
 
-interface DashboardItem {
+export interface DashboardItem {
   id: number;
   description: string;
   link: string;
-  icon?: React.ElementType;
+  icon: React.ElementType;
 }
 
 export interface UserDashboard {
   id: number;
   title: string;
-  icon?: React.ReactNode;
   content: DashboardItem[];
-  link: string;
   colors?: number[][];
   bgColor: string;
   animationSpeed: number;
@@ -46,6 +44,16 @@ export interface GradeInfo {
   dotSize?: number;
 }
 
+export interface GoodsOrder {
+  id: number;
+  material: string;
+  supplier: string;
+  className: string;
+  imgClassName?: string;
+  titleClassName?: string;
+  img?: string;
+  spareImg?: string;
+}
 // Iniital Types
 
 export interface GridItem {

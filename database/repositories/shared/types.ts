@@ -8,6 +8,6 @@ export enum TransactionType {
 
 export enum OrderStatus {
   PENDING = "pending",
-  PARTIAL = "partial delivery",
-  FULFILLED = "fulfilled",
+  PARTIAL = "partial",
+  COMPLETE = "complete",
 }

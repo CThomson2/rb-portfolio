@@ -1,1 +1,1 @@
-export * from "./queries";
+export { queries } from "./queries";

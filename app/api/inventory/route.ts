@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getDrums } from "@/database/repositories/drums/queries";
+import { queries } from "@/database/repositories/drums/queries";
 import { DRUM_STATUS } from "@/types/enums/drums";
 import { NewDrum } from "@/types/database/drums";
 
@@ -16,7 +16,7 @@ export async function GET(req: Request) {
     const status = (searchParams.get("status") ??
       DRUM_STATUS.AVAILABLE) as DRUM_STATUS;
 
-    const drumsData = await getDrums({
+    const drumsData = await queries.getDrums({
       page,
       limit,
       sortField,

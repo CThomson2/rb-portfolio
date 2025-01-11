@@ -12,7 +12,7 @@ import {
   PaginationState,
 } from "@tanstack/react-table";
 
-import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
+import { Table, TableBody, TableCell, TableRow } from "@/components/ui/Table";
 
 import TableTabs from "./tabs";
 import TableHeader from "@/components/shared/table/TableHeader";

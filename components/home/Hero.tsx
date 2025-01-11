@@ -11,6 +11,19 @@ const Hero = () => {
       {/**
        *  UI: Spotlights
        *  Link: https://ui.aceternity.com/components/spotlight
+       *
+       *  Spotlight positioning:
+       *  - First spotlight: Positioned top-left, full screen height
+       *    - Mobile: -40px from top, -10px from left
+       *    - Desktop: -20px from top, -32px from left
+       *
+       *  - Second spotlight: Positioned right side
+       *    - 80% viewport height, 50% viewport width
+       *    - 10px from top, aligned to right edge
+       *
+       *  - Third spotlight: Positioned center-left
+       *    - 80% viewport height, 50% viewport width
+       *    - 28px from top, 80px from left
        */}
       <div>
         <Spotlight

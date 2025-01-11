@@ -16,7 +16,7 @@ import {
   TableCell,
   TableHead,
   TableRow,
-} from "@/components/ui/table";
+} from "@/components/ui/Table";
 import TableHeader from "@/components/shared/table/TableHeader";
 import SearchBar from "@/components/shared/table/header/SearchBar";
 import TableFooter from "@/components/shared/table/footer";
@@ -29,10 +29,10 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
+} from "@/components/ui/DropdownMenu";
+import { Button } from "@/components/ui/Button";
 import { PlusCircle, MoreHorizontal } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/components/ui/Badge";
 
 const filterOptions = [
   { label: "All", value: "all" },

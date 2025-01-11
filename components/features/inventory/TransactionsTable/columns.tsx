@@ -2,7 +2,7 @@
 
 // Import necessary dependencies for table functionality
 import { ColumnDef } from "@tanstack/react-table";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Checkbox } from "@/components/ui/Checkbox";
 import { SortableColumn } from "@/components/shared/table/SortableColumn";
 // Import individual cell components for better organization
 import ProductName from "@/components/features/products/ProductTable/table-data/ProductName";
@@ -19,14 +19,14 @@ import { format } from "date-fns";
 import { getTxTypeVariant } from "@/lib/utils/formatters";
 
 // UI Components
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/Button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/ui/DropdownMenu";
 
 import { MoreHorizontal } from "lucide-react";
 import type { Transaction } from "@/types/database/transactions";

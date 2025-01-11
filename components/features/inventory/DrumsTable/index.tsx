@@ -2,7 +2,7 @@
 "use client";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import {
   useReactTable,
   getCoreRowModel,
@@ -12,7 +12,7 @@ import {
   flexRender,
 } from "@tanstack/react-table";
 import { columns } from "./columns";
-import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
+import { Table, TableBody, TableCell, TableRow } from "@/components/ui/Table";
 import TableHeader from "@/components/shared/table/TableHeader";
 import TableFooter from "@/components/shared/table/footer";
 import SearchBar from "@/components/shared/table/header/SearchBar";
@@ -35,7 +35,6 @@ export function DrumsTable() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("all");
 
-  const parentRef = useRef<HTMLDivElement>(null);
   const [pageSize, setPageSize] = useState(50);
   const [pageIndex, setPageIndex] = useState(0);
 

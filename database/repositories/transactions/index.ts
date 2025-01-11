@@ -1,3 +1,1 @@
-import * as transactions from "./queries";
-
-export const queries = { transactions };
+export { queries } from "./queries";

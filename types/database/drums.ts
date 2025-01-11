@@ -20,12 +20,6 @@ export interface NewDrum extends Omit<NewDrumBase, "order_id"> {
   date_ordered?: Date | null;
 }
 
-// Type for the API response
-export interface DrumsResponse {
-  drums: NewDrum[];
-  total: number;
-}
-
 // Type for the query parameters
 export interface DrumQueryParams {
   page: number;
@@ -33,4 +27,10 @@ export interface DrumQueryParams {
   sortField?: keyof NewDrum;
   sortOrder?: "asc" | "desc";
   status?: DRUM_STATUS;
+}
+
+// Type for the API response
+export interface DrumsResponse {
+  drums: NewDrum[];
+  total: number;
 }

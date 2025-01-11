@@ -8,20 +8,21 @@ import { TransactionRow } from "@/types/database/transactions";
  * @returns Promise resolving to array of transactions with material names
 
  */
-export async function getTransactions(
-  page: number = 1,
-  limit: number = 50
-): Promise<{ rows: TransactionRow[]; total: number }> {
-  const offset = (page - 1) * limit;
+export const queries = {
+  getTransactions: async (
+    page = 1,
+    limit = 50
+  ): Promise<{ rows: TransactionRow[]; total: number }> => {
+    const offset = (page - 1) * limit;
 
-  // Get the total number of transactions
-  const totalResult = await prisma.$queryRaw<{ total: number }[]>`
+    // Get the total number of transactions
+    const totalResult = await prisma.$queryRaw<{ total: number }[]>`
     SELECT COUNT(*) as total FROM inventory.transactions
   `;
-  const total = Number(totalResult[0].total);
+    const total = Number(totalResult[0].total);
 
-  // Then get the paginated data, with LEFT JOINs to get the material name
-  const result = await prisma.$queryRaw`
+    // Then get the paginated data, with LEFT JOINs to get the material name
+    const result = await prisma.$queryRaw`
     SELECT
       t.*,
       CASE
@@ -39,43 +40,44 @@ export async function getTransactions(
     OFFSET ${offset}
   `;
 
-  return {
-    rows: result as TransactionRow[],
-    total,
-  };
+    return {
+      rows: result as TransactionRow[],
+      total,
+    };
 
-  // // Use a CTE (Common Table Expression) for better performance
-  // const result = await prisma.$queryRaw`
-  //   WITH MaterialInfo AS (
-  //     SELECT
-  //       d.delivery_id,
-  //       o.material as delivery_material,
-  //       nd.drum_id,
-  //       nd.material as drum_material,
-  //       rd.repro_drum_id,
-  //       rd.material as repro_material
-  //     FROM inventory.deliveries d
-  //     LEFT JOIN inventory.orders o ON d.order_id = o.order_id
-  //     LEFT JOIN inventory.new_drums nd ON nd.drum_id = nd.drum_id
-  //     LEFT JOIN inventory.repro_drums rd ON rd.repro_drum_id = rd.repro_drum_id
-  //   )
-  //   SELECT
-  //     t.*,
-  //     COALESCE(
-  //       mi.delivery_material,
-  //       mi.drum_material,
-  //       mi.repro_material
-  //     ) as material_name,
-  //     COUNT(*) OVER() as total_count
-  //   FROM inventory.transactions t
-  //   LEFT JOIN MaterialInfo mi ON
-  //     t.delivery_id = mi.delivery_id OR
-  //     t.drum_id = mi.drum_id OR
-  //     t.repro_id = mi.repro_drum_id
-  //   ORDER BY t.tx_date DESC
-  //   LIMIT ${limit}
-  //   OFFSET ${offset}
-  // `;
+    // // Use a CTE (Common Table Expression) for better performance
+    // const result = await prisma.$queryRaw`
+    //   WITH MaterialInfo AS (
+    //     SELECT
+    //       d.delivery_id,
+    //       o.material as delivery_material,
+    //       nd.drum_id,
+    //       nd.material as drum_material,
+    //       rd.repro_drum_id,
+    //       rd.material as repro_material
+    //     FROM inventory.deliveries d
+    //     LEFT JOIN inventory.orders o ON d.order_id = o.order_id
+    //     LEFT JOIN inventory.new_drums nd ON nd.drum_id = nd.drum_id
+    //     LEFT JOIN inventory.repro_drums rd ON rd.repro_drum_id = rd.repro_drum_id
+    //   )
+    //   SELECT
+    //     t.*,
+    //     COALESCE(
+    //       mi.delivery_material,
+    //       mi.drum_material,
+    //       mi.repro_material
+    //     ) as material_name,
+    //     COUNT(*) OVER() as total_count
+    //   FROM inventory.transactions t
+    //   LEFT JOIN MaterialInfo mi ON
+    //     t.delivery_id = mi.delivery_id OR
+    //     t.drum_id = mi.drum_id OR
+    //     t.repro_id = mi.repro_drum_id
+    //   ORDER BY t.tx_date DESC
+    //   LIMIT ${limit}
+    //   OFFSET ${offset}
+    // `;
 
-  // return { rows, total };
-}
+    // return { rows, total };
+  },
+};

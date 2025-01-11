@@ -1,15 +1,48 @@
 import { prisma } from "@/database/client";
-import type { Order, OrderCreate } from "../../../types/database/orders";
+import type { NewOrder, OrderResponse } from "@/types/database/orders";
 import { OrderStatus } from "../shared/types";
+import type { OrderQueryParams } from "@/types/database/orders";
+export const queries = {
+  getOrders: async ({
+    page = 1,
+    limit = 50,
+    sortField = "date_ordered",
+    sortOrder = "desc",
+  }: OrderQueryParams): Promise<OrderResponse> => {
+    const offset = (page - 1) * limit;
 
-const queries = {
+    // Get the total number of orders
+    const total = await prisma.orders.count();
+
+    // Get the paginated data
+    const rows = await prisma.orders.findMany({
+      orderBy: [{ [sortField]: sortOrder }, { order_id: "desc" }],
+      skip: offset,
+      take: limit,
+    });
+
+    const orders = rows.map((row) => ({
+      order_id: row.order_id,
+      supplier: row.supplier,
+      material: row.material,
+      quantity: row.quantity,
+      date_ordered: row.date_ordered?.toISOString(),
+      quantity_received: row.quantity_received,
+      delivery_status: row.delivery_status as OrderStatus,
+      created_at: row.created_at?.toISOString(),
+      updated_at: row.updated_at?.toISOString(),
+    }));
+
+    return { orders, total };
+  },
+
   /**
    * Creates a new order in the database.
    * Sets initial status to "pending" and quantity_received to 0.
    * @param data The order data containing supplier, material, quantity and optional notes
    * @returns The created order record
    */
-  create: async (data: OrderCreate) => {
+  create: async (data: NewOrder) => {
     return prisma.orders.create({
       data: {
         ...data,
@@ -47,5 +80,3 @@ const queries = {
     });
   },
 };
-
-export default queries;

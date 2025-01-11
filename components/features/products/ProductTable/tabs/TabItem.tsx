@@ -1,6 +1,6 @@
 "use client";
 import { useMemo } from "react";
-import { Separator } from "@/components/ui/separator";
+import { Separator } from "@/components/ui/Separator";
 
 import { GRADE } from "@/types/enums/products";
 import { cn } from "@/lib/utils";

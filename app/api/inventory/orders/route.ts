@@ -1,7 +1,5 @@
-// This is a Next.js API route handler for fetching inventory transactions
-// The route is accessed at /api/inventory/transactions
 import { NextResponse } from "next/server";
-import { queries } from "@/database/repositories/transactions/queries";
+import { queries } from "@/database/repositories/orders/queries";
 
 export async function GET(req: Request) {
   // Extract search params from the request URL
@@ -19,8 +17,8 @@ export async function GET(req: Request) {
   try {
     // Fetch transactions from the database using the repository function
     // TODO: Pass page and limit to getTransactions for pagination
-    const transactions = await queries.getTransactions(page, limit);
-    return NextResponse.json(transactions);
+    const orders = await queries.getOrders({ page, limit });
+    return NextResponse.json(orders);
   } catch (error) {
     // If database query fails, return 500 error response
     return NextResponse.json(
