@@ -88,6 +88,8 @@
 @layer utilities {
   .heading {
     @apply font-bold text-4xl md:text-5xl text-center;
+    position: relative;
+    z-index: 10;
   }
 }
 
@@ -110,5 +112,19 @@
 
   .terms-bullet {
     @apply text-gray-300 mb-2 pl-8 italic;
+  }
+
+  .hover-effect {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .hover-effect:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .hover-effect:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(128, 90, 213, 0.5);
   }
 }

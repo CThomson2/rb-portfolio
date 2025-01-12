@@ -104,7 +104,7 @@ export const DataTable = <T,>({
         />
         <ActionButton text={newButtonText} href={newButtonHref} />
       </div>
-      <div className="flex flex-col m-5 pb-10">
+      <div className="flex flex-col m-5 pb-10 overflow-x-auto webkit-overflow-scrolling-touch min-w-[600px]">
         <TableTabs activeTab={activeFilter} setActiveTab={setActiveFilter} />
         <div className="rounded-md border-x-2 border-[hsl(var(--table-header))] relative bg-slate-600">
           <Table>

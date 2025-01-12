@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./provider";
 import Providers from "./providers";
+import Sidebar from "@/components/home/Sidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
         <link rel="icon" href="/rc-logo-b.png" sizes="any" />
       </head>
       <body className={inter.className}>
+        <Sidebar />
         <Providers>
           <ThemeProvider
             attribute="class"

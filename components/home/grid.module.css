@@ -26,7 +26,18 @@
   /* background: #1e1e2f; */
   border-radius: 8px;
   padding: 1.5rem;
-  /* transition:  0.3s ease; */
+  transition: all 0.3s ease;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.dropdown {
+  display: none;
 }
 
 .card-links {
@@ -37,6 +48,66 @@
   height: 100%;
   width: 100%;
   gap: 0;
+}
+
+/* Font Styling */
+.card-links li {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3rem 0.5rem;
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  color: #90aade;
+  border-radius: 4px;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 0.3s ease;
+  height: 2rem; /* Fixed height */
+}
+
+/* Subtle border between links */
+.card-links li:not(:last-child) {
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.card-links li:hover {
+  background: rgba(255, 255, 255, 0); /* Light hover background */
+  color: #e5e7eb;
+  font-size: 1.5rem;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.5); /* Faint glowing effect */
+  flex-grow: 3;
+  transition: all 0.3s ease;
+}
+
+/* Style for fading non-hovered items */
+.card-links div:hover ~ div {
+  opacity: 0.5;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr; /* Single column layout for small screens */
+  }
+
+  .card {
+    height: 3rem; /* Adjust height to fit content */
+    max-width: 90vw; /* Prevent cards from expanding past screen edges */
+  }
+
+  .dropdown {
+    display: block;
+    margin-top: 1rem;
+  }
 }
 
 /*
@@ -69,45 +140,6 @@
   width: 100%;
 } */
 
-/* Font Styling */
-.card-links li {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.3rem 0.5rem;
-  margin: 0;
-  width: 100%;
-  text-align: center;
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  text-decoration: none;
-  color: #90aade;
-  border-radius: 4px;
-  /* transition: all 0.3s ease; */
-  max-width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  transition: all 0.3s ease;
-}
-
-/* Subtle border between links */
-.card-links li:not(:last-child) {
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.8);
-}
-
-.card-links li:hover {
-  background: rgba(255, 255, 255, 0); /* Light hover background */
-  color: #e5e7eb;
-  font-size: 1.5rem;
-  text-shadow: 0 0 12px rgba(255, 255, 255, 0.5); /* Faint glowing effect */
-  flex-grow: 3;
-  transition: all 0.3s ease;
-}
-
 /* .card-links li:not(:last-child):hover { */
 /* background: rgba(0, 0, 0, 0.8); */
 /* border-bottom: 2px solid rgba(255, 255, 255, 1); */
@@ -136,8 +168,3 @@ Alternative hover effect - background highlights on links
     opacity: 1;
   }
 } */
-
-/* Style for fading non-hovered items */
-.card-links div:hover ~ div {
-  opacity: 0.5;
-}

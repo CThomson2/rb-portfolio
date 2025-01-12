@@ -19,6 +19,15 @@
     </div>
 </div>
 
+/_
+className="flex-1 min-h-[230px] text-black dark:text-white
+border border-neutral-200 dark:border-slate-700 transform
+transition-all duration-300 hover:scale-95 hover:shadow-
+[0_0_10px_rgba(255,255,255,1)] hover:border-white
+hover:bg-slate-900/90 focus:outline-none focus:ring-4
+focus:ring-purple-500"
+_/
+
 ## 📋 <a name="table">Table of Contents</a>
 
 ### TODO - Make branch on other public app and integrate this into its home page

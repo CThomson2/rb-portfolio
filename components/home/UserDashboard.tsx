@@ -3,10 +3,10 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { CanvasRevealEffect } from "@/components/ui/CanvasRevealEffect";
 import { userDashboard } from "@/content/main";
-import type { DashboardItem } from "@/types/content";
-import styles from "./UserDashboard.module.css";
+import styles from "./grid.module.css";
 import { TextGenerateEffect } from "@/components/ui/TextGenerateEffect";
 import { Spotlight } from "@/components/ui/Spotlight";
+import Image from "next/image";
 
 const DashboardGrid = () => {
   return (
@@ -31,6 +31,7 @@ const DashboardGrid = () => {
             key={option.id}
             title={<AceternityIcon option={option.title} />}
             content={option.content}
+            thumbnail={option.thumbnail}
             // link={option.link}
           >
             <CanvasRevealEffect
@@ -48,9 +49,19 @@ const DashboardGrid = () => {
 
 export default DashboardGrid;
 
+// className={`${styles.card} group/canvas-card flex items-center justify-center w-full
+// mx-auto p-4 relative h-[25rem] rounded-3xl`}
+// // style={{
+// //   background: "rgb(4,7,29)",
+// //   backgroundColor:
+// //     "linear-gradient(90deg, rgba(4,7,29,1) 0%, rgba(12,14,35,1) 100%)",
+// //   width: "100%",
+// // }}
+
 const Card = ({
   title,
   content,
+  thumbnail,
   children,
 }: {
   title: React.ReactNode;
@@ -60,6 +71,7 @@ const Card = ({
     link: string;
     icon: React.ElementType;
   }[];
+  thumbnail: string;
   children?: React.ReactNode;
 }) => {
   const [hovered, setHovered] = React.useState(false);
@@ -83,19 +95,19 @@ const Card = ({
       <Icon className="absolute h-10 w-10 -top-3 -right-3 dark:text-white text-black opacity-30" />
       <Icon className="absolute h-10 w-10 -bottom-3 -right-3 dark:text-white text-black opacity-30" />
 
-      <AnimatePresence>
-        {hovered && (
+      {hovered && (
+        <AnimatePresence>
           <motion.div
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.5 }}
+            animate={{ opacity: 1 }}
             className="h-full w-full absolute inset-0 flex flex-col justify-center items-center"
           >
             {children}
           </motion.div>
-        )}
-      </AnimatePresence>
+        </AnimatePresence>
+      )}
 
-      <div className="relative z-20 px-10 h-full w-full">
+      <div className="flex lg:flex-col justify-center flex-col lg:items-center p-3 py-6 md:p-5 lg:p-10 gap-2 elative z-20 px-10">
         <div
           className="text-center group-hover/canvas-card:-translate-y-4 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] 
           group-hover/canvas-card:opacity-0 transition duration-200 min-w-40 mx-auto flex items-center justify-center"
@@ -110,23 +122,34 @@ const Card = ({
             {title}
           </h2> */}
         {/* add this one for the description */}
-        <div
-          className="text-3xl opacity-0 group-hover/canvas-card:opacity-100
+        {hovered && (
+          <>
+            {/* <Image
+              src={thumbnail}
+              alt="Thumbnail"
+              width={128}
+              height={128}
+              className="lg:w-32 md:w-20 w-16"
+            /> */}
+            <div
+              className="text-3xl opacity-0 group-hover/canvas-card:opacity-100
          relative z-10 mt-2 group-hover/canvas-card:text-white text-center
          group-hover/canvas-card:-translate-y-2 transition duration-200 h-full"
-          style={{ color: "#E4ECFF" }}
-        >
-          <ul className={`list-none flex flex-col ${styles["card-links"]}`}>
-            {content.map((item) => (
-              <Link href={item.link} key={item.id}>
-                <li className="my-2 cursor-pointer transition-colors duration-200 flex-grow">
-                  <item.icon className="mr-2" />
-                  {item.description}
-                </li>
-              </Link>
-            ))}
-          </ul>
-        </div>
+              style={{ color: "#E4ECFF" }}
+            >
+              <ul className={`list-none flex flex-col ${styles["card-links"]}`}>
+                {content.map((item) => (
+                  <Link href={item.link} key={item.id}>
+                    <li className="my-2 cursor-pointer transition-colors duration-200 flex-grow">
+                      <item.icon className="mr-2" />
+                      {item.description}
+                    </li>
+                  </Link>
+                ))}
+              </ul>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

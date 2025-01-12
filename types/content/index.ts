@@ -26,11 +26,21 @@ export interface UserDashboard {
   id: number;
   title: string;
   content: DashboardItem[];
+  thumbnail: string;
   colors?: number[][];
   bgColor: string;
   animationSpeed: number;
   dotSize?: number;
 }
+
+export type WorkExperience = {
+  id: number;
+  title: string;
+  description: string;
+  className: string;
+  thumbnail: string;
+  content: DashboardItem[];
+};
 
 export interface GradeInfo {
   id: number;
@@ -87,14 +97,6 @@ export type Company = {
   name: string;
   img: string;
   nameImg: string;
-};
-
-export type WorkExperience = {
-  id: number;
-  title: string;
-  description: string;
-  className: string;
-  thumbnail: string;
 };
 
 export type SocialMedia = {
