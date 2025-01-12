@@ -1,5 +1,5 @@
 import { prisma } from "@/database/client";
-import type { NewOrder, OrderResponse } from "@/types/database/orders";
+import type { NewOrder, OrderGetResponse } from "@/types/database/orders";
 import { OrderStatus } from "../shared/types";
 import type { OrderQueryParams } from "@/types/database/orders";
 export const queries = {
@@ -8,7 +8,7 @@ export const queries = {
     limit = 50,
     sortField = "date_ordered",
     sortOrder = "desc",
-  }: OrderQueryParams): Promise<OrderResponse> => {
+  }: OrderQueryParams): Promise<OrderGetResponse> => {
     const offset = (page - 1) * limit;
 
     // Get the total number of orders

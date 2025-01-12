@@ -1,4 +1,4 @@
-import { OrdersGrid } from "@/components/features/inventory/OrdersGrid";
+import OrdersGrid from "@/components/features/inventory/OrdersGrid";
 
 const OrdersPage = () => {
   return <OrdersGrid />;

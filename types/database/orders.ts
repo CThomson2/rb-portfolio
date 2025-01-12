@@ -23,11 +23,11 @@ export interface Order {
   material: string;
   quantity: number;
   date_ordered?: string;
-  quantity_received: number;
-  delivery_status: OrderStatus;
   notes?: string;
   created_at?: string;
   updated_at?: string;
+  quantity_received: number;
+  delivery_status: OrderStatus;
 }
 
 export interface OrderQueryParams {
@@ -37,7 +37,25 @@ export interface OrderQueryParams {
   sortOrder?: "asc" | "desc";
 }
 
-export interface OrderResponse {
+export interface OrderGetResponse {
   orders: Order[];
   total: number;
+}
+
+export interface OrderPostParams {
+  supplier: string;
+  material: string;
+  quantity: number;
+}
+export interface OrderPostResponse {
+  order_id: number;
+  supplier: string;
+  material: string;
+  quantity: number;
+  date_ordered: Date | null;
+  notes: string | null;
+  created_at: Date | null;
+  updated_at: Date | null;
+  quantity_received: number;
+  delivery_status: string;
 }

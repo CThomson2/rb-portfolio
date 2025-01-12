@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { queries } from "@/database/repositories/orders/queries";
+import { prisma } from "@/database/client";
+import type { OrderPostResponse } from "@/types/database/orders";
 
 export async function GET(req: Request) {
   // Extract search params from the request URL
@@ -23,14 +25,26 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
+  // Parse request body
+  const body = await req.json();
+  const { material, supplier, quantity } = body;
+
   try {
-    const newOrder = await req.json();
-    const createdOrder = await queries.createOrder(newOrder);
-    return NextResponse.json(createdOrder, { status: 201 });
-  } catch (error) {
-    console.error("Error creating order:", error);
+    const newOrder: OrderPostResponse = await prisma.orders.create({
+      data: {
+        supplier,
+        material,
+        quantity,
+      },
+    });
     return NextResponse.json(
-      { error: "Failed to create order" },
+      { success: true, order: newOrder },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      { success: false, error: "Failed to create order" },
       { status: 500 }
     );
   }
