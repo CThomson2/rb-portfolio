@@ -38,7 +38,7 @@ interface SearchBarProps {
  * @param onSearchChange - Callback when search text changes
  * @param placeholder - Optional placeholder text for search input
  */
-const SearchBar = ({
+export const SearchBar = ({
   filterOptions,
   selectedFilter,
   onFilterChange,
@@ -96,5 +96,3 @@ const SearchBar = ({
     </div>
   );
 };
-
-export default SearchBar;

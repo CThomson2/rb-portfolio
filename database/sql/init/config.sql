@@ -31,6 +31,28 @@ CREATE TABLE inventory.deliveries (
     CONSTRAINT valid_quantity CHECK (quantity_received > 0)
 );
 
+
+-- This constraint ensures that drums can only have a 'pending' status if their associated order is not complete.
+-- It works by checking one of two conditions must be true:
+-- 1. The drum status is one of: 'available', 'scheduled', or 'processed'
+-- OR
+-- 2. The drum's associated order is not complete (using NOT EXISTS)
+--
+-- The NOT EXISTS clause checks if there are any matching rows in the orders table where:
+-- - The order_id matches the drum's order_id
+-- - AND the delivery_status is 'complete'
+-- If no such row exists (NOT EXISTS is true), then the order is not complete
+-- This effectively prevents drums from having 'pending' status when their order is complete
+ALTER TABLE inventory.new_drums
+ADD CONSTRAINT check_complete_order_drums_status
+CHECK (
+    status != 'pending' OR
+    NOT EXISTS (
+        SELECT 1
+        FROM inventory.orders
+        WHERE orders.order_id = new_drums.order_id AND delivery_status = 'complete'
+    )
+);
 -- Create function that automatically updates order status when deliveries change
 -- This function:
 -- 1. Recalculates total quantity_received by summing all deliveries

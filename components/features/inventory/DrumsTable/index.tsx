@@ -13,11 +13,13 @@ import {
 } from "@tanstack/react-table";
 import { columns } from "./columns";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/Table";
-import TableHeader from "@/components/shared/table/header/TableHeader";
-import TableFooter from "@/components/shared/table/footer";
-import SearchBar from "@/components/shared/table/header/SearchBar";
-import ActionButton from "@/components/shared/table/header/ActionButton";
+import { TableHeader } from "@/components/shared/table";
+import { TableFooter } from "@/components/shared/table";
+import { SearchBar } from "@/components/shared/table";
+import { ActionButton } from "@/components/shared/table";
 import type { DrumsResponse } from "@/types/database/drums";
+import { DRUM_STATUS } from "@/types/enums/drums";
+import { StatusFilter } from "@/components/shared/table";
 
 const filterOptions = [
   { label: "All", value: "all" },
@@ -37,6 +39,7 @@ export function DrumsTable() {
 
   const [pageSize, setPageSize] = useState(50);
   const [pageIndex, setPageIndex] = useState(0);
+  const [status, setStatus] = useState<DRUM_STATUS[]>([DRUM_STATUS.AVAILABLE]);
 
   const { data, isLoading } = useQuery({
     queryKey: ["drums", pageIndex, pageSize],
@@ -106,6 +109,12 @@ export function DrumsTable() {
           <ActionButton text="Manage Inventory" href="/inventory/drums/new" />
         </div>
         <div className="flex-row gap-4 hidden lg:flex">
+          <Link href="/inventory/orders" className="mx-auto">
+            <button className="flex flex-col items-center px-6 py-3 bg-slate-600 rounded-md hover:bg-slate-500 transition-colors">
+              <span className="text-xs text-gray-300">Go to</span>
+              <span className="font-medium">Orders</span>
+            </button>
+          </Link>
           <Link href="/inventory/transactions" className="mx-auto">
             <button className="flex flex-col items-center px-6 py-3 bg-slate-600 rounded-md hover:bg-slate-500 transition-colors">
               <span className="text-xs text-gray-300">Go to</span>

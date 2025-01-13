@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { DataTable } from "@/components/shared/table/DataTable";
+import { DataTable } from "@/components/shared/table";
 import { ColumnDef, SortingState } from "@tanstack/react-table";
 import type { ProductTableRow } from "@/types/database/products";
 
@@ -16,7 +16,7 @@ const filterOptions = [
   { label: "By CAS Number", value: "cas_number" },
 ];
 
-export const ProductTable = React.memo(({ columns, data }: DataTableProps) => {
+const ProductTable = React.memo(({ columns, data }: DataTableProps) => {
   // React Table state
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [rowSelection, setRowSelection] = React.useState({});
@@ -230,3 +230,5 @@ export const DataTable = React.memo(({ columns, data }: DataTableProps) => {
   );
 });
 */
+
+export default ProductTable;

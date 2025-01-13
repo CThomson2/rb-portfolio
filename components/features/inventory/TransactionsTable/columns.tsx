@@ -3,16 +3,11 @@
 // Import necessary dependencies for table functionality
 import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/Checkbox";
-import { SortableColumn } from "@/components/shared/table/ux/SortableColumn";
-// Import individual cell components for better organization
-import ProductName from "@/components/features/products/ProductTable/table-data/ProductName";
-import ProductGrade from "@/components/features/products/ProductTable/table-data/ProductGrade";
-
-import ProductStockLevel from "@/components/features/products/ProductTable/table-data/ProductStockLevel";
-
-import ProjectLastUpdate from "@/components/shared/projects/LastUpdate";
-import { ProjectActions } from "@/components/shared/table/ux/Actions";
-import ProjectTimeLine from "@/components/shared/projects/Timeline";
+import {
+  SortableColumn,
+  StatusFilter,
+  Actions,
+} from "@/components/shared/table";
 
 // Formatters
 import { format } from "date-fns";
@@ -20,15 +15,8 @@ import { getTxTypeVariant } from "@/lib/utils/formatters";
 
 // UI Components
 import { Badge } from "@/components/ui/Badge";
-import { Button } from "@/components/ui/Button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/DropdownMenu";
 
-import { MoreHorizontal } from "lucide-react";
+// import { MoreHorizontal } from "lucide-react";
 import type { Transaction } from "@/types/database/transactions";
 
 // components/features/inventory/TransactionTable/columns.tsx
@@ -116,7 +104,7 @@ export const columns: ColumnDef<Transaction>[] = [
     header: "Actions",
     cell: () => (
       <div className="min-w-0 overflow-hidden">
-        <ProjectActions />
+        <Actions />
       </div>
     ),
   },

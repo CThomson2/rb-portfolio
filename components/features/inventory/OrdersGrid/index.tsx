@@ -7,8 +7,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { NewOrder, OrderGetResponse } from "@/types/database/orders";
 import { SortingState } from "@tanstack/react-table";
 import Link from "next/link";
-import ActionButton from "@/components/shared/table/header/ActionButton";
-import SearchBar from "@/components/shared/table/header/SearchBar";
+import { ActionButton, SearchBar } from "@/components/shared/table";
 
 const filterOptions = [
   { label: "All", value: "all" },

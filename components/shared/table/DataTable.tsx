@@ -8,10 +8,13 @@ import {
   flexRender,
 } from "@tanstack/react-table";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/Table";
-import TableHeader from "@/components/shared/table/header/TableHeader";
-import TableFooter from "@/components/shared/table/footer";
-import SearchBar from "@/components/shared/table/header/SearchBar";
-import ActionButton from "@/components/shared/table/header/ActionButton";
+import {
+  TableHeader,
+  TableFooter,
+  SearchBar,
+  ActionButton,
+} from "@/components/shared/table";
+// TODO: Remove this import and make Tabs a shared table component
 import TableTabs from "@/components/features/products/ProductTable/tabs";
 import { cn } from "@/lib/utils";
 

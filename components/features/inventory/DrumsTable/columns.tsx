@@ -1,6 +1,9 @@
 // components/features/inventory/DrumsTable/columns.tsx
 import { ColumnDef } from "@tanstack/react-table";
-import { SortableColumn } from "@/components/shared/table/ux/SortableColumn";
+import {
+  SortableColumn,
+  StatusFilter,
+} from "@/components/shared/table";
 import { Badge } from "@/components/ui/Badge";
 import { format } from "date-fns";
 import type { NewDrum } from "@/types/database/drums";
@@ -20,7 +23,10 @@ export const columns: ColumnDef<NewDrum>[] = [
   },
   {
     accessorKey: "status",
-    header: ({ column }) => <SortableColumn column={column} title="Status" />,
+    // header: ({ column }) => <SortableColumn column={column} title="Status" />,
+    header: ({ column }) => {
+      <StatusFilter
+    }
     cell: ({ row }) => (
       <Badge
         variant={row.getValue("status") === "available" ? "success" : "default"}

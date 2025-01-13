@@ -8,7 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/Select";
 
-function TableFooter<TData>({ table }: { table: Table<TData> }) {
+export const TableFooter = <TData,>({ table }: { table: Table<TData> }) => {
   return (
     <div className="flex items-center justify-between px-5 py-10">
       {/* Left side - selected rows count */}
@@ -54,6 +54,6 @@ function TableFooter<TData>({ table }: { table: Table<TData> }) {
       </div>
     </div>
   );
-}
+};
 
 export default TableFooter;

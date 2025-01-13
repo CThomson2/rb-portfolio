@@ -8,7 +8,7 @@ interface ActionButtonProps {
   href?: string;
 }
 
-const ActionButton = ({ text, href }: ActionButtonProps) => {
+export const ActionButton = ({ text, href }: ActionButtonProps) => {
   const buttonContent = (
     <>
       <PlusIcon className="w-4 h-8 mr-1" />
@@ -32,5 +32,3 @@ const ActionButton = ({ text, href }: ActionButtonProps) => {
     </Button>
   );
 };
-
-export default ActionButton;

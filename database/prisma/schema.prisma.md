@@ -93,7 +93,7 @@ transactions transactions[]
 @@schema("inventory")
 }
 
-model distillations {
+model [distillations](#daily-production-sheet) {
 distillation_id Int @id @default(autoincrement())
 loading_date DateTime? @default(dbgenerated("CURRENT_DATE")) @db.Date
 start_date DateTime? @db.Date
@@ -208,6 +208,8 @@ created_at DateTime? @default(now()) @db.Timestamptz(6)
 updated_at DateTime? @default(now()) @db.Timestamptz(6)
 distillations distillations? @relation(fields: [distillation_id], references: [distillation_id], onDelete: NoAction, onUpdate: NoAction)
 repro_drums repro_drums? @relation(fields: [repro_drum_id], references: [repro_drum_id], onDelete: NoAction, onUpdate: NoAction)
+
+### Daily Production Sheet
 
 @@schema("inventory")
 }
