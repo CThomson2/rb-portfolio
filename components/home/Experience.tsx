@@ -15,6 +15,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 import { workExperience } from "@/content/main";
 import { Button } from "../ui/MovingBorders";
@@ -125,10 +126,12 @@ const Experience = () => {
                     className={`text-start text-white-100 mt-3 font-semibold ${styles["card-links"]}`}
                   >
                     {card.content.map((item) => (
-                      <li key={item.id} className="my-2 h-8">
-                        <item.icon className="mr-2" />
-                        {item.description}
-                      </li>
+                      <Link href={item.link} key={item.id}>
+                        <li key={item.id} className="my-2 h-8">
+                          <item.icon className="mr-2" />
+                          {item.description}
+                        </li>
+                      </Link>
                     ))}
                   </ul>
                 ) : (

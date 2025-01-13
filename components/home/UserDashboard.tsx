@@ -31,7 +31,7 @@ const DashboardGrid = () => {
             key={option.id}
             title={<AceternityIcon option={option.title} />}
             content={option.content}
-            thumbnail={option.thumbnail}
+            // thumbnail={option.thumbnail}
             // link={option.link}
           >
             <CanvasRevealEffect
@@ -61,7 +61,7 @@ export default DashboardGrid;
 const Card = ({
   title,
   content,
-  thumbnail,
+  // thumbnail,
   children,
 }: {
   title: React.ReactNode;
@@ -71,7 +71,7 @@ const Card = ({
     link: string;
     icon: React.ElementType;
   }[];
-  thumbnail: string;
+  // thumbnail: string;
   children?: React.ReactNode;
 }) => {
   const [hovered, setHovered] = React.useState(false);

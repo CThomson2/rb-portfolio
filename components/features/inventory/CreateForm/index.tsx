@@ -18,31 +18,40 @@ export const CreateForm = ({
   const [quantity, setQuantity] = useState<OrderPostParams["quantity"]>(0);
 
   return (
-    <>
-      <h1>Create Order</h1>
-      {/* ... form UI for creating the order ... */}
-      <p>Material</p>
-      <input
-        placeholder="Material"
-        type="text"
-        value={material}
-        onChange={(e) => setMaterial(e.target.value)}
-      />
-      <p>Supplier</p>
-      <input
-        placeholder="Supplier"
-        type="text"
-        value={supplier}
-        onChange={(e) => setSupplier(e.target.value)}
-      />
-      <p>Quantity</p>
-      <input
-        placeholder="Quantity"
-        type="number"
-        value={quantity}
-        onChange={(e) => setQuantity(Number(e.target.value))}
-      />
+    <div className="space-y-4">
+      <h1 className="text-2xl font-bold text-white">Create Order</h1>
+      <div className="space-y-2">
+        <label className="block text-white">Material</label>
+        <input
+          className="w-full p-2 rounded-md bg-slate-600 text-white"
+          placeholder="Material"
+          type="text"
+          value={material}
+          onChange={(e) => setMaterial(e.target.value)}
+        />
+      </div>
+      <div className="space-y-2">
+        <label className="block text-white">Supplier</label>
+        <input
+          className="w-full p-2 rounded-md bg-slate-600 text-white"
+          placeholder="Supplier"
+          type="text"
+          value={supplier}
+          onChange={(e) => setSupplier(e.target.value)}
+        />
+      </div>
+      <div className="space-y-2">
+        <label className="block text-white">Quantity</label>
+        <input
+          className="w-full p-2 rounded-md bg-slate-600 text-white"
+          placeholder="Quantity"
+          type="number"
+          value={quantity}
+          onChange={(e) => setQuantity(Number(e.target.value))}
+        />
+      </div>
       <button
+        className="bg-blue-500 text-white px-4 py-2 rounded-md"
         onClick={() =>
           onOrderCreated({
             material,
@@ -53,14 +62,6 @@ export const CreateForm = ({
       >
         Submit Order
       </button>
-
-      {orderData && (
-        <BarcodeLabel
-          orderId={orderData.order_id}
-          material={orderData.material}
-          supplier={orderData.supplier}
-        />
-      )}
-    </>
+    </div>
   );
 };

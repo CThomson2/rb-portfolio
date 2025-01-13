@@ -9390,7 +9390,7 @@ export namespace Prisma {
     quantity_received: number
     date_received: Date
     batch_code: string | null
-    location: string | null
+    location: string
     delivery_notes: string | null
     created_at: Date | null
     updated_at: Date | null
@@ -9493,7 +9493,7 @@ export namespace Prisma {
       quantity_received: number
       date_received: Date
       batch_code: string | null
-      location: string | null
+      location: string
       delivery_notes: string | null
       created_at: Date | null
       updated_at: Date | null
@@ -22893,7 +22893,7 @@ export namespace Prisma {
     quantity_received?: IntFilter<"deliveries"> | number
     date_received?: DateTimeFilter<"deliveries"> | Date | string
     batch_code?: StringNullableFilter<"deliveries"> | string | null
-    location?: StringNullableFilter<"deliveries"> | string | null
+    location?: StringFilter<"deliveries"> | string
     delivery_notes?: StringNullableFilter<"deliveries"> | string | null
     created_at?: DateTimeNullableFilter<"deliveries"> | Date | string | null
     updated_at?: DateTimeNullableFilter<"deliveries"> | Date | string | null
@@ -22907,7 +22907,7 @@ export namespace Prisma {
     quantity_received?: SortOrder
     date_received?: SortOrder
     batch_code?: SortOrderInput | SortOrder
-    location?: SortOrderInput | SortOrder
+    location?: SortOrder
     delivery_notes?: SortOrderInput | SortOrder
     created_at?: SortOrderInput | SortOrder
     updated_at?: SortOrderInput | SortOrder
@@ -22925,7 +22925,7 @@ export namespace Prisma {
     quantity_received?: IntFilter<"deliveries"> | number
     date_received?: DateTimeFilter<"deliveries"> | Date | string
     batch_code?: StringNullableFilter<"deliveries"> | string | null
-    location?: StringNullableFilter<"deliveries"> | string | null
+    location?: StringFilter<"deliveries"> | string
     delivery_notes?: StringNullableFilter<"deliveries"> | string | null
     created_at?: DateTimeNullableFilter<"deliveries"> | Date | string | null
     updated_at?: DateTimeNullableFilter<"deliveries"> | Date | string | null
@@ -22939,7 +22939,7 @@ export namespace Prisma {
     quantity_received?: SortOrder
     date_received?: SortOrder
     batch_code?: SortOrderInput | SortOrder
-    location?: SortOrderInput | SortOrder
+    location?: SortOrder
     delivery_notes?: SortOrderInput | SortOrder
     created_at?: SortOrderInput | SortOrder
     updated_at?: SortOrderInput | SortOrder
@@ -22959,7 +22959,7 @@ export namespace Prisma {
     quantity_received?: IntWithAggregatesFilter<"deliveries"> | number
     date_received?: DateTimeWithAggregatesFilter<"deliveries"> | Date | string
     batch_code?: StringNullableWithAggregatesFilter<"deliveries"> | string | null
-    location?: StringNullableWithAggregatesFilter<"deliveries"> | string | null
+    location?: StringWithAggregatesFilter<"deliveries"> | string
     delivery_notes?: StringNullableWithAggregatesFilter<"deliveries"> | string | null
     created_at?: DateTimeNullableWithAggregatesFilter<"deliveries"> | Date | string | null
     updated_at?: DateTimeNullableWithAggregatesFilter<"deliveries"> | Date | string | null
@@ -24097,7 +24097,7 @@ export namespace Prisma {
     quantity_received: number
     date_received?: Date | string
     batch_code?: string | null
-    location?: string | null
+    location?: string
     delivery_notes?: string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -24111,7 +24111,7 @@ export namespace Prisma {
     quantity_received: number
     date_received?: Date | string
     batch_code?: string | null
-    location?: string | null
+    location?: string
     delivery_notes?: string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -24122,7 +24122,7 @@ export namespace Prisma {
     quantity_received?: IntFieldUpdateOperationsInput | number
     date_received?: DateTimeFieldUpdateOperationsInput | Date | string
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: StringFieldUpdateOperationsInput | string
     delivery_notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -24136,7 +24136,7 @@ export namespace Prisma {
     quantity_received?: IntFieldUpdateOperationsInput | number
     date_received?: DateTimeFieldUpdateOperationsInput | Date | string
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: StringFieldUpdateOperationsInput | string
     delivery_notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -24149,7 +24149,7 @@ export namespace Prisma {
     quantity_received: number
     date_received?: Date | string
     batch_code?: string | null
-    location?: string | null
+    location?: string
     delivery_notes?: string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -24159,7 +24159,7 @@ export namespace Prisma {
     quantity_received?: IntFieldUpdateOperationsInput | number
     date_received?: DateTimeFieldUpdateOperationsInput | Date | string
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: StringFieldUpdateOperationsInput | string
     delivery_notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -24171,7 +24171,7 @@ export namespace Prisma {
     quantity_received?: IntFieldUpdateOperationsInput | number
     date_received?: DateTimeFieldUpdateOperationsInput | Date | string
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: StringFieldUpdateOperationsInput | string
     delivery_notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -28451,7 +28451,7 @@ export namespace Prisma {
     quantity_received: number
     date_received?: Date | string
     batch_code?: string | null
-    location?: string | null
+    location?: string
     delivery_notes?: string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -28463,7 +28463,7 @@ export namespace Prisma {
     quantity_received: number
     date_received?: Date | string
     batch_code?: string | null
-    location?: string | null
+    location?: string
     delivery_notes?: string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -28540,7 +28540,7 @@ export namespace Prisma {
     quantity_received?: IntFilter<"deliveries"> | number
     date_received?: DateTimeFilter<"deliveries"> | Date | string
     batch_code?: StringNullableFilter<"deliveries"> | string | null
-    location?: StringNullableFilter<"deliveries"> | string | null
+    location?: StringFilter<"deliveries"> | string
     delivery_notes?: StringNullableFilter<"deliveries"> | string | null
     created_at?: DateTimeNullableFilter<"deliveries"> | Date | string | null
     updated_at?: DateTimeNullableFilter<"deliveries"> | Date | string | null
@@ -29013,7 +29013,7 @@ export namespace Prisma {
     quantity_received: number
     date_received?: Date | string
     batch_code?: string | null
-    location?: string | null
+    location?: string
     delivery_notes?: string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -29026,7 +29026,7 @@ export namespace Prisma {
     quantity_received: number
     date_received?: Date | string
     batch_code?: string | null
-    location?: string | null
+    location?: string
     delivery_notes?: string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -29144,7 +29144,7 @@ export namespace Prisma {
     quantity_received?: IntFieldUpdateOperationsInput | number
     date_received?: DateTimeFieldUpdateOperationsInput | Date | string
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: StringFieldUpdateOperationsInput | string
     delivery_notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -29157,7 +29157,7 @@ export namespace Prisma {
     quantity_received?: IntFieldUpdateOperationsInput | number
     date_received?: DateTimeFieldUpdateOperationsInput | Date | string
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: StringFieldUpdateOperationsInput | string
     delivery_notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -29677,7 +29677,7 @@ export namespace Prisma {
     quantity_received: number
     date_received?: Date | string
     batch_code?: string | null
-    location?: string | null
+    location?: string
     delivery_notes?: string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -29697,7 +29697,7 @@ export namespace Prisma {
     quantity_received?: IntFieldUpdateOperationsInput | number
     date_received?: DateTimeFieldUpdateOperationsInput | Date | string
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: StringFieldUpdateOperationsInput | string
     delivery_notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -29709,7 +29709,7 @@ export namespace Prisma {
     quantity_received?: IntFieldUpdateOperationsInput | number
     date_received?: DateTimeFieldUpdateOperationsInput | Date | string
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: StringFieldUpdateOperationsInput | string
     delivery_notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -29721,7 +29721,7 @@ export namespace Prisma {
     quantity_received?: IntFieldUpdateOperationsInput | number
     date_received?: DateTimeFieldUpdateOperationsInput | Date | string
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: StringFieldUpdateOperationsInput | string
     delivery_notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null

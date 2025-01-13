@@ -406,7 +406,7 @@ export const workExperience: WorkExperience[] = [
       {
         id: 1,
         description: "Record New Order",
-        link: "/inventory/orders?form=new",
+        link: "/inventory/orders/create",
         icon: TicketCheck,
       },
       {

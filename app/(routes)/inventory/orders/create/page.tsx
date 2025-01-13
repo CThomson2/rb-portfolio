@@ -53,18 +53,22 @@ function OrderCreationPage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="max-w-4xl mx-auto p-6 space-y-6">
       {error && (
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
           {error}
         </div>
       )}
 
-      {!orderData ? (
-        <CreateForm onOrderCreated={handleCreateOrder} orderData={null} />
-      ) : (
-        <div className="space-y-6">
-          <h2 className="text-2xl font-bold">Order Created Successfully</h2>
+      <div className="bg-slate-700 p-8 rounded-md shadow-md">
+        <CreateForm onOrderCreated={handleCreateOrder} orderData={orderData} />
+      </div>
+
+      {orderData && (
+        <div className="bg-slate-800 text-white p-8 rounded-md shadow-md">
+          <h2 className="text-2xl font-bold mb-4">
+            Order Created Successfully
+          </h2>
           <BarcodeLabel
             orderId={orderData.order_id}
             material={orderData.material}

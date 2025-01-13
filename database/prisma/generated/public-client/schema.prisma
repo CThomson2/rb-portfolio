@@ -82,7 +82,7 @@ model deliveries {
   quantity_received Int
   date_received     DateTime       @default(dbgenerated("CURRENT_DATE")) @db.Date
   batch_code        String?        @db.VarChar(50)
-  location          String?        @default("new-site") @db.VarChar(15)
+  location          String         @default("new-site") @db.VarChar(15)
   delivery_notes    String?
   created_at        DateTime?      @default(now()) @db.Timestamptz(6)
   updated_at        DateTime?      @default(now()) @db.Timestamptz(6)
