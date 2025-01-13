@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { queries } from "@/database/repositories/orders/queries";
 import { prisma } from "@/database/client";
 import type { OrderPostResponse } from "@/types/database/orders";
+import { Prisma } from "@/database/prisma/generated/public-client";
 
 export async function GET(req: Request) {
   // Extract search params from the request URL
@@ -42,6 +43,10 @@ export async function POST(req: Request) {
       { status: 200 }
     );
   } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      // PostgreSQL error messages are in error.message
+      return NextResponse.json({ error: error.message }, { status: 400 });
+    }
     console.error(error);
     return NextResponse.json(
       { success: false, error: "Failed to create order" },

@@ -96,3 +96,59 @@ FROM
     inventory.deliveries
 ORDER BY
     delivery_id DESC;
+
+--
+-- orders
+-- reset quantity_received to 0 for test records
+UPDATE inventory.orders
+SET
+    quantity_received = 0
+WHERE
+    order_id IN ();
+
+-- data inserted via UI form, which sends a POST request to the server and INSERTS the data into the orders table
+SELECT
+    order_id,
+    supplier,
+    material,
+    quantity,
+    date_ordered,
+    quantity_received,
+    delivery_status
+FROM
+    inventory.orders
+ORDER BY
+    order_id DESC;
+
+-- new_drums
+SELECT
+    drum_id,
+    material,
+    status,
+    order_id
+FROM
+    inventory.new_drums
+ORDER BY
+    created_at DESC;
+
+-- deliveries
+INSERT INTO
+    inventory.deliveries (
+        order_id,
+        quantity_received,
+        date_received,
+        batch_code
+    )
+VALUES
+    (48, 2, CURRENT_DATE, 'TEST-PARTIAL-EXCEEDS');
+
+SELECT
+    delivery_id,
+    order_id,
+    quantity_received,
+    date_received,
+    batch_code
+FROM
+    inventory.deliveries
+ORDER BY
+    delivery_id DESC;

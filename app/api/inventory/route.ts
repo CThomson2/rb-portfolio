@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { queries } from "@/database/repositories/drums/queries";
 import { DRUM_STATUS } from "@/types/enums/drums";
-import { NewDrum } from "@/types/database/drums";
+import { NewDrum, DrumQueryParams } from "@/types/database/drums";
 
 export async function GET(req: Request) {
   try {
@@ -13,8 +13,12 @@ export async function GET(req: Request) {
     const sortOrder = (searchParams.get("sortOrder") ?? "desc") as
       | "desc"
       | "asc";
-    const status = (searchParams.get("status") ??
-      DRUM_STATUS.AVAILABLE) as DRUM_STATUS;
+
+    // Split the status string into an array
+    const statusParam = searchParams.get("status");
+    const status = statusParam
+      ? (statusParam.split(",") as DRUM_STATUS[])
+      : [DRUM_STATUS.AVAILABLE];
 
     const drumsData = await queries.getDrums({
       page,

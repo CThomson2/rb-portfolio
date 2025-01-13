@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/database/client";
+import { Prisma } from "@/database/prisma/generated/public-client";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
@@ -17,13 +18,13 @@ export async function GET(req: Request) {
       case "POST": {
         // Example: Create a product with name and grade from the request body
         // Destructure fields from req.body or do full validation
-        const { name, grade } = await req.json();
+        const { name, grade, sku } = await req.json();
 
         const newProduct = await prisma.products.create({
           data: {
             name: searchParams.get("name") || "[name]",
             grade: searchParams.get("grade") || "[grade]",
-            sku: "R_-____",
+            sku: sku || "R_-____",
           },
         });
 
@@ -66,6 +67,10 @@ export async function GET(req: Request) {
         );
     }
   } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      // PostgreSQL error messages are in error.message
+      return NextResponse.json({ error: error.message }, { status: 400 });
+    }
     console.error("API Error:", error);
     return NextResponse.json(
       { error: "Internal Server Error" },

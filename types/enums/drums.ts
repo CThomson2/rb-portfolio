@@ -1,5 +1,6 @@
 // Enum for drum status
 export enum DRUM_STATUS {
+  PENDING = "pending",
   AVAILABLE = "available",
   SCHEDULED = "scheduled",
   PROCESSED = "processed",

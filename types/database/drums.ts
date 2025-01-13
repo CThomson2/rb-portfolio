@@ -26,7 +26,7 @@ export interface DrumQueryParams {
   limit: number;
   sortField?: keyof NewDrum;
   sortOrder?: "asc" | "desc";
-  status?: DRUM_STATUS;
+  status: DRUM_STATUS[];
 }
 
 // Type for the API response

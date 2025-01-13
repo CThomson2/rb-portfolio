@@ -8,20 +8,20 @@ export const queries = {
     limit = 50,
     sortField = "drum_id",
     sortOrder = "asc",
-    status = DRUM_STATUS.AVAILABLE,
+    status,
   }: DrumQueryParams): Promise<DrumsResponse> => {
     const offset = (page - 1) * limit;
 
     // Get the total number of drums
     const total = await prisma.new_drums.count({
       where: {
-        status,
+        status: { in: status },
       },
     });
     // Get the paginated data
     const rows = await prisma.new_drums.findMany({
       where: {
-        status,
+        status: { in: status },
       },
       include: {
         orders: true,

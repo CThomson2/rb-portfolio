@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="Author" content="Made by 'tree'" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="GENERATOR"
+      content="tree v2.2.1 © 1996 - 2024 by Steve Baker, Thomas Moore, Francesc Rocher, Florian Sesser, Kyosuke Tokoro"
+    />
+    <title>Project Structure</title>
+    <style type="text/css">
+
+	/* Inter font */
+	@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+      BODY {
+        font-family: monospace, sans-serif;
+        color: black;
+      }
+      P {
+        font-family: monospace, sans-serif;
+        color: black;
+        margin: 0px;
+        padding: 0px;
+      }
+      A:visited {
+        text-decoration: none;
+        margin: 0px;
+        padding: 0px;
+      }
+      A:link {
+        text-decoration: none;
+        margin: 0px;
+        padding: 0px;
+      }
+      A:hover {
+        text-decoration: underline;
+        background-color: yellow;
+        margin: 0px;
+        padding: 0px;
+      }
+      A:active {
+        margin: 0px;
+        padding: 0px;
+      }
+      .VERSION {
+        font-size: small;
+        font-family: arial, sans-serif;
+      }
+      .NORM {
+        color: black;
+      }
+      .FIFO {
+        color: purple;
+      }
+      .CHAR {
+        color: yellow;
+      }
+      .DIR {
+        color: rgb(0, 0, 110);
+        font-weight: bold;
+      }
+      .BLOCK {
+        color: yellow;
+      }
+      .LINK {
+        color: aqua;
+      }
+      .SOCK {
+        color: fuchsia;
+      }
+      .EXEC {
+        color: green;
+      }
+
+	    /* New styles for file extensions */
+    .NORM[href*=".ts"] {
+      color: rgb(0, 139, 107);
+	  }
+    .NORM[href*=".js"] {
+		color: rgb(116, 124, 2);
+	  }
+	  .NORM[href*=".tsx"], .NORM[href*=".jsx"] {
+		color: rgb(0, 114, 196);
+	  }
+	  .NORM[href$=".d.ts"] {
+		color: rgb(116, 124, 2);
+	  }
+	  .NORM[href$=".sql"] {
+		color: rgb(225, 0, 225);
+	  }
+	  .NORM[href$=".sql"] {
+		color: rgb(225, 0, 225);
+	  }
+	  .NORM[href$="index.ts"], .NORM[href$="index.tsx"], .NORM[href$="index.js"], .NORM[href$="index.jsx"] {
+		color: rgb(0, 84, 144);
+		text-decoration: underline;
+	  }
+	  .NORM[href*=".css"] {
+		color: rgb(105, 6, 105);
+	  }
+	  .NORM[href*=".csv"] {
+		color: rgb(0, 114, 196);
+	  }
+	  .NORM[href*=".json"] {
+		color: rgb(216, 0, 0);
+	  }
+	  .OBSELETE {
+		color: rgb(128, 128, 128);
+		font-style: italic;
+	  }
+    </style>
+  </head>
+  <body>
+    <h1>Project Structure</h1>
+    <p>
+      <a class="DIR" href="\localhost./">.</a><br />
+      ├── <a class="NORM font-semibold;" href="\localhost./README.md">README.md</a><br />
+      ├── <a class="DIR" href="\localhost./app/">app</a><br />
+      │   ├── <a class="DIR" href="\localhost./app/%28routes%29/">(routes)</a
+      ><br />
+      │   │   ├──
+      <a class="DIR" href="\localhost./app/%28routes%29/contact/">contact</a
+      ><br />
+      │   │   │   └──
+      <a class="NORM" href="\localhost./app/%28routes%29/contact/page.tsx"
+        >page.tsx</a
+      ><br />
+      │   │   ├──
+      <a class="DIR" href="\localhost./app/%28routes%29/delivery/">delivery</a
+      ><br />
+      │   │   │   └──
+      <a class="NORM" href="\localhost./app/%28routes%29/delivery/page.tsx"
+        >page.tsx</a
+      ><br />
+      │   │   ├──
+      <a class="DIR" href="\localhost./app/%28routes%29/inventory/">inventory</a
+      ><br />
+      │   │   │   ├──
+      <a class="DIR" href="\localhost./app/%28routes%29/inventory/orders/"
+        >orders</a
+      ><br />
+      │   │   │   │   ├──
+      <a class="DIR" href="\localhost./app/%28routes%29/inventory/orders/create/">create</a
+	  ><br />
+      │   │   │   │   │   └──
+      <a
+        class="NORM"
+        href="\localhost./app/%28routes%29/inventory/orders/create/page.tsx"
+        >page.tsx</a
+      ><br />
+      │   │   │   │   └──
+      <a
+        class="NORM"
+        href="\localhost./app/%28routes%29/inventory/orders/page.tsx"
+        >page.tsx</a
+      ><br />
+      │   │   │   ├──
+      <a class="NORM" href="\localhost./app/%28routes%29/inventory/page.tsx"
+        >page.tsx</a
+      ><br />
+      │   │   │   └──
+      <a class="DIR" href="\localhost./app/%28routes%29/inventory/transactions/"
+        >transactions</a
+      ><br />
+      │   │   │   &nbsp;&nbsp;&nbsp; ├──
+      <a
+        class="OBSELETE"
+        href="\localhost./app/%28routes%29/inventory/transactions/_table.tsx"
+        >_table.tsx</a
+      ><br />
+      │   │   │   &nbsp;&nbsp;&nbsp; └──
+      <a
+        class="NORM"
+        href="\localhost./app/%28routes%29/inventory/transactions/page.tsx"
+        >page.tsx</a
+      ><br />
+      │   │   ├──
+      <a class="DIR" href="\localhost./app/%28routes%29/products/">products</a
+      ><br />
+      │   │   │   ├──
+      <a class="DIR" href="\localhost./app/%28routes%29/products/%5Bid%5D/"
+        >[id]</a
+      ><br />
+      │   │   │   │   └──
+      <a
+        class="NORM"
+        href="\localhost./app/%28routes%29/products/%5Bid%5D/page.tsx"
+        >page.tsx</a
+      ><br />
+      │   │   │   └──
+      <a class="NORM" href="\localhost./app/%28routes%29/products/page.tsx"
+        >page.tsx</a
+      ><br />
+      │   │   └──
+      <a class="DIR" href="\localhost./app/%28routes%29/terms/">terms</a><br />
+      │   │   &nbsp;&nbsp;&nbsp; └──
+      <a class="NORM" href="\localhost./app/%28routes%29/terms/page.tsx"
+        >page.tsx</a
+      ><br />
+      │   ├── <a class="DIR" href="\localhost./app/api/">api</a><br />
+      │   │   ├──
+      <a class="DIR" href="\localhost./app/api/inventory/">inventory</a><br />
+      │   │   │   ├──
+      <a class="DIR" href="\localhost./app/api/inventory/orders/">orders</a
+      ><br />
+      │   │   │   │   └──
+      <a class="NORM" href="\localhost./app/api/inventory/orders/route.ts"
+        >route.ts</a
+      ><br />
+      │   │   │   ├──
+      <a class="NORM" href="\localhost./app/api/inventory/route.ts">route.ts</a
+      ><br />
+      │   │   │   └──
+      <a class="DIR" href="\localhost./app/api/inventory/transactions/"
+        >transactions</a
+      ><br />
+      │   │   │   &nbsp;&nbsp;&nbsp; └──
+      <a class="NORM" href="\localhost./app/api/inventory/transactions/route.ts"
+        >route.ts</a
+      ><br />
+      │   │   ├──
+      <a class="DIR" href="\localhost./app/api/products/">products</a><br />
+      │   │   │   ├──
+      <a class="DIR" href="\localhost./app/api/products/count/">count</a><br />
+      │   │   │   │   └──
+      <a class="NORM" href="\localhost./app/api/products/count/route.ts"
+        >route.ts</a
+      ><br />
+      │   │   │   ├──
+      <a class="DIR" href="\localhost./app/api/products/fetch/">fetch</a><br />
+      │   │   │   │   └──
+      <a class="NORM" href="\localhost./app/api/products/fetch/route.ts"
+        >route.ts</a
+      ><br />
+      │   │   │   └──
+      <a class="NORM TS" href="\localhost./app/api/products/route.ts">route.ts</a
+      ><br />
+      │   │   └──
+      <a class="DIR" href="\localhost./app/api/sentry-example-api/"
+        >sentry-example-api</a
+      ><br />
+      │   │   &nbsp;&nbsp;&nbsp; └──
+      <a class="NORM TS" href="\localhost./app/api/sentry-example-api/route.js"
+        >route.js</a
+      ><br />
+      │   ├──
+      <a class="NORM TSX" href="\localhost./app/global-error.jsx"
+        >global-error.jsx</a
+      ><br />
+      │   ├── <a class="NORM CSS" href="\localhost./app/globals.css">globals.css</a
+      ><br />
+      │   ├── <a class="NORM TSX" href="\localhost./app/layout.tsx">layout.tsx</a
+      ><br />
+      │   ├── <a class="NORM TSX" href="\localhost./app/page.tsx">page.tsx</a><br />
+      │   ├──
+      <a class="NORM TSX" href="\localhost./app/provider.tsx">provider.tsx</a><br />
+      │   ├──
+      <a class="NORM TSX" href="\localhost./app/providers.tsx">providers.tsx</a
+      ><br />
+      │   └──
+      <a class="DIR" href="\localhost./app/sentry-example-page/"
+        >sentry-example-page</a
+      ><br />
+      │   &nbsp;&nbsp;&nbsp; └──
+      <a class="NORM" href="\localhost./app/sentry-example-page/page.jsx"
+        >page.jsx</a
+      ><br />
+      ├──
+      <a class="NORM CSV" href="\localhost./chem-formulas.csv">chem-formulas.csv</a
+      ><br />
+      ├── <a class="DIR" href="\localhost./components/">components</a><br />
+      │   ├── <a class="DIR" href="\localhost./components/features/">features</a
+      ><br />
+      │   │   ├──
+      <a class="DIR" href="\localhost./components/features/inventory/"
+        >inventory</a
+      ><br />
+      │   │   │   ├──
+      <a
+        class="DIR"
+        href="\localhost./components/features/inventory/CreateForm/"
+        >CreateForm</a
+      ><br />
+      │   │   │   │   └──
+      <a
+        class="NORM"
+        href="\localhost./components/features/inventory/CreateForm/index.tsx"
+        >index.tsx</a
+      ><br />
+      │   │   │   ├──
+      <a
+        class="DIR"
+        href="\localhost./components/features/inventory/DrumsTable/"
+        >DrumsTable</a
+      ><br />
+      │   │   │   │   ├──
+      <a
+        class="NORM"
+        href="\localhost./components/features/inventory/DrumsTable/columns.tsx"
+        >columns.tsx</a
+      ><br />
+      │   │   │   │   └──
+      <a
+        class="NORM"
+        href="\localhost./components/features/inventory/DrumsTable/index.tsx"
+        >index.tsx</a
+      ><br />
+      │   │   │   ├──
+      <a
+        class="DIR"
+        href="\localhost./components/features/inventory/OrdersGrid/"
+        >OrdersGrid</a
+      ><br />
+      │   │   │   │   ├──
+      <a
+        class="NORM"
+        href="\localhost./components/features/inventory/OrdersGrid/GridItem.tsx"
+        >GridItem.tsx</a
+      ><br />
+      │   │   │   │   └──
+      <a
+        class="NORM"
+        href="\localhost./components/features/inventory/OrdersGrid/index.tsx"
+        >index.tsx</a
+      ><br />
+      │   │   │   └──
+      <a
+        class="DIR"
+        href="\localhost./components/features/inventory/TransactionsTable/"
+        >TransactionsTable</a
+      ><br />
+      │   │   │   &nbsp;&nbsp;&nbsp; ├──
+      <a
+        class="NORM"
+        href="\localhost./components/features/inventory/TransactionsTable/columns.tsx"
+        >columns.tsx</a
+      ><br />
+      │   │   │   &nbsp;&nbsp;&nbsp; └──
+      <a
+        class="NORM"
+        href="\localhost./components/features/inventory/TransactionsTable/index.tsx"
+        >index.tsx</a
+      ><br />
+      │   │   └──
+      <a class="DIR" href="\localhost./components/features/products/"
+        >products</a
+      ><br />
+      │   │   &nbsp;&nbsp;&nbsp; ├──
+      <a
+        class="DIR"
+        href="\localhost./components/features/products/ProductDialog/"
+        >ProductDialog</a
+      ><br />
+      │   │   &nbsp;&nbsp;&nbsp; │   ├──
+      <a
+        class="NORM"
+        href="\localhost./components/features/products/ProductDialog/ProductDialog.tsx"
+        >ProductDialog.tsx</a
+      ><br />
+      │   │   &nbsp;&nbsp;&nbsp; │   ├──
+      <a
+        class="NORM"
+        href="\localhost./components/features/products/ProductDialog/ProductTable.tsx"
+        >ProductTable.tsx</a
+      ><br />
+      │   │   &nbsp;&nbsp;&nbsp; │   └──
+      <a
+        class="NORM"
+        href="\localhost./components/features/products/ProductDialog/dialog.module.css"
+        >dialog.module.css</a
+      ><br />
+      │   │   &nbsp;&nbsp;&nbsp; └──
+      <a
+        class="DIR"
+        href="\localhost./components/features/products/ProductTable/"
+        >ProductTable</a
+      ><br />
+      │   │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├──
+      <a
+        class="NORM"
+        href="\localhost./components/features/products/ProductTable/columns.tsx"
+        >columns.tsx</a
+      ><br />
+      │   │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├──
+      <a
+        class="DIR"
+        href="\localhost./components/features/products/ProductTable/header/"
+        >header</a
+      ><br />
+      │   │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; │   └──
+      <a
+        class="NORM"
+        href="\localhost./components/features/products/ProductTable/header/SearchBar.tsx"
+        >SearchBar.tsx</a
+      ><br />
+      │   │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├──
+      <a
+        class="NORM"
+        href="\localhost./components/features/products/ProductTable/index.tsx"
+        >index.tsx</a
+      ><br />
+      │   │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├──
+      <a
+        class="DIR"
+        href="\localhost./components/features/products/ProductTable/table-data/"
+        >table-data</a
+      ><br />
+      │   │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; │   ├──
+      <a
+        class="NORM"
+        href="\localhost./components/features/products/ProductTable/table-data/ProductGrade.tsx"
+        >ProductGrade.tsx</a
+      ><br />
+      │   │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; │   ├──
+      <a
+        class="NORM"
+        href="\localhost./components/features/products/ProductTable/table-data/ProductName.tsx"
+        >ProductName.tsx</a
+      ><br />
+      │   │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; │   └──
+      <a
+        class="NORM"
+        href="\localhost./components/features/products/ProductTable/table-data/ProductStockLevel.tsx"
+        >ProductStockLevel.tsx</a
+      ><br />
+      │   │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; └──
+      <a
+        class="DIR"
+        href="\localhost./components/features/products/ProductTable/tabs/"
+        >tabs</a
+      ><br />
+      │   │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├──
+      <a
+        class="NORM"
+        href="\localhost./components/features/products/ProductTable/tabs/TabItem.tsx"
+        >TabItem.tsx</a
+      ><br />
+      │   │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; └──
+      <a
+        class="NORM"
+        href="\localhost./components/features/products/ProductTable/tabs/index.tsx"
+        >index.tsx</a
+      ><br />
+      │   ├── <a class="DIR" href="\localhost./components/home/">home</a><br />
+      │   │   ├──
+      <a class="NORM" href="\localhost./components/home/Approach.tsx"
+        >Approach.tsx</a
+      ><br />
+      │   │   ├──
+      <a class="NORM" href="\localhost./components/home/Barcode.tsx"
+        >Barcode.tsx</a
+      ><br />
+      │   │   ├──
+      <a class="NORM" href="\localhost./components/home/Clients.tsx"
+        >Clients.tsx</a
+      ><br />
+      │   │   ├──
+      <a class="NORM" href="\localhost./components/home/Experience.module.css"
+        >Experience.module.css</a
+      ><br />
+      │   │   ├──
+      <a class="NORM" href="\localhost./components/home/Experience.tsx"
+        >Experience.tsx</a
+      ><br />
+      │   │   ├──
+      <a class="NORM" href="\localhost./components/home/Footer.tsx"
+        >Footer.tsx</a
+      ><br />
+      │   │   ├──
+      <a class="NORM" href="\localhost./components/home/Grid.tsx">Grid.tsx</a
+      ><br />
+      │   │   ├──
+      <a class="NORM" href="\localhost./components/home/Hero.tsx">Hero.tsx</a
+      ><br />
+      │   │   ├──
+      <a class="NORM" href="\localhost./components/home/MagicButton.tsx"
+        >MagicButton.tsx</a
+      ><br />
+      │   │   ├──
+      <a class="NORM" href="\localhost./components/home/RecentProjects.tsx"
+        >RecentProjects.tsx</a
+      ><br />
+      │   │   ├──
+      <a class="NORM" href="\localhost./components/home/Sidebar.tsx"
+        >Sidebar.tsx</a
+      ><br />
+      │   │   ├──
+      <a class="NORM" href="\localhost./components/home/UserDashboard.tsx"
+        >UserDashboard.tsx</a
+      ><br />
+      │   │   └──
+      <a class="NORM" href="\localhost./components/home/grid.module.css"
+        >grid.module.css</a
+      ><br />
+      │   ├── <a class="DIR" href="\localhost./components/shared/">shared</a
+      ><br />
+      │   │   ├──
+      <a class="DIR" href="\localhost./components/shared/projects/">projects</a
+      ><br />
+      │   │   │   ├──
+      <a
+        class="NORM"
+        href="\localhost./components/shared/projects/LastUpdate.tsx"
+        >LastUpdate.tsx</a
+      ><br />
+      │   │   │   ├──
+      <a
+        class="NORM"
+        href="\localhost./components/shared/projects/ProjectManager.tsx"
+        >ProjectManager.tsx</a
+      ><br />
+      │   │   │   ├──
+      <a
+        class="NORM"
+        href="\localhost./components/shared/projects/Resources.tsx"
+        >Resources.tsx</a
+      ><br />
+      │   │   │   └──
+      <a class="NORM" href="\localhost./components/shared/projects/Timeline.tsx"
+        >Timeline.tsx</a
+      ><br />
+      │   │   └──
+      <a class="DIR" href="\localhost./components/shared/table/">table</a><br />
+      │   │   &nbsp;&nbsp;&nbsp; ├──
+      <a class="NORM" href="\localhost./components/shared/table/DataTable.tsx"
+        >DataTable.tsx</a
+      ><br />
+      │   │   &nbsp;&nbsp;&nbsp; ├──
+      <a class="DIR" href="\localhost./components/shared/table/footer/"
+        >footer</a
+      ><br />
+      │   │   &nbsp;&nbsp;&nbsp; │   ├──
+      <a
+        class="NORM"
+        href="\localhost./components/shared/table/footer/Pagination.tsx"
+        >Pagination.tsx</a
+      ><br />
+      │   │   &nbsp;&nbsp;&nbsp; │   └──
+      <a
+        class="NORM"
+        href="\localhost./components/shared/table/footer/index.tsx"
+        >index.tsx</a
+      ><br />
+      │   │   &nbsp;&nbsp;&nbsp; ├──
+      <a class="DIR" href="\localhost./components/shared/table/header/"
+        >header</a
+      ><br />
+      │   │   &nbsp;&nbsp;&nbsp; │   ├──
+      <a
+        class="NORM"
+        href="\localhost./components/shared/table/header/ActionButton.tsx"
+        >ActionButton.tsx</a
+      ><br />
+      │   │   &nbsp;&nbsp;&nbsp; │   ├──
+      <a
+        class="NORM"
+        href="\localhost./components/shared/table/header/SearchBar.tsx"
+        >SearchBar.tsx</a
+      ><br />
+      │   │   &nbsp;&nbsp;&nbsp; │   └──
+      <a
+        class="NORM"
+        href="\localhost./components/shared/table/header/TableHeader.tsx"
+        >TableHeader.tsx</a
+      ><br />
+      │   │   &nbsp;&nbsp;&nbsp; └──
+      <a class="DIR" href="\localhost./components/shared/table/ux/">ux</a><br />
+      │   │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├──
+      <a class="NORM" href="\localhost./components/shared/table/ux/Actions.tsx"
+        >Actions.tsx</a
+      ><br />
+      │   │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; └──
+      <a
+        class="NORM"
+        href="\localhost./components/shared/table/ux/SortableColumn.tsx"
+        >SortableColumn.tsx</a
+      ><br />
+      │   └── <a class="DIR" href="\localhost./components/ui/">ui</a><br />
+      │   &nbsp;&nbsp;&nbsp; ├──
+      <a class="NORM" href="\localhost./components/ui/Avatar.tsx">Avatar.tsx</a
+      ><br />
+      │   &nbsp;&nbsp;&nbsp; ├──
+      <a class="NORM" href="\localhost./components/ui/Badge.tsx">Badge.tsx</a
+      ><br />
+      │   &nbsp;&nbsp;&nbsp; ├──
+      <a class="NORM" href="\localhost./components/ui/BentoGrid.tsx"
+        >BentoGrid.tsx</a
+      ><br />
+      │   &nbsp;&nbsp;&nbsp; ├──
+      <a class="NORM" href="\localhost./components/ui/Button.tsx">Button.tsx</a
+      ><br />
+      │   &nbsp;&nbsp;&nbsp; ├──
+      <a class="NORM" href="\localhost./components/ui/CanvasRevealEffect.tsx"
+        >CanvasRevealEffect.tsx</a
+      ><br />
+      │   &nbsp;&nbsp;&nbsp; ├──
+      <a class="NORM" href="\localhost./components/ui/Card.tsx">Card.tsx</a
+      ><br />
+      │   &nbsp;&nbsp;&nbsp; ├──
+      <a class="NORM" href="\localhost./components/ui/Checkbox.tsx"
+        >Checkbox.tsx</a
+      ><br />
+      │   &nbsp;&nbsp;&nbsp; ├──
+      <a class="NORM" href="\localhost./components/ui/DropdownMenu.tsx"
+        >DropdownMenu.tsx</a
+      ><br />
+      │   &nbsp;&nbsp;&nbsp; ├──
+      <a class="NORM" href="\localhost./components/ui/FloatingNavbar.tsx"
+        >FloatingNavbar.tsx</a
+      ><br />
+      │   &nbsp;&nbsp;&nbsp; ├──
+      <a class="NORM" href="\localhost./components/ui/Globe.tsx">Globe.tsx</a
+      ><br />
+      │   &nbsp;&nbsp;&nbsp; ├──
+      <a class="NORM" href="\localhost./components/ui/GradientBg.tsx"
+        >GradientBg.tsx</a
+      ><br />
+      │   &nbsp;&nbsp;&nbsp; ├──
+      <a class="NORM" href="\localhost./components/ui/GridGlobe.tsx"
+        >GridGlobe.tsx</a
+      ><br />
+      │   &nbsp;&nbsp;&nbsp; ├──
+      <a class="NORM" href="\localhost./components/ui/HoverBorder.tsx"
+        >HoverBorder.tsx</a
+      ><br />
+      │   &nbsp;&nbsp;&nbsp; ├──
+      <a class="NORM" href="\localhost./components/ui/InfiniteCards.tsx"
+        >InfiniteCards.tsx</a
+      ><br />
+      │   &nbsp;&nbsp;&nbsp; ├──
+      <a class="NORM" href="\localhost./components/ui/LayoutGrid.tsx"
+        >LayoutGrid.tsx</a
+      ><br />
+      │   &nbsp;&nbsp;&nbsp; ├──
+      <a class="NORM" href="\localhost./components/ui/List.tsx">List.tsx</a
+      ><br />
+      │   &nbsp;&nbsp;&nbsp; ├──
+      <a class="NORM" href="\localhost./components/ui/MovingBorders.tsx"
+        >MovingBorders.tsx</a
+      ><br />
+      │   &nbsp;&nbsp;&nbsp; ├──
+      <a class="NORM ts" href="\localhost./components/ui/Pin.tsx">Pin.tsx</a><br />
+      │   &nbsp;&nbsp;&nbsp; ├──
+      <a class="NORM" href="\localhost./components/ui/Select.tsx">Select.tsx</a
+      ><br />
+      │   &nbsp;&nbsp;&nbsp; ├──
+      <a class="NORM" href="\localhost./components/ui/Separator.tsx"
+        >Separator.tsx</a
+      ><br />
+      │   &nbsp;&nbsp;&nbsp; ├──
+      <a class="NORM" href="\localhost./components/ui/Spotlight.tsx"
+        >Spotlight.tsx</a
+      ><br />
+      │   &nbsp;&nbsp;&nbsp; ├──
+      <a class="NORM" href="\localhost./components/ui/Table.tsx">Table.tsx</a
+      ><br />
+      │   &nbsp;&nbsp;&nbsp; ├──
+      <a class="NORM" href="\localhost./components/ui/TextGenerateEffect.tsx"
+        >TextGenerateEffect.tsx</a
+      ><br />
+      │   &nbsp;&nbsp;&nbsp; └──
+      <a class="NORM" href="\localhost./components/ui/Tooltip.tsx"
+        >Tooltip.tsx</a
+      ><br />
+      ├── <a class="NORM" href="\localhost./components.json">components.json</a
+      ><br />
+      ├── <a class="DIR" href="\localhost./content/">content</a><br />
+      │   ├── <a class="DIR" href="\localhost./content/about/">about</a><br />
+      │   │   └──
+      <a class="NORM" href="\localhost./content/about/index.ts">index.ts</a
+      ><br />
+      │   ├──
+      <a class="NORM" href="\localhost./content/confetti.json">confetti.json</a
+      ><br />
+      │   ├──
+      <a class="NORM" href="\localhost./content/globe.json">globe.json</a><br />
+      │   ├── <a class="DIR" href="\localhost./content/main/">main</a><br />
+      │   │   └──
+      <a class="NORM" href="\localhost./content/main/index.ts">index.ts</a
+      ><br />
+      │   ├── <a class="DIR" href="\localhost./content/products/">products</a
+      ><br />
+      │   │   └──
+      <a class="NORM" href="\localhost./content/products/index.ts">index.ts</a
+      ><br />
+      │   └── <a class="DIR" href="\localhost./content/terms/">terms</a><br />
+      │   &nbsp;&nbsp;&nbsp; ├──
+      <a class="NORM" href="\localhost./content/terms/index.ts">index.ts</a
+      ><br />
+      │   &nbsp;&nbsp;&nbsp; ├──
+      <a class="NORM" href="\localhost./content/terms/terms.txt">terms.txt</a
+      ><br />
+      │   &nbsp;&nbsp;&nbsp; └──
+      <a class="NORM" href="\localhost./content/terms/types.ts">types.ts</a
+      ><br />
+      ├── <a class="DIR" href="\localhost./database/">database</a><br />
+      │   ├── <a class="NORM" href="\localhost./database/client.ts">client.ts</a
+      ><br />
+      │   ├── <a class="DIR" href="\localhost./database/prisma/">prisma</a
+      ><br />
+      │   │   ├──
+      <a class="DIR" href="\localhost./database/prisma/generated/">generated</a
+      ><br />
+      │   │   │   └──
+      <a class="DIR" href="\localhost./database/prisma/generated/public-client/"
+        >public-client</a
+      ><br />
+      │   │   │   &nbsp;&nbsp;&nbsp; ├──
+      <a
+        class="NORM"
+        href="\localhost./database/prisma/generated/public-client/default.d.ts"
+        >default.d.ts</a
+      ><br />
+      │   │   │   &nbsp;&nbsp;&nbsp; ├──
+      <a
+        class="NORM"
+        href="\localhost./database/prisma/generated/public-client/default.js"
+        >default.js</a
+      ><br />
+      │   │   │   &nbsp;&nbsp;&nbsp; ├──
+      <a
+        class="NORM"
+        href="\localhost./database/prisma/generated/public-client/edge.d.ts"
+        >edge.d.ts</a
+      ><br />
+      │   │   │   &nbsp;&nbsp;&nbsp; ├──
+      <a
+        class="NORM"
+        href="\localhost./database/prisma/generated/public-client/edge.js"
+        >edge.js</a
+      ><br />
+      │   │   │   &nbsp;&nbsp;&nbsp; ├──
+      <a
+        class="NORM"
+        href="\localhost./database/prisma/generated/public-client/index-browser.js"
+        >index-browser.js</a
+      ><br />
+      │   │   │   &nbsp;&nbsp;&nbsp; ├──
+      <a
+        class="NORM"
+        href="\localhost./database/prisma/generated/public-client/index.d.ts"
+        >index.d.ts</a
+      ><br />
+      │   │   │   &nbsp;&nbsp;&nbsp; ├──
+      <a
+        class="NORM"
+        href="\localhost./database/prisma/generated/public-client/index.js"
+        >index.js</a
+      ><br />
+      │   │   │   &nbsp;&nbsp;&nbsp; ├──
+      <a
+        class="EXEC"
+        href="\localhost./database/prisma/generated/public-client/libquery_engine-darwin-arm64.dylib.node"
+        >libquery_engine-darwin-arm64.dylib.node</a
+      ><br />
+      │   │   │   &nbsp;&nbsp;&nbsp; ├──
+      <a
+        class="NORM"
+        href="\localhost./database/prisma/generated/public-client/package.json"
+        >package.json</a
+      ><br />
+      │   │   │   &nbsp;&nbsp;&nbsp; ├──
+      <a
+        class="DIR"
+        href="\localhost./database/prisma/generated/public-client/runtime/"
+        >runtime</a
+      ><br />
+      │   │   │   &nbsp;&nbsp;&nbsp; │   ├──
+      <a
+        class="NORM"
+        href="\localhost./database/prisma/generated/public-client/runtime/edge-esm.js"
+        >edge-esm.js</a
+      ><br />
+      │   │   │   &nbsp;&nbsp;&nbsp; │   ├──
+      <a
+        class="NORM"
+        href="\localhost./database/prisma/generated/public-client/runtime/edge.js"
+        >edge.js</a
+      ><br />
+      │   │   │   &nbsp;&nbsp;&nbsp; │   ├──
+      <a
+        class="NORM"
+        href="\localhost./database/prisma/generated/public-client/runtime/index-browser.d.ts"
+        >index-browser.d.ts</a
+      ><br />
+      │   │   │   &nbsp;&nbsp;&nbsp; │   ├──
+      <a
+        class="NORM"
+        href="\localhost./database/prisma/generated/public-client/runtime/index-browser.js"
+        >index-browser.js</a
+      ><br />
+      │   │   │   &nbsp;&nbsp;&nbsp; │   ├──
+      <a
+        class="NORM"
+        href="\localhost./database/prisma/generated/public-client/runtime/library.d.ts"
+        >library.d.ts</a
+      ><br />
+      │   │   │   &nbsp;&nbsp;&nbsp; │   ├──
+      <a
+        class="NORM"
+        href="\localhost./database/prisma/generated/public-client/runtime/library.js"
+        >library.js</a
+      ><br />
+      │   │   │   &nbsp;&nbsp;&nbsp; │   ├──
+      <a
+        class="NORM"
+        href="\localhost./database/prisma/generated/public-client/runtime/react-native.js"
+        >react-native.js</a
+      ><br />
+      │   │   │   &nbsp;&nbsp;&nbsp; │   └──
+      <a
+        class="NORM"
+        href="\localhost./database/prisma/generated/public-client/runtime/wasm.js"
+        >wasm.js</a
+      ><br />
+      │   │   │   &nbsp;&nbsp;&nbsp; ├──
+      <a
+        class="NORM"
+        href="\localhost./database/prisma/generated/public-client/schema.prisma"
+        >schema.prisma</a
+      ><br />
+      │   │   │   &nbsp;&nbsp;&nbsp; ├──
+      <a
+        class="NORM"
+        href="\localhost./database/prisma/generated/public-client/wasm.d.ts"
+        >wasm.d.ts</a
+      ><br />
+      │   │   │   &nbsp;&nbsp;&nbsp; └──
+      <a
+        class="NORM"
+        href="\localhost./database/prisma/generated/public-client/wasm.js"
+        >wasm.js</a
+      ><br />
+      │   │   ├──
+      <a class="NORM" href="\localhost./database/prisma/schema.prisma"
+        >schema.prisma</a
+      ><br />
+      │   │   └──
+      <a class="NORM" href="\localhost./database/prisma/schema.prisma.md"
+        >schema.prisma.md</a
+      ><br />
+      │   ├──
+      <a class="DIR" href="\localhost./database/repositories/">repositories</a
+      ><br />
+      │   │   ├──
+      <a class="DIR" href="\localhost./database/repositories/drums/">drums</a
+      ><br />
+      │   │   │   ├──
+      <a class="NORM" href="\localhost./database/repositories/drums/index.ts"
+        >index.ts</a
+      ><br />
+      │   │   │   └──
+      <a class="NORM" href="\localhost./database/repositories/drums/queries.ts"
+        >queries.ts</a
+      ><br />
+      │   │   ├──
+      <a class="NORM" href="\localhost./database/repositories/index.ts"
+        >index.ts</a
+      ><br />
+      │   │   ├──
+      <a class="DIR" href="\localhost./database/repositories/orders/">orders</a
+      ><br />
+      │   │   │   ├──
+      <a class="NORM" href="\localhost./database/repositories/orders/index.ts"
+        >index.ts</a
+      ><br />
+      │   │   │   └──
+      <a class="NORM" href="\localhost./database/repositories/orders/queries.ts"
+        >queries.ts</a
+      ><br />
+      │   │   ├──
+      <a class="DIR" href="\localhost./database/repositories/products/"
+        >products</a
+      ><br />
+      │   │   │   ├──
+      <a class="NORM" href="\localhost./database/repositories/products/index.ts"
+        >index.ts</a
+      ><br />
+      │   │   │   └──
+      <a class="DIR" href="\localhost./database/repositories/products/queries/"
+        >queries</a
+      ><br />
+      │   │   │   &nbsp;&nbsp;&nbsp; ├──
+      <a
+        class="NORM"
+        href="\localhost./database/repositories/products/queries/fetch.ts"
+        >fetch.ts</a
+      ><br />
+      │   │   │   &nbsp;&nbsp;&nbsp; ├──
+      <a
+        class="NORM"
+        href="\localhost./database/repositories/products/queries/gradeFilter.ts"
+        >gradeFilter.ts</a
+      ><br />
+      │   │   │   &nbsp;&nbsp;&nbsp; └──
+      <a
+        class="NORM"
+        href="\localhost./database/repositories/products/queries/update.ts"
+        >update.ts</a
+      ><br />
+      │   │   ├──
+      <a class="DIR" href="\localhost./database/repositories/shared/">shared</a
+      ><br />
+      │   │   │   └──
+      <a class="NORM" href="\localhost./database/repositories/shared/types.ts"
+        >types.ts</a
+      ><br />
+      │   │   └──
+      <a class="DIR" href="\localhost./database/repositories/transactions/"
+        >transactions</a
+      ><br />
+      │   │   &nbsp;&nbsp;&nbsp; ├──
+      <a
+        class="NORM"
+        href="\localhost./database/repositories/transactions/index.ts"
+        >index.ts</a
+      ><br />
+      │   │   &nbsp;&nbsp;&nbsp; └──
+      <a
+        class="NORM"
+        href="\localhost./database/repositories/transactions/queries.ts"
+        >queries.ts</a
+      ><br />
+      │   └── <a class="DIR" href="\localhost./database/sql/">sql</a><br />
+      │   &nbsp;&nbsp;&nbsp; ├──
+      <a class="DIR" href="\localhost./database/sql/functions/">functions</a
+      ><br />
+      │   &nbsp;&nbsp;&nbsp; │   └──
+      <a class="NORM" href="\localhost./database/sql/functions/triggers.sql"
+        >triggers.sql</a
+      ><br />
+      │   &nbsp;&nbsp;&nbsp; ├──
+      <a class="DIR" href="\localhost./database/sql/init/">init</a><br />
+      │   &nbsp;&nbsp;&nbsp; │   ├──
+      <a class="NORM" href="\localhost./database/sql/init/config.sql"
+        >config.sql</a
+      ><br />
+      │   &nbsp;&nbsp;&nbsp; │   ├──
+      <a class="NORM" href="\localhost./database/sql/init/dec24Stock.sql"
+        >dec24Stock.sql</a
+      ><br />
+      │   &nbsp;&nbsp;&nbsp; │   └──
+      <a class="NORM" href="\localhost./database/sql/init/seedDrumData.sql"
+        >seedDrumData.sql</a
+      ><br />
+      │   &nbsp;&nbsp;&nbsp; └──
+      <a class="DIR" href="\localhost./database/sql/misc/">misc</a><br />
+      │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├──
+      <a class="NORM" href="\localhost./database/sql/misc/queries_tx_drums.sql"
+        >queries_tx_drums.sql</a
+      ><br />
+      │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; └──
+      <a class="NORM" href="\localhost./database/sql/misc/still_data_dump.sql"
+        >still_data_dump.sql</a
+      ><br />
+      ├── <a class="DIR" href="\localhost./lib/">lib</a><br />
+      │   ├──
+      <a class="NORM" href="\localhost./lib/StockTake_24.xlsx"
+        >StockTake_24.xlsx</a
+      ><br />
+      │   ├── <a class="DIR" href="\localhost./lib/constants/">constants</a
+      ><br />
+      │   │   ├──
+      <a class="NORM" href="\localhost./lib/constants/table.ts">table.ts</a
+      ><br />
+      │   │   └──
+      <a class="NORM" href="\localhost./lib/constants/template_data.tsx"
+        >template_data.tsx</a
+      ><br />
+      │   ├── <a class="DIR" href="\localhost./lib/hooks/">hooks</a><br />
+      │   │   └──
+      <a class="NORM" href="\localhost./lib/hooks/useDebounce.ts"
+        >useDebounce.ts</a
+      ><br />
+      │   └── <a class="DIR" href="\localhost./lib/utils/">utils</a><br />
+      │   &nbsp;&nbsp;&nbsp; ├──
+      <a class="NORM" href="\localhost./lib/utils/chemicalFormula.ts"
+        >chemicalFormula.ts</a
+      ><br />
+      │   &nbsp;&nbsp;&nbsp; ├──
+      <a class="NORM" href="\localhost./lib/utils/formatters.ts"
+        >formatters.ts</a
+      ><br />
+      │   &nbsp;&nbsp;&nbsp; └──
+      <a class="NORM ts" href="\localhost./lib/utils/index.ts">index.ts</a><br />
+      ├── <a class="NORM" href="\localhost./next-env.d.ts">next-env.d.ts</a
+      ><br />
+      ├── <a class="NORM" href="\localhost./next.config.mjs">next.config.mjs</a
+      ><br />
+      ├── <a class="NORM" href="\localhost./package-lock.json">package-lock.json</a
+      ><br />
+      ├── <a class="NORM" href="\localhost./package.json">package.json</a
+      ><br />
+      ├── <a class="NORM" href="\localhost./postcss.config.js">postcss.config.js</a
+      ><br />
+      ├── <a class="NORM" href="\localhost./sentry.client.config.ts"
+        >sentry.client.config.ts</a
+      ><br />
+      ├──
+      <a class="NORM" href="\localhost./sentry.edge.config.ts"
+        >sentry.edge.config.ts</a
+      ><br />
+      ├──
+      <a class="NORM" href="\localhost./sentry.server.config.ts"
+        >sentry.server.config.ts</a
+      ><br />
+      ├──
+      <a class="NORM" href="\localhost./tailwind.config.ts"
+        >tailwind.config.ts</a
+      ><br />
+      ├── <a class="NORM" href="\localhost./tsconfig.json">tsconfig.json</a
+      ><br />
+      └── <a class="DIR" href="\localhost./types/">types</a><br />
+      &nbsp;&nbsp;&nbsp; ├──
+      <a class="DIR" href="\localhost./types/content/">content</a><br />
+      &nbsp;&nbsp;&nbsp; │   └──
+      <a class="NORM" href="\localhost./types/content/index.ts">index.ts</a
+      ><br />
+      &nbsp;&nbsp;&nbsp; ├──
+      <a class="DIR" href="\localhost./types/database/">database</a><br />
+      &nbsp;&nbsp;&nbsp; │   ├──
+      <a class="NORM" href="\localhost./types/database/drums.ts">drums.ts</a
+      ><br />
+      &nbsp;&nbsp;&nbsp; │   ├──
+      <a class="NORM" href="\localhost./types/database/orders.ts">orders.ts</a
+      ><br />
+      &nbsp;&nbsp;&nbsp; │   ├──
+      <a class="NORM" href="\localhost./types/database/products.ts"
+        >products.ts</a
+      ><br />
+      &nbsp;&nbsp;&nbsp; │   └──
+      <a class="NORM" href="\localhost./types/database/transactions.ts"
+        >transactions.ts</a
+      ><br />
+      &nbsp;&nbsp;&nbsp; └──
+      <a class="DIR" href="\localhost./types/enums/">enums</a><br />
+      &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├──
+      <a class="NORM ts" href="\localhost./types/enums/drums.ts">drums.ts</a><br />
+      &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; └──
+      <a class="NORM" href="\localhost./types/enums/products.ts">products.ts</a
+      ><br />
+      <br /><br />
+      <p>71 directories, 171 files</p>
+    </p>
+
+    <!-- <hr />
+    <p class="VERSION">
+      tree v2.2.1 © 1996 - 2024 by Steve Baker and Thomas Moore <br />
+      HTML output hacked and copyleft © 1998 by Francesc Rocher <br />
+      JSON output hacked and copyleft © 2014 by Florian Sesser <br />
+      Charsets / OS/2 support © 2001 by Kyosuke Tokoro
+    </p> -->
+  </body>
+</html>

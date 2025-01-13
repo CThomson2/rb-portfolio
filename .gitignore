@@ -41,6 +41,7 @@ next-env.d.ts
 
 # output
 *.txt
+project_tree.pdf
 
 # database
 database/generated/
