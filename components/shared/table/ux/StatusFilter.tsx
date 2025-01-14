@@ -1,13 +1,13 @@
 "use client";
 
 import React from "react";
-import { DRUM_STATUS } from "@/types/enums/drums";
+import { DrumStatus, DrumStatusType } from "@/types/enums/drums";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { ArrowUp, ArrowDown } from "lucide-react";
 
 interface StatusFilterProps<TData, TValue> {
-  selectedStatuses: DRUM_STATUS[];
-  setSelectedStatuses: React.Dispatch<React.SetStateAction<DRUM_STATUS[]>>;
+  selectedStatuses: DrumStatusType[];
+  setSelectedStatuses: React.Dispatch<React.SetStateAction<DrumStatusType[]>>;
   title: string;
 }
 
@@ -23,16 +23,16 @@ export const StatusFilter = <TData, TValue>({
   title,
 }: StatusFilterProps<TData, TValue>) => {
   // NOTE: There appears to be a type error in setSelectedStatuses callback
-  // The error suggests the callback expects DRUM_STATUS[] but receives a function
+  // The error suggests the callback expects DrumStatus[] but receives a function
   // This could be fixed by updating the prop type to:
-  // setSelectedStatuses: React.Dispatch<React.SetStateAction<DRUM_STATUS[]>>
+  // setSelectedStatuses: React.Dispatch<React.SetStateAction<DrumStatus[]>>
 
   /**
    * Handles toggling a status filter checkbox
    * If status is already selected, removes it
    * If status is not selected, adds it
    */
-  const handleCheckboxChange = (status: DRUM_STATUS) => {
+  const handleCheckboxChange = (status: DrumStatusType) => {
     setSelectedStatuses((prevStatuses) =>
       prevStatuses.includes(status)
         ? prevStatuses.filter((s) => s !== status)
@@ -47,7 +47,7 @@ export const StatusFilter = <TData, TValue>({
       <ArrowDown />
       <div className="flex flex-col gap-2">
         {/* Map over all possible drum statuses to create checkboxes */}
-        {Object.values(DRUM_STATUS).map((status) => (
+        {Object.values(DrumStatus).map((status) => (
           <label key={status} className="flex items-center">
             <Checkbox
               checked={selectedStatuses.includes(status)}

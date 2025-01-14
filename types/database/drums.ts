@@ -1,13 +1,13 @@
 // types/database/inventory.ts
-import { DRUM_LOCATION, DRUM_STATUS } from "@/types/enums/drums";
+import { DrumLocationType, DrumStatusType } from "@/types/enums/drums";
 
 // Base type that matches the SQL/Prisma schema
 export interface NewDrumBase {
   drum_id: number;
   material: string;
   date_processed: Date | null;
-  status: DRUM_STATUS;
-  location: DRUM_LOCATION;
+  status: DrumStatusType;
+  location: DrumLocationType;
   created_at: Date | null;
   updated_at: Date | null;
   order_id: number | null;
@@ -26,7 +26,7 @@ export interface DrumQueryParams {
   limit: number;
   sortField?: keyof NewDrum;
   sortOrder?: "asc" | "desc";
-  status: DRUM_STATUS[];
+  status: DrumStatusType[];
 }
 
 // Type for the API response

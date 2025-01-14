@@ -24,9 +24,12 @@ export const columns: ColumnDef<NewDrum>[] = [
   {
     accessorKey: "status",
     // header: ({ column }) => <SortableColumn column={column} title="Status" />,
-    header: ({ column }) => {
+    header: ({ column }) =>
       <StatusFilter
-    }
+        title="Status"
+        selectedStatuses={[]}
+        setSelectedStatuses={() => {}}
+      />,
     cell: ({ row }) => (
       <Badge
         variant={row.getValue("status") === "available" ? "success" : "default"}

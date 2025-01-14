@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { GRADE } from "@/types/enums/products";
+import { GradeType } from "@/types/enums/products";
 import TabItem from "./TabItem";
 
 interface GradeCounts {
@@ -56,7 +56,7 @@ const TableTabs = ({ activeTab, setActiveTab }: TableTabsProps) => {
         setActiveTab={setActiveTab}
       />
 
-      {Object.values(GRADE).map((grade) => {
+      {Object.values(Grade).map((grade) => {
         return (
           <TabItem
             key={grade}

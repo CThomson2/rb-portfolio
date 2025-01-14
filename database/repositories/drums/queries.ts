@@ -1,6 +1,6 @@
 import { prisma } from "@/database/client";
 import type { DrumQueryParams, DrumsResponse } from "@/types/database/drums";
-import { DRUM_LOCATION, DRUM_STATUS } from "@/types/enums/drums";
+import type { DrumLocationType, DrumStatusType } from "@/types/enums/drums";
 
 export const queries = {
   getDrums: async ({
@@ -36,8 +36,8 @@ export const queries = {
     const drums = rows.map((row) => ({
       drum_id: row.drum_id,
       material: row.material,
-      status: row.status as DRUM_STATUS,
-      location: row.location as DRUM_LOCATION,
+      status: row.status as DrumStatusType,
+      location: row.location as DrumLocationType,
       order_id: row.orders?.order_id,
       supplier: row.orders?.supplier,
       date_ordered: row.orders?.date_ordered,

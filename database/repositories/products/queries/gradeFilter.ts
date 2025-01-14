@@ -1,7 +1,7 @@
 // database/repositories/products/queries.ts
 import { prisma } from "@/database/client";
 import type { ProductTableRow } from "@/types/components/products";
-import { GRADE } from "@/types/enums/products";
+import { GradeType } from "@/types/enums/products";
 
 // interface FetchProductsOptions {
 //   grade?: string;
@@ -62,11 +62,11 @@ export async function getProductCounts() {
 
   return {
     all: totalCount,
-    GD: gradeCounts.find((count) => count.grade === GRADE.GD)?._count ?? 0,
-    HPLC: gradeCounts.find((count) => count.grade === GRADE.HPLC)?._count ?? 0,
-    LCMS: gradeCounts.find((count) => count.grade === GRADE.LCMS)?._count ?? 0,
+    GD: gradeCounts.find((count) => count.grade === Grade.GD)?._count ?? 0,
+    HPLC: gradeCounts.find((count) => count.grade === Grade.HPLC)?._count ?? 0,
+    LCMS: gradeCounts.find((count) => count.grade === Grade.LCMS)?._count ?? 0,
     PTS_DS:
-      gradeCounts.find((count) => count.grade === GRADE.PTS_DS)?._count ?? 0,
+      gradeCounts.find((count) => count.grade === Grade.PTS_DS)?._count ?? 0,
   };
 }
 

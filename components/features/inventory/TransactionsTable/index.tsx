@@ -157,7 +157,7 @@ export const TransactionsTable = React.memo(() => {
 
   return (
     <>
-      <div className="max-h-fit flex flex-row justify-between items-center px-8 py-8 bg-slate-700 rounded-md">
+      <div className="max-h-fit flex flex-row justify-between items-center px-16 py-8 bg-slate-700 rounded-md">
         <SearchBar
           filterOptions={filterOptions}
           selectedFilter={selectedFilter}

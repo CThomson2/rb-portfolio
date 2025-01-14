@@ -92,19 +92,12 @@ const OrdersGrid = () => {
           </div>
           {/* <ActionButton text="Manage Inventory" href="/inventory/drums/new" /> */}
           {/* Form to add a new order */}
-          <button
+          <Link
+            href="/inventory/orders/create"
             className="bg-blue-500 text-white px-4 py-2 rounded-md"
-            type="button"
-            onClick={() =>
-              handleAddOrder({
-                supplier: "New Supplier",
-                material: "New Material",
-                quantity: 10,
-              })
-            }
           >
             Add Order
-          </button>
+          </Link>
         </div>
         <div className="flex-row gap-4 hidden lg:flex">
           <Link href="/inventory/transactions" className="mx-auto">

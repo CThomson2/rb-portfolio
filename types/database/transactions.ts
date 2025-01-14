@@ -1,16 +1,25 @@
 // database/repositories/inventory/types.ts
+import { type TransactionVariantType } from "@/types/enums/transactions";
+
 export interface Transaction {
   tx_id: number;
-  tx_type: string;
-  tx_date: string;
-  direction: string;
+  tx_type: TransactionVariantType;
+  tx_date: Date;
+  direction: "IN" | "OUT";
   material: string | null;
+  // Source of transaction foreign keys
   delivery_id: number | null;
   drum_id: number | null;
   repro_id: number | null;
+  // Destination of transaction foreign key
   process_id: number | null;
+  // Optional notes
   tx_notes: string | null;
+  // Internal product batch code for (re)processing tx_types
   batch_code: string | null;
+  // Timestamps
+  created_at: Date;
+  updated_at: Date;
 }
 
 export interface TransactionRow extends Transaction {

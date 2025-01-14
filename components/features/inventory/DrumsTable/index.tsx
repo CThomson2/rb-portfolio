@@ -1,8 +1,8 @@
 // components/features/inventory/DrumsTable/index.tsx
 "use client";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
 import {
   useReactTable,
   getCoreRowModel,
@@ -18,7 +18,7 @@ import { TableFooter } from "@/components/shared/table";
 import { SearchBar } from "@/components/shared/table";
 import { ActionButton } from "@/components/shared/table";
 import type { DrumsResponse } from "@/types/database/drums";
-import { DRUM_STATUS } from "@/types/enums/drums";
+import { DrumStatus, DrumStatusType } from "@/types/enums/drums";
 import { StatusFilter } from "@/components/shared/table";
 
 const filterOptions = [
@@ -29,7 +29,7 @@ const filterOptions = [
   { label: "By Status", value: "status" },
 ];
 
-export function DrumsTable() {
+export const DrumsTable = React.memo(() => {
   const [sorting, setSorting] = useState<SortingState>([
     { id: "drum_id", desc: true },
   ]);
@@ -39,7 +39,9 @@ export function DrumsTable() {
 
   const [pageSize, setPageSize] = useState(50);
   const [pageIndex, setPageIndex] = useState(0);
-  const [status, setStatus] = useState<DRUM_STATUS[]>([DRUM_STATUS.AVAILABLE]);
+  const [status, setStatus] = useState<DrumStatusType[]>([
+    DrumStatus.AVAILABLE,
+  ]);
 
   const { data, isLoading } = useQuery({
     queryKey: ["drums", pageIndex, pageSize],
@@ -90,7 +92,19 @@ export function DrumsTable() {
   });
 
   if (isLoading) {
-    return <div>Loading drums...</div>;
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm">
+        <div className="text-center">
+          <h1 className="text-5xl font-medium tracking-wider">
+            <span className="text-7xl text-blue-400">L</span>
+            <span className="text-white">
+              OADING DATA
+              <span className="inline animate-dots"></span>
+            </span>
+          </h1>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -159,4 +173,4 @@ export function DrumsTable() {
       <TableFooter table={table} />
     </div>
   );
-}
+});

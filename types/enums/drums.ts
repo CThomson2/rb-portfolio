@@ -1,13 +1,19 @@
-// Enum for drum status
-export enum DRUM_STATUS {
-  PENDING = "pending",
-  AVAILABLE = "available",
-  SCHEDULED = "scheduled",
-  PROCESSED = "processed",
-}
+// Changed from enum to const map for drum status
+export const DrumStatus = {
+  PENDING: "pending",
+  AVAILABLE: "available",
+  SCHEDULED: "scheduled",
+  PROCESSED: "processed",
+} as const;
 
-// Enum for locations
-export enum DRUM_LOCATION {
-  NEW_SITE = "new-site",
-  OLD_SITE = "old-site",
-}
+// Type for DrumStatus values
+export type DrumStatusType = (typeof DrumStatus)[keyof typeof DrumStatus];
+
+// Changed from enum to const map for locations
+export const DrumLocation = {
+  NEW_SITE: "new-site",
+  OLD_SITE: "old-site",
+} as const;
+
+// Type for DrumLocation values
+export type DrumLocationType = (typeof DrumLocation)[keyof typeof DrumLocation];
