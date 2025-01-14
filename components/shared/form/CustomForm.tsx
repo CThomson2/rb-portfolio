@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import type { FormField } from "@/types/content/form";
 import type { HttpMethodType } from "@/types/enums/form";
 
-interface CustomFormProps {
+export interface CustomFormProps {
   /** The API endpoint to send the request to, e.g. "/api/orders" */
   endpoint: string;
 
@@ -134,7 +134,12 @@ export const CustomForm: React.FC<CustomFormProps> = ({
       className={`rounded p-4 bg-gray-100 shadow-md ${className || ""}`}
       onSubmit={handleSubmit}
     >
-      <h3 className="text-lg font-semibold mb-3">{method} Form</h3>
+      <h1 className="text-slate-800 text-center text-2xl font-bold">
+        Record a New Transaction
+      </h1>
+      {/* <h3 className="text-lg font-semibold mb-3 text-slate-800">
+        {method} Form
+      </h3> */}
 
       {/* Render a field for each definition in `fields` */}
       {fields.map((field) => (

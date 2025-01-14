@@ -8,7 +8,7 @@ import Footer from "@/components/home/Footer";
 import Clients from "@/components/home/Clients";
 import ApproachGrid from "@/components/home/Approach";
 import Experience from "@/components/home/Experience";
-import RecentProjects from "@/components/home/RecentProjects";
+import QueryForms from "@/components/home/RecentProjects";
 import { FloatingNav } from "@/components/ui/FloatingNavbar";
 import UserDashboard from "@/components/home/UserDashboard";
 
@@ -19,11 +19,11 @@ const Home = () => {
         <FloatingNav navItems={navItems} />
         <Hero />
         {/* <Grid /> */}
-        {/* <RecentProjects /> */}
-        {/* <Clients /> */}
+        <QueryForms />
+        <Clients />
         <Experience />
         {/* <UserDashboard /> */}
-        {/* <ApproachGrid /> */}
+        <ApproachGrid />
         <Footer />
       </div>
     </main>

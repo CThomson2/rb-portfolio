@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
 import "./globals.css";
-import { ThemeProvider } from "./provider";
-import Providers from "./providers";
+import { Providers } from "./providers";
 import Sidebar from "@/components/home/Sidebar";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -26,16 +25,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <Sidebar />
-        <Providers>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

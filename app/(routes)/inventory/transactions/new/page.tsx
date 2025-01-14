@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { CustomForm } from "@/components/shared/form/CustomForm";
+import { Form } from "@/components/shared/form";
 import type { FormField } from "@/types/content/form";
 
 const fields: FormField[] = [
@@ -29,15 +29,13 @@ const fields: FormField[] = [
   { name: "sku", label: "SKU", type: "text", placeholder: "Enter SKU" },
 ];
 
-export const NewTransactionPage = () => {
+const NewTransactionPage = () => {
   // If I want to do a GET on mount (to pre-fill the form), I can do so here
   // This would then set `initialValues` in state, and pass to <CustomForm initialValues={...} />
 
   return (
     <div className="p-6">
-      <h1 className="text-xl font-bold">Record a New Transaction</h1>
-
-      <CustomForm
+      <Form
         endpoint="/api/inventory/transactions/new"
         method="POST"
         fields={fields}
@@ -50,3 +48,5 @@ export const NewTransactionPage = () => {
     </div>
   );
 };
+
+export default NewTransactionPage;

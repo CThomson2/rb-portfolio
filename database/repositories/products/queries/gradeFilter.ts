@@ -1,7 +1,8 @@
 // database/repositories/products/queries.ts
 import { prisma } from "@/database/client";
-import type { ProductTableRow } from "@/types/components/products";
-import { GradeType } from "@/types/enums/products";
+import type { ProductTableRow } from "@/types/database/products";
+import { Grade } from "@/types/enums/products";
+import type { GradeType } from "@/types/enums/products";
 
 // interface FetchProductsOptions {
 //   grade?: string;
@@ -19,7 +20,7 @@ import { GradeType } from "@/types/enums/products";
  * Or if no grade provided:
  * SELECT COUNT(*) FROM products
  */
-export async function byGrade(grade?: GRADE): Promise<number> {
+export async function byGrade(grade?: GradeType): Promise<number> {
   return prisma.products.count({
     where: grade ? { grade } : undefined,
   });
