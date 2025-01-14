@@ -88,8 +88,14 @@ export const TransactionsTable = React.memo(() => {
             return tx.tx_type.toLowerCase().includes(query);
           case "material":
             return tx.material?.toLowerCase().includes(query);
+          // TODO: Date filter cannot be a text search, but instead a mini-calendar and/or a dropdown with a Y-M-D picker
+          // From this input, the SQL string can be generated as `${dateSelection.year}-${dateSelection.month}-${dateSelection.day}`
+          // Remove date from this code block - it's a separate filter, not a search bar filter
           case "date":
-            return tx.tx_date.includes(query);
+            // Date format: 2025-01-14T12:22:14.566Z
+            // [date].toLocaleDateString() returns "1/14/2025"
+            // SQL date format: 2025-01-14
+            return tx.tx_date.toLocaleDateString().includes(query);
           default:
             // Search across all fields
             return (
@@ -165,7 +171,7 @@ export const TransactionsTable = React.memo(() => {
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}
         />
-        <ActionButton text="New Transaction" href="/transactions/new" />
+        <ActionButton text="Manage Inventory" href="/inventory/drums/new" />
       </div>
       <div className="flex flex-col m-5 pb-10">
         <div className="rounded-md border-x-2 border-[hsl(var(--table-header))] relative bg-slate-600">

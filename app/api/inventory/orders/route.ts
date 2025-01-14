@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { queries } from "@/database/repositories/orders/queries";
 import { prisma } from "@/database/client";
 import type { OrderPostResponse } from "@/types/database/orders";
-import { Prisma } from "@/database/prisma/generated/public-client";
+import { PrismaClientKnownRequestError } from "@/database/prisma/generated/public-client/runtime/library";
 
 export async function GET(req: Request) {
   // Extract search params from the request URL
@@ -43,7 +43,7 @@ export async function POST(req: Request) {
       { status: 200 }
     );
   } catch (error) {
-    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+    if (error instanceof PrismaClientKnownRequestError) {
       // PostgreSQL error messages are in error.message
       return NextResponse.json({ error: error.message }, { status: 400 });
     }

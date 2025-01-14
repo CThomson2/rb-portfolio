@@ -1,4 +1,4 @@
-import { StockLevelType } from "@/types/enums/products";
+import { StockLevel, StockLevelType } from "@/types/enums/products";
 
 const stockLevelBackgroundColors = {
   [StockLevel.LOW_STOCK]: "bg-red-100",
@@ -24,14 +24,7 @@ const stockLevelLabels = {
   [StockLevel.SURPLUS]: "Surplus",
 };
 
-const ProductStockLevel = ({
-  stockLevel,
-}: {
-  stockLevel:
-    | STOCK_LEVEL.LOW_STOCK
-    | STOCK_LEVEL.IN_STOCK
-    | STOCK_LEVEL.SURPLUS;
-}) => {
+const ProductStockLevel = ({ stockLevel }: { stockLevel: StockLevelType }) => {
   return (
     <div
       className={`flex items-center justify-center w-fit h-6 px-3 gap-2 rounded-sm text-sm font-normal ${stockLevelBackgroundColors[stockLevel]} ${stockLevelTextColors[stockLevel]}`}

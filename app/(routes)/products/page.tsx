@@ -1,6 +1,5 @@
-import { ProductTable } from "@/components/features/products/ProductTable";
+import ProductTable from "@/components/features/products/ProductTable";
 import { columns } from "@/components/features/products/ProductTable/columns";
-import type { ProductTableRow } from "@/types/database/products";
 import { queries } from "@/database/repositories/products";
 
 // This is a SSC. Use prisma to fetch products and the table header grades and associated counts

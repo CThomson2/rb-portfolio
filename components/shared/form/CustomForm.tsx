@@ -37,7 +37,7 @@ interface CustomFormProps {
   className?: string;
 }
 
-const CustomForm: React.FC<CustomFormProps> = ({
+export const CustomForm: React.FC<CustomFormProps> = ({
   endpoint,
   method,
   fields,
@@ -152,6 +152,7 @@ const CustomForm: React.FC<CustomFormProps> = ({
             placeholder={field.placeholder}
             value={formValues[field.name] || ""}
             onChange={handleChange}
+            required={field.required}
             className="w-full rounded px-3 py-2 text-black border border-gray-300 focus:outline-none"
           />
         </div>
@@ -171,5 +172,3 @@ const CustomForm: React.FC<CustomFormProps> = ({
     </form>
   );
 };
-
-export default CustomForm;

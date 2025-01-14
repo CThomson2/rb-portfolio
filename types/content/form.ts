@@ -10,4 +10,5 @@ export type FormField = {
   label: string;
   type: string;
   placeholder?: string;
+  required?: boolean;
 };

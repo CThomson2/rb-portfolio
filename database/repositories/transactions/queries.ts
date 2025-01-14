@@ -101,6 +101,12 @@ export const queries = {
     // return { rows, total };
   },
 
+  getTransactionById: async (id: string) => {
+    return await prisma.transactions.findUnique({
+      where: { tx_id: parseInt(id) },
+    });
+  },
+
   createTransaction: async (transactionData: CreateTransactionInput) => {
     const {
       tx_type,

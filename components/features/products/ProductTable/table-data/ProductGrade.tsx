@@ -1,4 +1,4 @@
-import { GradeType } from "@/types/enums/products";
+import { Grade, GradeType } from "@/types/enums/products";
 
 const gradeBackgroundColors = {
   [Grade.GD]: "bg-red-100",
@@ -28,11 +28,7 @@ const gradeLabels = {
   [Grade.PTS_DS]: "PTS-DS",
 };
 
-const ProductGrade = ({
-  grade,
-}: {
-  grade: GRADE.GD | GRADE.HPLC | GRADE.LCMS | GRADE.PTS_DS;
-}) => {
+const ProductGrade = ({ grade }: { grade: GradeType }) => {
   return (
     <div
       className={`flex items-center justify-center h-6 px-3 mx-auto gap-2 rounded-sm text-sm font-normal ${gradeBackgroundColors[grade]} ${gradeTextColors[grade]}`}

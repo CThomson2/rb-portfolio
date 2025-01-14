@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { queries } from "@/database/repositories/drums/queries";
 import { DrumStatus, DrumStatusType } from "@/types/enums/drums";
-import { NewDrum, DrumQueryParams } from "@/types/database/drums";
+import { NewDrum } from "@/types/database/drums";
 
 export async function GET(req: Request) {
   try {

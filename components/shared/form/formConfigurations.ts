@@ -34,7 +34,7 @@ export const formConfigurations = {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ name: "Example", sku: "12345" }), // Example payload
+          body: JSON.stringify({ name: "Example", grade: "GD", sku: "12345" }), // Example payload
         });
         const data = await response.json();
         setServerResponse("Data created successfully.");

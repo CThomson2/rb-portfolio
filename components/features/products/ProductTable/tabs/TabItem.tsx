@@ -11,7 +11,7 @@ const TabItem = ({
   activeTab,
   setActiveTab,
 }: {
-  grade: GRADE | "All";
+  grade: GradeType | "All";
   number: number;
   activeTab: string;
   setActiveTab: (value: string) => void;

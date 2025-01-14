@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { GradeType } from "@/types/enums/products";
+import { Grade, GradeType } from "@/types/enums/products";
 import TabItem from "./TabItem";
 
 interface GradeCounts {

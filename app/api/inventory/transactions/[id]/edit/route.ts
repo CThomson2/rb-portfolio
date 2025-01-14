@@ -1,17 +1,15 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextResponse } from "next/server";
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
+export async function PATCH(
+  req: Request,
+  { params }: { params: { id: string } }
 ) {
-  if (req.method === "PATCH") {
-    const { id } = req.query;
-    // Handle updating a transaction by ID
-    // Example: const { newName } = req.body;
-    // Add logic to update the transaction in the database
-    res.status(200).json({ message: `Transaction ${id} updated successfully` });
-  } else {
-    res.setHeader("Allow", ["PATCH"]);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
-  }
+  const id = params.id;
+  // Handle updating a transaction by ID
+  // Example: const data = await request.json();
+  // Add logic to update the transaction in the database
+  return NextResponse.json(
+    { message: `Transaction ${id} updated successfully` },
+    { status: 200 }
+  );
 }
