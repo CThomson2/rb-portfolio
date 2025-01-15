@@ -1,5 +1,5 @@
 // database/repositories/inventory/types.ts
-import { type TransactionVariantType } from "@/types/enums/transactions";
+import { type TransactionVariantType } from "@/types/constant/transactions";
 
 export interface Transaction {
   tx_id: number;

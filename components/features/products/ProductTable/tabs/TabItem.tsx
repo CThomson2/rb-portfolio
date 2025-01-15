@@ -2,7 +2,7 @@
 import { useMemo } from "react";
 import { Separator } from "@/components/ui/Separator";
 
-import { GradeType } from "@/types/enums/products";
+import { GradeType } from "@/types/constant/products";
 import { cn } from "@/lib/utils";
 
 const TabItem = ({

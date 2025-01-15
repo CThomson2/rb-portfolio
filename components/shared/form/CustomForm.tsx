@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import type { FormField } from "@/types/content/form";
-import type { HttpMethodType } from "@/types/enums/form";
+import type { HttpMethodType } from "@/types/constant/form";
 
 export interface CustomFormProps {
   /** The API endpoint to send the request to, e.g. "/api/orders" */
@@ -92,7 +92,7 @@ export const CustomForm: React.FC<CustomFormProps> = ({
       // Only add a request body for non-GET requests
       // GET requests shouldn't have a body according to HTTP spec
       if (!isGet) {
-        // Convert form values object to JSON string for sending
+        // Convert form values object to JSON string for sending description authentic
         requestOptions.body = JSON.stringify(formValues);
       }
 

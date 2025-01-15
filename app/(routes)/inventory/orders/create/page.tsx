@@ -13,9 +13,11 @@
 "use client";
 
 import { useState } from "react";
-import BarcodeLabel from "@/components/home/Barcode";
+import BarcodeLabel from "@/components/features/barcodes/Barcode";
 import { OrderPostResponse } from "@/types/database/orders";
 import { CreateForm } from "@/components/features/inventory/CreateForm";
+
+// import { Form } from "@/components/shared/form";
 
 // Form values match the expected POST request body shape
 interface FormValues {

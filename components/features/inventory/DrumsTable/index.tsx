@@ -18,7 +18,7 @@ import { TableFooter } from "@/components/shared/table";
 import { SearchBar } from "@/components/shared/table";
 import { ActionButton } from "@/components/shared/table";
 import type { DrumsResponse } from "@/types/database/drums";
-import { DrumStatus, DrumStatusType } from "@/types/enums/drums";
+import { DrumStatus, DrumStatusType } from "@/types/constant/drums";
 import { StatusFilter } from "@/components/shared/table";
 
 const filterOptions = [

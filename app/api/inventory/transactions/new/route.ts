@@ -40,3 +40,22 @@ export async function POST(req: Request) {
     );
   }
 }
+
+// Implement websockets
+// It ensures immediate updates to the UI,
+// After a transaction is created, the UI should be updated with the new transaction
+// This is done by sending a message to the client
+// The client then updates the UI using the new transaction data
+
+// The websocket connection is established when the user navigates to the transactions page
+// The websocket connection is closed when the user navigates away from the transactions page
+// The websocket connection is reestablished when the user navigates back to the transactions page
+
+// When a barcode is scanned, the websocket sends a message to the server
+// The server then creates a new transaction record in the database
+// The websocket then sends a message to the client to update the UI with the new transaction data
+
+// The server notifies the client of the new transaction data
+// How does the client know which transaction data to update?
+// The client has a list of all transactions in the database
+// The client then updates the UI with the new transaction data

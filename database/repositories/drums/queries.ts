@@ -1,6 +1,6 @@
 import { prisma } from "@/database/client";
 import type { DrumQueryParams, DrumsResponse } from "@/types/database/drums";
-import type { DrumLocationType, DrumStatusType } from "@/types/enums/drums";
+import type { DrumLocationType, DrumStatusType } from "@/types/constant/drums";
 
 export const queries = {
   getDrums: async ({

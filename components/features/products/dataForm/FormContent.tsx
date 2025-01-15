@@ -1,4 +1,4 @@
-import { HttpMethodType } from "@/types/enums/form";
+import { HttpMethodType } from "@/types/constant/form";
 import { formConfigurations } from "./formConfigurations";
 
 interface FormField {

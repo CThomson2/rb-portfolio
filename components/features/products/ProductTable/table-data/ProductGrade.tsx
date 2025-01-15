@@ -1,4 +1,4 @@
-import { Grade, GradeType } from "@/types/enums/products";
+import { Grade, GradeType } from "@/types/constant/products";
 
 const gradeBackgroundColors = {
   [Grade.GD]: "bg-red-100",

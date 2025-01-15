@@ -1,5 +1,6 @@
 // Sidebar.tsx
 "use client";
+import Link from "next/link";
 import React, { useState, useEffect } from "react";
 
 /**
@@ -131,6 +132,9 @@ const Sidebar: React.FC<SidebarProps> = () => {
             {/* Add your menu, links, etc. here */}
             <h2 className="text-xl font-semibold">Sidebar</h2>
             <p className="mt-4">Your content goes here.</p>
+            <Link href="/inventory">Inventory</Link>
+            <Link href="/inventory/transactions">Transactions</Link>
+            <Link href="/inventory/transactions">Transactions</Link>
           </div>
         )}
       </div>

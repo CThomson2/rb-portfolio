@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { DrumStatus, DrumStatusType } from "@/types/enums/drums";
+import { DrumStatus, DrumStatusType } from "@/types/constant/drums";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { ArrowUp, ArrowDown } from "lucide-react";
 

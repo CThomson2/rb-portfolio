@@ -12,3 +12,10 @@ export type FormField = {
   placeholder?: string;
   required?: boolean;
 };
+
+export type FormFieldSelect = FormField & {
+  type: "select";
+  options: string[];
+};
+
+export type FormFields = FormField | FormFieldSelect;

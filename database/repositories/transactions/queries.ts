@@ -7,7 +7,7 @@ import type {
 import {
   TransactionVariant,
   type TransactionVariantType,
-} from "@/types/enums/transactions";
+} from "@/types/constant/transactions";
 
 interface CreateTransactionInput {
   tx_type: TransactionVariantType; // "import" | "processing" | "reprocessing" | "disposal" | "loss"
