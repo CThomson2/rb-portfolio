@@ -1,6 +1,5 @@
 "use client";
 
-import BarcodeLabel from "@/components/features/barcodes/Barcode";
 import { OrderFormData, OrderPostParams } from "@/types/database/orders";
 import React, { useState } from "react";
 

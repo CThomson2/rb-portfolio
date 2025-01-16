@@ -3,6 +3,7 @@ import type { CustomFormProps } from "./CustomForm";
 import { FormDetails } from "./FormDetails";
 
 export const Form = ({
+  title,
   endpoint,
   method,
   fields,
@@ -16,6 +17,7 @@ export const Form = ({
       {/* Form Section */}
       <div className="w-3/5 p-8 bg-slate-700">
         <CustomForm
+          title={title}
           endpoint={endpoint}
           method={method}
           fields={fields}

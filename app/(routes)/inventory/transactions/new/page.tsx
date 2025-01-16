@@ -51,6 +51,7 @@ const NewTransactionPage = () => {
   return (
     <div className="p-6">
       <Form
+        title="Create Transaction"
         endpoint="/api/inventory/transactions/new"
         method="POST"
         fields={fields}

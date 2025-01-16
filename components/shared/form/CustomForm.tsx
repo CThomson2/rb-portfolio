@@ -4,6 +4,9 @@ import type { FormField } from "@/types/content/form";
 import type { HttpMethodType } from "@/types/constant/form";
 
 export interface CustomFormProps {
+  /** The title of the form */
+  title: string;
+
   /** The API endpoint to send the request to, e.g. "/api/orders" */
   endpoint: string;
 
@@ -38,6 +41,7 @@ export interface CustomFormProps {
 }
 
 export const CustomForm: React.FC<CustomFormProps> = ({
+  title,
   endpoint,
   method,
   fields,
@@ -131,21 +135,19 @@ export const CustomForm: React.FC<CustomFormProps> = ({
 
   return (
     <form
-      className={`rounded p-4 bg-gray-100 shadow-md ${className || ""}`}
+      className={`rounded p-4 bg-transparent shadow-lg max-w-md mx-auto ${
+        className || ""
+      }`}
       onSubmit={handleSubmit}
     >
-      <h1 className="text-slate-800 text-center text-2xl font-bold">
-        Record a New Transaction
+      <h1 className="text-slate-800 text-center text-2xl font-bold mb-4">
+        {title}
       </h1>
-      {/* <h3 className="text-lg font-semibold mb-3 text-slate-800">
-        {method} Form
-      </h3> */}
 
-      {/* Render a field for each definition in `fields` */}
       {fields.map((field) => (
         <div className="mb-3" key={field.name}>
           <label
-            className="block text-sm font-medium mb-1"
+            className="block text-sm font-medium mb-1 text-white"
             htmlFor={field.name}
           >
             {field.label}
@@ -158,22 +160,22 @@ export const CustomForm: React.FC<CustomFormProps> = ({
             value={formValues[field.name] || ""}
             onChange={handleChange}
             required={field.required}
-            className="w-full rounded px-3 py-2 text-black border border-gray-300 focus:outline-none"
+            className="w-full rounded px-3 py-2 text-white bg-gray-800 border border-gray-600 focus:outline-none"
           />
         </div>
       ))}
 
-      {/* Submit Button */}
       <button
         type="submit"
-        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:bg-gray-400"
+        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
         disabled={loading}
       >
         {loading ? "Loading..." : `Submit (${method})`}
       </button>
 
-      {/* Server response message */}
-      {serverMessage && <div className="mt-3 text-sm">{serverMessage}</div>}
+      {serverMessage && (
+        <div className="mt-3 text-sm text-white">{serverMessage}</div>
+      )}
     </form>
   );
 };
