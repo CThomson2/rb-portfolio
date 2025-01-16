@@ -1,15 +1,13 @@
 "use client";
 
 import BarcodeLabel from "@/components/features/barcodes/Barcode";
-import { OrderPostParams, OrderPostResponse } from "@/types/database/orders";
+import { OrderFormData, OrderPostParams } from "@/types/database/orders";
 import React, { useState } from "react";
 
 export const CreateForm = ({
   onOrderCreated,
-  orderData,
 }: {
   onOrderCreated: (order: OrderPostParams) => void;
-  orderData: OrderPostResponse | null;
 }) => {
   const [material, setMaterial] =
     useState<OrderPostParams["material"]>("Material");

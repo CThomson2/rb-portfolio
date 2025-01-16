@@ -45,3 +45,5 @@ project_tree.pdf
 
 # database
 database/generated/
+barcodes_test.pdf
+lib/generateBarcodes.js

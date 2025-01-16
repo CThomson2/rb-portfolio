@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { queries } from "@/database/repositories/orders/queries";
 import { prisma } from "@/database/client";
-import type { OrderPostResponse } from "@/types/database/orders";
+import type { OrderFormData } from "@/types/database/orders";
 import { PrismaClientKnownRequestError } from "@/database/prisma/generated/public-client/runtime/library";
 
 export async function GET(req: Request) {
@@ -31,15 +31,22 @@ export async function POST(req: Request) {
   const { material, supplier, quantity } = body;
 
   try {
-    const newOrder: OrderPostResponse = await prisma.orders.create({
+    // 1) Create new order
+    const newOrder: OrderFormData = await prisma.orders.create({
       data: {
         supplier,
         material,
         quantity,
       },
     });
+
+    // 3) Return the combined data in JSON
     return NextResponse.json(
-      { success: true, order: newOrder },
+      {
+        success: true,
+        order: newOrder, // the order data
+        // drum_ids: drumIds, // the array of new drum IDs
+      },
       { status: 200 }
     );
   } catch (error) {

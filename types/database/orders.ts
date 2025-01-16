@@ -47,15 +47,24 @@ export interface OrderPostParams {
   material: string;
   quantity: number;
 }
-export interface OrderPostResponse {
+export interface OrderFormData {
   order_id: number;
   supplier: string;
   material: string;
   quantity: number;
-  date_ordered: Date | null;
+  date_ordered: Date | string | null;
   notes: string | null;
-  created_at: Date | null;
-  updated_at: Date | null;
+  created_at: Date | string | null;
+  updated_at: Date | string | null;
   quantity_received: number;
   delivery_status: string;
+}
+
+export interface OrderPostResponse extends OrderFormData {
+  drumIds: number[];
+}
+
+export interface OrderPostRequest extends OrderFormData {
+  drumIds: number[];
+  status: 200 | 201 | 400 | 404 | 500;
 }

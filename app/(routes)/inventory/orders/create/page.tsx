@@ -13,9 +13,9 @@
 "use client";
 
 import { useState } from "react";
-import BarcodeLabel from "@/components/features/barcodes/Barcode";
-import { OrderPostResponse } from "@/types/database/orders";
+import { OrderFormData, OrderPostResponse } from "@/types/database/orders";
 import { CreateForm } from "@/components/features/inventory/CreateForm";
+import { DrumLabel } from "@/components/features/barcodes/DrumLabel";
 
 // import { Form } from "@/components/shared/form";
 
@@ -27,7 +27,8 @@ interface FormValues {
 }
 
 function OrderCreationPage() {
-  const [orderData, setOrderData] = useState<OrderPostResponse | null>(null);
+  const [orderData, setOrderData] = useState<OrderFormData | null>(null);
+  const [drumIds, setDrumIds] = useState<number[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   const handleCreateOrder = async (formValues: FormValues) => {
@@ -47,6 +48,7 @@ function OrderCreationPage() {
 
       if (data.success) {
         setOrderData(data.order);
+        // setDrumIds(data.drum_ids);
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred");
@@ -54,28 +56,32 @@ function OrderCreationPage() {
     }
   };
 
+  const handleError = (error: string) => {
+    setError(error);
+  };
+
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
       {error && (
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-          {error}
+          ERROR: {error}
         </div>
       )}
 
       <div className="bg-slate-700 p-8 rounded-md shadow-md">
-        <CreateForm onOrderCreated={handleCreateOrder} orderData={orderData} />
+        <CreateForm onOrderCreated={handleCreateOrder} />
       </div>
 
       {orderData && (
         <div className="bg-slate-800 text-white p-8 rounded-md shadow-md">
           <h2 className="text-2xl font-bold mb-4">
-            Order Created Successfully
+            Order #{orderData.order_id} Created Successfully
           </h2>
-          <BarcodeLabel
-            orderId={orderData.order_id}
-            material={orderData.material}
-            supplier={orderData.supplier}
-          />
+          {/* <h3>Order ID: {orderData.order_id}</h3>
+          <h3>Material: {orderData.material}</h3>
+          <h3>Supplier: {orderData.supplier}</h3> */}
+          <DrumLabel order={orderData} onError={setError} />
+          {/* <BarcodeLabel order={orderData} /> */}
         </div>
       )}
     </div>

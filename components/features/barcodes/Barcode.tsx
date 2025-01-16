@@ -1,16 +1,13 @@
 import React, { useRef } from "react";
 import Barcode from "react-barcode";
+import { OrderFormData } from "@/types/database/orders";
 
 interface BarcodeLabelProps {
-  orderId: number;
-  material: string;
-  supplier: string;
+  order: OrderFormData;
 }
 
-const BarcodeLabel: React.FC<BarcodeLabelProps> = ({
-  orderId,
-  material,
-  supplier,
+export const BarcodeLabel: React.FC<BarcodeLabelProps> = ({
+  order: { order_id, material, supplier },
 }) => {
   const printRef = useRef<HTMLDivElement>(null);
 
@@ -36,7 +33,7 @@ const BarcodeLabel: React.FC<BarcodeLabelProps> = ({
     pdf.addImage(imageData, "PNG", 20, 20, 200, 100);
 
     // Download the PDF
-    pdf.save(`Order-${orderId}-label.pdf`);
+    pdf.save(`Order-${order_id}-label.pdf`);
   };
 
   return (
@@ -57,7 +54,7 @@ const BarcodeLabel: React.FC<BarcodeLabelProps> = ({
       >
         <h3>{supplier}</h3>
         <h4>{material}</h4>
-        <Barcode value={`${orderId}`} format="CODE128" />
+        <Barcode value={`${order_id}`} format="CODE128" />
       </div>
 
       <button onClick={handleDownloadPDF}>Download PDF</button>
