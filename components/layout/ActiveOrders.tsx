@@ -36,13 +36,18 @@ export default function ActiveOrders() {
             key={order.order_id}
             className="bg-gray-700 p-3 rounded flex items-center justify-between"
           >
-            <div>
-              <div className="font-medium">
-                {order.supplier} - {order.material} ({order.quantity} drums)
+            {/* This grid has 4 columns defined but only 2 divs, so the last 2 columns will be empty */}
+            <div className="grid grid-cols-[1fr_3fr_1fr_1fr]">
+              {/* This div takes up the first column */}
+              <div className="flex items-center justify-center italic text-lg text-gray-400">
+                #{order.order_id}
               </div>
-              <div className="text-sm text-gray-300">
-                Order ID: {order.order_id}
+              {/* This div takes up the second column */}
+              <div className="flex flex-col items-center justify-center font-medium">
+                <div className="font-bold">{order.material}</div>
+                <div>{order.supplier}</div>
               </div>
+              {/* The third and fourth columns are empty since no divs are defined for them */}
             </div>
 
             {/* CTA button → order page (later we can add modal logic) */}

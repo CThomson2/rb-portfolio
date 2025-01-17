@@ -79,6 +79,17 @@ export const queries = {
       where: {
         delivery_status: "pending",
       },
+      orderBy: {
+        order_id: "desc",
+      },
+      select: {
+        order_id: true,
+        supplier: true,
+        material: true,
+        quantity: true,
+        quantity_received: true,
+        delivery_status: true,
+      },
     });
   },
 

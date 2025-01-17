@@ -22,6 +22,8 @@ app/
 */
 
 import React, { useState } from "react";
+import ActiveOrders from "./ActiveOrders";
+import RecentDeliveries from "./RecentDeliveries";
 
 export const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,7 +49,7 @@ export const Sidebar = () => {
           fixed top-0 left-0 h-full z-40
           bg-gray-800 text-white
           transition-all duration-300
-          ${isOpen ? "w-64" : "w-0"}
+          ${isOpen ? "w-[2/5]" : "w-0"}
           overflow-hidden
         `}
         style={
