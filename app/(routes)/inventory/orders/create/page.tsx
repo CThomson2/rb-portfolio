@@ -61,29 +61,29 @@ function OrderCreationPage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-6">
+    <div className="max-w-8xl flex justify-center items-center mx-auto p-6 space-y-6">
       {error && (
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
           ERROR: {error}
         </div>
       )}
 
-      <div className="bg-slate-700 p-8 rounded-md shadow-md">
+      <div className="bg-slate-900 p-8 w-full rounded-md shadow-md">
         <CreateForm onOrderCreated={handleCreateOrder} />
-      </div>
 
-      {orderData && (
-        <div className="bg-slate-800 text-white p-8 rounded-md shadow-md">
-          <h2 className="text-2xl font-bold mb-4">
-            Order #{orderData.order_id} Created Successfully
-          </h2>
-          {/* <h3>Order ID: {orderData.order_id}</h3>
+        {orderData && (
+          <div className="bg-slate-800 text-white p-8 mx-auto  rounded-md shadow-md">
+            <h2 className="text-2xl font-bold mb-4">
+              Order #{orderData.order_id} Created Successfully
+            </h2>
+            {/* <h3>Order ID: {orderData.order_id}</h3>
           <h3>Material: {orderData.material}</h3>
           <h3>Supplier: {orderData.supplier}</h3> */}
-          <DrumLabel order={orderData} onError={setError} />
-          {/* <BarcodeLabel order={orderData} /> */}
-        </div>
-      )}
+            <DrumLabel order={orderData} onError={setError} />
+            {/* <BarcodeLabel order={orderData} /> */}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
