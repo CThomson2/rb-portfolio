@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 
 import "./globals.css";
 import { Providers } from "./providers";
-import Sidebar from "@/components/home/Sidebar";
+import { Sidebar } from "@/components/layout/Sidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +24,9 @@ export default function RootLayout({
         <link rel="icon" href="/rc-logo-b.png" sizes="any" />
       </head>
       <body className={inter.className}>
+        {/* Sidebar is included globally; it can be toggled open/closed on any page */}
         <Sidebar />
+
         <Providers>{children}</Providers>
       </body>
     </html>

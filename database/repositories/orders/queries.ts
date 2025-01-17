@@ -69,6 +69,19 @@ export const queries = {
     });
   },
 
+  /**
+   * Gets all orders with a delivery status of "pending".
+   * This is used to display active orders (en-route or partially fulfilled) in the sidebar.
+   * @returns An array of orders with a delivery status of "pending"
+   */
+  getActiveOrders: async () => {
+    return prisma.orders.findMany({
+      where: {
+        delivery_status: "pending",
+      },
+    });
+  },
+
   updateDeliveryStatus: async (orderId: number, status: OrderStatus) => {
     return prisma.orders.update({
       where: {

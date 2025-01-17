@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>README.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="barcode-generation">Barcode Generation</h1>
+<p>Below is a conceptual outline for how you might implement barcode generation and downloading within a Next.js application, using TypeScript and Prisma. The solution can be adapted in multiple ways, so treat this as a starting point rather than a strict set of steps.</p>
+<h2 id="1-choose-a-barcode-generation-strategy">1. Choose a Barcode-Generation Strategy</h2>
+<p>There are two common ways to generate a barcode in a JavaScript/TypeScript environment:</p>
+<ol>
+<li>
+<p><strong>Use a client-side library</strong> to generate the barcode as an image or SVG in the browser.</p>
+<ul>
+<li><strong>Examples</strong>:
+<ul>
+<li><a href="https://github.com/lindell/JsBarcode">jsBarcode</a> (plain JavaScript, can be used in React)</li>
+<li><a href="https://github.com/kciter/react-barcode">react-barcode</a> (React component)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Generate the barcode on the server (e.g., in a Next.js API route) and return the image (or PDF) to the client.</p>
+<ul>
+<li><strong>Examples</strong>:
+<ul>
+<li><a href="https://github.com/metafloor/bwip-js">bwip-js</a> can generate barcodes on the server side</li>
+<li>Return the generated image buffer or embed it into a PDF</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>Either approach can work. For many production use-cases, generating PDFs (or images) server-side is popular because:</p>
+<ul>
+<li>Barcodes can be stored or cached on the server (if needed)</li>
+<li>It centralizes the PDF generation (versions, styling, etc.) into one place</li>
+</ul>
+<p>That said, client-side solutions are sometimes simpler to implement if it's just for a quick download/print from the browser.</p>
+<h2 id="2-decide-on-pdf-vs-on-screenhtml-download">2. Decide on PDF vs. On-Screen/HTML Download</h2>
+<p>Often, barcode labels end up as small PDFs or printable labels. Two approaches:</p>
+<ol>
+<li>
+<p><strong>Generate a PDF directly</strong> and let the user download it or print it.</p>
+<ul>
+<li>Tools: <a href="https://github.com/Hopding/pdf-lib">pdf-lib</a>, <a href="https://github.com/parallax/jsPDF">jsPDF</a>, or <a href="http://pdfmake.org/">pdfmake</a>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Render a page or component with barcodes</strong> and rely on the browser’s print function or a download mechanism.</p>
+<ul>
+<li>Tools: <a href="https://github.com/kciter/react-barcode"><code>react-barcode</code></a> for the barcode, and a library like <a href="https://github.com/niklasvh/html2canvas"><code>html2canvas</code></a> + <a href="https://github.com/parallax/jsPDF"><code>jsPDF</code></a> to “snapshot” the rendered component and generate a PDF on the fly in the browser.</li>
+</ul>
+</li>
+</ol>
+<p>For complete control (especially for multiple barcodes on one page with certain label dimensions), generating a PDF from either the server or the client is typically more consistent.</p>
+<p><a href="https://github.com/Hopding/pdf-lib">pdf-lib</a> is a popular library for creating PDFs in JavaScript/TypeScript.
+<a href="https://github.com/parallax/jsPDF">js-pdf</a> is another popular library for creating PDFs.
+<a href="http://pdfmake.org/">pdf-make</a> is a more modern library for creating PDFs.</p>
+<h3 id="21-pdf">2.1 PDF</h3>
+<ul>
+<li>More robust, can be downloaded and printed</li>
+<li>More control over styling</li>
+<li>Can be cached on the server</li>
+</ul>
+<h3 id="22-on-screenhtml">2.2 On-Screen/HTML</h3>
+<ul>
+<li>Easier to implement</li>
+<li>Faster to load</li>
+<li>Can be styled with CSS</li>
+</ul>
+<h2 id="3-typical-workflow-in-nextjs">3. Typical Workflow in Next.js</h2>
+<h3 id="31-database-insertion-orders-table">3.1 Database Insertion (Orders Table)</h3>
+<ol>
+<li>
+<p><strong>User Submits Form</strong>: They fill in fields:</p>
+<ul>
+<li><code>materialType</code></li>
+<li><code>materialName</code></li>
+<li><code>supplier</code></li>
+<li><code>quantity</code></li>
+</ul>
+</li>
+<li>
+<p><strong>API Route</strong> in Next.js to handle the POST request.</p>
+</li>
+</ol>
+<details <summary><strong>Example</strong> <code>POST to &quot;/api/orders/create&quot;</code>
+</details><pre class="hljs"><code><div><span class="hljs-comment">// /pages/api/orders/create.ts</span>
+<span class="hljs-keyword">import</span> { NextApiRequest, NextApiResponse } <span class="hljs-keyword">from</span> <span class="hljs-string">"next"</span>;
+<span class="hljs-keyword">import</span> prisma <span class="hljs-keyword">from</span> <span class="hljs-string">"@/lib/prisma"</span>; <span class="hljs-comment">// wherever Prisma is initialized</span>
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">POST</span>(<span class="hljs-params">req: NextApiRequest, res: NextApiResponse</span>) </span>{
+  <span class="hljs-keyword">if</span> (req.method !== <span class="hljs-string">"POST"</span>) {
+    <span class="hljs-keyword">return</span> res.status(<span class="hljs-number">405</span>).end(); <span class="hljs-comment">// Method Not Allowed</span>
+  }
+
+  <span class="hljs-keyword">const</span> { materialType, materialName, supplier, quantity } = req.body;
+
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> newOrder = <span class="hljs-keyword">await</span> prisma.orders.create({
+      data: {
+        materialType,
+        materialName,
+        supplier,
+        quantity,
+      },
+    });
+    <span class="hljs-keyword">return</span> res.status(<span class="hljs-number">200</span>).json({ success: <span class="hljs-literal">true</span>, order: newOrder });
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-built_in">console</span>.error(error);
+    <span class="hljs-keyword">return</span> res
+      .status(<span class="hljs-number">500</span>)
+      .json({ success: <span class="hljs-literal">false</span>, error: <span class="hljs-string">"Failed to create order"</span> });
+  }
+}
+</div></code></pre>
+
+<br>
+<ol start="3">
+<li><strong>Frontend Form</strong>: Once the <code>POST</code> request succeeds, it'll return the record with the new <code>orderId</code> and associated data that was just created in the database.</li>
+</ol>
+<h3 id="32-generate-barcode--pdf">3.2. <strong>Generate Barcode &amp; PDF</strong></h3>
+<p>Generate a PDF label with:</p>
+<ul>
+<li>A textual representation (Supplier, Material Name, etc.).</li>
+<li>The barcode itself (e.g., Code128, QR code, etc.).</li>
+</ul>
+<blockquote>
+<p><strong>Option A: Generate on the Client using React</strong></p>
+</blockquote>
+<ul>
+<li>Immediately after the order is created, you can fetch the newly inserted record’s ID (and other data) and pass it to a React component that uses a library like <code>react-barcode</code>.</li>
+<li>Then use something like <code>jsPDF</code> to convert the component (or a hidden DOM element) to a PDF.</li>
+</ul>
+<blockquote>
+<ol>
+<li><strong>React Barcode Component</strong></li>
+</ol>
+</blockquote>
+<details <summary><strong>Example</strong> with <code>react-barcode</code> for the barcode plus <code>html2canvas</code> + <code>jsPDF</code>
+</details><pre class="hljs"><code><div>import React, { useRef } from &quot;react&quot;;
+import Barcode from &quot;react-barcode&quot;;
+
+interface BarcodeLabelProps {
+  orderId: number;
+  materialName: string;
+  supplier: string;
+}
+
+const BarcodeLabel: React.FC&lt;BarcodeLabelProps&gt; = ({
+  orderId,
+  materialName,
+  supplier,
+}) =&gt; {
+  const printRef = useRef&lt;HTMLDivElement&gt;(null);
+
+  const handleDownloadPDF = async () =&gt; {
+    if (!printRef.current) return;
+
+    // Use html2canvas to get the DOM as an image
+    const html2canvas = (await import(&quot;html2canvas&quot;)).default;
+    const jsPDF = (await import(&quot;jspdf&quot;)).default;
+
+    const canvas = await html2canvas(printRef.current);
+    const imageData = canvas.toDataURL(&quot;image/png&quot;);
+
+    // Create a PDF
+    const pdf = new jsPDF({
+      orientation: &quot;portrait&quot;,
+      unit: &quot;pt&quot;,
+      format: &quot;A4&quot;,
+    });
+
+    // Add the image to the PDF
+    // You may want to calculate positioning/sizing more precisely
+    pdf.addImage(imageData, &quot;PNG&quot;, 20, 20, 200, 100);
+
+    // Download the PDF
+    pdf.save(`Order-${orderId}-label.pdf`);
+  };
+
+  return (
+    &lt;div&gt;
+      {/* This part is the label preview that will be converted to PDF */}
+      &lt;div ref={printRef} style={{ padding: 20, background: &quot;#fff&quot; }}&gt;
+        &lt;h3&gt;Supplier: {supplier}&lt;/h3&gt;
+        &lt;h4&gt;Material: {materialName}&lt;/h4&gt;
+        &lt;Barcode value={`${orderId}`} format=&quot;CODE128&quot; /&gt;
+      &lt;/div&gt;
+
+      &lt;button onClick={handleDownloadPDF}&gt;Download PDF&lt;/button&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default BarcodeLabel;
+</div></code></pre>
+
+<br>
+<blockquote>
+<ol start="2">
+<li><strong>Component Usage</strong></li>
+</ol>
+</blockquote>
+<p>In the order creation page (or success screen), once it have the order details:</p>
+<details <summary><strong>Example</strong> <code>&quot;app/inventory/orders/new?success=true&quot;</code>
+</details><pre class="hljs"><code><div>// Suppose backend receives orderData from the POST request
+import BarcodeLabel from './BarcodeLabel';
+
+function OrderCreatedPage() {
+  const [orderData, setOrderData] = useState&lt;any&gt;(null);
+
+  const handleCreateOrder = async (formValues: any) =&gt; {
+    const res = await fetch('/api/orders/create', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formValues),
+    });
+    const data = await res.json();
+    if (data.success) {
+      setOrderData(data.order);
+    }
+  };
+
+  return (
+    &lt;&gt;
+      {/* ... form UI for creating the order ... */}
+      &lt;button onClick={() =&gt; handleCreateOrder({ ... })}&gt;Submit Order&lt;/button&gt;
+
+      {orderData &amp;&amp; (
+        &lt;BarcodeLabel
+          orderId={orderData.id}
+          materialName={orderData.materialName}
+          supplier={orderData.supplier}
+        /&gt;
+      )}
+    &lt;/&gt;
+  );
+}
+
+export default OrderCreatedPage;
+</div></code></pre>
+
+<br>
+<ul>
+<li>Pros: Easy to build a quick downloadable label.</li>
+<li>Cons: More steps in the browser; might not be as “standardized” or “controlled” as a server-generated PDF.</li>
+</ul>
+<blockquote>
+<p><strong>Option B: Generate on the Server</strong></p>
+</blockquote>
+<p>Use a server-side library to:</p>
+<ol>
+<li>Generate a barcode image (e.g., with <a href="https://github.com/metafloor/bwip-js">bwip-js</a>).</li>
+<li>Insert that image into a PDF (with <a href="https://github.com/Hopding/pdf-lib">pdf-lib</a> or <a href="http://pdfmake.org/">pdf-make</a>).</li>
+</ol>
+<p>The result is a PDF file that will be returned as a Buffer in the HTTP response, and the client can prompt a download.</p>
+<details <summary>
+<strong>Example</strong> (using <code>bwip-js</code> + <code>pdf-lib</code> in an API route):
+
+</details><pre class="hljs"><code><div><span class="hljs-comment">// /pages/api/orders/create.ts</span>
+<span class="hljs-comment">// /pages/api/barcodes/[orderId].ts</span>
+<span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> { NextApiRequest, NextApiResponse } <span class="hljs-keyword">from</span> <span class="hljs-string">"next"</span>;
+<span class="hljs-keyword">import</span> bwipjs <span class="hljs-keyword">from</span> <span class="hljs-string">"bwip-js"</span>;
+<span class="hljs-keyword">import</span> { PDFDocument, StandardFonts } <span class="hljs-keyword">from</span> <span class="hljs-string">"pdf-lib"</span>;
+<span class="hljs-keyword">import</span> prisma <span class="hljs-keyword">from</span> <span class="hljs-string">"../../../lib/prisma"</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handler</span>(<span class="hljs-params">
+  req: NextApiRequest,
+  res: NextApiResponse
+</span>) </span>{
+  <span class="hljs-keyword">const</span> { orderId } = req.query;
+
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-comment">// 1. Fetch the relevant order data from DB</span>
+    <span class="hljs-keyword">const</span> order = <span class="hljs-keyword">await</span> prisma.orders.findUnique({
+      where: { id: <span class="hljs-built_in">Number</span>(orderId) },
+    });
+
+    <span class="hljs-keyword">if</span> (!order) {
+      <span class="hljs-keyword">return</span> res.status(<span class="hljs-number">404</span>).send(<span class="hljs-string">"Order not found"</span>);
+    }
+
+    <span class="hljs-comment">// 2. Generate a barcode image from orderId (or any unique field)</span>
+    <span class="hljs-keyword">const</span> pngBuffer = <span class="hljs-keyword">await</span> bwipjs.toBuffer({
+      bcid: <span class="hljs-string">"code128"</span>, <span class="hljs-comment">// Barcode type</span>
+      text: <span class="hljs-built_in">String</span>(order.id),
+      scale: <span class="hljs-number">3</span>,
+      height: <span class="hljs-number">10</span>,
+      includetext: <span class="hljs-literal">true</span>,
+      textxalign: <span class="hljs-string">"center"</span>,
+    });
+
+    <span class="hljs-comment">// 3. Create a PDF with pdf-lib</span>
+    <span class="hljs-keyword">const</span> pdfDoc = <span class="hljs-keyword">await</span> PDFDocument.create();
+    <span class="hljs-keyword">const</span> page = pdfDoc.addPage([<span class="hljs-number">400</span>, <span class="hljs-number">200</span>]); <span class="hljs-comment">// label size</span>
+    <span class="hljs-keyword">const</span> font = <span class="hljs-keyword">await</span> pdfDoc.embedFont(StandardFonts.Helvetica);
+
+    <span class="hljs-comment">// Embed the barcode image</span>
+    <span class="hljs-keyword">const</span> barcodeImage = <span class="hljs-keyword">await</span> pdfDoc.embedPng(pngBuffer);
+    <span class="hljs-keyword">const</span> barcodeDims = barcodeImage.scale(<span class="hljs-number">1</span>); <span class="hljs-comment">// scale as needed</span>
+
+    <span class="hljs-comment">// Place the barcode on the PDF</span>
+    page.drawImage(barcodeImage, {
+      x: <span class="hljs-number">50</span>,
+      y: <span class="hljs-number">80</span>,
+      width: barcodeDims.width,
+      height: barcodeDims.height,
+    });
+
+    <span class="hljs-comment">// Add some text fields (supplier, materialName, etc.)</span>
+    page.drawText(<span class="hljs-string">`Supplier: <span class="hljs-subst">${order.supplier}</span>`</span>, {
+      x: <span class="hljs-number">50</span>,
+      y: <span class="hljs-number">150</span>,
+      size: <span class="hljs-number">12</span>,
+      font,
+    });
+    page.drawText(<span class="hljs-string">`Material: <span class="hljs-subst">${order.materialName}</span>`</span>, {
+      x: <span class="hljs-number">50</span>,
+      y: <span class="hljs-number">130</span>,
+      size: <span class="hljs-number">12</span>,
+      font,
+    });
+
+    <span class="hljs-keyword">const</span> pdfBytes = <span class="hljs-keyword">await</span> pdfDoc.save();
+
+    <span class="hljs-comment">// 4. Return the PDF bytes as a download</span>
+    res.setHeader(<span class="hljs-string">"Content-Type"</span>, <span class="hljs-string">"application/pdf"</span>);
+    res.setHeader(
+      <span class="hljs-string">"Content-Disposition"</span>,
+      <span class="hljs-string">`attachment; filename=barcode-<span class="hljs-subst">${orderId}</span>.pdf`</span>
+    );
+    <span class="hljs-keyword">return</span> res.send(Buffer.from(pdfBytes));
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-built_in">console</span>.error(error);
+    <span class="hljs-keyword">return</span> res.status(<span class="hljs-number">500</span>).send(<span class="hljs-string">"Server error"</span>);
+  }
+}
+</div></code></pre>
+<p><strong>Client-Side Usage</strong></p>
+<pre class="hljs"><code><div>&lt;button onClick={() =&gt; window.open(`/api/barcodes/${orderData.id}`, &quot;_blank&quot;)}&gt;
+  Download Barcode
+&lt;/button&gt;
+</div></code></pre>
+
+<br>
+<h2 id="4-putting-it-all-together">4. Putting It All Together</h2>
+<p>A typical sequence once the user clicks “Submit Order”:</p>
+<ol>
+<li><strong>Submit</strong> the order form -&gt; POST to api/orders/create.</li>
+<li><strong>API</strong> inserts a new row in the orders table, returns order.id and other fields.</li>
+<li><strong>Front End</strong> receives the new order object.</li>
+<li>The page (or a modal) shows a “Download Barcode PDF” button.</li>
+</ol>
+<ul>
+<li>If generating <strong>client-side</strong>: use a React component like react-barcode + html2canvas + jsPDF to create the PDF.</li>
+<li>If generating <strong>server-side</strong>: call your GET /api/barcodes/[orderId] route to download the generated PDF.</li>
+</ul>
+<h2 id="5-key-implementation-details">5. Key Implementation Details</h2>
+<ol>
+<li>Data Model</li>
+</ol>
+<ul>
+<li>Orders table must have a unique ID (primary key, often auto-increment).</li>
+<li>You can also store a “barcode value” if you want (though often the ID itself suffices).</li>
+</ul>
+<ol start="2">
+<li>Barcode Format:</li>
+</ol>
+<ul>
+<li>Code128 is very common for alphanumeric.</li>
+<li>QR codes can store more data if needed.</li>
+</ul>
+<ol start="3">
+<li>Styling:</li>
+</ol>
+<ul>
+<li>If printing to real labels (e.g., 4x6 inch label printers), you might need to carefully size your PDF pages.</li>
+<li>Test on actual printers to ensure sizing and clarity.</li>
+</ul>
+<ol start="4">
+<li>Performance:</li>
+</ol>
+<ul>
+<li>Generating PDFs on the client is typically fine for small scale.</li>
+<li>For large scale or batch printing, you might prefer server-generated PDFs (so you can queue them, store them, or generate them in a background job).</li>
+</ul>
+<ol start="5">
+<li>Security:</li>
+</ol>
+<ul>
+<li>If only authorized users can download barcodes, ensure your Next.js API routes have appropriate authentication/authorization.</li>
+</ul>
+<h2 id="6-summary--planned-path">6. Summary &amp; Planned Path</h2>
+<h3 id="chosen-method">CHOSEN METHOD</h3>
+<p><strong>Server-side PDF generation</strong> (<em>Option B from the alternative methodologies described above</em>) is generally more robust in production contexts. It keeps the logic centralized, and you can store or log the generated barcode PDFs if needed. The code snippet above - using <code>bwip-js</code> and <code>pdf-lib</code> libraries - is a straightforward example of how to do it. If you can think of improvements/enmhancements, mention your thoughts - but for the first iteration of this, I'd like you to use keep the code from the snippets as it is, aside from any minor changes that are required or are trivial but noticable improvements.</p>
+<h2 id="final-thoughts">Final Thoughts</h2>
+<ul>
+<li><strong>More Complete Approach</strong>: Generate a standardized PDF server-side, then offer a direct “Download PDF” link.</li>
+<li><strong>Error Handling</strong>: Always handle errors gracefully, and provide user feedback.</li>
+<li><strong>Security</strong>: Ensure that the API route is protected from unauthorized access.</li>
+<li><strong>Performance</strong>: Consider the performance implications of generating PDFs on the server, especially for high-volume applications.</li>
+<li><strong>User Experience</strong>: Provide a seamless experience, from form submission to PDF download.</li>
+<li><strong>Minimal Approach (not using this, but it's noted here for reference)</strong>: Use <code>react-barcode</code> and have a “Print” button that opens the browser’s print dialog (no PDF required).</li>
+</ul>
+<p>For all ways of implementing this, the steps remain fundamentally the same:</p>
+<ol>
+<li>Insert order in DB.</li>
+<li>Gather data (order ID, material details) from DB or directly from the response.</li>
+<li>Render or generate a barcode with those details.</li>
+<li>Place the barcode + text into a printable format (either a PDF or on-screen label).</li>
+<li>Let the user print or download.</li>
+</ol>
+<p>That is the general pattern. You can adapt libraries or specifics (like which barcode type to use, how big the label is, etc.) if you can think of improvements/enhancements.</p>
+<p>Thanks. Now please review the code in this file, and adapt it to generate a server-side PDF with a size of 4&quot; x 6&quot; per PDF page. Design the barcode itself however you link - this isn't too important and will be refined later anyway. Just make sure to display the barcode itself in the center of each PDF page (or downloadable print label). And also display some visual text fields (e.g. simple placeholder text like the string literals: &quot;Supplier&quot;, &quot;Material Name&quot;, &quot;Order ID&quot;, etc.) in the same location as the barcode.</p>
+
+</body>
+</html>
