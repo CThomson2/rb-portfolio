@@ -1,0 +1,25 @@
+.card {
+  transition: all 0.3s ease;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.dropdown {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .card {
+    height: auto;
+  }
+
+  .dropdown {
+    display: block;
+    margin-top: 1rem;
+  }
+}

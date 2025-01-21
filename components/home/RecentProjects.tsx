@@ -5,12 +5,12 @@ import Image from "next/image";
 import { projects } from "@/content/main";
 import { PinContainer } from "../ui/Pin";
 
-const RecentProjects = () => {
+const QueryForms = () => {
   return (
     <div className="py-20">
       <h1 className="heading">
-        A small selection of{" "}
-        <span className="text-purple">recent projects</span>
+        All of your paperwork{" "}
+        <span className="text-[#78c4ff]">in one place</span>
       </h1>
       <div className="flex flex-wrap items-center justify-center p-4 gap-16 mt-10">
         {projects.map((item) => (
@@ -27,18 +27,26 @@ const RecentProjects = () => {
                   className="relative w-full h-full overflow-hidden lg:rounded-3xl"
                   style={{ backgroundColor: "#13162D" }}
                 >
-                  <Image
+                  <img src="/bg.png" alt="bgimg" className="object-cover" />
+                  {/* <Image
                     src="/bg.png"
                     alt="bgimg"
                     fill
                     className="object-cover"
-                  />
+                  /> */}
                 </div>
-                <Image
+                <img
                   src={item.img}
                   alt="cover"
                   className="z-10 absolute bottom-0"
                 />
+                {/* <Image
+                  src={item.img}
+                  alt="cover"
+                  width={100}
+                  height={100}
+                  className="z-10 absolute bottom-0"
+                /> */}
               </div>
 
               <h1 className="font-bold lg:text-2xl md:text-xl text-base line-clamp-1">
@@ -90,4 +98,4 @@ const RecentProjects = () => {
   );
 };
 
-export default RecentProjects;
+export default QueryForms;

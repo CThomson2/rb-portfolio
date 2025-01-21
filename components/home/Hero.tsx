@@ -11,6 +11,19 @@ const Hero = () => {
       {/**
        *  UI: Spotlights
        *  Link: https://ui.aceternity.com/components/spotlight
+       *
+       *  Spotlight positioning:
+       *  - First spotlight: Positioned top-left, full screen height
+       *    - Mobile: -40px from top, -10px from left
+       *    - Desktop: -20px from top, -32px from left
+       *
+       *  - Second spotlight: Positioned right side
+       *    - 80% viewport height, 50% viewport width
+       *    - 10px from top, aligned to right edge
+       *
+       *  - Third spotlight: Positioned center-left
+       *    - 80% viewport height, 50% viewport width
+       *    - 28px from top, 80px from left
        */}
       <div>
         <Spotlight
@@ -43,9 +56,9 @@ const Hero = () => {
 
       <div className="flex justify-center relative my-20 z-10">
         <div className="max-w-[89vw] md:max-w-2xl lg:max-w-[60vw] flex flex-col items-center justify-center">
-          <p className="uppercase tracking-widest text-xs text-center text-blue-100 max-w-100">
+          <p className="uppercase tracking-widest text-xs text-center text-slate-300 max-w-100">
             Supplying Scientific Endeavours{" "}
-            <span className="font-bold">since 1974 </span>
+            <span className="font-bold text-slate-100">since 1974 </span>
           </p>
 
           {/**

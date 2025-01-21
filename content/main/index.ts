@@ -8,16 +8,172 @@ import {
   SocialMedia,
   // Additional Types
   GradeInfo,
+  UserDashboard,
 } from "@/types/content";
+
+import {
+  // Card 1
+  TicketCheck,
+  Truck,
+  BookOpenCheck,
+  // Card 2
+  ArrowLeftRight,
+  FlaskRound,
+  ClipboardPenLine,
+  // Card 3
+  LayoutList,
+  Info,
+  Download,
+  // Card 4
+  Rows3,
+  Boxes,
+  OctagonAlert,
+} from "lucide-react";
 
 // UK Manufacturer of Ultra High Purity Solvents and Reagents
 // Free of Interfering Impurities
 
 export const navItems: NavItem[] = [
-  { name: "About", link: "#about" },
-  { name: "Projects", link: "#projects" },
-  { name: "Testimonials", link: "#testimonials" },
+  { name: "Manage", link: "#dashboard" },
+  { name: "Products", link: "/products" },
+  { name: "Inventory", link: "/inventory" },
+  { name: "Operations", link: "/inventory/transactions" },
   { name: "Contact", link: "#contact" },
+];
+
+/*
+ {
+    id: 1,
+    title: "Raw Materials",
+    description:
+      "Assisted in the development of a web-based platform using React.js, enhancing interactivity.",
+    className: "md:col-span-2",
+    thumbnail: "/expr-1.svg",
+  },
+*/
+
+export const userDashboard: UserDashboard[] = [
+  {
+    id: 1,
+    title: "Goods Inwards",
+    content: [
+      {
+        id: 1,
+        description: "Record New Order",
+        link: "/inventory/orders?form=new",
+        icon: TicketCheck,
+      },
+      {
+        id: 2,
+        description: "Active Orders & Deliveries",
+        link: "/inventory/orders",
+        icon: Truck,
+      },
+      {
+        id: 3,
+        description: "Inventory Overview",
+        link: "/inventory",
+        icon: BookOpenCheck,
+      },
+    ],
+    // link: "/inventory",
+    // colors: [[24, 89, 124]],
+    thumbnail: "/expr-1.svg",
+    colors: [[236, 226, 208]],
+    bgColor: "bg-slate-400",
+    animationSpeed: 3,
+    dotSize: 2,
+  },
+  {
+    id: 2,
+    title: "Inventory & Production",
+    content: [
+      {
+        id: 1,
+        description: "Transactions",
+        link: "/inventory/transactions",
+        icon: ArrowLeftRight,
+      },
+      {
+        id: 2,
+        description: "Distillations",
+        link: "/production/distillations",
+        icon: FlaskRound,
+      },
+      {
+        id: 3,
+        description: "QRD Form",
+        link: "/production/qrd-form",
+        icon: ClipboardPenLine,
+      },
+    ],
+    // link: "/inventory/transactions",
+    // colors: [[218, 133, 113]],
+    // bgColor: "bg-blue-[#DA8571]",
+    thumbnail: "/expr-2.svg",
+    colors: [[102, 238, 213]],
+    bgColor: "bg-slate-500",
+    animationSpeed: 3,
+    dotSize: 2,
+  },
+  {
+    id: 3,
+    title: "Product Range",
+    content: [
+      {
+        id: 1,
+        description: "Overview",
+        link: "/products",
+        icon: LayoutList,
+      },
+      {
+        id: 2,
+        description: "Detailed Info",
+        link: "/products?expanded=true",
+        icon: Info,
+      },
+      {
+        id: 3,
+        description: "Sheets for Download",
+        link: "/products?expanded=true",
+        icon: Download,
+      },
+    ],
+    thumbnail: "/exp3.svg",
+    colors: [[81, 136, 184]],
+    bgColor: "bg-slate-500",
+    animationSpeed: 3,
+    dotSize: 2,
+  },
+  {
+    id: 4,
+    title: "Raw Materials",
+    content: [
+      {
+        id: 1,
+        description: "Overview",
+        link: "/raw-materials",
+        icon: Rows3,
+      },
+      {
+        id: 2,
+        description: "Dangerous Goods",
+        link: "/raw-materials/dgn",
+        icon: OctagonAlert,
+      },
+      {
+        id: 3,
+        description: "Drum Inventory",
+        link: "/inventory",
+        icon: Boxes,
+      },
+    ],
+    thumbnail: "/exp4.svg",
+    colors: [[255, 86, 102]],
+    bgColor: "bg-slate-500",
+    animationSpeed: 3,
+    dotSize: 2,
+  },
 ];
 
 export const gradeInfo: GradeInfo[] = [
@@ -28,10 +184,11 @@ export const gradeInfo: GradeInfo[] = [
     description:
       "Glass Distilled solvents are purified through a distillation process using glass apparatus to avoid contamination from metal ions. This grade ensures high purity and is suitable for sensitive analytical applications.",
     img: "/products/gd.png",
-    colors: [[47, 79, 79]],
-    bgColor: "bg-sky-600",
+    // colors: [[47, 79, 79]],
+    colors: [[0, 0, 255]],
+    bgColor: "bg-emerald-600",
     animationSpeed: 5.0,
-    dotSize: 4,
+    dotSize: 2,
   },
   {
     id: 2,
@@ -240,36 +397,132 @@ export const companies: Company[] = [
 export const workExperience: WorkExperience[] = [
   {
     id: 1,
-    title: "Frontend Engineer Intern",
+    title: "Goods Inwards",
     description:
-      "Assisted in the development of a web-based platform using React.js, enhancing interactivity.",
+      "Track and manage incoming raw materials, including details like batch numbers, quantities, and supplier information. Monitor quality control checks and documentation for imported goods.",
     className: "md:col-span-2",
-    thumbnail: "/exp1.svg",
+    thumbnail: "/expr-1.svg",
+    content: [
+      {
+        id: 1,
+        description: "Record New Order",
+        link: "/inventory/orders/create",
+        icon: TicketCheck,
+      },
+      {
+        id: 2,
+        description: "Active Orders & Deliveries",
+        link: "/inventory/orders",
+        icon: Truck,
+      },
+      {
+        id: 3,
+        description: "Inventory Overview",
+        link: "/inventory",
+        icon: BookOpenCheck,
+      },
+    ],
   },
   {
     id: 2,
-    title: "Mobile App Dev - JSM Tech",
+    title: "Operational Management",
     description:
-      "Designed and developed mobile app for both iOS & Android platforms using React Native.",
+      "Monitor and manage the day-to-day operations of the warehouse, including inventory management, order fulfillment, and logistics.",
     className: "md:col-span-2", // change to md:col-span-2
-    thumbnail: "/exp2.svg",
+    thumbnail: "/expr-2.svg",
+    content: [
+      {
+        id: 1,
+        description: "Transactions",
+        link: "/inventory/transactions",
+        icon: ArrowLeftRight,
+      },
+      {
+        id: 2,
+        description: "Distillations",
+        link: "/production/distillations",
+        icon: FlaskRound,
+      },
+      {
+        id: 3,
+        description: "QRD Form",
+        link: "/production/qrd-form",
+        icon: ClipboardPenLine,
+      },
+    ],
   },
   {
     id: 3,
-    title: "Freelance App Dev Project",
+    title: "Product Range",
     description:
-      "Led the dev of a mobile app for a client, from initial concept to deployment on app stores.",
+      "Access our comprehensive product catalog with detailed specifications, stock levels, and historical performance data. View technical documentation and download product specification sheets.",
     className: "md:col-span-2", // change to md:col-span-2
     thumbnail: "/exp3.svg",
+    content: [
+      {
+        id: 1,
+        description: "Overview",
+        link: "/products",
+        icon: LayoutList,
+      },
+      {
+        id: 2,
+        description: "Detailed Info",
+        link: "/products?expanded=true",
+        icon: Info,
+      },
+      {
+        id: 3,
+        description: "Sheets for Download",
+        link: "/products?expanded=true",
+        icon: Download,
+      },
+    ],
   },
   {
     id: 4,
-    title: "Lead Frontend Developer",
+    title: "Raw Materials",
     description:
-      "Developed and maintained user-facing features using modern frontend technologies.",
+      "Monitor and manage raw material inventory with real-time stock levels, safety information, and usage analytics. Track dangerous goods documentation and drum inventory status.",
     className: "md:col-span-2",
     thumbnail: "/exp4.svg",
+    content: [
+      {
+        id: 1,
+        description: "Overview",
+        link: "/raw-materials",
+        icon: Rows3,
+      },
+      {
+        id: 2,
+        description: "Dangerous Goods",
+        link: "/raw-materials/dgn",
+        icon: OctagonAlert,
+      },
+      {
+        id: 3,
+        description: "Drum Inventory",
+        link: "/inventory",
+        icon: Boxes,
+      },
+    ],
   },
+  // {
+  //   id: 5,
+  //   title: "Warehouse Batches",
+  //   description:
+  //     "Led the dev of a mobile app for a client, from initial concept to deployment on app stores.",
+  //   className: "md:col-span-2", // change to md:col-span-2
+  //   thumbnail: "/exp3.svg",
+  // },
+  // {
+  //   id: 6,
+  //   title: "Goods for Export",
+  //   description:
+  //     "Developed and maintained user-facing features using modern frontend technologies.",
+  //   className: "md:col-span-2",
+  //   thumbnail: "/exp4.svg",
+  // },
 ];
 
 export const socialMedia: SocialMedia[] = [

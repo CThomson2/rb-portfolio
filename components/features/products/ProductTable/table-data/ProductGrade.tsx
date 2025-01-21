@@ -1,38 +1,34 @@
-import { GRADE } from "@/types/database/products";
+import { Grade, GradeType } from "@/types/constant/products";
 
 const gradeBackgroundColors = {
-  [GRADE.GD]: "bg-red-100",
-  [GRADE.HPLC]: "bg-yellow-100",
-  [GRADE.LCMS]: "bg-green-100",
-  [GRADE.PTS_DS]: "bg-blue-100",
+  [Grade.GD]: "bg-red-100",
+  [Grade.HPLC]: "bg-yellow-100",
+  [Grade.LCMS]: "bg-green-100",
+  [Grade.PTS_DS]: "bg-blue-100",
 };
 
 const gradeTextColors = {
-  [GRADE.GD]: "text-red-600",
-  [GRADE.HPLC]: "text-yellow-600",
-  [GRADE.LCMS]: "text-green-600",
-  [GRADE.PTS_DS]: "text-blue-600",
+  [Grade.GD]: "text-red-600",
+  [Grade.HPLC]: "text-yellow-600",
+  [Grade.LCMS]: "text-green-600",
+  [Grade.PTS_DS]: "text-blue-600",
 };
 
 const gradeDotBackgroundColors = {
-  [GRADE.GD]: "bg-red-600",
-  [GRADE.HPLC]: "bg-yellow-600",
-  [GRADE.LCMS]: "bg-green-600",
-  [GRADE.PTS_DS]: "bg-blue-600",
+  [Grade.GD]: "bg-red-600",
+  [Grade.HPLC]: "bg-yellow-600",
+  [Grade.LCMS]: "bg-green-600",
+  [Grade.PTS_DS]: "bg-blue-600",
 };
 
 const gradeLabels = {
-  [GRADE.GD]: "GD",
-  [GRADE.HPLC]: "HPLC",
-  [GRADE.LCMS]: "LCMS",
-  [GRADE.PTS_DS]: "PTS-DS",
+  [Grade.GD]: "GD",
+  [Grade.HPLC]: "HPLC",
+  [Grade.LCMS]: "LCMS",
+  [Grade.PTS_DS]: "PTS-DS",
 };
 
-const ProductGrade = ({
-  grade,
-}: {
-  grade: GRADE.GD | GRADE.HPLC | GRADE.LCMS | GRADE.PTS_DS;
-}) => {
+const ProductGrade = ({ grade }: { grade: GradeType }) => {
   return (
     <div
       className={`flex items-center justify-center h-6 px-3 mx-auto gap-2 rounded-sm text-sm font-normal ${gradeBackgroundColors[grade]} ${gradeTextColors[grade]}`}

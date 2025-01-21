@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/database/client";
 
-export async function GET(request: Request) {
+export async function GET(req: Request) {
   const products = await prisma.products.findMany({
     select: {
       product_id: true,

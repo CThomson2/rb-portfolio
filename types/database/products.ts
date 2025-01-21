@@ -2,25 +2,16 @@
 // types/database/products.ts
 import { Decimal } from "@prisma/client/runtime/library";
 
-export enum GRADE {
-  GD = "GD",
-  HPLC = "HPLC",
-  LCMS = "LCMS",
-  PTS_DS = "PTS-DS",
-}
-
-export const enum STOCK_LEVEL {
-  LOW_STOCK = "LOW_STOCK",
-  IN_STOCK = "IN_STOCK",
-  SURPLUS = "SURPLUS",
-}
-
 // Base product type that mirrors your database schema
 export interface BaseProduct {
   product_id: number;
   name: string;
   sku: string;
   grade: string;
+}
+
+export interface ProductTableRow extends BaseProduct {
+  cas_number: string;
 }
 
 // Extended product type with prices (result of JOIN)
@@ -34,4 +25,15 @@ export interface ProductWithPrices extends BaseProduct {
     bottle_size_id: number;
     price: Decimal;
   }[];
+}
+
+export interface ProductModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  product: ProductWithPrices | null;
+}
+
+export interface FilterOption {
+  label: string;
+  value: string;
 }

@@ -25,6 +25,14 @@ const config = {
         "2xl": "1400px",
       },
     },
+    screens: {
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1152px",
+      "2xl": "1280px",
+      "3xl": "1536px",
+    },
     extend: {
       colors: {
         black: {
@@ -39,11 +47,14 @@ const config = {
           200: "#C1C2D3",
         },
         blue: {
-          "100": "#E4ECFF",
+          DEFAULT: "#E4ECFF",
+          100: "#18597C",
+          101: "#DA8571",
+          102: "#64AFD8",
+          103: "#612940",
         },
         purple: "#CBACF9",
-        // Grade card colors
-        grades: {},
+        // Card (homepage)) colors
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -76,6 +87,10 @@ const config = {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+          topLeft: "hsl(var(--card-top-left, 215 25% 27%))",
+          topRight: "hsl(var(--card-top-right, 217 33% 17%))",
+          bottomLeft: "hsl(var(--card-bottom-left, 219 39% 11%))",
+          bottomRight: "hsl(var(--card-bottom-right, 222 47% 11%))",
         },
       },
       typography: {
@@ -101,6 +116,12 @@ const config = {
         "accordion-up": {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
+        },
+        dots: {
+          "0%": { content: "" },
+          "33%": { content: "." },
+          "66%": { content: ".." },
+          "100%": { content: "..." },
         },
         spotlight: {
           "0%": {
@@ -164,6 +185,7 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
         spotlight: "spotlight 2s ease .75s 1 forwards",
         shimmer: "shimmer 2s linear infinite",
+        dots: "dots 1.2s infinite",
         first: "moveVertical 30s ease infinite",
         second: "moveInCircle 20s reverse infinite",
         third: "moveInCircle 40s linear infinite",

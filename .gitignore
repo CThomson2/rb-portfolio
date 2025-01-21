@@ -12,6 +12,7 @@
 # next.js
 /.next/
 /out/
+.next/
 
 # production
 /build
@@ -26,8 +27,8 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-.env
-.env*.local
+# .env
+# .env*.local
 
 # vercel
 .vercel
@@ -41,6 +42,13 @@ next-env.d.ts
 
 # output
 *.txt
+project_tree.pdf
 
 # database
 database/generated/
+database/sessions/
+barcodes_test.pdf
+lib/generateBarcodes.js
+
+# documentation
+docs/

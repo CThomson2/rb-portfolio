@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { GRADE } from "@/types/database/products";
+import { Grade, GradeType } from "@/types/constant/products";
 import TabItem from "./TabItem";
 
 interface GradeCounts {
@@ -12,8 +12,8 @@ interface GradeCounts {
 }
 
 interface TableTabsProps {
-  activeTab: GRADE | "All";
-  setActiveTab: (value: GRADE | "All") => void;
+  activeTab: string;
+  setActiveTab: (value: string) => void;
 }
 
 const TableTabs = ({ activeTab, setActiveTab }: TableTabsProps) => {
@@ -56,7 +56,7 @@ const TableTabs = ({ activeTab, setActiveTab }: TableTabsProps) => {
         setActiveTab={setActiveTab}
       />
 
-      {Object.values(GRADE).map((grade) => {
+      {Object.values(Grade).map((grade) => {
         return (
           <TabItem
             key={grade}

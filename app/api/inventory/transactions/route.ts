@@ -1,28 +1,28 @@
-// app/api/inventory/transactions/route.ts
-import { prisma } from "@/database/client";
+// This is a Next.js API route handler for fetching inventory transactions
+// The route is accessed at /api/inventory/transactions
 import { NextResponse } from "next/server";
-import { inventoryRepository } from "@/database/repositories";
+import { queries } from "@/database/repositories/transactions/queries";
 
-export async function GET() {
+export async function GET(req: Request) {
+  // Extract search params from the request URL
+  // For example, from: /api/inventory/transactions?page=2&limit=10
+  const { searchParams } = new URL(req.url);
+
+  // Get page number from URL params, defaulting to 1 if not provided
+  // parseInt converts the string param to a number
+  const page = parseInt(searchParams.get("page") || "1");
+
+  // Get limit (items per page) from URL params, defaulting to 50
+  // This allows requests like ?limit=10 to show 10 items per page
+  const limit = parseInt(searchParams.get("limit") || "50");
+
   try {
-    const transactions = await prisma.$queryRaw`
-        SELECT 
-            t.*, 
-            CASE 
-            WHEN t.import_id IS NOT NULL THEN i.supplier_name
-            WHEN t.drum_id IS NOT NULL THEN nd.material_type
-            WHEN t.repro_id IS NOT NULL THEN rd.material_type
-            END as material_name
-        FROM inventory.transactions t
-        LEFT JOIN inventory.imports i ON t.import_id = i.import_id
-        LEFT JOIN inventory.new_drums nd ON t.drum_id = nd.drum_id
-        LEFT JOIN inventory.repro_drums rd ON t.repro_id = rd.repro_drum_id
-        ORDER BY t.created_at DESC
-        LIMIT 100
-    `;
-
-    return NextResponse.json(transactions.rows);
+    // Fetch transactions from the database using the repository function
+    // TODO: Pass page and limit to getTransactions for pagination
+    const transactions = await queries.getTransactions(page, limit);
+    return NextResponse.json(transactions);
   } catch (error) {
+    // If database query fails, return 500 error response
     return NextResponse.json(
       { error: "Failed to fetch transactions" },
       { status: 500 }

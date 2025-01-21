@@ -2,18 +2,17 @@
 
 // Import necessary dependencies for table functionality
 import { ColumnDef } from "@tanstack/react-table";
-import { Checkbox } from "@/components/ui/checkbox";
-import { SortableHeader } from "@/components/shared/SortableHeader";
+import { Checkbox } from "@/components/ui/Checkbox";
+import { SortableColumn } from "@/components/shared/table/ux/SortableColumn";
 // Import individual cell components for better organization
 import ProductName from "@/components/features/products/ProductTable/table-data/ProductName";
 import ProductGrade from "@/components/features/products/ProductTable/table-data/ProductGrade";
 
 import ProductStockLevel from "@/components/features/products/ProductTable/table-data/ProductStockLevel";
 
-import ProjectLastUpdate from "@/components/features/projects/LastUpdate";
-import { ProjectActions } from "@/components/shared/Actions";
-import ProjectTimeLine from "@/components/shared/Timeline";
-import type { ProductTableRow } from "@/types/components/products";
+import ProjectLastUpdate from "@/components/shared/projects/LastUpdate";
+import { ProjectActions } from "@/components/shared/table/ux/Actions";
+import type { ProductTableRow } from "@/types/database/products";
 
 /*
 To implement filtering and sorting, you'll need:
@@ -93,7 +92,7 @@ export const columns: ColumnDef<ProductTableRow>[] = [
     // cell: Renders each cell in this column using ProductName component, passing the name value from the row
     // enableSorting: Allows this column to be sorted when clicking the header
     accessorKey: "name",
-    header: ({ column }) => <SortableHeader column={column} title="Product" />,
+    header: ({ column }) => <SortableColumn column={column} title="Product" />,
     cell: ({ row }) => (
       <div className="min-w-0 overflow-hidden whitespace-nowrap">
         <ProductName name={row.getValue("name")} />
@@ -104,7 +103,7 @@ export const columns: ColumnDef<ProductTableRow>[] = [
   {
     // Grade column - traffic light icons to show varying quality
     accessorKey: "grade",
-    header: ({ column }) => <SortableHeader column={column} title="Grade" />,
+    header: ({ column }) => <SortableColumn column={column} title="Grade" />,
     cell: ({ row }) => (
       <div className="min-w-fit max-w-[90px] overflow-hidden">
         <ProductGrade grade={row.getValue("grade")} />
@@ -126,7 +125,7 @@ export const columns: ColumnDef<ProductTableRow>[] = [
     // Last updated column with date sorting
     accessorKey: "cas_number",
     header: ({ column }) => (
-      <SortableHeader column={column} title="CAS number" />
+      <SortableColumn column={column} title="CAS number" />
     ),
     cell: ({ row }) => (
       <div className="min-w-0 overflow-hidden">

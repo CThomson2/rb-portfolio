@@ -1,15 +1,9 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import {
-  countProductsByGrade,
-  countAllProducts,
-} from "@/lib/products/countProductsByGrade";
-import { GRADE } from "@/types/database/products";
-import { productRepository } from "@/database/repositories";
 import { NextResponse } from "next/server";
+import { queries } from "@/database/repositories/products";
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
-    const counts = await productRepository.getProductCounts();
+    const counts = await queries.count.getProductCounts();
     return NextResponse.json(counts);
   } catch (error) {
     return NextResponse.json(

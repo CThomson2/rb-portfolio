@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page Structure</title>
+  </head>
+  <body>
+    <!-- <header>
+      This document visualizes the layout structure of the home page.
+    </header> -->
+
+    <div class="page-layout">
+      <!-- Navigation Bar -->
+      <div class="nav-bar">Header/Navigation</div>
+
+      <!-- Left Sidebar -->
+      <div class="sidebar sidebar-left">Left Sidebar</div>
+
+      <!-- Main Content Area -->
+      <div class="main-content">
+        <table class="content-table">
+          <tr>
+            <td class="content-cell hero">Hero Section</td>
+          </tr>
+          <tr>
+            <td class="content-cell">Bento Grid Dashboard</td>
+          </tr>
+          <tr>
+            <td class="content-cell">About/Guides</td>
+          </tr>
+          <tr>
+            <td class="content-cell">Forms & Reports</td>
+          </tr>
+          <tr>
+            <td class="content-cell">Data Analytics / Tables</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Right Sidebar -->
+      <div class="sidebar sidebar-right">Right Sidebar</div>
+    </div>
+    <!-- Footer -->
+    <footer>Footer</footer>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: InterHelvetica, sans-serif;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 1.25rem;
+      }
+
+      .page-layout {
+        display: flex;
+        width: 100%;
+        flex-wrap: wrap;
+        position: relative;
+        margin: 0;
+      }
+
+      .nav-bar {
+        width: 100%;
+        height: 80px;
+        background: #bfb;
+        border: 1px solid #4f4f4f;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 1.25rem;
+        /* padding: 10px; */
+        position: fixed;
+        margin-top: 0;
+        top: 0;
+        z-index: 200;
+      }
+
+      .sidebar {
+        width: 15%;
+        background: #f0f0f0;
+        min-height: 100vh;
+        position: fixed;
+        top: 60px;
+      }
+
+      .sidebar {
+        top: 80px;
+        z-index: 100;
+        background: #5ad;
+      }
+
+      .sidebar-left {
+        left: 0;
+      }
+
+      .sidebar-right {
+        right: 0;
+      }
+
+      .main-content {
+        width: 70%;
+        margin: 60px 15% 0 15%;
+      }
+
+      .content-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .content-cell {
+        border: 1px solid #888;
+        padding: 10px;
+        height: 250px;
+      }
+
+      .hero {
+        height: 300px;
+      }
+
+      footer {
+        height: 100px;
+        width: 100%;
+        background: rgb(140, 72, 249);
+        border: 1px solid #4f4f4f;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 1.25rem;
+        position: fixed;
+        bottom: 0;
+        z-index: 200;
+      }
+    </style>
+  </body>
+</html>

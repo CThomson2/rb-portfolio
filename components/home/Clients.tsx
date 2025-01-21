@@ -32,12 +32,15 @@ const Clients = () => {
                 <Image
                   src={company.img}
                   alt={company.name}
+                  width={100}
+                  height={100}
                   className="md:w-10 w-5"
                 />
                 <Image
                   src={company.nameImg}
                   alt={company.name}
                   width={company.id === 4 || company.id === 5 ? 100 : 150}
+                  height={100}
                   className="md:w-24 w-20"
                 />
               </div>

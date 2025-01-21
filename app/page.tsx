@@ -8,8 +8,9 @@ import Footer from "@/components/home/Footer";
 import Clients from "@/components/home/Clients";
 import ApproachGrid from "@/components/home/Approach";
 import Experience from "@/components/home/Experience";
-import RecentProjects from "@/components/home/RecentProjects";
+import QueryForms from "@/components/home/RecentProjects";
 import { FloatingNav } from "@/components/ui/FloatingNavbar";
+import UserDashboard from "@/components/home/UserDashboard";
 
 const Home = () => {
   return (
@@ -17,11 +18,12 @@ const Home = () => {
       <div className="max-w-7xl w-full">
         <FloatingNav navItems={navItems} />
         <Hero />
-        {/* <Grid /> */}
-        {/* <RecentProjects /> */}
-        {/* <Clients /> */}
-        <ApproachGrid />
         <Experience />
+        <QueryForms />
+        {/* <Grid /> */}
+        <Clients />
+        {/* <UserDashboard /> */}
+        <ApproachGrid />
         <Footer />
       </div>
     </main>

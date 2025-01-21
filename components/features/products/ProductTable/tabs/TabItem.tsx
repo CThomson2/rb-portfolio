@@ -1,8 +1,8 @@
 "use client";
 import { useMemo } from "react";
-import { Separator } from "@/components/ui/separator";
+import { Separator } from "@/components/ui/Separator";
 
-import { GRADE } from "@/types/database/products";
+import { GradeType } from "@/types/constant/products";
 import { cn } from "@/lib/utils";
 
 const TabItem = ({
@@ -11,13 +11,15 @@ const TabItem = ({
   activeTab,
   setActiveTab,
 }: {
-  grade: GRADE | "All";
+  grade: GradeType | "All";
   number: number;
-  activeTab: GRADE | "All";
-  setActiveTab: (value: GRADE | "All") => void;
+  activeTab: string;
+  setActiveTab: (value: string) => void;
 }) => {
   const handleClick = () => {
+    console.log("clicked", grade);
     setActiveTab(grade);
+    console.log("activeTab", activeTab);
   };
 
   const isActive = useMemo(() => activeTab === grade, [activeTab, grade]);

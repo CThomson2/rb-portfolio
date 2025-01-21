@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
 import "./globals.css";
-import { ThemeProvider } from "./provider";
+import { Providers } from "./providers";
+import { Sidebar } from "@/components/layout/Sidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,14 +24,10 @@ export default function RootLayout({
         <link rel="icon" href="/rc-logo-b.png" sizes="any" />
       </head>
       <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        {/* Sidebar is included globally; it can be toggled open/closed on any page */}
+        <Sidebar />
+
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
