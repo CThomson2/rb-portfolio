@@ -94,10 +94,10 @@ export type repro_drums = $Result.DefaultSelection<Prisma.$repro_drumsPayload>
  */
 export type transactions = $Result.DefaultSelection<Prisma.$transactionsPayload>
 /**
- * Model stills
+ * Model Still
  * This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
  */
-export type stills = $Result.DefaultSelection<Prisma.$stillsPayload>
+export type Still = $Result.DefaultSelection<Prisma.$StillPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -385,14 +385,14 @@ export class PrismaClient<
   get transactions(): Prisma.transactionsDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.stills`: Exposes CRUD operations for the **stills** model.
+   * `prisma.still`: Exposes CRUD operations for the **Still** model.
     * Example usage:
     * ```ts
     * // Fetch zero or more Stills
-    * const stills = await prisma.stills.findMany()
+    * const stills = await prisma.still.findMany()
     * ```
     */
-  get stills(): Prisma.stillsDelegate<ExtArgs, ClientOptions>;
+  get still(): Prisma.StillDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -849,7 +849,7 @@ export namespace Prisma {
     repro_additions: 'repro_additions',
     repro_drums: 'repro_drums',
     transactions: 'transactions',
-    stills: 'stills'
+    Still: 'Still'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -865,7 +865,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "bottle_sizes" | "chemical_groups" | "product_prices" | "products" | "raw_materials" | "batches" | "deliveries" | "distillations" | "drum_distillations" | "imports" | "new_drums" | "orders" | "processes" | "repro_additions" | "repro_drums" | "transactions" | "stills"
+      modelProps: "bottle_sizes" | "chemical_groups" | "product_prices" | "products" | "raw_materials" | "batches" | "deliveries" | "distillations" | "drum_distillations" | "imports" | "new_drums" | "orders" | "processes" | "repro_additions" | "repro_drums" | "transactions" | "still"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2053,77 +2053,77 @@ export namespace Prisma {
           }
         }
       }
-      stills: {
-        payload: Prisma.$stillsPayload<ExtArgs>
-        fields: Prisma.stillsFieldRefs
+      Still: {
+        payload: Prisma.$StillPayload<ExtArgs>
+        fields: Prisma.StillFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.stillsFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$stillsPayload> | null
+            args: Prisma.StillFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StillPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.stillsFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$stillsPayload>
+            args: Prisma.StillFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StillPayload>
           }
           findFirst: {
-            args: Prisma.stillsFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$stillsPayload> | null
+            args: Prisma.StillFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StillPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.stillsFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$stillsPayload>
+            args: Prisma.StillFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StillPayload>
           }
           findMany: {
-            args: Prisma.stillsFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$stillsPayload>[]
+            args: Prisma.StillFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StillPayload>[]
           }
           create: {
-            args: Prisma.stillsCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$stillsPayload>
+            args: Prisma.StillCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StillPayload>
           }
           createMany: {
-            args: Prisma.stillsCreateManyArgs<ExtArgs>
+            args: Prisma.StillCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.stillsCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$stillsPayload>[]
+            args: Prisma.StillCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StillPayload>[]
           }
           delete: {
-            args: Prisma.stillsDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$stillsPayload>
+            args: Prisma.StillDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StillPayload>
           }
           update: {
-            args: Prisma.stillsUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$stillsPayload>
+            args: Prisma.StillUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StillPayload>
           }
           deleteMany: {
-            args: Prisma.stillsDeleteManyArgs<ExtArgs>
+            args: Prisma.StillDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.stillsUpdateManyArgs<ExtArgs>
+            args: Prisma.StillUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.stillsUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$stillsPayload>[]
+            args: Prisma.StillUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StillPayload>[]
           }
           upsert: {
-            args: Prisma.stillsUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$stillsPayload>
+            args: Prisma.StillUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StillPayload>
           }
           aggregate: {
-            args: Prisma.StillsAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateStills>
+            args: Prisma.StillAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateStill>
           }
           groupBy: {
-            args: Prisma.stillsGroupByArgs<ExtArgs>
-            result: $Utils.Optional<StillsGroupByOutputType>[]
+            args: Prisma.StillGroupByArgs<ExtArgs>
+            result: $Utils.Optional<StillGroupByOutputType>[]
           }
           count: {
-            args: Prisma.stillsCountArgs<ExtArgs>
-            result: $Utils.Optional<StillsCountAggregateOutputType> | number
+            args: Prisma.StillCountArgs<ExtArgs>
+            result: $Utils.Optional<StillCountAggregateOutputType> | number
           }
         }
       }
@@ -2227,7 +2227,7 @@ export namespace Prisma {
     repro_additions?: repro_additionsOmit
     repro_drums?: repro_drumsOmit
     transactions?: transactionsOmit
-    stills?: stillsOmit
+    still?: StillOmit
   }
 
   /* Types for Logging */
@@ -2651,32 +2651,32 @@ export namespace Prisma {
 
 
   /**
-   * Count Type StillsCountOutputType
+   * Count Type StillCountOutputType
    */
 
-  export type StillsCountOutputType = {
+  export type StillCountOutputType = {
     processes: number
   }
 
-  export type StillsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    processes?: boolean | StillsCountOutputTypeCountProcessesArgs
+  export type StillCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    processes?: boolean | StillCountOutputTypeCountProcessesArgs
   }
 
   // Custom InputTypes
   /**
-   * StillsCountOutputType without action
+   * StillCountOutputType without action
    */
-  export type StillsCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StillCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StillsCountOutputType
+     * Select specific fields to fetch from the StillCountOutputType
      */
-    select?: StillsCountOutputTypeSelect<ExtArgs> | null
+    select?: StillCountOutputTypeSelect<ExtArgs> | null
   }
 
   /**
-   * StillsCountOutputType without action
+   * StillCountOutputType without action
    */
-  export type StillsCountOutputTypeCountProcessesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StillCountOutputTypeCountProcessesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: processesWhereInput
   }
 
@@ -16446,7 +16446,7 @@ export namespace Prisma {
     transporter?: boolean
     date_processed?: boolean
     new_drums?: boolean | processes$new_drumsArgs<ExtArgs>
-    stills?: boolean | stillsDefaultArgs<ExtArgs>
+    stills?: boolean | StillDefaultArgs<ExtArgs>
     transactions?: boolean | processes$transactionsArgs<ExtArgs>
     _count?: boolean | ProcessesCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["processes"]>
@@ -16462,7 +16462,7 @@ export namespace Prisma {
     transporter?: boolean
     date_processed?: boolean
     new_drums?: boolean | processes$new_drumsArgs<ExtArgs>
-    stills?: boolean | stillsDefaultArgs<ExtArgs>
+    stills?: boolean | StillDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["processes"]>
 
   export type processesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -16476,7 +16476,7 @@ export namespace Prisma {
     transporter?: boolean
     date_processed?: boolean
     new_drums?: boolean | processes$new_drumsArgs<ExtArgs>
-    stills?: boolean | stillsDefaultArgs<ExtArgs>
+    stills?: boolean | StillDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["processes"]>
 
   export type processesSelectScalar = {
@@ -16494,24 +16494,24 @@ export namespace Prisma {
   export type processesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"process_id" | "material" | "drum_id" | "supplier" | "still_code" | "operator" | "loader" | "transporter" | "date_processed", ExtArgs["result"]["processes"]>
   export type processesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     new_drums?: boolean | processes$new_drumsArgs<ExtArgs>
-    stills?: boolean | stillsDefaultArgs<ExtArgs>
+    stills?: boolean | StillDefaultArgs<ExtArgs>
     transactions?: boolean | processes$transactionsArgs<ExtArgs>
     _count?: boolean | ProcessesCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type processesIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     new_drums?: boolean | processes$new_drumsArgs<ExtArgs>
-    stills?: boolean | stillsDefaultArgs<ExtArgs>
+    stills?: boolean | StillDefaultArgs<ExtArgs>
   }
   export type processesIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     new_drums?: boolean | processes$new_drumsArgs<ExtArgs>
-    stills?: boolean | stillsDefaultArgs<ExtArgs>
+    stills?: boolean | StillDefaultArgs<ExtArgs>
   }
 
   export type $processesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "processes"
     objects: {
       new_drums: Prisma.$new_drumsPayload<ExtArgs> | null
-      stills: Prisma.$stillsPayload<ExtArgs>
+      stills: Prisma.$StillPayload<ExtArgs>
       transactions: Prisma.$transactionsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -16919,7 +16919,7 @@ export namespace Prisma {
   export interface Prisma__processesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     new_drums<T extends processes$new_drumsArgs<ExtArgs> = {}>(args?: Subset<T, processes$new_drumsArgs<ExtArgs>>): Prisma__new_drumsClient<$Result.GetResult<Prisma.$new_drumsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
-    stills<T extends stillsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, stillsDefaultArgs<ExtArgs>>): Prisma__stillsClient<$Result.GetResult<Prisma.$stillsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    stills<T extends StillDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StillDefaultArgs<ExtArgs>>): Prisma__StillClient<$Result.GetResult<Prisma.$StillPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
     transactions<T extends processes$transactionsArgs<ExtArgs> = {}>(args?: Subset<T, processes$transactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$transactionsPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -21092,256 +21092,256 @@ export namespace Prisma {
 
 
   /**
-   * Model stills
+   * Model Still
    */
 
-  export type AggregateStills = {
-    _count: StillsCountAggregateOutputType | null
-    _avg: StillsAvgAggregateOutputType | null
-    _sum: StillsSumAggregateOutputType | null
-    _min: StillsMinAggregateOutputType | null
-    _max: StillsMaxAggregateOutputType | null
+  export type AggregateStill = {
+    _count: StillCountAggregateOutputType | null
+    _avg: StillAvgAggregateOutputType | null
+    _sum: StillSumAggregateOutputType | null
+    _min: StillMinAggregateOutputType | null
+    _max: StillMaxAggregateOutputType | null
   }
 
-  export type StillsAvgAggregateOutputType = {
+  export type StillAvgAggregateOutputType = {
     power: number | null
     capacity: number | null
   }
 
-  export type StillsSumAggregateOutputType = {
+  export type StillSumAggregateOutputType = {
     power: number | null
     capacity: number | null
   }
 
-  export type StillsMinAggregateOutputType = {
+  export type StillMinAggregateOutputType = {
     code: string | null
     site: string | null
     power: number | null
     capacity: number | null
-    is_vacuum: boolean | null
-    is_operational: boolean | null
+    isVacuum: boolean | null
+    isOperational: boolean | null
   }
 
-  export type StillsMaxAggregateOutputType = {
+  export type StillMaxAggregateOutputType = {
     code: string | null
     site: string | null
     power: number | null
     capacity: number | null
-    is_vacuum: boolean | null
-    is_operational: boolean | null
+    isVacuum: boolean | null
+    isOperational: boolean | null
   }
 
-  export type StillsCountAggregateOutputType = {
+  export type StillCountAggregateOutputType = {
     code: number
     site: number
     power: number
     capacity: number
-    is_vacuum: number
-    is_operational: number
+    isVacuum: number
+    isOperational: number
     _all: number
   }
 
 
-  export type StillsAvgAggregateInputType = {
+  export type StillAvgAggregateInputType = {
     power?: true
     capacity?: true
   }
 
-  export type StillsSumAggregateInputType = {
+  export type StillSumAggregateInputType = {
     power?: true
     capacity?: true
   }
 
-  export type StillsMinAggregateInputType = {
+  export type StillMinAggregateInputType = {
     code?: true
     site?: true
     power?: true
     capacity?: true
-    is_vacuum?: true
-    is_operational?: true
+    isVacuum?: true
+    isOperational?: true
   }
 
-  export type StillsMaxAggregateInputType = {
+  export type StillMaxAggregateInputType = {
     code?: true
     site?: true
     power?: true
     capacity?: true
-    is_vacuum?: true
-    is_operational?: true
+    isVacuum?: true
+    isOperational?: true
   }
 
-  export type StillsCountAggregateInputType = {
+  export type StillCountAggregateInputType = {
     code?: true
     site?: true
     power?: true
     capacity?: true
-    is_vacuum?: true
-    is_operational?: true
+    isVacuum?: true
+    isOperational?: true
     _all?: true
   }
 
-  export type StillsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StillAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which stills to aggregate.
+     * Filter which Still to aggregate.
      */
-    where?: stillsWhereInput
+    where?: StillWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of stills to fetch.
+     * Determine the order of Stills to fetch.
      */
-    orderBy?: stillsOrderByWithRelationInput | stillsOrderByWithRelationInput[]
+    orderBy?: StillOrderByWithRelationInput | StillOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: stillsWhereUniqueInput
+    cursor?: StillWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` stills from the position of the cursor.
+     * Take `±n` Stills from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` stills.
+     * Skip the first `n` Stills.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned stills
+     * Count returned Stills
     **/
-    _count?: true | StillsCountAggregateInputType
+    _count?: true | StillCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: StillsAvgAggregateInputType
+    _avg?: StillAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: StillsSumAggregateInputType
+    _sum?: StillSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: StillsMinAggregateInputType
+    _min?: StillMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: StillsMaxAggregateInputType
+    _max?: StillMaxAggregateInputType
   }
 
-  export type GetStillsAggregateType<T extends StillsAggregateArgs> = {
-        [P in keyof T & keyof AggregateStills]: P extends '_count' | 'count'
+  export type GetStillAggregateType<T extends StillAggregateArgs> = {
+        [P in keyof T & keyof AggregateStill]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateStills[P]>
-      : GetScalarType<T[P], AggregateStills[P]>
+        : GetScalarType<T[P], AggregateStill[P]>
+      : GetScalarType<T[P], AggregateStill[P]>
   }
 
 
 
 
-  export type stillsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: stillsWhereInput
-    orderBy?: stillsOrderByWithAggregationInput | stillsOrderByWithAggregationInput[]
-    by: StillsScalarFieldEnum[] | StillsScalarFieldEnum
-    having?: stillsScalarWhereWithAggregatesInput
+  export type StillGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StillWhereInput
+    orderBy?: StillOrderByWithAggregationInput | StillOrderByWithAggregationInput[]
+    by: StillScalarFieldEnum[] | StillScalarFieldEnum
+    having?: StillScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: StillsCountAggregateInputType | true
-    _avg?: StillsAvgAggregateInputType
-    _sum?: StillsSumAggregateInputType
-    _min?: StillsMinAggregateInputType
-    _max?: StillsMaxAggregateInputType
+    _count?: StillCountAggregateInputType | true
+    _avg?: StillAvgAggregateInputType
+    _sum?: StillSumAggregateInputType
+    _min?: StillMinAggregateInputType
+    _max?: StillMaxAggregateInputType
   }
 
-  export type StillsGroupByOutputType = {
+  export type StillGroupByOutputType = {
     code: string
     site: string
     power: number
     capacity: number
-    is_vacuum: boolean | null
-    is_operational: boolean | null
-    _count: StillsCountAggregateOutputType | null
-    _avg: StillsAvgAggregateOutputType | null
-    _sum: StillsSumAggregateOutputType | null
-    _min: StillsMinAggregateOutputType | null
-    _max: StillsMaxAggregateOutputType | null
+    isVacuum: boolean | null
+    isOperational: boolean | null
+    _count: StillCountAggregateOutputType | null
+    _avg: StillAvgAggregateOutputType | null
+    _sum: StillSumAggregateOutputType | null
+    _min: StillMinAggregateOutputType | null
+    _max: StillMaxAggregateOutputType | null
   }
 
-  type GetStillsGroupByPayload<T extends stillsGroupByArgs> = Prisma.PrismaPromise<
+  type GetStillGroupByPayload<T extends StillGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<StillsGroupByOutputType, T['by']> &
+      PickEnumerable<StillGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof StillsGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof StillGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], StillsGroupByOutputType[P]>
-            : GetScalarType<T[P], StillsGroupByOutputType[P]>
+              : GetScalarType<T[P], StillGroupByOutputType[P]>
+            : GetScalarType<T[P], StillGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type stillsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type StillSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     code?: boolean
     site?: boolean
     power?: boolean
     capacity?: boolean
-    is_vacuum?: boolean
-    is_operational?: boolean
-    processes?: boolean | stills$processesArgs<ExtArgs>
-    _count?: boolean | StillsCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["stills"]>
+    isVacuum?: boolean
+    isOperational?: boolean
+    processes?: boolean | Still$processesArgs<ExtArgs>
+    _count?: boolean | StillCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["still"]>
 
-  export type stillsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type StillSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     code?: boolean
     site?: boolean
     power?: boolean
     capacity?: boolean
-    is_vacuum?: boolean
-    is_operational?: boolean
-  }, ExtArgs["result"]["stills"]>
+    isVacuum?: boolean
+    isOperational?: boolean
+  }, ExtArgs["result"]["still"]>
 
-  export type stillsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type StillSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     code?: boolean
     site?: boolean
     power?: boolean
     capacity?: boolean
-    is_vacuum?: boolean
-    is_operational?: boolean
-  }, ExtArgs["result"]["stills"]>
+    isVacuum?: boolean
+    isOperational?: boolean
+  }, ExtArgs["result"]["still"]>
 
-  export type stillsSelectScalar = {
+  export type StillSelectScalar = {
     code?: boolean
     site?: boolean
     power?: boolean
     capacity?: boolean
-    is_vacuum?: boolean
-    is_operational?: boolean
+    isVacuum?: boolean
+    isOperational?: boolean
   }
 
-  export type stillsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"code" | "site" | "power" | "capacity" | "is_vacuum" | "is_operational", ExtArgs["result"]["stills"]>
-  export type stillsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    processes?: boolean | stills$processesArgs<ExtArgs>
-    _count?: boolean | StillsCountOutputTypeDefaultArgs<ExtArgs>
+  export type StillOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"code" | "site" | "power" | "capacity" | "isVacuum" | "isOperational", ExtArgs["result"]["still"]>
+  export type StillInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    processes?: boolean | Still$processesArgs<ExtArgs>
+    _count?: boolean | StillCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type stillsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type stillsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type StillIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type StillIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
-  export type $stillsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "stills"
+  export type $StillPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Still"
     objects: {
       processes: Prisma.$processesPayload<ExtArgs>[]
     }
@@ -21350,138 +21350,138 @@ export namespace Prisma {
       site: string
       power: number
       capacity: number
-      is_vacuum: boolean | null
-      is_operational: boolean | null
-    }, ExtArgs["result"]["stills"]>
+      isVacuum: boolean | null
+      isOperational: boolean | null
+    }, ExtArgs["result"]["still"]>
     composites: {}
   }
 
-  type stillsGetPayload<S extends boolean | null | undefined | stillsDefaultArgs> = $Result.GetResult<Prisma.$stillsPayload, S>
+  type StillGetPayload<S extends boolean | null | undefined | StillDefaultArgs> = $Result.GetResult<Prisma.$StillPayload, S>
 
-  type stillsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<stillsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: StillsCountAggregateInputType | true
+  type StillCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<StillFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: StillCountAggregateInputType | true
     }
 
-  export interface stillsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['stills'], meta: { name: 'stills' } }
+  export interface StillDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Still'], meta: { name: 'Still' } }
     /**
-     * Find zero or one Stills that matches the filter.
-     * @param {stillsFindUniqueArgs} args - Arguments to find a Stills
+     * Find zero or one Still that matches the filter.
+     * @param {StillFindUniqueArgs} args - Arguments to find a Still
      * @example
-     * // Get one Stills
-     * const stills = await prisma.stills.findUnique({
+     * // Get one Still
+     * const still = await prisma.still.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends stillsFindUniqueArgs>(args: SelectSubset<T, stillsFindUniqueArgs<ExtArgs>>): Prisma__stillsClient<$Result.GetResult<Prisma.$stillsPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends StillFindUniqueArgs>(args: SelectSubset<T, StillFindUniqueArgs<ExtArgs>>): Prisma__StillClient<$Result.GetResult<Prisma.$StillPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
 
     /**
-     * Find one Stills that matches the filter or throw an error with `error.code='P2025'`
+     * Find one Still that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {stillsFindUniqueOrThrowArgs} args - Arguments to find a Stills
+     * @param {StillFindUniqueOrThrowArgs} args - Arguments to find a Still
      * @example
-     * // Get one Stills
-     * const stills = await prisma.stills.findUniqueOrThrow({
+     * // Get one Still
+     * const still = await prisma.still.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends stillsFindUniqueOrThrowArgs>(args: SelectSubset<T, stillsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__stillsClient<$Result.GetResult<Prisma.$stillsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends StillFindUniqueOrThrowArgs>(args: SelectSubset<T, StillFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StillClient<$Result.GetResult<Prisma.$StillPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
-     * Find the first Stills that matches the filter.
+     * Find the first Still that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {stillsFindFirstArgs} args - Arguments to find a Stills
+     * @param {StillFindFirstArgs} args - Arguments to find a Still
      * @example
-     * // Get one Stills
-     * const stills = await prisma.stills.findFirst({
+     * // Get one Still
+     * const still = await prisma.still.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends stillsFindFirstArgs>(args?: SelectSubset<T, stillsFindFirstArgs<ExtArgs>>): Prisma__stillsClient<$Result.GetResult<Prisma.$stillsPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends StillFindFirstArgs>(args?: SelectSubset<T, StillFindFirstArgs<ExtArgs>>): Prisma__StillClient<$Result.GetResult<Prisma.$StillPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
 
     /**
-     * Find the first Stills that matches the filter or
+     * Find the first Still that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {stillsFindFirstOrThrowArgs} args - Arguments to find a Stills
+     * @param {StillFindFirstOrThrowArgs} args - Arguments to find a Still
      * @example
-     * // Get one Stills
-     * const stills = await prisma.stills.findFirstOrThrow({
+     * // Get one Still
+     * const still = await prisma.still.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends stillsFindFirstOrThrowArgs>(args?: SelectSubset<T, stillsFindFirstOrThrowArgs<ExtArgs>>): Prisma__stillsClient<$Result.GetResult<Prisma.$stillsPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends StillFindFirstOrThrowArgs>(args?: SelectSubset<T, StillFindFirstOrThrowArgs<ExtArgs>>): Prisma__StillClient<$Result.GetResult<Prisma.$StillPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Find zero or more Stills that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {stillsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {StillFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Stills
-     * const stills = await prisma.stills.findMany()
+     * const stills = await prisma.still.findMany()
      * 
      * // Get first 10 Stills
-     * const stills = await prisma.stills.findMany({ take: 10 })
+     * const stills = await prisma.still.findMany({ take: 10 })
      * 
      * // Only select the `code`
-     * const stillsWithCodeOnly = await prisma.stills.findMany({ select: { code: true } })
+     * const stillWithCodeOnly = await prisma.still.findMany({ select: { code: true } })
      * 
      */
-    findMany<T extends stillsFindManyArgs>(args?: SelectSubset<T, stillsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$stillsPayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends StillFindManyArgs>(args?: SelectSubset<T, StillFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StillPayload<ExtArgs>, T, "findMany", ClientOptions>>
 
     /**
-     * Create a Stills.
-     * @param {stillsCreateArgs} args - Arguments to create a Stills.
+     * Create a Still.
+     * @param {StillCreateArgs} args - Arguments to create a Still.
      * @example
-     * // Create one Stills
-     * const Stills = await prisma.stills.create({
+     * // Create one Still
+     * const Still = await prisma.still.create({
      *   data: {
-     *     // ... data to create a Stills
+     *     // ... data to create a Still
      *   }
      * })
      * 
      */
-    create<T extends stillsCreateArgs>(args: SelectSubset<T, stillsCreateArgs<ExtArgs>>): Prisma__stillsClient<$Result.GetResult<Prisma.$stillsPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends StillCreateArgs>(args: SelectSubset<T, StillCreateArgs<ExtArgs>>): Prisma__StillClient<$Result.GetResult<Prisma.$StillPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Create many Stills.
-     * @param {stillsCreateManyArgs} args - Arguments to create many Stills.
+     * @param {StillCreateManyArgs} args - Arguments to create many Stills.
      * @example
      * // Create many Stills
-     * const stills = await prisma.stills.createMany({
+     * const still = await prisma.still.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends stillsCreateManyArgs>(args?: SelectSubset<T, stillsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends StillCreateManyArgs>(args?: SelectSubset<T, StillCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create many Stills and returns the data saved in the database.
-     * @param {stillsCreateManyAndReturnArgs} args - Arguments to create many Stills.
+     * @param {StillCreateManyAndReturnArgs} args - Arguments to create many Stills.
      * @example
      * // Create many Stills
-     * const stills = await prisma.stills.createManyAndReturn({
+     * const still = await prisma.still.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
      * // Create many Stills and only return the `code`
-     * const stillsWithCodeOnly = await prisma.stills.createManyAndReturn({
+     * const stillWithCodeOnly = await prisma.still.createManyAndReturn({
      *   select: { code: true },
      *   data: [
      *     // ... provide data here
@@ -21491,28 +21491,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends stillsCreateManyAndReturnArgs>(args?: SelectSubset<T, stillsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$stillsPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends StillCreateManyAndReturnArgs>(args?: SelectSubset<T, StillCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StillPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
 
     /**
-     * Delete a Stills.
-     * @param {stillsDeleteArgs} args - Arguments to delete one Stills.
+     * Delete a Still.
+     * @param {StillDeleteArgs} args - Arguments to delete one Still.
      * @example
-     * // Delete one Stills
-     * const Stills = await prisma.stills.delete({
+     * // Delete one Still
+     * const Still = await prisma.still.delete({
      *   where: {
-     *     // ... filter to delete one Stills
+     *     // ... filter to delete one Still
      *   }
      * })
      * 
      */
-    delete<T extends stillsDeleteArgs>(args: SelectSubset<T, stillsDeleteArgs<ExtArgs>>): Prisma__stillsClient<$Result.GetResult<Prisma.$stillsPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends StillDeleteArgs>(args: SelectSubset<T, StillDeleteArgs<ExtArgs>>): Prisma__StillClient<$Result.GetResult<Prisma.$StillPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
-     * Update one Stills.
-     * @param {stillsUpdateArgs} args - Arguments to update one Stills.
+     * Update one Still.
+     * @param {StillUpdateArgs} args - Arguments to update one Still.
      * @example
-     * // Update one Stills
-     * const stills = await prisma.stills.update({
+     * // Update one Still
+     * const still = await prisma.still.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -21522,30 +21522,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends stillsUpdateArgs>(args: SelectSubset<T, stillsUpdateArgs<ExtArgs>>): Prisma__stillsClient<$Result.GetResult<Prisma.$stillsPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends StillUpdateArgs>(args: SelectSubset<T, StillUpdateArgs<ExtArgs>>): Prisma__StillClient<$Result.GetResult<Prisma.$StillPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Delete zero or more Stills.
-     * @param {stillsDeleteManyArgs} args - Arguments to filter Stills to delete.
+     * @param {StillDeleteManyArgs} args - Arguments to filter Stills to delete.
      * @example
      * // Delete a few Stills
-     * const { count } = await prisma.stills.deleteMany({
+     * const { count } = await prisma.still.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends stillsDeleteManyArgs>(args?: SelectSubset<T, stillsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends StillDeleteManyArgs>(args?: SelectSubset<T, StillDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Stills.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {stillsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {StillUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
      * // Update many Stills
-     * const stills = await prisma.stills.updateMany({
+     * const still = await prisma.still.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -21555,14 +21555,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends stillsUpdateManyArgs>(args: SelectSubset<T, stillsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends StillUpdateManyArgs>(args: SelectSubset<T, StillUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Stills and returns the data updated in the database.
-     * @param {stillsUpdateManyAndReturnArgs} args - Arguments to update many Stills.
+     * @param {StillUpdateManyAndReturnArgs} args - Arguments to update many Stills.
      * @example
      * // Update many Stills
-     * const stills = await prisma.stills.updateManyAndReturn({
+     * const still = await prisma.still.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -21572,7 +21572,7 @@ export namespace Prisma {
      * })
      * 
      * // Update zero or more Stills and only return the `code`
-     * const stillsWithCodeOnly = await prisma.stills.updateManyAndReturn({
+     * const stillWithCodeOnly = await prisma.still.updateManyAndReturn({
      *   select: { code: true },
      *   where: {
      *     // ... provide filter here
@@ -21585,56 +21585,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends stillsUpdateManyAndReturnArgs>(args: SelectSubset<T, stillsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$stillsPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends StillUpdateManyAndReturnArgs>(args: SelectSubset<T, StillUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StillPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
 
     /**
-     * Create or update one Stills.
-     * @param {stillsUpsertArgs} args - Arguments to update or create a Stills.
+     * Create or update one Still.
+     * @param {StillUpsertArgs} args - Arguments to update or create a Still.
      * @example
-     * // Update or create a Stills
-     * const stills = await prisma.stills.upsert({
+     * // Update or create a Still
+     * const still = await prisma.still.upsert({
      *   create: {
-     *     // ... data to create a Stills
+     *     // ... data to create a Still
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Stills we want to update
+     *     // ... the filter for the Still we want to update
      *   }
      * })
      */
-    upsert<T extends stillsUpsertArgs>(args: SelectSubset<T, stillsUpsertArgs<ExtArgs>>): Prisma__stillsClient<$Result.GetResult<Prisma.$stillsPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends StillUpsertArgs>(args: SelectSubset<T, StillUpsertArgs<ExtArgs>>): Prisma__StillClient<$Result.GetResult<Prisma.$StillPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
 
 
     /**
      * Count the number of Stills.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {stillsCountArgs} args - Arguments to filter Stills to count.
+     * @param {StillCountArgs} args - Arguments to filter Stills to count.
      * @example
      * // Count the number of Stills
-     * const count = await prisma.stills.count({
+     * const count = await prisma.still.count({
      *   where: {
      *     // ... the filter for the Stills we want to count
      *   }
      * })
     **/
-    count<T extends stillsCountArgs>(
-      args?: Subset<T, stillsCountArgs>,
+    count<T extends StillCountArgs>(
+      args?: Subset<T, StillCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], StillsCountAggregateOutputType>
+          : GetScalarType<T['select'], StillCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Stills.
+     * Allows you to perform aggregations operations on a Still.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StillsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {StillAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -21654,13 +21654,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends StillsAggregateArgs>(args: Subset<T, StillsAggregateArgs>): Prisma.PrismaPromise<GetStillsAggregateType<T>>
+    aggregate<T extends StillAggregateArgs>(args: Subset<T, StillAggregateArgs>): Prisma.PrismaPromise<GetStillAggregateType<T>>
 
     /**
-     * Group by Stills.
+     * Group by Still.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {stillsGroupByArgs} args - Group by arguments.
+     * @param {StillGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -21675,14 +21675,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends stillsGroupByArgs,
+      T extends StillGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: stillsGroupByArgs['orderBy'] }
-        : { orderBy?: stillsGroupByArgs['orderBy'] },
+        ? { orderBy: StillGroupByArgs['orderBy'] }
+        : { orderBy?: StillGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -21731,22 +21731,22 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, stillsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStillsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, StillGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStillGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the stills model
+   * Fields of the Still model
    */
-  readonly fields: stillsFieldRefs;
+  readonly fields: StillFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for stills.
+   * The delegate class that acts as a "Promise-like" for Still.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__stillsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__StillClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    processes<T extends stills$processesArgs<ExtArgs> = {}>(args?: Subset<T, stills$processesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$processesPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    processes<T extends Still$processesArgs<ExtArgs> = {}>(args?: Subset<T, Still$processesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$processesPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -21773,394 +21773,394 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the stills model
+   * Fields of the Still model
    */ 
-  interface stillsFieldRefs {
-    readonly code: FieldRef<"stills", 'String'>
-    readonly site: FieldRef<"stills", 'String'>
-    readonly power: FieldRef<"stills", 'Int'>
-    readonly capacity: FieldRef<"stills", 'Int'>
-    readonly is_vacuum: FieldRef<"stills", 'Boolean'>
-    readonly is_operational: FieldRef<"stills", 'Boolean'>
+  interface StillFieldRefs {
+    readonly code: FieldRef<"Still", 'String'>
+    readonly site: FieldRef<"Still", 'String'>
+    readonly power: FieldRef<"Still", 'Int'>
+    readonly capacity: FieldRef<"Still", 'Int'>
+    readonly isVacuum: FieldRef<"Still", 'Boolean'>
+    readonly isOperational: FieldRef<"Still", 'Boolean'>
   }
     
 
   // Custom InputTypes
   /**
-   * stills findUnique
+   * Still findUnique
    */
-  export type stillsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StillFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the stills
+     * Select specific fields to fetch from the Still
      */
-    select?: stillsSelect<ExtArgs> | null
+    select?: StillSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the stills
+     * Omit specific fields from the Still
      */
-    omit?: stillsOmit<ExtArgs> | null
+    omit?: StillOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: stillsInclude<ExtArgs> | null
+    include?: StillInclude<ExtArgs> | null
     /**
-     * Filter, which stills to fetch.
+     * Filter, which Still to fetch.
      */
-    where: stillsWhereUniqueInput
+    where: StillWhereUniqueInput
   }
 
   /**
-   * stills findUniqueOrThrow
+   * Still findUniqueOrThrow
    */
-  export type stillsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StillFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the stills
+     * Select specific fields to fetch from the Still
      */
-    select?: stillsSelect<ExtArgs> | null
+    select?: StillSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the stills
+     * Omit specific fields from the Still
      */
-    omit?: stillsOmit<ExtArgs> | null
+    omit?: StillOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: stillsInclude<ExtArgs> | null
+    include?: StillInclude<ExtArgs> | null
     /**
-     * Filter, which stills to fetch.
+     * Filter, which Still to fetch.
      */
-    where: stillsWhereUniqueInput
+    where: StillWhereUniqueInput
   }
 
   /**
-   * stills findFirst
+   * Still findFirst
    */
-  export type stillsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StillFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the stills
+     * Select specific fields to fetch from the Still
      */
-    select?: stillsSelect<ExtArgs> | null
+    select?: StillSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the stills
+     * Omit specific fields from the Still
      */
-    omit?: stillsOmit<ExtArgs> | null
+    omit?: StillOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: stillsInclude<ExtArgs> | null
+    include?: StillInclude<ExtArgs> | null
     /**
-     * Filter, which stills to fetch.
+     * Filter, which Still to fetch.
      */
-    where?: stillsWhereInput
+    where?: StillWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of stills to fetch.
+     * Determine the order of Stills to fetch.
      */
-    orderBy?: stillsOrderByWithRelationInput | stillsOrderByWithRelationInput[]
+    orderBy?: StillOrderByWithRelationInput | StillOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for stills.
+     * Sets the position for searching for Stills.
      */
-    cursor?: stillsWhereUniqueInput
+    cursor?: StillWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` stills from the position of the cursor.
+     * Take `±n` Stills from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` stills.
+     * Skip the first `n` Stills.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of stills.
+     * Filter by unique combinations of Stills.
      */
-    distinct?: StillsScalarFieldEnum | StillsScalarFieldEnum[]
+    distinct?: StillScalarFieldEnum | StillScalarFieldEnum[]
   }
 
   /**
-   * stills findFirstOrThrow
+   * Still findFirstOrThrow
    */
-  export type stillsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StillFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the stills
+     * Select specific fields to fetch from the Still
      */
-    select?: stillsSelect<ExtArgs> | null
+    select?: StillSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the stills
+     * Omit specific fields from the Still
      */
-    omit?: stillsOmit<ExtArgs> | null
+    omit?: StillOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: stillsInclude<ExtArgs> | null
+    include?: StillInclude<ExtArgs> | null
     /**
-     * Filter, which stills to fetch.
+     * Filter, which Still to fetch.
      */
-    where?: stillsWhereInput
+    where?: StillWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of stills to fetch.
+     * Determine the order of Stills to fetch.
      */
-    orderBy?: stillsOrderByWithRelationInput | stillsOrderByWithRelationInput[]
+    orderBy?: StillOrderByWithRelationInput | StillOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for stills.
+     * Sets the position for searching for Stills.
      */
-    cursor?: stillsWhereUniqueInput
+    cursor?: StillWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` stills from the position of the cursor.
+     * Take `±n` Stills from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` stills.
+     * Skip the first `n` Stills.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of stills.
+     * Filter by unique combinations of Stills.
      */
-    distinct?: StillsScalarFieldEnum | StillsScalarFieldEnum[]
+    distinct?: StillScalarFieldEnum | StillScalarFieldEnum[]
   }
 
   /**
-   * stills findMany
+   * Still findMany
    */
-  export type stillsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StillFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the stills
+     * Select specific fields to fetch from the Still
      */
-    select?: stillsSelect<ExtArgs> | null
+    select?: StillSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the stills
+     * Omit specific fields from the Still
      */
-    omit?: stillsOmit<ExtArgs> | null
+    omit?: StillOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: stillsInclude<ExtArgs> | null
+    include?: StillInclude<ExtArgs> | null
     /**
-     * Filter, which stills to fetch.
+     * Filter, which Stills to fetch.
      */
-    where?: stillsWhereInput
+    where?: StillWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of stills to fetch.
+     * Determine the order of Stills to fetch.
      */
-    orderBy?: stillsOrderByWithRelationInput | stillsOrderByWithRelationInput[]
+    orderBy?: StillOrderByWithRelationInput | StillOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing stills.
+     * Sets the position for listing Stills.
      */
-    cursor?: stillsWhereUniqueInput
+    cursor?: StillWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` stills from the position of the cursor.
+     * Take `±n` Stills from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` stills.
+     * Skip the first `n` Stills.
      */
     skip?: number
-    distinct?: StillsScalarFieldEnum | StillsScalarFieldEnum[]
+    distinct?: StillScalarFieldEnum | StillScalarFieldEnum[]
   }
 
   /**
-   * stills create
+   * Still create
    */
-  export type stillsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StillCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the stills
+     * Select specific fields to fetch from the Still
      */
-    select?: stillsSelect<ExtArgs> | null
+    select?: StillSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the stills
+     * Omit specific fields from the Still
      */
-    omit?: stillsOmit<ExtArgs> | null
+    omit?: StillOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: stillsInclude<ExtArgs> | null
+    include?: StillInclude<ExtArgs> | null
     /**
-     * The data needed to create a stills.
+     * The data needed to create a Still.
      */
-    data: XOR<stillsCreateInput, stillsUncheckedCreateInput>
+    data: XOR<StillCreateInput, StillUncheckedCreateInput>
   }
 
   /**
-   * stills createMany
+   * Still createMany
    */
-  export type stillsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StillCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many stills.
+     * The data used to create many Stills.
      */
-    data: stillsCreateManyInput | stillsCreateManyInput[]
+    data: StillCreateManyInput | StillCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * stills createManyAndReturn
+   * Still createManyAndReturn
    */
-  export type stillsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StillCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the stills
+     * Select specific fields to fetch from the Still
      */
-    select?: stillsSelectCreateManyAndReturn<ExtArgs> | null
+    select?: StillSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the stills
+     * Omit specific fields from the Still
      */
-    omit?: stillsOmit<ExtArgs> | null
+    omit?: StillOmit<ExtArgs> | null
     /**
-     * The data used to create many stills.
+     * The data used to create many Stills.
      */
-    data: stillsCreateManyInput | stillsCreateManyInput[]
+    data: StillCreateManyInput | StillCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * stills update
+   * Still update
    */
-  export type stillsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StillUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the stills
+     * Select specific fields to fetch from the Still
      */
-    select?: stillsSelect<ExtArgs> | null
+    select?: StillSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the stills
+     * Omit specific fields from the Still
      */
-    omit?: stillsOmit<ExtArgs> | null
+    omit?: StillOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: stillsInclude<ExtArgs> | null
+    include?: StillInclude<ExtArgs> | null
     /**
-     * The data needed to update a stills.
+     * The data needed to update a Still.
      */
-    data: XOR<stillsUpdateInput, stillsUncheckedUpdateInput>
+    data: XOR<StillUpdateInput, StillUncheckedUpdateInput>
     /**
-     * Choose, which stills to update.
+     * Choose, which Still to update.
      */
-    where: stillsWhereUniqueInput
+    where: StillWhereUniqueInput
   }
 
   /**
-   * stills updateMany
+   * Still updateMany
    */
-  export type stillsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StillUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update stills.
+     * The data used to update Stills.
      */
-    data: XOR<stillsUpdateManyMutationInput, stillsUncheckedUpdateManyInput>
+    data: XOR<StillUpdateManyMutationInput, StillUncheckedUpdateManyInput>
     /**
-     * Filter which stills to update
+     * Filter which Stills to update
      */
-    where?: stillsWhereInput
+    where?: StillWhereInput
   }
 
   /**
-   * stills updateManyAndReturn
+   * Still updateManyAndReturn
    */
-  export type stillsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StillUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the stills
+     * Select specific fields to fetch from the Still
      */
-    select?: stillsSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: StillSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the stills
+     * Omit specific fields from the Still
      */
-    omit?: stillsOmit<ExtArgs> | null
+    omit?: StillOmit<ExtArgs> | null
     /**
-     * The data used to update stills.
+     * The data used to update Stills.
      */
-    data: XOR<stillsUpdateManyMutationInput, stillsUncheckedUpdateManyInput>
+    data: XOR<StillUpdateManyMutationInput, StillUncheckedUpdateManyInput>
     /**
-     * Filter which stills to update
+     * Filter which Stills to update
      */
-    where?: stillsWhereInput
+    where?: StillWhereInput
   }
 
   /**
-   * stills upsert
+   * Still upsert
    */
-  export type stillsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StillUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the stills
+     * Select specific fields to fetch from the Still
      */
-    select?: stillsSelect<ExtArgs> | null
+    select?: StillSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the stills
+     * Omit specific fields from the Still
      */
-    omit?: stillsOmit<ExtArgs> | null
+    omit?: StillOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: stillsInclude<ExtArgs> | null
+    include?: StillInclude<ExtArgs> | null
     /**
-     * The filter to search for the stills to update in case it exists.
+     * The filter to search for the Still to update in case it exists.
      */
-    where: stillsWhereUniqueInput
+    where: StillWhereUniqueInput
     /**
-     * In case the stills found by the `where` argument doesn't exist, create a new stills with this data.
+     * In case the Still found by the `where` argument doesn't exist, create a new Still with this data.
      */
-    create: XOR<stillsCreateInput, stillsUncheckedCreateInput>
+    create: XOR<StillCreateInput, StillUncheckedCreateInput>
     /**
-     * In case the stills was found with the provided `where` argument, update it with this data.
+     * In case the Still was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<stillsUpdateInput, stillsUncheckedUpdateInput>
+    update: XOR<StillUpdateInput, StillUncheckedUpdateInput>
   }
 
   /**
-   * stills delete
+   * Still delete
    */
-  export type stillsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StillDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the stills
+     * Select specific fields to fetch from the Still
      */
-    select?: stillsSelect<ExtArgs> | null
+    select?: StillSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the stills
+     * Omit specific fields from the Still
      */
-    omit?: stillsOmit<ExtArgs> | null
+    omit?: StillOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: stillsInclude<ExtArgs> | null
+    include?: StillInclude<ExtArgs> | null
     /**
-     * Filter which stills to delete.
+     * Filter which Still to delete.
      */
-    where: stillsWhereUniqueInput
+    where: StillWhereUniqueInput
   }
 
   /**
-   * stills deleteMany
+   * Still deleteMany
    */
-  export type stillsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StillDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which stills to delete
+     * Filter which Stills to delete
      */
-    where?: stillsWhereInput
+    where?: StillWhereInput
   }
 
   /**
-   * stills.processes
+   * Still.processes
    */
-  export type stills$processesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Still$processesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the processes
      */
@@ -22182,21 +22182,21 @@ export namespace Prisma {
   }
 
   /**
-   * stills without action
+   * Still without action
    */
-  export type stillsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StillDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the stills
+     * Select specific fields to fetch from the Still
      */
-    select?: stillsSelect<ExtArgs> | null
+    select?: StillSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the stills
+     * Omit specific fields from the Still
      */
-    omit?: stillsOmit<ExtArgs> | null
+    omit?: StillOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: stillsInclude<ExtArgs> | null
+    include?: StillInclude<ExtArgs> | null
   }
 
 
@@ -22432,16 +22432,16 @@ export namespace Prisma {
   export type TransactionsScalarFieldEnum = (typeof TransactionsScalarFieldEnum)[keyof typeof TransactionsScalarFieldEnum]
 
 
-  export const StillsScalarFieldEnum: {
+  export const StillScalarFieldEnum: {
     code: 'code',
     site: 'site',
     power: 'power',
     capacity: 'capacity',
-    is_vacuum: 'is_vacuum',
-    is_operational: 'is_operational'
+    isVacuum: 'isVacuum',
+    isOperational: 'isOperational'
   };
 
-  export type StillsScalarFieldEnum = (typeof StillsScalarFieldEnum)[keyof typeof StillsScalarFieldEnum]
+  export type StillScalarFieldEnum = (typeof StillScalarFieldEnum)[keyof typeof StillScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -23383,7 +23383,7 @@ export namespace Prisma {
     transporter?: StringNullableFilter<"processes"> | string | null
     date_processed?: DateTimeNullableFilter<"processes"> | Date | string | null
     new_drums?: XOR<New_drumsNullableScalarRelationFilter, new_drumsWhereInput> | null
-    stills?: XOR<StillsScalarRelationFilter, stillsWhereInput>
+    stills?: XOR<StillScalarRelationFilter, StillWhereInput>
     transactions?: TransactionsListRelationFilter
   }
 
@@ -23398,7 +23398,7 @@ export namespace Prisma {
     transporter?: SortOrderInput | SortOrder
     date_processed?: SortOrderInput | SortOrder
     new_drums?: new_drumsOrderByWithRelationInput
-    stills?: stillsOrderByWithRelationInput
+    stills?: StillOrderByWithRelationInput
     transactions?: transactionsOrderByRelationAggregateInput
   }
 
@@ -23416,7 +23416,7 @@ export namespace Prisma {
     transporter?: StringNullableFilter<"processes"> | string | null
     date_processed?: DateTimeNullableFilter<"processes"> | Date | string | null
     new_drums?: XOR<New_drumsNullableScalarRelationFilter, new_drumsWhereInput> | null
-    stills?: XOR<StillsScalarRelationFilter, stillsWhereInput>
+    stills?: XOR<StillScalarRelationFilter, StillWhereInput>
     transactions?: TransactionsListRelationFilter
   }, "process_id">
 
@@ -23723,66 +23723,66 @@ export namespace Prisma {
     batch_code?: StringNullableWithAggregatesFilter<"transactions"> | string | null
   }
 
-  export type stillsWhereInput = {
-    AND?: stillsWhereInput | stillsWhereInput[]
-    OR?: stillsWhereInput[]
-    NOT?: stillsWhereInput | stillsWhereInput[]
-    code?: StringFilter<"stills"> | string
-    site?: StringFilter<"stills"> | string
-    power?: IntFilter<"stills"> | number
-    capacity?: IntFilter<"stills"> | number
-    is_vacuum?: BoolNullableFilter<"stills"> | boolean | null
-    is_operational?: BoolNullableFilter<"stills"> | boolean | null
+  export type StillWhereInput = {
+    AND?: StillWhereInput | StillWhereInput[]
+    OR?: StillWhereInput[]
+    NOT?: StillWhereInput | StillWhereInput[]
+    code?: StringFilter<"Still"> | string
+    site?: StringFilter<"Still"> | string
+    power?: IntFilter<"Still"> | number
+    capacity?: IntFilter<"Still"> | number
+    isVacuum?: BoolNullableFilter<"Still"> | boolean | null
+    isOperational?: BoolNullableFilter<"Still"> | boolean | null
     processes?: ProcessesListRelationFilter
   }
 
-  export type stillsOrderByWithRelationInput = {
+  export type StillOrderByWithRelationInput = {
     code?: SortOrder
     site?: SortOrder
     power?: SortOrder
     capacity?: SortOrder
-    is_vacuum?: SortOrderInput | SortOrder
-    is_operational?: SortOrderInput | SortOrder
+    isVacuum?: SortOrderInput | SortOrder
+    isOperational?: SortOrderInput | SortOrder
     processes?: processesOrderByRelationAggregateInput
   }
 
-  export type stillsWhereUniqueInput = Prisma.AtLeast<{
+  export type StillWhereUniqueInput = Prisma.AtLeast<{
     code?: string
-    AND?: stillsWhereInput | stillsWhereInput[]
-    OR?: stillsWhereInput[]
-    NOT?: stillsWhereInput | stillsWhereInput[]
-    site?: StringFilter<"stills"> | string
-    power?: IntFilter<"stills"> | number
-    capacity?: IntFilter<"stills"> | number
-    is_vacuum?: BoolNullableFilter<"stills"> | boolean | null
-    is_operational?: BoolNullableFilter<"stills"> | boolean | null
+    AND?: StillWhereInput | StillWhereInput[]
+    OR?: StillWhereInput[]
+    NOT?: StillWhereInput | StillWhereInput[]
+    site?: StringFilter<"Still"> | string
+    power?: IntFilter<"Still"> | number
+    capacity?: IntFilter<"Still"> | number
+    isVacuum?: BoolNullableFilter<"Still"> | boolean | null
+    isOperational?: BoolNullableFilter<"Still"> | boolean | null
     processes?: ProcessesListRelationFilter
   }, "code" | "code">
 
-  export type stillsOrderByWithAggregationInput = {
+  export type StillOrderByWithAggregationInput = {
     code?: SortOrder
     site?: SortOrder
     power?: SortOrder
     capacity?: SortOrder
-    is_vacuum?: SortOrderInput | SortOrder
-    is_operational?: SortOrderInput | SortOrder
-    _count?: stillsCountOrderByAggregateInput
-    _avg?: stillsAvgOrderByAggregateInput
-    _max?: stillsMaxOrderByAggregateInput
-    _min?: stillsMinOrderByAggregateInput
-    _sum?: stillsSumOrderByAggregateInput
+    isVacuum?: SortOrderInput | SortOrder
+    isOperational?: SortOrderInput | SortOrder
+    _count?: StillCountOrderByAggregateInput
+    _avg?: StillAvgOrderByAggregateInput
+    _max?: StillMaxOrderByAggregateInput
+    _min?: StillMinOrderByAggregateInput
+    _sum?: StillSumOrderByAggregateInput
   }
 
-  export type stillsScalarWhereWithAggregatesInput = {
-    AND?: stillsScalarWhereWithAggregatesInput | stillsScalarWhereWithAggregatesInput[]
-    OR?: stillsScalarWhereWithAggregatesInput[]
-    NOT?: stillsScalarWhereWithAggregatesInput | stillsScalarWhereWithAggregatesInput[]
-    code?: StringWithAggregatesFilter<"stills"> | string
-    site?: StringWithAggregatesFilter<"stills"> | string
-    power?: IntWithAggregatesFilter<"stills"> | number
-    capacity?: IntWithAggregatesFilter<"stills"> | number
-    is_vacuum?: BoolNullableWithAggregatesFilter<"stills"> | boolean | null
-    is_operational?: BoolNullableWithAggregatesFilter<"stills"> | boolean | null
+  export type StillScalarWhereWithAggregatesInput = {
+    AND?: StillScalarWhereWithAggregatesInput | StillScalarWhereWithAggregatesInput[]
+    OR?: StillScalarWhereWithAggregatesInput[]
+    NOT?: StillScalarWhereWithAggregatesInput | StillScalarWhereWithAggregatesInput[]
+    code?: StringWithAggregatesFilter<"Still"> | string
+    site?: StringWithAggregatesFilter<"Still"> | string
+    power?: IntWithAggregatesFilter<"Still"> | number
+    capacity?: IntWithAggregatesFilter<"Still"> | number
+    isVacuum?: BoolNullableWithAggregatesFilter<"Still"> | boolean | null
+    isOperational?: BoolNullableWithAggregatesFilter<"Still"> | boolean | null
   }
 
   export type bottle_sizesCreateInput = {
@@ -24622,7 +24622,7 @@ export namespace Prisma {
     transporter?: string | null
     date_processed?: Date | string | null
     new_drums?: new_drumsCreateNestedOneWithoutProcessesInput
-    stills: stillsCreateNestedOneWithoutProcessesInput
+    stills: StillCreateNestedOneWithoutProcessesInput
     transactions?: transactionsCreateNestedManyWithoutProcessesInput
   }
 
@@ -24647,7 +24647,7 @@ export namespace Prisma {
     transporter?: NullableStringFieldUpdateOperationsInput | string | null
     date_processed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     new_drums?: new_drumsUpdateOneWithoutProcessesNestedInput
-    stills?: stillsUpdateOneRequiredWithoutProcessesNestedInput
+    stills?: StillUpdateOneRequiredWithoutProcessesNestedInput
     transactions?: transactionsUpdateManyWithoutProcessesNestedInput
   }
 
@@ -24977,71 +24977,71 @@ export namespace Prisma {
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type stillsCreateInput = {
+  export type StillCreateInput = {
     code: string
     site: string
     power: number
     capacity: number
-    is_vacuum?: boolean | null
-    is_operational?: boolean | null
+    isVacuum?: boolean | null
+    isOperational?: boolean | null
     processes?: processesCreateNestedManyWithoutStillsInput
   }
 
-  export type stillsUncheckedCreateInput = {
+  export type StillUncheckedCreateInput = {
     code: string
     site: string
     power: number
     capacity: number
-    is_vacuum?: boolean | null
-    is_operational?: boolean | null
+    isVacuum?: boolean | null
+    isOperational?: boolean | null
     processes?: processesUncheckedCreateNestedManyWithoutStillsInput
   }
 
-  export type stillsUpdateInput = {
+  export type StillUpdateInput = {
     code?: StringFieldUpdateOperationsInput | string
     site?: StringFieldUpdateOperationsInput | string
     power?: IntFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
-    is_vacuum?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    is_operational?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    isVacuum?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    isOperational?: NullableBoolFieldUpdateOperationsInput | boolean | null
     processes?: processesUpdateManyWithoutStillsNestedInput
   }
 
-  export type stillsUncheckedUpdateInput = {
+  export type StillUncheckedUpdateInput = {
     code?: StringFieldUpdateOperationsInput | string
     site?: StringFieldUpdateOperationsInput | string
     power?: IntFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
-    is_vacuum?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    is_operational?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    isVacuum?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    isOperational?: NullableBoolFieldUpdateOperationsInput | boolean | null
     processes?: processesUncheckedUpdateManyWithoutStillsNestedInput
   }
 
-  export type stillsCreateManyInput = {
+  export type StillCreateManyInput = {
     code: string
     site: string
     power: number
     capacity: number
-    is_vacuum?: boolean | null
-    is_operational?: boolean | null
+    isVacuum?: boolean | null
+    isOperational?: boolean | null
   }
 
-  export type stillsUpdateManyMutationInput = {
+  export type StillUpdateManyMutationInput = {
     code?: StringFieldUpdateOperationsInput | string
     site?: StringFieldUpdateOperationsInput | string
     power?: IntFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
-    is_vacuum?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    is_operational?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    isVacuum?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    isOperational?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
-  export type stillsUncheckedUpdateManyInput = {
+  export type StillUncheckedUpdateManyInput = {
     code?: StringFieldUpdateOperationsInput | string
     site?: StringFieldUpdateOperationsInput | string
     power?: IntFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
-    is_vacuum?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    is_operational?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    isVacuum?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    isOperational?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -25904,9 +25904,9 @@ export namespace Prisma {
     isNot?: new_drumsWhereInput | null
   }
 
-  export type StillsScalarRelationFilter = {
-    is?: stillsWhereInput
-    isNot?: stillsWhereInput
+  export type StillScalarRelationFilter = {
+    is?: StillWhereInput
+    isNot?: StillWhereInput
   }
 
   export type processesCountOrderByAggregateInput = {
@@ -26142,39 +26142,39 @@ export namespace Prisma {
     not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
   }
 
-  export type stillsCountOrderByAggregateInput = {
+  export type StillCountOrderByAggregateInput = {
     code?: SortOrder
     site?: SortOrder
     power?: SortOrder
     capacity?: SortOrder
-    is_vacuum?: SortOrder
-    is_operational?: SortOrder
+    isVacuum?: SortOrder
+    isOperational?: SortOrder
   }
 
-  export type stillsAvgOrderByAggregateInput = {
+  export type StillAvgOrderByAggregateInput = {
     power?: SortOrder
     capacity?: SortOrder
   }
 
-  export type stillsMaxOrderByAggregateInput = {
+  export type StillMaxOrderByAggregateInput = {
     code?: SortOrder
     site?: SortOrder
     power?: SortOrder
     capacity?: SortOrder
-    is_vacuum?: SortOrder
-    is_operational?: SortOrder
+    isVacuum?: SortOrder
+    isOperational?: SortOrder
   }
 
-  export type stillsMinOrderByAggregateInput = {
+  export type StillMinOrderByAggregateInput = {
     code?: SortOrder
     site?: SortOrder
     power?: SortOrder
     capacity?: SortOrder
-    is_vacuum?: SortOrder
-    is_operational?: SortOrder
+    isVacuum?: SortOrder
+    isOperational?: SortOrder
   }
 
-  export type stillsSumOrderByAggregateInput = {
+  export type StillSumOrderByAggregateInput = {
     power?: SortOrder
     capacity?: SortOrder
   }
@@ -26863,10 +26863,10 @@ export namespace Prisma {
     connect?: new_drumsWhereUniqueInput
   }
 
-  export type stillsCreateNestedOneWithoutProcessesInput = {
-    create?: XOR<stillsCreateWithoutProcessesInput, stillsUncheckedCreateWithoutProcessesInput>
-    connectOrCreate?: stillsCreateOrConnectWithoutProcessesInput
-    connect?: stillsWhereUniqueInput
+  export type StillCreateNestedOneWithoutProcessesInput = {
+    create?: XOR<StillCreateWithoutProcessesInput, StillUncheckedCreateWithoutProcessesInput>
+    connectOrCreate?: StillCreateOrConnectWithoutProcessesInput
+    connect?: StillWhereUniqueInput
   }
 
   export type transactionsCreateNestedManyWithoutProcessesInput = {
@@ -26893,12 +26893,12 @@ export namespace Prisma {
     update?: XOR<XOR<new_drumsUpdateToOneWithWhereWithoutProcessesInput, new_drumsUpdateWithoutProcessesInput>, new_drumsUncheckedUpdateWithoutProcessesInput>
   }
 
-  export type stillsUpdateOneRequiredWithoutProcessesNestedInput = {
-    create?: XOR<stillsCreateWithoutProcessesInput, stillsUncheckedCreateWithoutProcessesInput>
-    connectOrCreate?: stillsCreateOrConnectWithoutProcessesInput
-    upsert?: stillsUpsertWithoutProcessesInput
-    connect?: stillsWhereUniqueInput
-    update?: XOR<XOR<stillsUpdateToOneWithWhereWithoutProcessesInput, stillsUpdateWithoutProcessesInput>, stillsUncheckedUpdateWithoutProcessesInput>
+  export type StillUpdateOneRequiredWithoutProcessesNestedInput = {
+    create?: XOR<StillCreateWithoutProcessesInput, StillUncheckedCreateWithoutProcessesInput>
+    connectOrCreate?: StillCreateOrConnectWithoutProcessesInput
+    upsert?: StillUpsertWithoutProcessesInput
+    connect?: StillWhereUniqueInput
+    update?: XOR<XOR<StillUpdateToOneWithWhereWithoutProcessesInput, StillUpdateWithoutProcessesInput>, StillUncheckedUpdateWithoutProcessesInput>
   }
 
   export type transactionsUpdateManyWithoutProcessesNestedInput = {
@@ -28281,7 +28281,7 @@ export namespace Prisma {
     loader?: string | null
     transporter?: string | null
     date_processed?: Date | string | null
-    stills: stillsCreateNestedOneWithoutProcessesInput
+    stills: StillCreateNestedOneWithoutProcessesInput
     transactions?: transactionsCreateNestedManyWithoutProcessesInput
   }
 
@@ -28606,27 +28606,27 @@ export namespace Prisma {
     create: XOR<new_drumsCreateWithoutProcessesInput, new_drumsUncheckedCreateWithoutProcessesInput>
   }
 
-  export type stillsCreateWithoutProcessesInput = {
+  export type StillCreateWithoutProcessesInput = {
     code: string
     site: string
     power: number
     capacity: number
-    is_vacuum?: boolean | null
-    is_operational?: boolean | null
+    isVacuum?: boolean | null
+    isOperational?: boolean | null
   }
 
-  export type stillsUncheckedCreateWithoutProcessesInput = {
+  export type StillUncheckedCreateWithoutProcessesInput = {
     code: string
     site: string
     power: number
     capacity: number
-    is_vacuum?: boolean | null
-    is_operational?: boolean | null
+    isVacuum?: boolean | null
+    isOperational?: boolean | null
   }
 
-  export type stillsCreateOrConnectWithoutProcessesInput = {
-    where: stillsWhereUniqueInput
-    create: XOR<stillsCreateWithoutProcessesInput, stillsUncheckedCreateWithoutProcessesInput>
+  export type StillCreateOrConnectWithoutProcessesInput = {
+    where: StillWhereUniqueInput
+    create: XOR<StillCreateWithoutProcessesInput, StillUncheckedCreateWithoutProcessesInput>
   }
 
   export type transactionsCreateWithoutProcessesInput = {
@@ -28704,33 +28704,33 @@ export namespace Prisma {
     transactions?: transactionsUncheckedUpdateManyWithoutNew_drumsNestedInput
   }
 
-  export type stillsUpsertWithoutProcessesInput = {
-    update: XOR<stillsUpdateWithoutProcessesInput, stillsUncheckedUpdateWithoutProcessesInput>
-    create: XOR<stillsCreateWithoutProcessesInput, stillsUncheckedCreateWithoutProcessesInput>
-    where?: stillsWhereInput
+  export type StillUpsertWithoutProcessesInput = {
+    update: XOR<StillUpdateWithoutProcessesInput, StillUncheckedUpdateWithoutProcessesInput>
+    create: XOR<StillCreateWithoutProcessesInput, StillUncheckedCreateWithoutProcessesInput>
+    where?: StillWhereInput
   }
 
-  export type stillsUpdateToOneWithWhereWithoutProcessesInput = {
-    where?: stillsWhereInput
-    data: XOR<stillsUpdateWithoutProcessesInput, stillsUncheckedUpdateWithoutProcessesInput>
+  export type StillUpdateToOneWithWhereWithoutProcessesInput = {
+    where?: StillWhereInput
+    data: XOR<StillUpdateWithoutProcessesInput, StillUncheckedUpdateWithoutProcessesInput>
   }
 
-  export type stillsUpdateWithoutProcessesInput = {
+  export type StillUpdateWithoutProcessesInput = {
     code?: StringFieldUpdateOperationsInput | string
     site?: StringFieldUpdateOperationsInput | string
     power?: IntFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
-    is_vacuum?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    is_operational?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    isVacuum?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    isOperational?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
-  export type stillsUncheckedUpdateWithoutProcessesInput = {
+  export type StillUncheckedUpdateWithoutProcessesInput = {
     code?: StringFieldUpdateOperationsInput | string
     site?: StringFieldUpdateOperationsInput | string
     power?: IntFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
-    is_vacuum?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    is_operational?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    isVacuum?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    isOperational?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type transactionsUpsertWithWhereUniqueWithoutProcessesInput = {
@@ -29075,7 +29075,7 @@ export namespace Prisma {
     transporter?: string | null
     date_processed?: Date | string | null
     new_drums?: new_drumsCreateNestedOneWithoutProcessesInput
-    stills: stillsCreateNestedOneWithoutProcessesInput
+    stills: StillCreateNestedOneWithoutProcessesInput
   }
 
   export type processesUncheckedCreateWithoutTransactionsInput = {
@@ -29218,7 +29218,7 @@ export namespace Prisma {
     transporter?: NullableStringFieldUpdateOperationsInput | string | null
     date_processed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     new_drums?: new_drumsUpdateOneWithoutProcessesNestedInput
-    stills?: stillsUpdateOneRequiredWithoutProcessesNestedInput
+    stills?: StillUpdateOneRequiredWithoutProcessesNestedInput
   }
 
   export type processesUncheckedUpdateWithoutTransactionsInput = {
@@ -29601,7 +29601,7 @@ export namespace Prisma {
     loader?: NullableStringFieldUpdateOperationsInput | string | null
     transporter?: NullableStringFieldUpdateOperationsInput | string | null
     date_processed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    stills?: stillsUpdateOneRequiredWithoutProcessesNestedInput
+    stills?: StillUpdateOneRequiredWithoutProcessesNestedInput
     transactions?: transactionsUpdateManyWithoutProcessesNestedInput
   }
 

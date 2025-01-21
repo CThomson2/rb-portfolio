@@ -66,8 +66,7 @@ For complete control (especially for multiple barcodes on one page with certain 
 
 2. **API Route** in Next.js to handle the POST request.
 
-<details
-<summary><strong>Example</strong> <code>POST to "/api/orders/create"</code></summary>
+**Example** `POST to "/api/orders/create"`
 
 ```ts
 // /pages/api/orders/create.ts
@@ -100,9 +99,6 @@ export async function POST(req: NextApiRequest, res: NextApiResponse) {
 }
 ```
 
-</details open>
-<br>
-
 3. **Frontend Form**: Once the `POST` request succeeds, it'll return the record with the new `orderId` and associated data that was just created in the database.
 
 ### 3.2. **Generate Barcode & PDF**
@@ -119,8 +115,7 @@ Generate a PDF label with:
 
 > 1. **React Barcode Component**
 
-<details
-<summary><strong>Example</strong> with <code>react-barcode</code> for the barcode plus <code>html2canvas</code> + <code>jsPDF</code></summary>
+**Example** with `react-barcode` for the barcode plus `html2canvas` + `jsPDF`
 
 ```tsx
 import React, { useRef } from "react";
@@ -181,15 +176,11 @@ const BarcodeLabel: React.FC<BarcodeLabelProps> = ({
 export default BarcodeLabel;
 ```
 
-</details open>
-<br>
-
 > 2. **Component Usage**
 
 In the order creation page (or success screen), once it have the order details:
 
-<details
-<summary><strong>Example</strong> <code>"app/inventory/orders/new?success=true"</code></summary>
+**Example** `"app/inventory/orders/new?success=true"`
 
 ```tsx
 // Suppose backend receives orderData from the POST request
@@ -229,9 +220,6 @@ function OrderCreatedPage() {
 export default OrderCreatedPage;
 ```
 
-</details open>
-<br>
-
 - Pros: Easy to build a quick downloadable label.
 - Cons: More steps in the browser; might not be as “standardized” or “controlled” as a server-generated PDF.
 
@@ -244,10 +232,7 @@ Use a server-side library to:
 
 The result is a PDF file that will be returned as a Buffer in the HTTP response, and the client can prompt a download.
 
-<details 
-<summary>
-<strong>Example</strong> (using <code>bwip-js</code> + <code>pdf-lib</code> in an API route):
-</summary>
+**Example** (using `bwip-js` + `pdf-lib` in an API route):
 
 ```ts
 // /pages/api/orders/create.ts
@@ -338,9 +323,6 @@ export default async function handler(
 </button>
 ```
 
-</details open>
-<br>
-
 ## 4. Putting It All Together
 
 A typical sequence once the user clicks “Submit Order”:
@@ -360,22 +342,22 @@ A typical sequence once the user clicks “Submit Order”:
 - Orders table must have a unique ID (primary key, often auto-increment).
 - You can also store a “barcode value” if you want (though often the ID itself suffices).
 
-2. Barcode Format:
+2. Barcode Format
 
 - Code128 is very common for alphanumeric.
 - QR codes can store more data if needed.
 
-3. Styling:
+3. Styling
 
 - If printing to real labels (e.g., 4x6 inch label printers), you might need to carefully size your PDF pages.
 - Test on actual printers to ensure sizing and clarity.
 
-4. Performance:
+4. Performance
 
 - Generating PDFs on the client is typically fine for small scale.
 - For large scale or batch printing, you might prefer server-generated PDFs (so you can queue them, store them, or generate them in a background job).
 
-5. Security:
+5. Security
 
 - If only authorized users can download barcodes, ensure your Next.js API routes have appropriate authentication/authorization.
 

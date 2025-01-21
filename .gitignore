@@ -12,6 +12,7 @@
 # next.js
 /.next/
 /out/
+.next/
 
 # production
 /build
@@ -45,5 +46,9 @@ project_tree.pdf
 
 # database
 database/generated/
+database/sessions/
 barcodes_test.pdf
 lib/generateBarcodes.js
+
+# documentation
+docs/

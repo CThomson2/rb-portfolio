@@ -7,6 +7,9 @@ import { PDFDocument, StandardFonts } from "pdf-lib";
 // For convenience, helper to convert inches to PDF points (72pt = 1in)
 const inchesToPoints = (inches: number) => inches * 72;
 
+// Example Postman API request (GET):
+// https://localhost:3000/api/barcodes/generate/123?material=Steel&supplier=Acme
+
 export async function GET(
   req: Request,
   { params }: { params: { orderId: string } }

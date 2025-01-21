@@ -287,13 +287,13 @@ exports.Prisma.TransactionsScalarFieldEnum = {
   batch_code: 'batch_code'
 };
 
-exports.Prisma.StillsScalarFieldEnum = {
+exports.Prisma.StillScalarFieldEnum = {
   code: 'code',
   site: 'site',
   power: 'power',
   capacity: 'capacity',
-  is_vacuum: 'is_vacuum',
-  is_operational: 'is_operational'
+  isVacuum: 'isVacuum',
+  isOperational: 'isOperational'
 };
 
 exports.Prisma.SortOrder = {
@@ -329,7 +329,7 @@ exports.Prisma.ModelName = {
   repro_additions: 'repro_additions',
   repro_drums: 'repro_drums',
   transactions: 'transactions',
-  stills: 'stills'
+  Still: 'Still'
 };
 
 /**

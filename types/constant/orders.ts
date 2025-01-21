@@ -4,4 +4,6 @@ export const OrderStatus = {
   COMPLETE: "complete",
 } as const;
 
-export type OrderStatus = (typeof OrderStatus)[keyof typeof OrderStatus];
+export type OrderStatusType = (typeof OrderStatus)[keyof typeof OrderStatus];
+
+export const OrderStatusOptions = Object.values(OrderStatus);
