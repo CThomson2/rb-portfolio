@@ -190,7 +190,7 @@ model processes {
   transporter    String?        @db.VarChar(10)
   date_processed DateTime?      @db.Timestamp(6)
   new_drums      new_drums?     @relation(fields: [drum_id], references: [drum_id], onDelete: NoAction, onUpdate: NoAction, map: "records_drum_id_fkey")
-  stills         stills         @relation(fields: [still_code], references: [code], onDelete: NoAction, onUpdate: NoAction, map: "records_still_code_fkey")
+  stills         Still          @relation(fields: [still_code], references: [code], onDelete: NoAction, onUpdate: NoAction, map: "records_still_code_fkey")
   transactions   transactions[]
 
   @@schema("inventory")
@@ -256,14 +256,15 @@ model transactions {
 }
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
-model stills {
-  code           String      @id @unique(map: "stills_still_code_key") @db.Char
-  site           String      @db.Char(2)
-  power          Int
-  capacity       Int
-  is_vacuum      Boolean?    @default(false)
-  is_operational Boolean?    @default(true)
-  processes      processes[]
+model Still {
+  code          String      @id @unique(map: "stills_still_code_key") @db.Char
+  site          String      @db.Char(2)
+  power         Int
+  capacity      Int
+  isVacuum      Boolean?    @default(false) @map("is_vacuum")
+  isOperational Boolean?    @default(true) @map("is_operational")
+  processes     processes[]
 
+  @@map("stills")
   @@schema("inventory")
 }
