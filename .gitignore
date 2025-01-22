@@ -26,6 +26,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# non-production testing files
+.ignore/*
+
 # local env files
 # .env
 # .env*.local
@@ -52,3 +55,7 @@ lib/generateBarcodes.js
 
 # documentation
 docs/
+
+# misc codebase and raw data
+public/misc-codebase/
+public/raw-data/
