@@ -37,9 +37,26 @@ export const createColumns = ({
         setSelectedStatuses={setSelectedStatuses}
       />
     ),
+
     cell: ({ row }) => (
       <Badge
-        variant={row.getValue("status") === "available" ? "success" : "default"}
+        variant={(() => {
+          switch (row.getValue<string>("status")) {
+            case "available":
+              return "success";
+            case "scheduled":
+              return "active";
+            case "processed":
+              return "secondary";
+            case "pending":
+              return "default";
+            case "wasted":
+            case "lost":
+              return "destructive";
+            default:
+              return "secondary";
+          }
+        })()}
       >
         {row.getValue<string>("status")}
       </Badge>
