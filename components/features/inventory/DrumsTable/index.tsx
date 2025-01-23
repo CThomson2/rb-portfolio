@@ -1,6 +1,6 @@
 // components/features/inventory/DrumsTable/index.tsx
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -11,7 +11,7 @@ import {
   SortingState,
   flexRender,
 } from "@tanstack/react-table";
-import { columns } from "./columns";
+import { createColumns } from "./columns";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/Table";
 import { TableHeader } from "@/components/shared/table";
 import { TableFooter } from "@/components/shared/table";
@@ -19,7 +19,6 @@ import { SearchBar } from "@/components/shared/table";
 import { ActionButton } from "@/components/shared/table";
 import type { DrumsResponse } from "@/types/database/drums";
 import { DrumStatus, DrumStatusType } from "@/types/constant/drums";
-import { StatusFilter } from "@/components/shared/table";
 
 const filterOptions = [
   { label: "All", value: "all" },
@@ -36,22 +35,28 @@ export const DrumsTable = React.memo(() => {
   const [rowSelection, setRowSelection] = useState({});
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("all");
-
   const [pageSize, setPageSize] = useState(50);
   const [pageIndex, setPageIndex] = useState(0);
-  const [status, setStatus] = useState<DrumStatusType[]>([
+  const [selectedStatuses, setSelectedStatuses] = useState<DrumStatusType[]>([
+    DrumStatus.PENDING,
     DrumStatus.AVAILABLE,
   ]);
 
+  // Create columns with status filter state
+  const columns = createColumns({ selectedStatuses, setSelectedStatuses });
+
+  // Update query when status filter changes
   const { data, isLoading } = useQuery({
-    queryKey: ["drums", pageIndex, pageSize],
+    queryKey: ["drums", pageIndex, pageSize, selectedStatuses],
     queryFn: async () => {
+      const statusParam = selectedStatuses.join(",");
       const response = await fetch(
-        `/api/inventory?page=${pageIndex + 1}&limit=${pageSize}`
+        `/api/inventory?page=${
+          pageIndex + 1
+        }&limit=${pageSize}&status=${statusParam}`
       );
       if (!response.ok) throw new Error("Failed to fetch drums");
       const data: DrumsResponse = await response.json();
-      // Map the response structure to the expected format
       return {
         rows: data.drums,
         total: data.total,

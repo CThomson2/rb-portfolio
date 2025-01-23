@@ -44,6 +44,7 @@ const OrdersGrid = () => {
     staleTime: 30000,
   });
 
+  /*
   const mutation = useMutation<OrderGetResponse, Error, NewOrder>({
     mutationFn: async (newOrder) => {
       const response = await fetch("/api/inventory/orders", {
@@ -73,6 +74,7 @@ const OrdersGrid = () => {
       },
     });
   };
+  */
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;

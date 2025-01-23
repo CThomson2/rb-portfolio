@@ -3,7 +3,7 @@ const fs = require("fs");
 const axios = require("axios");
 
 // Configuration
-const API_ENDPOINT = "http://localhost:3000/api/barcodes/process"; // Replace with your actual Next.js API endpoint
+const API_ENDPOINT = "http://localhost:3000/api/barcodes/scan"; // Replace with your actual Next.js API endpoint
 
 console.log("Starting serial port setup...");
 
@@ -30,7 +30,7 @@ async function sendDataToAPI(data) {
     });
     console.log("Successfully sent to API:", response.status);
   } catch (error) {
-    console.error("Error sending to API:", error.message);
+    console.error("Error sending to API:", API_ENDPOINT, error.message);
   }
 }
 

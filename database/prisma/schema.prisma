@@ -79,13 +79,14 @@ model batches {
 model deliveries {
   delivery_id       Int            @id(map: "drum_deliveries_pkey") @default(autoincrement())
   order_id          Int
-  quantity_received Int
+  quantity_received Int?           @default(0)
   date_received     DateTime       @default(dbgenerated("CURRENT_DATE")) @db.Date
   batch_code        String?        @db.VarChar(50)
   location          String         @default("new-site") @db.VarChar(15)
   delivery_notes    String?
-  created_at        DateTime?      @default(now()) @db.Timestamptz(6)
-  updated_at        DateTime?      @default(now()) @db.Timestamptz(6)
+  created_at        DateTime       @default(now()) @db.Timestamptz(6)
+  updated_at        DateTime       @default(now()) @db.Timestamptz(6)
+  is_finalised      Boolean        @default(false)
   orders            orders         @relation(fields: [order_id], references: [order_id], onDelete: NoAction, onUpdate: NoAction)
   transactions      transactions[]
 
@@ -247,6 +248,7 @@ model transactions {
   direction   String?      @default(dbgenerated("\nCASE tx_type\n    WHEN 'import'::text THEN 'IN'::text\n    WHEN 'processing'::text THEN 'OUT'::text\n    WHEN 'reprocessing'::text THEN 'OUT'::text\n    WHEN 'disposal'::text THEN 'OUT'::text\n    WHEN 'loss'::text THEN 'OUT'::text\n    ELSE NULL::text\nEND")) @db.VarChar(3)
   delivery_id Int?
   batch_code  String?      @db.VarChar(50)
+  order_id    Int?
   deliveries  deliveries?  @relation(fields: [delivery_id], references: [delivery_id], onDelete: NoAction, onUpdate: NoAction)
   new_drums   new_drums?   @relation(fields: [drum_id], references: [drum_id], onDelete: NoAction, onUpdate: NoAction)
   processes   processes?   @relation(fields: [process_id], references: [process_id], onDelete: NoAction, onUpdate: NoAction)
