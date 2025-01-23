@@ -30,7 +30,7 @@ export const createColumns = ({
   },
   {
     accessorKey: "status",
-    header: ({ column }) => (
+    header: () => (
       <StatusFilter
         title="Status"
         selectedStatuses={selectedStatuses}

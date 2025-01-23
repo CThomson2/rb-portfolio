@@ -1,8 +1,32 @@
 // components/features/inventory/DrumsTable/index.tsx
 "use client";
+
+/**
+ * DrumsTable Component
+ *
+ * A real-time table displaying drum inventory data with filtering, sorting and SSE updates.
+ *
+ * Key Features:
+ * 1. Server-Sent Events (SSE) for real-time updates:
+ *    - Connects to /api/drums/sse endpoint
+ *    - Listens for 'drumStatus' events containing {drumId, newStatus}
+ *    - Automatically updates table data when drum statuses change
+ *
+ * 2. Status Filtering:
+ *    - Uses StatusFilter component from shared/table/ux/StatusFilter.tsx
+ *    - Status checkboxes rendered in column header via columns.tsx
+ *    - Selected statuses passed to API via query params
+ *    - Updates query when statuses change to refetch filtered data
+ *
+ * 3. Pagination & Sorting:
+ *    - Manual server-side pagination
+ *    - Configurable page size
+ *    - Column sorting with SortableColumn component
+ */
+
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   useReactTable,
   getCoreRowModel,
@@ -29,6 +53,7 @@ const filterOptions = [
 ];
 
 export const DrumsTable = React.memo(() => {
+  const queryClient = useQueryClient();
   const [sorting, setSorting] = useState<SortingState>([
     { id: "drum_id", desc: true },
   ]);
@@ -40,12 +65,77 @@ export const DrumsTable = React.memo(() => {
   const [selectedStatuses, setSelectedStatuses] = useState<DrumStatusType[]>([
     DrumStatus.PENDING,
     DrumStatus.AVAILABLE,
+    DrumStatus.SCHEDULED,
   ]);
 
   // Create columns with status filter state
   const columns = createColumns({ selectedStatuses, setSelectedStatuses });
 
-  // Update query when status filter changes
+  /**
+   * Server-Sent Events (SSE) Setup
+   *
+   * 1. Creates EventSource connection to /api/drums/sse
+   * 2. Listens for three event types:
+   *    - 'connected': Initial connection confirmation
+   *    - 'drumStatus': Real-time status updates
+   *    - 'error': Connection/stream errors
+   * 3. Updates local data immediately on status changes
+   * 4. Cleans up connection on component unmount
+   */
+  useEffect(() => {
+    const eventSource = new EventSource("/api/drums/sse");
+
+    eventSource.addEventListener("connected", (event) => {
+      console.log("SSE Connected:", event);
+    });
+
+    eventSource.addEventListener("drumStatus", (event) => {
+      const { drumId, newStatus } = JSON.parse((event as MessageEvent).data);
+
+      // Invalidate the query to trigger a refetch
+      queryClient.invalidateQueries({ queryKey: ["drums"] });
+
+      // Optionally, update the local data immediately
+      queryClient.setQueryData<{ rows: any[]; total: number }>(
+        ["drums", pageIndex, pageSize, selectedStatuses],
+        (old) => {
+          if (!old) return old;
+
+          const updatedRows = old.rows.map((drum) =>
+            drum.drum_id === drumId ? { ...drum, status: newStatus } : drum
+          );
+
+          return {
+            ...old,
+            rows: updatedRows,
+          };
+        }
+      );
+    });
+
+    eventSource.addEventListener("error", (error) => {
+      console.error("SSE Error:", error);
+      eventSource.close();
+    });
+
+    return () => {
+      eventSource.close();
+    };
+  }, [queryClient, pageIndex, pageSize, selectedStatuses]);
+
+  /**
+   * Data Fetching
+   *
+   * Fetches drum data based on:
+   * - Current page index
+   * - Page size
+   * - Selected status filters
+   *
+   * Updates automatically when:
+   * - Page changes
+   * - Status filters change
+   * - SSE events received
+   */
   const { data, isLoading } = useQuery({
     queryKey: ["drums", pageIndex, pageSize, selectedStatuses],
     queryFn: async () => {
@@ -65,6 +155,7 @@ export const DrumsTable = React.memo(() => {
     staleTime: 30000,
   });
 
+  // Table configuration with TanStack Table
   const table = useReactTable({
     data: data?.rows ?? [],
     columns,
@@ -153,24 +244,15 @@ export const DrumsTable = React.memo(() => {
         <Table>
           <TableHeader table={table} />
           <TableBody>
-            {isLoading ? (
-              <TableRow>
-                <TableCell colSpan={columns.length}>Loading...</TableCell>
+            {table.getRowModel().rows.map((row) => (
+              <TableRow key={row.id}>
+                {row.getVisibleCells().map((cell) => (
+                  <TableCell key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </TableCell>
+                ))}
               </TableRow>
-            ) : (
-              table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id}>
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
-            )}
+            ))}
           </TableBody>
         </Table>
       </div>

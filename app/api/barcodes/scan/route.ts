@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/database/client";
 import { z } from "zod";
+import { drumEvents } from "@/lib/events/drumEvents";
 
 /**
  * Zod schema for the barcode data format
@@ -86,6 +87,12 @@ export async function POST(req: NextRequest) {
           JSON.stringify(importTransaction, null, 2)
         );
 
+        // Emit status change event for pending -> available transition
+        drumEvents.emit("statusChange", {
+          drumId: drumId,
+          newStatus: "available",
+        });
+
         return NextResponse.json(
           {
             success: true,
@@ -109,6 +116,8 @@ export async function POST(req: NextRequest) {
           status: "available", // Adding status check to ensure we only update if status hasn't changed
         });
 
+        // TODO: Change this to a transaction with `tx_type` = 'processing' as new status. Do not update other tables
+        // with Prisma other than the `transactions` table.
         const updatedDrum = await prisma.new_drums.update({
           where: {
             drum_id: drumId,
@@ -122,6 +131,12 @@ export async function POST(req: NextRequest) {
           "Update query result:",
           JSON.stringify(updatedDrum, null, 2)
         );
+
+        // Emit status change event for available -> scheduled transition
+        drumEvents.emit("statusChange", {
+          drumId: drumId,
+          newStatus: "scheduled",
+        });
 
         return NextResponse.json(
           {
