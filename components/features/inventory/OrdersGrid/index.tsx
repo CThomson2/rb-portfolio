@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { queries } from "@/database/repositories/orders/queries";
 import { BentoGrid } from "@/components/ui/BentoGrid";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -9,6 +9,7 @@ import Link from "next/link";
 import { ActionButton, SearchBar } from "@/components/shared/table";
 import { GridModal } from "./GridModal";
 import type { Order, OrderGetResponse } from "@/types/database/orders";
+import { useQueryClient } from "@tanstack/react-query";
 
 const filterOptions = [
   { label: "All", value: "all" },
@@ -38,6 +39,8 @@ const OrdersGrid = () => {
 
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const queryClient = useQueryClient();
 
   /**
    * TanStack Query Hook
@@ -79,6 +82,69 @@ const OrdersGrid = () => {
     },
     staleTime: 30000,
   });
+
+  /**
+   * Server-Sent Events (SSE) Setup for Real-time Order Updates
+   *
+   * Purpose: Establishes real-time connection to server for order quantity updates
+   * when drums are scanned.
+   *
+   * Dependencies:
+   * - queryClient: For invalidating and updating cached data
+   * - pageIndex/pageSize: Used in query key for updating specific data
+   *
+   * Flow:
+   * 1. Creates EventSource connection
+   * 2. Sets up event listeners for:
+   *    - connected: Logs successful connection
+   *    - orderUpdate: Updates cached data when a drum is scanned
+   *    - error: Handles connection errors
+   * 3. Cleans up connection on unmount
+   */
+  useEffect(() => {
+    const eventSource = new EventSource("/api/drums/sse");
+
+    eventSource.addEventListener("connected", (event) => {
+      console.log("SSE Connected:", event);
+    });
+
+    eventSource.addEventListener("orderUpdate", (event) => {
+      const { orderId, drumId, newQuantityReceived } = JSON.parse(
+        (event as MessageEvent).data
+      );
+
+      // Invalidate the query to trigger a refetch
+      queryClient.invalidateQueries({ queryKey: ["orders"] });
+
+      // Optimistically update local data before refetch completes
+      queryClient.setQueryData<{ rows: Order[]; total: number }>(
+        ["orders", pageIndex, pageSize],
+        (old) => {
+          if (!old) return old;
+
+          const updatedRows = old.rows.map((order) =>
+            order.order_id === orderId
+              ? { ...order, quantity_received: newQuantityReceived }
+              : order
+          );
+
+          return {
+            ...old,
+            rows: updatedRows,
+          };
+        }
+      );
+    });
+
+    eventSource.addEventListener("error", (error) => {
+      console.error("SSE Error:", error);
+      eventSource.close();
+    });
+
+    return () => {
+      eventSource.close();
+    };
+  }, [queryClient, pageIndex, pageSize]);
 
   /*
   const mutation = useMutation<OrderGetResponse, Error, NewOrder>({
