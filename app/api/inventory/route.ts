@@ -34,7 +34,7 @@ export async function GET(req: Request) {
     const statusParam = searchParams.get("status");
     const status = statusParam
       ? (statusParam.split(",") as DrumStatusType[])
-      : [DrumStatus.AVAILABLE];
+      : Object.values(DrumStatus);
 
     // Fetch drums data using repository query
     const drumsData = await queries.getDrums({

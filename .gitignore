@@ -51,7 +51,6 @@ project_tree.pdf
 database/generated/
 database/sessions/
 barcodes_test.pdf
-lib/generateBarcodes.js
 
 # documentation
 docs/
@@ -59,3 +58,4 @@ docs/
 # misc codebase and raw data
 public/misc-codebase/
 public/raw-data/
+public/rathburn/
