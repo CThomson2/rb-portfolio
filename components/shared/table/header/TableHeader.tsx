@@ -7,7 +7,6 @@ import {
 } from "@/components/ui/Table";
 import { Table } from "@tanstack/react-table";
 import { cn } from "@/lib/utils";
-import { TABLE_GRID_LAYOUT } from "@/lib/constants/table";
 
 /**
  * TableHeader Component

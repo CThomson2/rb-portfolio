@@ -23,8 +23,21 @@ export const queries = {
       where: {
         status: { in: status },
       },
-      include: {
-        orders: true,
+      select: {
+        drum_id: true,
+        material: true,
+        status: true,
+        location: true,
+        date_processed: true,
+        created_at: true,
+        updated_at: true,
+        orders: {
+          select: {
+            order_id: true,
+            supplier: true,
+            date_ordered: true,
+          },
+        },
       },
       orderBy: {
         [sortField]: sortOrder,

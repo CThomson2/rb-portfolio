@@ -13,9 +13,11 @@
 "use client";
 
 import { useState } from "react";
-import { OrderFormData, OrderPostResponse } from "@/types/database/orders";
+import { OrderFormData } from "@/types/database/orders";
 import { CreateForm } from "@/components/features/inventory/CreateForm";
 import { DrumLabel } from "@/components/features/barcodes/DrumLabel";
+import { cn } from "@/lib/utils";
+import { CheckCircle2 } from "lucide-react";
 
 // import { Form } from "@/components/shared/form";
 
@@ -26,11 +28,25 @@ interface FormValues {
   quantity: number;
 }
 
+/**
+ * OrderCreationPage component for handling the creation of new inventory orders.
+ *
+ * This component manages the state for order creation, including form submission,
+ * error handling, and displaying the created order details with a barcode label.
+ *
+ * @returns {JSX.Element} The rendered OrderCreationPage component
+ */
 function OrderCreationPage() {
-  const [orderData, setOrderData] = useState<OrderFormData | null>(null);
-  const [drumIds, setDrumIds] = useState<number[]>([]);
+  // Change to array of orders instead of single order
+  const [orders, setOrders] = useState<OrderFormData[]>([]);
   const [error, setError] = useState<string | null>(null);
 
+  /**
+   * Handles the creation of a new order by submitting form data to the API.
+   *
+   * @param {FormValues} formValues - The form values containing order details
+   * @returns {Promise<void>}
+   */
   const handleCreateOrder = async (formValues: FormValues) => {
     try {
       setError(null);
@@ -47,8 +63,8 @@ function OrderCreationPage() {
       }
 
       if (data.success) {
-        setOrderData(data.order);
-        // setDrumIds(data.drum_ids);
+        // Add new order to the beginning of the array
+        setOrders((prevOrders) => [data.order, ...prevOrders]);
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred");
@@ -56,33 +72,78 @@ function OrderCreationPage() {
     }
   };
 
+  /**
+   * Sets the error state with the provided error message.
+   *
+   * @param {string} error - The error message to be set
+   */
   const handleError = (error: string) => {
     setError(error);
   };
 
   return (
-    <div className="max-w-8xl flex justify-center items-center mx-auto p-6 space-y-6">
+    <div className="min-h-screen flex">
       {error && (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded z-50">
           ERROR: {error}
         </div>
       )}
 
-      <div className="bg-slate-900 p-8 w-full rounded-md shadow-md">
-        <CreateForm onOrderCreated={handleCreateOrder} />
-
-        {orderData && (
-          <div className="bg-slate-800 text-white p-8 mx-auto  rounded-md shadow-md">
-            <h2 className="text-2xl font-bold mb-4">
-              Order #{orderData.order_id} Created Successfully
-            </h2>
-            {/* <h3>Order ID: {orderData.order_id}</h3>
-          <h3>Material: {orderData.material}</h3>
-          <h3>Supplier: {orderData.supplier}</h3> */}
-            <DrumLabel order={orderData} onError={setError} />
-            {/* <BarcodeLabel order={orderData} /> */}
+      <div className="flex flex-1">
+        {/* Left section - Order Form */}
+        <div className="flex-1 p-6 flex items-center justify-center">
+          <div className="w-full max-w-[500px]">
+            <CreateForm onOrderCreated={handleCreateOrder} />
           </div>
-        )}
+        </div>
+
+        {/* Right section - Always visible with bg-slate-700 */}
+        <div className="flex-1 bg-slate-700 min-w-[500px]">
+          <div className="h-full flex flex-col">
+            <h2 className="text-2xl font-bold p-6 text-white border-b border-slate-600">
+              Barcode Labels
+            </h2>
+
+            <div className="flex-1 p-6 overflow-auto">
+              <div className="space-y-6">
+                {orders.map((order, index) => (
+                  <div
+                    key={order.order_id}
+                    className={cn(
+                      "transition-all duration-500",
+                      "opacity-0 translate-x-4",
+                      "animate-[enter_0.5s_ease-out_forwards]"
+                    )}
+                    style={{
+                      animationDelay: `${index * 100}ms`,
+                    }}
+                  >
+                    <div className="bg-slate-800 rounded-lg shadow-xl overflow-hidden">
+                      {/* Success Banner */}
+                      <div className="bg-green-500/10 border-b border-green-500/20 px-8 py-4 flex items-center gap-3">
+                        <CheckCircle2 className="text-green-500 w-6 h-6" />
+                        <h3 className="text-lg font-semibold text-green-500">
+                          Order Created Successfully
+                        </h3>
+                      </div>
+
+                      {/* Order Details and Actions */}
+                      <div className="p-8">
+                        <DrumLabel order={order} onError={setError} />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+
+                {orders.length === 0 && (
+                  <div className="text-center text-slate-400 py-12">
+                    No orders created yet. Use the form to create a new order.
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

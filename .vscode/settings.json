@@ -11,9 +11,9 @@
     "source.fixAll.eslint": "explicit"
   },
   "editor.wordWrap": "on",
-  "markdown-pdf.outputDirectory": "path/to/output/directory",
+  "markdown-pdf.outputDirectory": "./docs/markdown",
   "markdown-pdf.type": ["pdf"],
-  "markdown-pdf.executablePath": "/path/to/chrome/or/chromium",
+  "markdown-pdf.executablePath": "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge",
   "markdown-pdf.options": {
     "format": "A4",
     "margin": {
@@ -22,5 +22,6 @@
       "bottom": "20mm",
       "left": "20mm"
     }
-  }
+  },
+  "css.styleSheets": ["app/**/*.css", "app/**/*.scss"]
 }

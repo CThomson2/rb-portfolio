@@ -1,5 +1,14 @@
 import React from "react";
 
+/**
+ * BatchUploadPage component for rendering the batch upload interface.
+ *
+ * This component displays a page where users can upload multiple scans
+ * to the database. It includes a title, description, file input for
+ * selecting barcode label PDFs, and an upload button.
+ *
+ * @returns {JSX.Element} The rendered BatchUploadPage component.
+ */
 export default function BatchUploadPage() {
   return (
     <div className="flex flex-col items-center justify-center h-screen">

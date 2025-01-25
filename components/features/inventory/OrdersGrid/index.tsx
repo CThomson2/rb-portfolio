@@ -1,13 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { queries } from "@/database/repositories/orders/queries";
 import { BentoGrid } from "@/components/ui/BentoGrid";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { NewOrder, OrderGetResponse } from "@/types/database/orders";
 import { SortingState } from "@tanstack/react-table";
 import Link from "next/link";
 import { ActionButton, SearchBar } from "@/components/shared/table";
+import { GridModal } from "./GridModal";
+import type { Order, OrderGetResponse } from "@/types/database/orders";
+import { useQueryClient } from "@tanstack/react-query";
 
 const filterOptions = [
   { label: "All", value: "all" },
@@ -17,17 +19,54 @@ const filterOptions = [
 ];
 
 const OrdersGrid = () => {
+  // State for table sorting - currently unused but could be used for client-side sorting
   const [sorting, setSorting] = useState<SortingState>([
     { id: "order_id", desc: true },
   ]);
+
+  // State for row selection - currently unused but could enable multi-select functionality
   const [rowSelection, setRowSelection] = useState({});
+
+  // States for filtering - currently only used by SearchBar component
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("all");
 
+  // Pagination states - actively used by useQuery to fetch paginated data
+  // These values are included in the queryKey array, so when they change,
+  // useQuery will automatically refetch with the new pagination parameters
   const [pageIndex, setPageIndex] = useState(0);
   const [pageSize, setPageSize] = useState(50);
 
-  // Fetch orders from the API
+  const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const queryClient = useQueryClient();
+
+  /**
+   * TanStack Query Hook
+   *
+   * useQuery is a hook that manages server state including:
+   * - Fetching data
+   * - Caching results
+   * - Refetching when needed
+   * - Loading/error states
+   *
+   * Key Props:
+   * - queryKey: Unique identifier for this query, used for caching/refetching
+   *   Including pageIndex/pageSize means query will refetch when these change
+   *
+   * - queryFn: Async function that fetches the data
+   *   Uses pagination params from state to fetch correct page
+   *
+   * - staleTime: How long data is considered fresh (30 seconds)
+   *   After this time, data may be refetched if component remounts
+   *
+   * Returns:
+   * - data: The fetched data
+   * - isLoading: Loading state
+   * - error: Any error that occurred
+   * - refetch: Function to manually trigger a refetch
+   */
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["orders", pageIndex, pageSize],
     queryFn: async () => {
@@ -44,6 +83,101 @@ const OrdersGrid = () => {
     staleTime: 30000,
   });
 
+  /**
+   * Server-Sent Events (SSE) Setup for Real-time Order Updates
+   *
+   * Purpose: Establishes real-time connection to server for order quantity updates
+   * when drums are scanned.
+   *
+   * Dependencies:
+   * - queryClient: For invalidating and updating cached data
+   * - pageIndex/pageSize: Used in query key for updating specific data
+   *
+   * Flow:
+   * 1. Creates EventSource connection
+   * 2. Sets up event listeners for:
+   *    - connected: Logs successful connection
+   *    - orderUpdate: Updates cached data when a drum is scanned
+   *    - error: Handles connection errors and implements reconnection
+   * 3. Cleans up connection on unmount
+   */
+  useEffect(() => {
+    let eventSource: EventSource;
+    let retryCount = 0;
+    const maxRetries = 3;
+
+    function setupEventSource() {
+      eventSource = new EventSource("/api/orders/sse");
+      console.log("Establishing SSE connection...");
+
+      eventSource.addEventListener("connected", (event) => {
+        console.log("SSE Connected:", event);
+        retryCount = 0; // Reset retry count on successful connection
+      });
+
+      eventSource.addEventListener("orderUpdate", (event) => {
+        const { orderId, drumId, newQuantityReceived } = JSON.parse(
+          (event as MessageEvent).data
+        );
+        console.log(`Received order update for order ${orderId}`);
+
+        // Invalidate the query with the full query key
+        queryClient.invalidateQueries({
+          queryKey: ["orders", pageIndex, pageSize],
+        });
+
+        // Optimistically update local data before refetch completes
+        queryClient.setQueryData<{ rows: Order[]; total: number }>(
+          ["orders", pageIndex, pageSize],
+          (old) => {
+            if (!old) return old;
+
+            const updatedRows = old.rows.map((order) =>
+              order.order_id === orderId
+                ? { ...order, quantity_received: newQuantityReceived }
+                : order
+            );
+
+            return {
+              ...old,
+              rows: updatedRows,
+            };
+          }
+        );
+      });
+
+      eventSource.addEventListener("error", (error) => {
+        console.error("SSE Error:", error);
+        eventSource.close();
+
+        // Attempt to reconnect if we haven't exceeded max retries
+        if (retryCount < maxRetries) {
+          retryCount++;
+          console.log(
+            `Attempting to reconnect (attempt ${retryCount}/${maxRetries})...`
+          );
+          const reconnectDelay = Math.min(
+            1000 * Math.pow(2, retryCount),
+            10000
+          );
+          setTimeout(setupEventSource, reconnectDelay);
+        } else {
+          console.error("Max reconnection attempts reached");
+        }
+      });
+    }
+
+    setupEventSource();
+
+    return () => {
+      console.log("Cleaning up SSE connection");
+      if (eventSource) {
+        eventSource.close();
+      }
+    };
+  }, [queryClient, pageIndex, pageSize]);
+
+  /*
   const mutation = useMutation<OrderGetResponse, Error, NewOrder>({
     mutationFn: async (newOrder) => {
       const response = await fetch("/api/inventory/orders", {
@@ -72,6 +206,17 @@ const OrdersGrid = () => {
         console.log("Mutation settled:", { data, error });
       },
     });
+  };
+  */
+
+  const handleOrderClick = (order: Order) => {
+    setSelectedOrder(order);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedOrder(null);
   };
 
   if (isLoading) return <div>Loading...</div>;
@@ -121,15 +266,18 @@ const OrdersGrid = () => {
           {data?.rows.map((order) => (
             <div
               key={order.order_id}
-              className="p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow"
+              onClick={() => handleOrderClick(order)}
+              className="p-4 bg-slate-800 rounded-lg border border-slate-700 shadow-md 
+                hover:bg-slate-700/80 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] 
+                hover:border-slate-600 transition-all duration-200 cursor-pointer"
             >
               <div className="mb-2">
-                <h2 className="text-lg font-semibold text-secondary">
+                <h2 className="text-lg font-semibold text-white">
                   {order.supplier}
                 </h2>
-                <p className="text-sm text-gray-500">{order.material}</p>
+                <p className="text-sm text-slate-400">{order.material}</p>
               </div>
-              <div className="mb-2 text-secondary">
+              <div className="mb-2 text-white">
                 <p>
                   <strong>Ordered:</strong> {order.quantity}
                 </p>
@@ -141,10 +289,10 @@ const OrdersGrid = () => {
                   <span
                     className={`${
                       order.delivery_status === "complete"
-                        ? "text-green-600"
+                        ? "text-green-400"
                         : order.delivery_status === "partial"
-                        ? "text-yellow-600"
-                        : "text-gray-600"
+                        ? "text-yellow-400"
+                        : "text-slate-300"
                     } font-medium`}
                   >
                     {order.delivery_status}
@@ -152,7 +300,7 @@ const OrdersGrid = () => {
                 </p>
               </div>
               <div>
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-slate-400">
                   Ordered on:{" "}
                   {order.date_ordered
                     ? new Date(order.date_ordered).toLocaleDateString()
@@ -163,6 +311,12 @@ const OrdersGrid = () => {
           ))}
         </BentoGrid>
       </div>
+
+      <GridModal
+        order={selectedOrder}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
     </div>
   );
 };

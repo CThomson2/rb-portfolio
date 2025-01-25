@@ -26,6 +26,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# non-production testing files
+.ignore/*
+
 # local env files
 # .env
 # .env*.local
@@ -48,7 +51,15 @@ project_tree.pdf
 database/generated/
 database/sessions/
 barcodes_test.pdf
-lib/generateBarcodes.js
 
 # documentation
 docs/
+
+# misc codebase and raw data
+public/misc-codebase/
+public/raw-data/
+public/rathburn/
+
+
+app/api/barcodes/scan/_drumsOnlyRoute.ts
+app/api/drums/sse/_drumsOnlyRoute.ts

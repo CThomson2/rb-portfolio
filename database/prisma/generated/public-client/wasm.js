@@ -171,7 +171,8 @@ exports.Prisma.DeliveriesScalarFieldEnum = {
   location: 'location',
   delivery_notes: 'delivery_notes',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  is_finalised: 'is_finalised'
 };
 
 exports.Prisma.DistillationsScalarFieldEnum = {
@@ -284,7 +285,8 @@ exports.Prisma.TransactionsScalarFieldEnum = {
   process_id: 'process_id',
   direction: 'direction',
   delivery_id: 'delivery_id',
-  batch_code: 'batch_code'
+  batch_code: 'batch_code',
+  order_id: 'order_id'
 };
 
 exports.Prisma.StillScalarFieldEnum = {

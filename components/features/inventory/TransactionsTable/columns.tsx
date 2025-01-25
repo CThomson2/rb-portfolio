@@ -3,18 +3,14 @@
 // Import necessary dependencies for table functionality
 import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/Checkbox";
-import {
-  SortableColumn,
-  StatusFilter,
-  Actions,
-} from "@/components/shared/table";
+import { SortableColumn, Actions } from "@/components/shared/table";
 
 // Formatters
 import { format } from "date-fns";
 import { getTxTypeVariant } from "@/lib/utils/formatters";
 
 // UI Components
-import { Badge } from "@/components/ui/Badge";
+import { Badge } from "@/components/ui/badge";
 
 // import { MoreHorizontal } from "lucide-react";
 import type { Transaction } from "@/types/database/transactions";

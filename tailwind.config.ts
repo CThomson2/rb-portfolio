@@ -8,30 +8,38 @@ const {
 } = require("tailwindcss/lib/util/flattenColorPalette");
 
 const config = {
+  // Enable dark mode using CSS classes instead of media queries
   darkMode: ["class"],
+
+  // Specify which files Tailwind should scan for class names
   content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
-    "./data/**/*.{ts,tsx}",
+    "./pages/**/*.{ts,tsx}", // Next.js pages directory
+    "./components/**/*.{ts,tsx}", // React components
+    "./app/**/*.{ts,tsx}", // Next.js app directory
+    "./src/**/*.{ts,tsx}", // Source files
+    "./data/**/*.{ts,tsx}", // Data files
   ],
+
+  // Optional prefix for all utility classes
   prefix: "",
+
   theme: {
     container: {
-      center: true,
-      padding: "2rem",
+      center: true, // Center containers by default
+      padding: "2rem", // Default container padding
       screens: {
-        "2xl": "1400px",
+        "2xl": "1400px", // Max width for 2xl container
       },
     },
+
+    // Breakpoint definitions for responsive design
     screens: {
-      sm: "640px",
-      md: "768px",
-      lg: "1024px",
-      xl: "1152px",
-      "2xl": "1280px",
-      "3xl": "1536px",
+      sm: "640px", // Small devices
+      md: "768px", // Medium devices
+      lg: "1024px", // Large devices
+      xl: "1152px", // Extra large devices
+      "2xl": "1280px", // 2x extra large devices
+      "3xl": "1536px", // 3x extra large devices
     },
     extend: {
       colors: {

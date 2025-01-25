@@ -1,5 +1,6 @@
 import React from "react";
 import { OrderFormData } from "@/types/database/orders";
+import { FileDown } from "lucide-react";
 
 interface DrumLabelProps {
   order: OrderFormData;
@@ -43,23 +44,42 @@ export const DrumLabel: React.FC<DrumLabelProps> = ({
   };
 
   return (
-    <div className="space-y-4">
-      <p>
-        <strong>Order ID:</strong> {order_id}
-      </p>
-      <p>
-        <strong>Supplier:</strong> {supplier}
-      </p>
-      <p>
-        <strong>Material:</strong> {material}
-      </p>
+    <div className="space-y-8">
+      {/* Order Details Section */}
+      <div className="space-y-4">
+        <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-1">
+            <p className="text-slate-400 text-sm">Order ID</p>
+            <p className="text-xl font-semibold text-white">{order_id}</p>
+          </div>
+          <div className="space-y-1">
+            <p className="text-slate-400 text-sm">Material</p>
+            <p className="text-xl font-semibold text-white">{material}</p>
+          </div>
+          <div className="space-y-1">
+            <p className="text-slate-400 text-sm">Supplier</p>
+            <p className="text-xl font-semibold text-white">{supplier}</p>
+          </div>
+        </div>
+      </div>
 
-      <button
-        onClick={handleGeneratePDF}
-        className="bg-blue-600 text-white px-4 py-2 rounded"
-      >
-        Generate & View Barcode PDF
-      </button>
+      {/* Divider */}
+      <div className="border-t border-slate-600" />
+
+      {/* PDF Generation Section */}
+      <div className="space-y-3">
+        <p className="text-slate-300 text-sm">
+          Your order has been created successfully. Generate and print barcode
+          labels for each drum in this order.
+        </p>
+        <button
+          onClick={handleGeneratePDF}
+          className="group flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-lg transition-all duration-200 hover:translate-y-[-2px] active:translate-y-0 shadow-lg hover:shadow-blue-500/25"
+        >
+          <FileDown className="w-5 h-5 transition-transform group-hover:scale-110" />
+          <span className="font-medium">Download Barcode Labels</span>
+        </button>
+      </div>
     </div>
   );
 };
