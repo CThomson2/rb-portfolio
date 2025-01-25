@@ -1,3 +1,4 @@
+// TODO: This is a route to get data for the sidebar. Add more functionality to this route and others relating to the sidebar, as it's not close to being fully implemented yet.
 import { NextResponse } from "next/server";
 import { queries } from "@/database/repositories/orders/queries";
 import type {

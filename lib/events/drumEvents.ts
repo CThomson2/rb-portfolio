@@ -1,26 +1,46 @@
 import { EventEmitter } from "events";
 
 /**
- * DrumEventEmitter: A singleton class for managing real-time drum status updates
+ * DrumEventEmitter: A strongly-typed singleton class for managing real-time drum status updates
  *
- * This code creates a system for broadcasting drum status changes across the app:
+ * This class extends Node's EventEmitter to provide type-safe event handling across the app:
  *
- * 1. It uses Node's built-in EventEmitter to handle pub/sub events
- * 2. It's a singleton, meaning only one instance exists globally
- * 3. Used by:
- *    - API routes to emit status changes
- *    - Components to listen for updates
+ * Key Features:
+ * 1. Type-safe events defined by DrumEvents interface:
+ *    - drumStatus: Emitted when a drum's status changes
+ *    - orderUpdate: Emitted when an order's received quantity changes
+ *
+ * 2. Singleton pattern ensures one global event bus
+ *
+ * 3. Generic type constraints ensure type safety:
+ *    - emit<K>: Can only emit events defined in DrumEvents
+ *    - on<K>: Can only listen to defined events with correct parameters
+ *    - off<K>: Type-safe event unsubscription
  *
  * Example usage:
  *
- * // Emit a status change:
- * drumEvents.emit('statusChange', { drumId: 123, newStatus: 'available' })
+ * // Emit a drum status change (type-checked):
+ * drumEvents.emit('drumStatus', 123, 'available')
  *
- * // Listen for changes:
- * drumEvents.on('statusChange', ({ drumId, newStatus }) => {
- *   // Handle the change
+ * // Listen for changes (parameters are type-checked):
+ * drumEvents.on('drumStatus', (drumId, newStatus) => {
+ *   // TypeScript knows drumId is number, newStatus is string
  * })
+ *
+ * Note: When using with SSE (Server-Sent Events), ensure event names match
+ * between the SSE endpoint and DrumEvents interface. The SSE connection
+ * should emit events that this emitter can then broadcast locally.
  */
+
+declare interface DrumEvents {
+  drumStatus: (drumId: number, newStatus: string) => void;
+  orderUpdate: (
+    orderId: number,
+    drumId: number,
+    newQuantityReceived: number
+  ) => void;
+}
+
 class DrumEventEmitter extends EventEmitter {
   // Store the single instance
   private static instance: DrumEventEmitter;
@@ -36,6 +56,21 @@ class DrumEventEmitter extends EventEmitter {
       DrumEventEmitter.instance = new DrumEventEmitter();
     }
     return DrumEventEmitter.instance;
+  }
+
+  emit<K extends keyof DrumEvents>(
+    event: K,
+    ...args: Parameters<DrumEvents[K]>
+  ): boolean {
+    return super.emit(event, ...args);
+  }
+
+  on<K extends keyof DrumEvents>(event: K, listener: DrumEvents[K]): this {
+    return super.on(event, listener);
+  }
+
+  off<K extends keyof DrumEvents>(event: K, listener: DrumEvents[K]): this {
+    return super.off(event, listener);
   }
 }
 

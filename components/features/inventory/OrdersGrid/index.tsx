@@ -102,7 +102,7 @@ const OrdersGrid = () => {
    * 3. Cleans up connection on unmount
    */
   useEffect(() => {
-    const eventSource = new EventSource("/api/drums/sse");
+    const eventSource = new EventSource("/api/orders/sse");
 
     eventSource.addEventListener("connected", (event) => {
       console.log("SSE Connected:", event);
@@ -113,8 +113,10 @@ const OrdersGrid = () => {
         (event as MessageEvent).data
       );
 
-      // Invalidate the query to trigger a refetch
-      queryClient.invalidateQueries({ queryKey: ["orders"] });
+      // Invalidate the query with the full query key
+      queryClient.invalidateQueries({
+        queryKey: ["orders", pageIndex, pageSize],
+      });
 
       // Optimistically update local data before refetch completes
       queryClient.setQueryData<{ rows: Order[]; total: number }>(
