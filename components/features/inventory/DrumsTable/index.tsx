@@ -49,9 +49,9 @@ import { TableHeader } from "@/components/shared/table/ux/TableHeader";
 import { TableFooter } from "@/components/shared/table";
 import { SearchBar } from "@/components/shared/table";
 import { ActionButton } from "@/components/shared/table";
-import type { DrumsResponse } from "@/types/database/drums";
 import { DrumStatus, DrumStatusType } from "@/types/constant/drums";
 import { cn } from "@/lib/utils";
+import type { DrumsResponse } from "@/types/database/drums";
 
 // Filter options for the search bar dropdown
 const filterOptions = [
@@ -88,60 +88,119 @@ export const DrumsTable = React.memo(() => {
   const columns = createColumns({ selectedStatuses, setSelectedStatuses });
 
   /**
-   * Server-Sent Events (SSE) Setup
+   * Server-Sent Events (SSE) Effect Hook
    *
-   * Purpose: Establishes real-time connection to server for drum status updates
+   * Purpose: Establishes and manages a real-time connection to server for drum status updates
+   * using SSE for one-way server-to-client communication.
    *
    * Dependencies:
-   * - queryClient: For invalidating and updating cached data
-   * - pageIndex/pageSize/selectedStatuses: Used in query key for updating specific data
+   * - queryClient: TanStack Query's central cache manager for storing/updating query data
+   * - pageIndex/pageSize/selectedStatuses: Used in query key to identify correct data subset
+   *
+   * The queryKey uniquely identifies cached data with:
+   * - "drums": Base key for drum data
+   * - pageIndex: Current page number
+   * - pageSize: Items per page
+   * - selectedStatuses: Active status filters
+   *
+   * These parameters are needed in the queryKey because they affect which subset of data
+   * is being displayed. When an SSE event arrives, we need to update the correct "slice"
+   * of data based on current pagination and filters.
+   *
+   * "Invalidation" means marking cached data as stale, triggering a refetch.
+   * This ensures the UI shows fresh data after server-side changes.
    *
    * Flow:
-   * 1. Creates EventSource connection
+   * 1. Creates EventSource connection with reconnection logic
    * 2. Sets up event listeners for:
    *    - connected: Logs successful connection
-   *    - drumStatus: Updates cached data when drum status changes
-   *    - error: Handles connection errors
+   *    - drumStatus: Handles status updates by:
+   *      a) Invalidating current query to trigger refetch
+   *      b) Optimistically updating UI before refetch completes
+   *    - error: Handles connection errors with exponential backoff
    * 3. Cleans up connection on unmount
    */
   useEffect(() => {
-    const eventSource = new EventSource("/api/drums/sse");
+    let eventSource: EventSource | null = null;
+    let retryCount = 0;
+    const maxRetries = 3;
+    const connectionId = Math.random().toString(36).slice(2, 8);
 
-    eventSource.addEventListener("connected", (event) => {
-      console.log("SSE Connected:", event);
-    });
+    function setupEventSource() {
+      console.log(`[Drums Table ${connectionId}] Setting up SSE connection...`);
+      eventSource = new EventSource("/api/drums/sse");
 
-    eventSource.addEventListener("drumStatus", (event) => {
-      const { drumId, newStatus } = JSON.parse((event as MessageEvent).data);
+      eventSource.addEventListener("connected", (event) => {
+        console.log(`[Drums Table ${connectionId}] Connected:`, event.data);
+        retryCount = 0;
+      });
 
-      // Invalidate the query to trigger a refetch
-      queryClient.invalidateQueries({ queryKey: ["drums"] });
+      eventSource.addEventListener("drumStatus", (event) => {
+        const { drumId, newStatus } = JSON.parse((event as MessageEvent).data);
+        console.log(
+          `[Drums Table ${connectionId}] Received status update for drum ${drumId}: ${newStatus}`
+        );
 
-      // Optimistically update local data before refetch completes
-      queryClient.setQueryData<{ rows: any[]; total: number }>(
-        ["drums", pageIndex, pageSize, selectedStatuses],
-        (old) => {
-          if (!old) return old;
+        // Immediately invalidate the query
+        queryClient.invalidateQueries({
+          queryKey: ["drums", pageIndex, pageSize, selectedStatuses],
+          exact: true,
+        });
 
-          const updatedRows = old.rows.map((drum) =>
-            drum.drum_id === drumId ? { ...drum, status: newStatus } : drum
-          );
+        // Optimistically update UI
+        queryClient.setQueryData<{ rows: any[]; total: number }>(
+          ["drums", pageIndex, pageSize, selectedStatuses],
+          (old) => {
+            if (!old) return old;
+            console.log(
+              `[Drums Table ${connectionId}] Updating local data for drum ${drumId}`
+            );
 
-          return {
-            ...old,
-            rows: updatedRows,
-          };
+            const updatedRows = old.rows.map((drum) =>
+              drum.drum_id === drumId ? { ...drum, status: newStatus } : drum
+            );
+
+            return {
+              ...old,
+              rows: updatedRows,
+            };
+          }
+        );
+      });
+
+      eventSource.addEventListener("error", (error) => {
+        console.error(`[Drums Table ${connectionId}] SSE Error:`, error);
+        if (eventSource) {
+          eventSource.close();
+          eventSource = null;
         }
-      );
-    });
 
-    eventSource.addEventListener("error", (error) => {
-      console.error("SSE Error:", error);
-      eventSource.close();
-    });
+        if (retryCount < maxRetries) {
+          retryCount++;
+          const reconnectDelay = Math.min(
+            1000 * Math.pow(2, retryCount),
+            10000
+          );
+          console.log(
+            `[Drums Table ${connectionId}] Attempting to reconnect (attempt ${retryCount}/${maxRetries}) in ${reconnectDelay}ms...`
+          );
+          setTimeout(setupEventSource, reconnectDelay);
+        } else {
+          console.error(
+            `[Drums Table ${connectionId}] Max reconnection attempts reached`
+          );
+        }
+      });
+    }
+
+    setupEventSource();
 
     return () => {
-      eventSource.close();
+      console.log(`[Drums Table ${connectionId}] Cleaning up SSE connection`);
+      if (eventSource) {
+        eventSource.close();
+        eventSource = null;
+      }
     };
   }, [queryClient, pageIndex, pageSize, selectedStatuses]);
 

@@ -98,53 +98,82 @@ const OrdersGrid = () => {
    * 2. Sets up event listeners for:
    *    - connected: Logs successful connection
    *    - orderUpdate: Updates cached data when a drum is scanned
-   *    - error: Handles connection errors
+   *    - error: Handles connection errors and implements reconnection
    * 3. Cleans up connection on unmount
    */
   useEffect(() => {
-    const eventSource = new EventSource("/api/orders/sse");
+    let eventSource: EventSource;
+    let retryCount = 0;
+    const maxRetries = 3;
 
-    eventSource.addEventListener("connected", (event) => {
-      console.log("SSE Connected:", event);
-    });
+    function setupEventSource() {
+      eventSource = new EventSource("/api/orders/sse");
+      console.log("Establishing SSE connection...");
 
-    eventSource.addEventListener("orderUpdate", (event) => {
-      const { orderId, drumId, newQuantityReceived } = JSON.parse(
-        (event as MessageEvent).data
-      );
-
-      // Invalidate the query with the full query key
-      queryClient.invalidateQueries({
-        queryKey: ["orders", pageIndex, pageSize],
+      eventSource.addEventListener("connected", (event) => {
+        console.log("SSE Connected:", event);
+        retryCount = 0; // Reset retry count on successful connection
       });
 
-      // Optimistically update local data before refetch completes
-      queryClient.setQueryData<{ rows: Order[]; total: number }>(
-        ["orders", pageIndex, pageSize],
-        (old) => {
-          if (!old) return old;
+      eventSource.addEventListener("orderUpdate", (event) => {
+        const { orderId, drumId, newQuantityReceived } = JSON.parse(
+          (event as MessageEvent).data
+        );
+        console.log(`Received order update for order ${orderId}`);
 
-          const updatedRows = old.rows.map((order) =>
-            order.order_id === orderId
-              ? { ...order, quantity_received: newQuantityReceived }
-              : order
+        // Invalidate the query with the full query key
+        queryClient.invalidateQueries({
+          queryKey: ["orders", pageIndex, pageSize],
+        });
+
+        // Optimistically update local data before refetch completes
+        queryClient.setQueryData<{ rows: Order[]; total: number }>(
+          ["orders", pageIndex, pageSize],
+          (old) => {
+            if (!old) return old;
+
+            const updatedRows = old.rows.map((order) =>
+              order.order_id === orderId
+                ? { ...order, quantity_received: newQuantityReceived }
+                : order
+            );
+
+            return {
+              ...old,
+              rows: updatedRows,
+            };
+          }
+        );
+      });
+
+      eventSource.addEventListener("error", (error) => {
+        console.error("SSE Error:", error);
+        eventSource.close();
+
+        // Attempt to reconnect if we haven't exceeded max retries
+        if (retryCount < maxRetries) {
+          retryCount++;
+          console.log(
+            `Attempting to reconnect (attempt ${retryCount}/${maxRetries})...`
           );
-
-          return {
-            ...old,
-            rows: updatedRows,
-          };
+          const reconnectDelay = Math.min(
+            1000 * Math.pow(2, retryCount),
+            10000
+          );
+          setTimeout(setupEventSource, reconnectDelay);
+        } else {
+          console.error("Max reconnection attempts reached");
         }
-      );
-    });
+      });
+    }
 
-    eventSource.addEventListener("error", (error) => {
-      console.error("SSE Error:", error);
-      eventSource.close();
-    });
+    setupEventSource();
 
     return () => {
-      eventSource.close();
+      console.log("Cleaning up SSE connection");
+      if (eventSource) {
+        eventSource.close();
+      }
     };
   }, [queryClient, pageIndex, pageSize]);
 
