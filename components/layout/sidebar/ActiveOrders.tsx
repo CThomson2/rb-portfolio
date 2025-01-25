@@ -1,17 +1,20 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
+import { Loader2 } from "lucide-react";
+import SidebarListItem from "./SidebarListItem";
 
 interface Order {
   order_id: number;
   supplier: string;
   material: string;
   quantity: number;
+  quantity_received?: number;
 }
 
 export default function ActiveOrders() {
   const [orders, setOrders] = useState<Order[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -21,44 +24,53 @@ export default function ActiveOrders() {
         if (!res.ok) throw new Error(await res.text());
         return res.json();
       })
-      .then((data) => setOrders(data))
-      .catch((err) => setError(err.message));
+      .then((data) => {
+        setOrders(data);
+        setError("");
+      })
+      .catch((err) => setError(err.message))
+      .finally(() => setIsLoading(false));
   }, []);
 
   return (
     <div>
-      <h2 className="text-lg font-bold mb-2">Pending Orders</h2>
-      {error && <p className="text-red-400 text-sm">{error}</p>}
+      {/* Loading indicator */}
+      {isLoading && (
+        <div className="flex justify-center py-4">
+          <Loader2 className="h-6 w-6 animate-spin text-gray-400" />
+        </div>
+      )}
 
-      <ul className="space-y-3">
-        {orders.map((order) => (
-          <li
-            key={order.order_id}
-            className="bg-gray-700 p-3 rounded flex items-center justify-between"
-          >
-            {/* This grid has 4 columns defined but only 2 divs, so the last 2 columns will be empty */}
-            <div className="grid grid-cols-[1fr_3fr_1fr_1fr]">
-              {/* This div takes up the first column */}
-              <div className="flex items-center justify-center italic text-lg text-gray-400">
-                #{order.order_id}
-              </div>
-              {/* This div takes up the second column */}
-              <div className="flex flex-col items-center justify-center font-medium">
-                <div className="font-bold">{order.material}</div>
-                <div>{order.supplier}</div>
-              </div>
-              {/* The third and fourth columns are empty since no divs are defined for them */}
-            </div>
+      {/* Error state */}
+      {error && (
+        <div className="rounded-lg border border-red-800/20 bg-red-900/10 p-4">
+          <p className="text-sm text-red-400">{error}</p>
+        </div>
+      )}
 
-            {/* CTA button → order page (later we can add modal logic) */}
-            <Link href="/inventory/orders" className="ml-4">
-              <button className="bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded">
-                View
-              </button>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {/* Empty state */}
+      {!isLoading && !error && orders.length === 0 && (
+        <div className="rounded-lg border border-gray-700/50 bg-gray-800/30 p-4">
+          <p className="text-sm text-gray-400">No active orders</p>
+        </div>
+      )}
+
+      {/* Orders list */}
+      {orders.length > 0 && (
+        <div className="space-y-3">
+          {orders.map((order) => (
+            <SidebarListItem
+              key={order.order_id}
+              id={order.order_id}
+              material={order.material}
+              supplier={order.supplier}
+              quantity={order.quantity}
+              quantityReceived={order.quantity_received}
+              isOrder={true}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

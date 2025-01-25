@@ -77,7 +77,9 @@ export const queries = {
   getActiveOrders: async () => {
     return prisma.orders.findMany({
       where: {
-        delivery_status: "pending",
+        delivery_status: {
+          in: ["pending", "partial"],
+        },
       },
       orderBy: {
         order_id: "desc",
