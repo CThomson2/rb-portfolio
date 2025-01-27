@@ -9,21 +9,19 @@ import Clients from "@/components/home/Clients";
 import ApproachGrid from "@/components/home/Approach";
 import Experience from "@/components/home/Experience";
 import QueryForms from "@/components/home/RecentProjects";
-import { FloatingNav } from "@/components/ui/FloatingNavbar";
 import UserDashboard from "@/components/home/UserDashboard";
 
 const Home = () => {
   return (
     <main className="relative bg-black-100 flex justify-center items-center flex-col overflow-hidden mx-auto sm:px-10 px-5">
       <div className="max-w-7xl w-full">
-        <FloatingNav navItems={navItems} />
         <Hero />
         <Experience />
-        <QueryForms />
+        {/* <QueryForms /> */}
         {/* <Grid /> */}
-        <Clients />
+        {/* <Clients /> */}
         {/* <UserDashboard /> */}
-        <ApproachGrid />
+        {/* <ApproachGrid /> */}
         <Footer />
       </div>
     </main>

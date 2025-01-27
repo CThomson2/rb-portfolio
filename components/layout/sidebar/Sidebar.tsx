@@ -61,7 +61,7 @@ export const Sidebar = () => {
     const toggleButton = document.querySelector("[data-toggle-sidebar]");
     if (!toggleButton) return;
 
-    const handleToggle = () => setIsOpen(true);
+    const handleToggle = () => setIsOpen((prev) => !prev);
     toggleButton.addEventListener("click", handleToggle);
     return () => toggleButton.removeEventListener("click", handleToggle);
   }, []);

@@ -20,7 +20,12 @@ export const CreateForm = ({
     quantity: boolean;
     batchCode: boolean;
   }>({ material: true, supplier: false, quantity: false, batchCode: false });
-
+  /**
+   * Handles keyboard events for form field navigation and submission.
+   * When Enter is pressed, moves focus to the next field if current field is valid.
+   * @param {KeyboardEvent<HTMLInputElement>} e - The keyboard event
+   * @param {string} field - The current field name ('material', 'supplier', 'quantity', or 'batchCode')
+   */
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>, field: string) => {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -47,6 +52,11 @@ export const CreateForm = ({
     }
   };
 
+  /**
+   * Handles blur events for form fields.
+   * When a field loses focus, validates it and activates the next field if valid.
+   * @param {string} field - The field that lost focus ('material', 'supplier', or 'quantity')
+   */
   const handleBlur = (field: string) => {
     switch (field) {
       case "material":
@@ -67,6 +77,10 @@ export const CreateForm = ({
     }
   };
 
+  /**
+   * Handles form submission.
+   * Validates required fields and calls onOrderCreated callback with form data if valid.
+   */
   const handleSubmit = () => {
     if (material && supplier && quantity > 0) {
       onOrderCreated({

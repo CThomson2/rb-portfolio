@@ -34,11 +34,121 @@ import {
 // Free of Interfering Impurities
 
 export const navItems: NavItem[] = [
-  { name: "Manage", link: "#dashboard" },
-  { name: "Products", link: "/products" },
-  { name: "Inventory", link: "/inventory" },
-  { name: "Operations", link: "/inventory/transactions" },
-  { name: "Contact", link: "#contact" },
+  // {
+  //   name: "Workflows",
+  //   links: [
+  //     {
+  //       name: "Workflows",
+  //       link: "#workflows",
+  //     },
+  //   ],
+  // },
+  {
+    name: "Goods Inwards",
+    links: [
+      {
+        id: 1,
+        name: "Record New Order",
+        // link: "/inventory/orders?form=new", // TODO: change route to this for the form page, replace the separate sub-page for this routing method
+        link: "/inventory/orders/create",
+      },
+      {
+        id: 2,
+        name: "View Barcode Labels",
+        link: "/inventory/orders",
+      },
+      {
+        id: 3,
+        name: "Drum Inventory",
+        link: "/inventory",
+      },
+      {
+        id: 4,
+        name: "Inventory Events",
+        link: "/inventory/transactions",
+      },
+    ],
+  },
+  {
+    name: "Manage",
+    links: [
+      {
+        id: 1,
+        name: "Manage",
+        link: "#dashboard",
+      },
+    ],
+  },
+  {
+    name: "Products",
+    links: [
+      {
+        id: 1,
+        name: "Product Range",
+        link: "/products",
+      },
+      {
+        id: 2,
+        name: "Price List",
+        link: "/products?expanded=true",
+      },
+      {
+        id: 3,
+        name: "SDS Information",
+        link: "/products/docs",
+      },
+      {
+        id: 4,
+        name: "Raw Materials",
+        link: "/raw-materials",
+      },
+      {
+        id: 5,
+        name: "Dangerous Goods",
+        link: "/raw-materials/dgn",
+      },
+    ],
+  },
+  {
+    name: "Inventory",
+    links: [
+      {
+        id: 1,
+        name: "New Drums",
+        link: "/inventory",
+      },
+      {
+        id: 2,
+        name: "Reprocessing Drums",
+        link: "/inventory/reprocessing",
+      },
+      {
+        id: 3,
+        name: "Finished Goods",
+        link: "/inventory/warehouse",
+      },
+    ],
+  },
+  {
+    name: "Production",
+    links: [
+      {
+        id: 1,
+        name: "Weekly Schedule",
+        link: "/production/schedule?form=new",
+      },
+      {
+        id: 2,
+        name: "Active Production",
+        link: "/production/active",
+      },
+      {
+        id: 3,
+        name: "View Records",
+        link: "/production/records",
+      },
+    ],
+  },
 ];
 
 /*
