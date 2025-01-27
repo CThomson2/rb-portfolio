@@ -6,7 +6,11 @@ export interface ContactInfo {
 
 export interface NavItem {
   name: string;
-  link: string;
+  links: {
+    id: number;
+    name: string;
+    link: string;
+  }[];
 }
 
 export interface ProductInfo {

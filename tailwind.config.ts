@@ -25,44 +25,41 @@ const config = {
 
   theme: {
     container: {
-      center: true, // Center containers by default
-      padding: "2rem", // Default container padding
+      center: true,
+      padding: "2rem",
       screens: {
-        "2xl": "1400px", // Max width for 2xl container
+        "2xl": "1400px",
       },
     },
-
-    // Breakpoint definitions for responsive design
     screens: {
-      sm: "640px", // Small devices
-      md: "768px", // Medium devices
-      lg: "1024px", // Large devices
-      xl: "1152px", // Extra large devices
-      "2xl": "1280px", // 2x extra large devices
-      "3xl": "1536px", // 3x extra large devices
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1152px",
+      "2xl": "1280px",
+      "3xl": "1536px",
     },
     extend: {
       colors: {
         black: {
+          "100": "#000319",
+          "200": "rgba(17, 25, 40, 0.75)",
+          "300": "rgba(255, 255, 255, 0.125)",
           DEFAULT: "#000",
-          100: "#000319",
-          200: "rgba(17, 25, 40, 0.75)",
-          300: "rgba(255, 255, 255, 0.125)",
         },
         white: {
+          "100": "#BEC1DD",
+          "200": "#C1C2D3",
           DEFAULT: "#FFF",
-          100: "#BEC1DD",
-          200: "#C1C2D3",
         },
         blue: {
+          "100": "#18597C",
+          "101": "#DA8571",
+          "102": "#64AFD8",
+          "103": "#612940",
           DEFAULT: "#E4ECFF",
-          100: "#18597C",
-          101: "#DA8571",
-          102: "#64AFD8",
-          103: "#612940",
         },
         purple: "#CBACF9",
-        // Card (homepage)) colors
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -100,6 +97,16 @@ const config = {
           bottomLeft: "hsl(var(--card-bottom-left, 219 39% 11%))",
           bottomRight: "hsl(var(--card-bottom-right, 222 47% 11%))",
         },
+        sidebar: {
+          DEFAULT: "hsl(var(--sidebar-background))",
+          foreground: "hsl(var(--sidebar-foreground))",
+          primary: "hsl(var(--sidebar-primary))",
+          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
+          accent: "hsl(var(--sidebar-accent))",
+          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
+          border: "hsl(var(--sidebar-border))",
+          ring: "hsl(var(--sidebar-ring))",
+        },
       },
       typography: {
         terms: {
@@ -118,18 +125,34 @@ const config = {
       },
       keyframes: {
         "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
+          from: {
+            height: "0",
+          },
+          to: {
+            height: "var(--radix-accordion-content-height)",
+          },
         },
         "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
+          from: {
+            height: "var(--radix-accordion-content-height)",
+          },
+          to: {
+            height: "0",
+          },
         },
         dots: {
-          "0%": { content: "" },
-          "33%": { content: "." },
-          "66%": { content: ".." },
-          "100%": { content: "..." },
+          "0%": {
+            content: "",
+          },
+          "33%": {
+            content: ".",
+          },
+          "66%": {
+            content: "..",
+          },
+          "100%": {
+            content: "...",
+          },
         },
         spotlight: {
           "0%": {

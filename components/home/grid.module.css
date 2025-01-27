@@ -1,5 +1,5 @@
 /* Custom classes using Tailwind's color utilities */
-.bg-card-100 {
+/* .bg-card-100 {
   @apply bg-[#18597C];
 }
 
@@ -13,7 +13,7 @@
 
 .bg-card-400 {
   @apply bg-[#612940];
-}
+} */
 
 /* Style the grid of four cards with proper spacing using CSS grid layout */
 .grid {
