@@ -9,7 +9,7 @@ console.log("Starting serial port setup...");
 
 // Set up the serial port
 const port = new SerialPort({
-  path: "/dev/tty.usbserial-240", // Replace with your actual port
+  path: "/dev/tty.usbserial-230", // Replace with your actual port
   baudRate: 9600,
 });
 
