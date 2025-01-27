@@ -12,16 +12,17 @@ import { Download, Calendar } from "lucide-react";
 import { format } from "date-fns";
 import type { Order } from "@/types/database/orders";
 import { cn } from "@/lib/utils";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Checkbox } from "@/components/ui/Checkbox";
 
 interface GridModalProps {
-  /** The order data to display. If null, component returns null */
+  /** The order data to display */
   order: Order | null;
   /** Controls modal visibility */
   isOpen: boolean;
   /** Callback function to close the modal */
   onClose: () => void;
+  /** Function to update the order data */
+  onOrderUpdate?: (updatedOrder: Order) => void;
 }
 
 /**
@@ -36,70 +37,67 @@ export const GridModal: React.FC<GridModalProps> = ({
   order,
   isOpen,
   onClose,
-}: {
-  order: Order | null;
-  isOpen: boolean;
-  onClose: () => void;
-}) => {
-  const queryClient = useQueryClient();
+  onOrderUpdate,
+}: GridModalProps) => {
+  // Early return if no order data available
+  if (!order || !isOpen) return null;
 
-  // Controls visibility of the ETA edit form
-  const [showETAForm, setShowETAForm] = useState(false);
+  // Single state for ETA form visibility
+  const [isEditingETA, setIsEditingETA] = useState(false);
 
-  // State for ETA date inputs
+  // State for ETA dates
   const [etaStart, setEtaStart] = useState<string>(
-    order?.eta_start ? format(new Date(order.eta_start), "yyyy-MM-dd") : ""
+    order.eta_start ? format(new Date(order.eta_start), "yyyy-MM-dd") : ""
   );
   const [etaEnd, setEtaEnd] = useState<string>(
-    order?.eta_end ? format(new Date(order.eta_end), "yyyy-MM-dd") : ""
+    order.eta_end ? format(new Date(order.eta_end), "yyyy-MM-dd") : ""
   );
+  const [isDateRange, setIsDateRange] = useState(!!order.eta_end);
 
-  // Controls whether ETA is single date or date range
-  const [isDateRange, setIsDateRange] = useState(false);
+  // Derived status calculation
+  const getETAStatus = (
+    start: Date | null | undefined,
+    end: Date | null | undefined
+  ): "tbc" | "confirmed" | "overdue" => {
+    if (!start) return "tbc";
+    const startDate = start instanceof Date ? start : new Date(start);
+    const endDate = end instanceof Date ? end : end ? new Date(end) : null;
 
-  /**
-   * Mutation hook for updating order ETA dates.
-   * On success, invalidates orders query cache and closes the ETA form.
-   */
-  const updateETA = useMutation({
-    mutationFn: async ({
-      orderId,
-      etaStart,
-      etaEnd,
-    }: {
-      orderId: number;
-      etaStart?: string;
-      etaEnd?: string;
-    }) => {
-      const response = await fetch(`/api/inventory/orders/${orderId}/eta`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          etaStart: etaStart || null,
-          etaEnd: etaEnd || null,
-        }),
-      });
+    if (
+      endDate &&
+      new Date() > endDate &&
+      order.delivery_status === "pending"
+    ) {
+      return "overdue";
+    }
+    return "confirmed";
+  };
 
-      if (!response.ok) {
-        throw new Error("Failed to update ETA");
-      }
+  const handleSaveETA = async () => {
+    try {
+      const response = await fetch(
+        `/api/inventory/orders/${order.order_id}/eta`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            etaStart: etaStart || null,
+            etaEnd: isDateRange ? etaEnd : etaStart,
+          }),
+        }
+      );
 
-      return response.json();
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["orders"] });
-      setShowETAForm(false);
-      setIsDateRange(false);
-    },
-  });
+      if (!response.ok) throw new Error("Failed to update ETA");
 
-  /**
-   * Generates and downloads a PDF containing barcode labels for the order.
-   * Makes a request to the barcode generation API endpoint.
-   */
+      const updatedOrder = await response.json();
+      onOrderUpdate?.(updatedOrder);
+      setIsEditingETA(false);
+    } catch (error) {
+      console.error("Error updating ETA:", error);
+    }
+  };
+
   const handleGeneratePDF = async () => {
-    if (!order) return;
-
     try {
       const res = await fetch(
         `/api/barcodes/generate/${order.order_id}?material=${encodeURIComponent(
@@ -107,9 +105,7 @@ export const GridModal: React.FC<GridModalProps> = ({
         )}&supplier=${encodeURIComponent(order.supplier)}`
       );
 
-      if (!res.ok) {
-        throw new Error("Failed to generate barcode PDF");
-      }
+      if (!res.ok) throw new Error("Failed to generate barcode PDF");
 
       const pdfBlob = await res.blob();
       const pdfUrl = window.URL.createObjectURL(pdfBlob);
@@ -119,26 +115,14 @@ export const GridModal: React.FC<GridModalProps> = ({
     }
   };
 
-  /**
-   * Handles saving updated ETA dates.
-   * Validates order exists before making API call.
-   */
-  const handleSaveETA = () => {
-    if (!order) return;
-
-    updateETA.mutate({
-      orderId: order.order_id,
-      etaStart: etaStart || undefined,
-      etaEnd: etaEnd || undefined,
-    });
-  };
-
-  // Early return if no order data available
-  if (!order) return null;
-
   // Helper to determine if order is pending or partially delivered
-  const isPendingArrival =
-    order.delivery_status === "pending" || order.delivery_status === "partial";
+  const isPendingArrival = ["pending", "partial"].includes(
+    order.delivery_status
+  );
+  const etaStatus = getETAStatus(
+    order.eta_start ? new Date(order.eta_start) : null,
+    order.eta_end ? new Date(order.eta_end) : null
+  );
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -184,14 +168,11 @@ export const GridModal: React.FC<GridModalProps> = ({
                   Status
                 </h3>
                 <p
-                  className={cn(
-                    "text-lg font-semibold",
-                    order.delivery_status === "complete"
-                      ? "text-green-400"
-                      : order.delivery_status === "partial"
-                      ? "text-yellow-400"
-                      : "text-slate-300"
-                  )}
+                  className={cn("text-lg font-semibold", {
+                    "text-green-400": order.delivery_status === "complete",
+                    "text-yellow-400": order.delivery_status === "partial",
+                    "text-slate-300": order.delivery_status === "pending",
+                  })}
                 >
                   {order.delivery_status}
                 </p>
@@ -226,17 +207,21 @@ export const GridModal: React.FC<GridModalProps> = ({
           </div>
         </div>
 
-        {/* ETA and Barcode sections - Only shown for pending/partial orders */}
+        {/* ETA Section - Displays and allows editing of Expected Time of Arrival */}
         {isPendingArrival && (
           <div className="space-y-4">
-            {/* ETA Section */}
+            {/* ETA Section Header */}
             <div className="flex flex-col items-center space-y-2 pt-4 border-t border-slate-700">
               <h3 className="text-sm font-medium text-slate-400">
-                Expected Delivery <span className="italic">(Provided ETA)</span>
+                Expected Delivery <span className="italic">(ETA)</span>
               </h3>
-              {showETAForm ? (
+
+              {/* ETA Form - Shown when editing dates */}
+              {isEditingETA ? (
                 <div className="flex flex-col space-y-3">
+                  {/* Date Input Grid */}
                   <div className="grid grid-cols-2 gap-4">
+                    {/* Start Date Input */}
                     <div>
                       <label className="text-sm text-slate-400">
                         Start Date
@@ -246,21 +231,16 @@ export const GridModal: React.FC<GridModalProps> = ({
                         value={etaStart}
                         onChange={(e) => {
                           setEtaStart(e.target.value);
-                          // Auto-set end date to match start date
-                          if (!isDateRange) {
-                            setEtaEnd(e.target.value);
-                          }
+                          if (!isDateRange) setEtaEnd(e.target.value);
                         }}
-                        min={
-                          order.date_ordered
-                            ? format(new Date(order.date_ordered), "yyyy-MM-dd")
-                            : format(new Date(), "yyyy-MM-dd")
-                        }
                         className="w-full mt-1 px-3 py-2 bg-slate-700 border border-slate-600 rounded-md text-white"
                         title="Select ETA start date"
                         aria-label="ETA start date"
+                        placeholder="Select start date"
                       />
                     </div>
+
+                    {/* End Date Input - Disabled unless date range is enabled */}
                     <div>
                       <label className="text-sm text-slate-400">End Date</label>
                       <input
@@ -272,23 +252,24 @@ export const GridModal: React.FC<GridModalProps> = ({
                         className={cn(
                           "w-full mt-1 px-3 py-2 border rounded-md",
                           !isDateRange
-                            ? "bg-slate-800 border-slate-700 text-slate-500 cursor-not-allowed"
+                            ? "bg-slate-800 border-slate-700 text-slate-500"
                             : "bg-slate-700 border-slate-600 text-white"
                         )}
                         title="Select ETA end date"
                         aria-label="ETA end date"
+                        placeholder="Select end date"
                       />
                     </div>
                   </div>
+
+                  {/* Date Range Toggle */}
                   <div className="flex items-center space-x-2">
                     <Checkbox
                       id="date-range"
                       checked={isDateRange}
                       onCheckedChange={(checked) => {
                         setIsDateRange(checked === true);
-                        if (!checked) {
-                          setEtaEnd(etaStart);
-                        }
+                        if (!checked) setEtaEnd(etaStart);
                       }}
                     />
                     <label
@@ -298,10 +279,12 @@ export const GridModal: React.FC<GridModalProps> = ({
                       Set date range?
                     </label>
                   </div>
+
+                  {/* Form Action Buttons */}
                   <div className="flex justify-end space-x-2">
                     <Button
                       onClick={() => {
-                        setShowETAForm(false);
+                        setIsEditingETA(false);
                         setIsDateRange(false);
                       }}
                       variant="outline"
@@ -312,29 +295,34 @@ export const GridModal: React.FC<GridModalProps> = ({
                     <Button
                       onClick={handleSaveETA}
                       className="bg-blue-500 hover:bg-blue-600"
-                      disabled={updateETA.isPending}
                     >
-                      {updateETA.isPending ? "Saving..." : "Save ETA"}
+                      Save ETA
                     </Button>
                   </div>
                 </div>
               ) : (
+                /* ETA Display - Shows current ETA with edit button */
                 <div className="flex items-center space-x-2">
                   <div className="flex items-center space-x-2 px-4 py-2 bg-slate-700 rounded-md">
                     <Calendar className="h-4 w-4 text-slate-400" />
-                    <span className="text-white">
-                      {order.eta_start && order.eta_end
-                        ? `${format(
-                            new Date(order.eta_start),
-                            "dd/MM"
-                          )} - ${format(new Date(order.eta_end), "dd/MM")}`
-                        : order.eta_start
-                        ? format(new Date(order.eta_start), "dd MMM")
+                    <span
+                      className={cn("font-medium", {
+                        "text-red-400": etaStatus === "overdue",
+                        "text-emerald-400": etaStatus === "confirmed",
+                        "text-slate-400": etaStatus === "tbc",
+                      })}
+                    >
+                      {order.eta_start
+                        ? `${format(new Date(order.eta_start), "dd/MM")}${
+                            order.eta_end
+                              ? ` - ${format(new Date(order.eta_end), "dd/MM")}`
+                              : ""
+                          }`
                         : "TBC"}
                     </span>
                   </div>
                   <Button
-                    onClick={() => setShowETAForm(true)}
+                    onClick={() => setIsEditingETA(true)}
                     variant="outline"
                     className="bg-transparent border-slate-600 text-slate-300 hover:bg-slate-700"
                   >

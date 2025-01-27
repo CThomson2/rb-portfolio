@@ -316,6 +316,26 @@ const OrdersGrid = () => {
         order={selectedOrder}
         isOpen={isModalOpen}
         onClose={handleCloseModal}
+        onOrderUpdate={(updatedOrder) => {
+          // Update the selected order
+          setSelectedOrder(updatedOrder);
+
+          // Update the order in the grid data
+          queryClient.setQueryData<{ rows: Order[]; total: number }>(
+            ["orders", pageIndex, pageSize],
+            (old) => {
+              if (!old) return old;
+              return {
+                ...old,
+                rows: old.rows.map((order) =>
+                  order.order_id === updatedOrder.order_id
+                    ? updatedOrder
+                    : order
+                ),
+              };
+            }
+          );
+        }}
       />
     </div>
   );

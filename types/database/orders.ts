@@ -29,8 +29,8 @@ export interface Order {
   updated_at?: string;
   quantity_received: number;
   delivery_status: OrderStatusType;
-  eta_start?: string;
-  eta_end?: string;
+  eta_start?: Date | string | null;
+  eta_end?: Date | string | null;
   eta_status: "tbc" | "confirmed" | "overdue";
 }
 
