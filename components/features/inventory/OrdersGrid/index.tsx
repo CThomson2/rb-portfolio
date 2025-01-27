@@ -273,9 +273,9 @@ const OrdersGrid = () => {
             >
               <div className="mb-2">
                 <h2 className="text-lg font-semibold text-white">
-                  {order.material}
+                  {order.supplier}
                 </h2>
-                <p className="text-sm text-slate-400">{order.supplier}</p>
+                <p className="text-sm text-slate-400">{order.material}</p>
               </div>
               <div className="mb-2 text-white">
                 <p>

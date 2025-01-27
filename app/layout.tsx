@@ -4,7 +4,7 @@ import { Menu } from "lucide-react";
 
 import "./globals.css";
 import { Providers } from "./providers";
-import { Sidebar } from "@/components/layout/sidebar/Sidebar";
+import { Sidebar } from "@/components/layout/Sidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 
