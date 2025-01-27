@@ -15066,6 +15066,8 @@ export namespace Prisma {
     updated_at: Date | null
     quantity_received: number | null
     delivery_status: string | null
+    eta_start: Date | null
+    eta_end: Date | null
   }
 
   export type OrdersMaxAggregateOutputType = {
@@ -15079,6 +15081,8 @@ export namespace Prisma {
     updated_at: Date | null
     quantity_received: number | null
     delivery_status: string | null
+    eta_start: Date | null
+    eta_end: Date | null
   }
 
   export type OrdersCountAggregateOutputType = {
@@ -15092,6 +15096,8 @@ export namespace Prisma {
     updated_at: number
     quantity_received: number
     delivery_status: number
+    eta_start: number
+    eta_end: number
     _all: number
   }
 
@@ -15119,6 +15125,8 @@ export namespace Prisma {
     updated_at?: true
     quantity_received?: true
     delivery_status?: true
+    eta_start?: true
+    eta_end?: true
   }
 
   export type OrdersMaxAggregateInputType = {
@@ -15132,6 +15140,8 @@ export namespace Prisma {
     updated_at?: true
     quantity_received?: true
     delivery_status?: true
+    eta_start?: true
+    eta_end?: true
   }
 
   export type OrdersCountAggregateInputType = {
@@ -15145,6 +15155,8 @@ export namespace Prisma {
     updated_at?: true
     quantity_received?: true
     delivery_status?: true
+    eta_start?: true
+    eta_end?: true
     _all?: true
   }
 
@@ -15245,6 +15257,8 @@ export namespace Prisma {
     updated_at: Date | null
     quantity_received: number
     delivery_status: string
+    eta_start: Date | null
+    eta_end: Date | null
     _count: OrdersCountAggregateOutputType | null
     _avg: OrdersAvgAggregateOutputType | null
     _sum: OrdersSumAggregateOutputType | null
@@ -15277,6 +15291,8 @@ export namespace Prisma {
     updated_at?: boolean
     quantity_received?: boolean
     delivery_status?: boolean
+    eta_start?: boolean
+    eta_end?: boolean
     deliveries?: boolean | orders$deliveriesArgs<ExtArgs>
     new_drums?: boolean | orders$new_drumsArgs<ExtArgs>
     _count?: boolean | OrdersCountOutputTypeDefaultArgs<ExtArgs>
@@ -15293,6 +15309,8 @@ export namespace Prisma {
     updated_at?: boolean
     quantity_received?: boolean
     delivery_status?: boolean
+    eta_start?: boolean
+    eta_end?: boolean
   }, ExtArgs["result"]["orders"]>
 
   export type ordersSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -15306,6 +15324,8 @@ export namespace Prisma {
     updated_at?: boolean
     quantity_received?: boolean
     delivery_status?: boolean
+    eta_start?: boolean
+    eta_end?: boolean
   }, ExtArgs["result"]["orders"]>
 
   export type ordersSelectScalar = {
@@ -15319,9 +15339,11 @@ export namespace Prisma {
     updated_at?: boolean
     quantity_received?: boolean
     delivery_status?: boolean
+    eta_start?: boolean
+    eta_end?: boolean
   }
 
-  export type ordersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"order_id" | "supplier" | "material" | "quantity" | "date_ordered" | "notes" | "created_at" | "updated_at" | "quantity_received" | "delivery_status", ExtArgs["result"]["orders"]>
+  export type ordersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"order_id" | "supplier" | "material" | "quantity" | "date_ordered" | "notes" | "created_at" | "updated_at" | "quantity_received" | "delivery_status" | "eta_start" | "eta_end", ExtArgs["result"]["orders"]>
   export type ordersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     deliveries?: boolean | orders$deliveriesArgs<ExtArgs>
     new_drums?: boolean | orders$new_drumsArgs<ExtArgs>
@@ -15347,6 +15369,8 @@ export namespace Prisma {
       updated_at: Date | null
       quantity_received: number
       delivery_status: string
+      eta_start: Date | null
+      eta_end: Date | null
     }, ExtArgs["result"]["orders"]>
     composites: {}
   }
@@ -15782,6 +15806,8 @@ export namespace Prisma {
     readonly updated_at: FieldRef<"orders", 'DateTime'>
     readonly quantity_received: FieldRef<"orders", 'Int'>
     readonly delivery_status: FieldRef<"orders", 'String'>
+    readonly eta_start: FieldRef<"orders", 'DateTime'>
+    readonly eta_end: FieldRef<"orders", 'DateTime'>
   }
     
 
@@ -22392,7 +22418,9 @@ export namespace Prisma {
     created_at: 'created_at',
     updated_at: 'updated_at',
     quantity_received: 'quantity_received',
-    delivery_status: 'delivery_status'
+    delivery_status: 'delivery_status',
+    eta_start: 'eta_start',
+    eta_end: 'eta_end'
   };
 
   export type OrdersScalarFieldEnum = (typeof OrdersScalarFieldEnum)[keyof typeof OrdersScalarFieldEnum]
@@ -23335,6 +23363,8 @@ export namespace Prisma {
     updated_at?: DateTimeNullableFilter<"orders"> | Date | string | null
     quantity_received?: IntFilter<"orders"> | number
     delivery_status?: StringFilter<"orders"> | string
+    eta_start?: DateTimeNullableFilter<"orders"> | Date | string | null
+    eta_end?: DateTimeNullableFilter<"orders"> | Date | string | null
     deliveries?: DeliveriesListRelationFilter
     new_drums?: New_drumsListRelationFilter
   }
@@ -23350,6 +23380,8 @@ export namespace Prisma {
     updated_at?: SortOrderInput | SortOrder
     quantity_received?: SortOrder
     delivery_status?: SortOrder
+    eta_start?: SortOrderInput | SortOrder
+    eta_end?: SortOrderInput | SortOrder
     deliveries?: deliveriesOrderByRelationAggregateInput
     new_drums?: new_drumsOrderByRelationAggregateInput
   }
@@ -23368,6 +23400,8 @@ export namespace Prisma {
     updated_at?: DateTimeNullableFilter<"orders"> | Date | string | null
     quantity_received?: IntFilter<"orders"> | number
     delivery_status?: StringFilter<"orders"> | string
+    eta_start?: DateTimeNullableFilter<"orders"> | Date | string | null
+    eta_end?: DateTimeNullableFilter<"orders"> | Date | string | null
     deliveries?: DeliveriesListRelationFilter
     new_drums?: New_drumsListRelationFilter
   }, "order_id">
@@ -23383,6 +23417,8 @@ export namespace Prisma {
     updated_at?: SortOrderInput | SortOrder
     quantity_received?: SortOrder
     delivery_status?: SortOrder
+    eta_start?: SortOrderInput | SortOrder
+    eta_end?: SortOrderInput | SortOrder
     _count?: ordersCountOrderByAggregateInput
     _avg?: ordersAvgOrderByAggregateInput
     _max?: ordersMaxOrderByAggregateInput
@@ -23404,6 +23440,8 @@ export namespace Prisma {
     updated_at?: DateTimeNullableWithAggregatesFilter<"orders"> | Date | string | null
     quantity_received?: IntWithAggregatesFilter<"orders"> | number
     delivery_status?: StringWithAggregatesFilter<"orders"> | string
+    eta_start?: DateTimeNullableWithAggregatesFilter<"orders"> | Date | string | null
+    eta_end?: DateTimeNullableWithAggregatesFilter<"orders"> | Date | string | null
   }
 
   export type processesWhereInput = {
@@ -24577,6 +24615,8 @@ export namespace Prisma {
     updated_at?: Date | string | null
     quantity_received?: number
     delivery_status?: string
+    eta_start?: Date | string | null
+    eta_end?: Date | string | null
     deliveries?: deliveriesCreateNestedManyWithoutOrdersInput
     new_drums?: new_drumsCreateNestedManyWithoutOrdersInput
   }
@@ -24592,6 +24632,8 @@ export namespace Prisma {
     updated_at?: Date | string | null
     quantity_received?: number
     delivery_status?: string
+    eta_start?: Date | string | null
+    eta_end?: Date | string | null
     deliveries?: deliveriesUncheckedCreateNestedManyWithoutOrdersInput
     new_drums?: new_drumsUncheckedCreateNestedManyWithoutOrdersInput
   }
@@ -24606,6 +24648,8 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     quantity_received?: IntFieldUpdateOperationsInput | number
     delivery_status?: StringFieldUpdateOperationsInput | string
+    eta_start?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    eta_end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deliveries?: deliveriesUpdateManyWithoutOrdersNestedInput
     new_drums?: new_drumsUpdateManyWithoutOrdersNestedInput
   }
@@ -24621,6 +24665,8 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     quantity_received?: IntFieldUpdateOperationsInput | number
     delivery_status?: StringFieldUpdateOperationsInput | string
+    eta_start?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    eta_end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deliveries?: deliveriesUncheckedUpdateManyWithoutOrdersNestedInput
     new_drums?: new_drumsUncheckedUpdateManyWithoutOrdersNestedInput
   }
@@ -24636,6 +24682,8 @@ export namespace Prisma {
     updated_at?: Date | string | null
     quantity_received?: number
     delivery_status?: string
+    eta_start?: Date | string | null
+    eta_end?: Date | string | null
   }
 
   export type ordersUpdateManyMutationInput = {
@@ -24648,6 +24696,8 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     quantity_received?: IntFieldUpdateOperationsInput | number
     delivery_status?: StringFieldUpdateOperationsInput | string
+    eta_start?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    eta_end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ordersUncheckedUpdateManyInput = {
@@ -24661,6 +24711,8 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     quantity_received?: IntFieldUpdateOperationsInput | number
     delivery_status?: StringFieldUpdateOperationsInput | string
+    eta_start?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    eta_end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type processesCreateInput = {
@@ -25931,6 +25983,8 @@ export namespace Prisma {
     updated_at?: SortOrder
     quantity_received?: SortOrder
     delivery_status?: SortOrder
+    eta_start?: SortOrder
+    eta_end?: SortOrder
   }
 
   export type ordersAvgOrderByAggregateInput = {
@@ -25950,6 +26004,8 @@ export namespace Prisma {
     updated_at?: SortOrder
     quantity_received?: SortOrder
     delivery_status?: SortOrder
+    eta_start?: SortOrder
+    eta_end?: SortOrder
   }
 
   export type ordersMinOrderByAggregateInput = {
@@ -25963,6 +26019,8 @@ export namespace Prisma {
     updated_at?: SortOrder
     quantity_received?: SortOrder
     delivery_status?: SortOrder
+    eta_start?: SortOrder
+    eta_end?: SortOrder
   }
 
   export type ordersSumOrderByAggregateInput = {
@@ -27867,6 +27925,8 @@ export namespace Prisma {
     updated_at?: Date | string | null
     quantity_received?: number
     delivery_status?: string
+    eta_start?: Date | string | null
+    eta_end?: Date | string | null
     new_drums?: new_drumsCreateNestedManyWithoutOrdersInput
   }
 
@@ -27881,6 +27941,8 @@ export namespace Prisma {
     updated_at?: Date | string | null
     quantity_received?: number
     delivery_status?: string
+    eta_start?: Date | string | null
+    eta_end?: Date | string | null
     new_drums?: new_drumsUncheckedCreateNestedManyWithoutOrdersInput
   }
 
@@ -27951,6 +28013,8 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     quantity_received?: IntFieldUpdateOperationsInput | number
     delivery_status?: StringFieldUpdateOperationsInput | string
+    eta_start?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    eta_end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     new_drums?: new_drumsUpdateManyWithoutOrdersNestedInput
   }
 
@@ -27965,6 +28029,8 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     quantity_received?: IntFieldUpdateOperationsInput | number
     delivery_status?: StringFieldUpdateOperationsInput | string
+    eta_start?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    eta_end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     new_drums?: new_drumsUncheckedUpdateManyWithoutOrdersNestedInput
   }
 
@@ -28349,6 +28415,8 @@ export namespace Prisma {
     updated_at?: Date | string | null
     quantity_received?: number
     delivery_status?: string
+    eta_start?: Date | string | null
+    eta_end?: Date | string | null
     deliveries?: deliveriesCreateNestedManyWithoutOrdersInput
   }
 
@@ -28363,6 +28431,8 @@ export namespace Prisma {
     updated_at?: Date | string | null
     quantity_received?: number
     delivery_status?: string
+    eta_start?: Date | string | null
+    eta_end?: Date | string | null
     deliveries?: deliveriesUncheckedCreateNestedManyWithoutOrdersInput
   }
 
@@ -28482,6 +28552,8 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     quantity_received?: IntFieldUpdateOperationsInput | number
     delivery_status?: StringFieldUpdateOperationsInput | string
+    eta_start?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    eta_end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deliveries?: deliveriesUpdateManyWithoutOrdersNestedInput
   }
 
@@ -28496,6 +28568,8 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     quantity_received?: IntFieldUpdateOperationsInput | number
     delivery_status?: StringFieldUpdateOperationsInput | string
+    eta_start?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    eta_end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deliveries?: deliveriesUncheckedUpdateManyWithoutOrdersNestedInput
   }
 

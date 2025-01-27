@@ -76,7 +76,7 @@ export const Sidebar = () => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50">
+    <div className="fixed inset-0 z-50 w-[2/7]">
       {/* Semi-transparent overlay */}
       <div
         className="fixed inset-0 bg-gray-900/80 backdrop-blur-sm transition-opacity"

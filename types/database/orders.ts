@@ -1,10 +1,11 @@
-import { OrderStatus } from "@/database/repositories/shared/types";
+import type { OrderStatusType } from "@/types/constant/orders";
 
 export interface NewOrder {
   supplier: string;
   material: string;
   quantity: number;
   notes?: string;
+  date_ordered?: string;
 }
 
 export interface OrderGridItem {
@@ -14,7 +15,7 @@ export interface OrderGridItem {
   quantity: number;
   date_ordered: string;
   quantity_received: number;
-  delivery_status: OrderStatus;
+  delivery_status: OrderStatusType;
 }
 
 export interface Order {
@@ -27,7 +28,10 @@ export interface Order {
   created_at?: string;
   updated_at?: string;
   quantity_received: number;
-  delivery_status: OrderStatus;
+  delivery_status: OrderStatusType;
+  eta_start?: string;
+  eta_end?: string;
+  eta_status: "tbc" | "confirmed" | "overdue";
 }
 
 export interface OrderQueryParams {
