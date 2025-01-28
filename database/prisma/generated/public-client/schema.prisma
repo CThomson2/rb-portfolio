@@ -174,6 +174,8 @@ model orders {
   updated_at        DateTime?    @default(now()) @db.Timestamptz(6)
   quantity_received Int          @default(0)
   delivery_status   String       @default("pending") @db.VarChar(20)
+  eta_start         DateTime?    @db.Date
+  eta_end           DateTime?    @db.Date
   deliveries        deliveries[]
   new_drums         new_drums[]
 
@@ -249,7 +251,7 @@ model transactions {
   delivery_id Int?
   batch_code  String?      @db.VarChar(50)
   order_id    Int?
-  deliveries  deliveries?  @relation(fields: [delivery_id], references: [delivery_id], onDelete: NoAction, onUpdate: NoAction)
+  deliveries  deliveries?  @relation(fields: [delivery_id], references: [delivery_id], onDelete: Cascade, onUpdate: NoAction)
   new_drums   new_drums?   @relation(fields: [drum_id], references: [drum_id], onDelete: NoAction, onUpdate: NoAction)
   processes   processes?   @relation(fields: [process_id], references: [process_id], onDelete: NoAction, onUpdate: NoAction)
   repro_drums repro_drums? @relation(fields: [repro_id], references: [repro_drum_id], onDelete: NoAction, onUpdate: NoAction)

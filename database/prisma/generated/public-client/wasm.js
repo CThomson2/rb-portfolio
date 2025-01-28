@@ -232,7 +232,9 @@ exports.Prisma.OrdersScalarFieldEnum = {
   created_at: 'created_at',
   updated_at: 'updated_at',
   quantity_received: 'quantity_received',
-  delivery_status: 'delivery_status'
+  delivery_status: 'delivery_status',
+  eta_start: 'eta_start',
+  eta_end: 'eta_end'
 };
 
 exports.Prisma.ProcessesScalarFieldEnum = {

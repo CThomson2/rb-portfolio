@@ -1,6 +1,7 @@
 import React from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Calendar } from "lucide-react";
 import Link from "next/link";
+import { format } from "date-fns";
 
 interface SidebarListItemProps {
   id: number;
@@ -9,6 +10,11 @@ interface SidebarListItemProps {
   quantity?: number;
   quantityReceived?: number;
   isOrder: boolean;
+  eta?: {
+    startDate?: Date;
+    endDate?: Date;
+    status: "tbc" | "confirmed" | "overdue";
+  };
 }
 
 const SidebarListItem: React.FC<SidebarListItemProps> = ({
@@ -18,7 +24,38 @@ const SidebarListItem: React.FC<SidebarListItemProps> = ({
   quantity,
   quantityReceived,
   isOrder,
+  eta,
 }) => {
+  // Function to format ETA display
+  const getETADisplay = () => {
+    if (!eta) return "ETA: TBC";
+
+    if (eta.status === "tbc") return "ETA: TBC";
+
+    if (eta.status === "overdue") {
+      return "Overdue";
+    }
+
+    if (eta.startDate && eta.endDate) {
+      const start = format(eta.startDate, "dd/MM");
+      const end = format(eta.endDate, "dd/MM");
+      return `ETA: ${start}-${end}`;
+    }
+
+    if (eta.startDate) {
+      return `ETA: ${format(eta.startDate, "dd MMM")}`;
+    }
+
+    return "ETA: TBC";
+  };
+
+  // Get color class for ETA status
+  const getETAColorClass = () => {
+    if (!eta || eta.status === "tbc") return "text-gray-400";
+    if (eta.status === "overdue") return "text-red-400";
+    return "text-emerald-400";
+  };
+
   return (
     <Link
       href={isOrder ? `/inventory/orders/${id}` : `/inventory/deliveries/${id}`}
@@ -37,6 +74,13 @@ const SidebarListItem: React.FC<SidebarListItemProps> = ({
           </div>
           <div className="truncate text-sm text-gray-400">
             {supplier || "Unknown Supplier"}
+          </div>
+          {/* ETA Display */}
+          <div
+            className={`flex items-center gap-1.5 mt-1 text-sm ${getETAColorClass()}`}
+          >
+            <Calendar className="h-3.5 w-3.5" />
+            <span>{getETADisplay()}</span>
           </div>
         </div>
 
