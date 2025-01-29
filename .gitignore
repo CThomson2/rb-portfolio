@@ -63,3 +63,5 @@ public/rathburn/
 
 app/api/barcodes/scan/_drumsOnlyRoute.ts
 app/api/drums/sse/_drumsOnlyRoute.ts
+.env
+.env

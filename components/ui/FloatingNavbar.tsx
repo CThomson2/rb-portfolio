@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 export const FloatingNav = ({
   navItems,
   className,
+  isStatic = false, // Add new prop with default false
 }: {
   navItems: {
     name: string;
@@ -23,28 +24,32 @@ export const FloatingNav = ({
     icon?: JSX.Element;
   }[];
   className?: string;
+  isStatic?: boolean; // Add type for new prop
 }) => {
   const { scrollYProgress } = useScroll();
   const [visible, setVisible] = useState(true);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
-  useMotionValueEvent(scrollYProgress, "change", (current) => {
-    // Check if current is not undefined and is a number
-    if (typeof current === "number") {
-      let direction = current! - scrollYProgress.getPrevious()!;
+  // Only add scroll event listener if not static
+  if (!isStatic) {
+    useMotionValueEvent(scrollYProgress, "change", (current) => {
+      // Check if current is not undefined and is a number
+      if (typeof current === "number") {
+        let direction = current! - scrollYProgress.getPrevious()!;
 
-      if (scrollYProgress.get() < 0.05) {
-        // also set true for the initial state
-        setVisible(true);
-      } else {
-        if (direction < 0) {
+        if (scrollYProgress.get() < 0.05) {
+          // also set true for the initial state
           setVisible(true);
         } else {
-          setVisible(false);
+          if (direction < 0) {
+            setVisible(true);
+          } else {
+            setVisible(false);
+          }
         }
       }
-    }
-  });
+    });
+  }
 
   const handleNavItemClick = (name: string) => {
     setActiveDropdown(activeDropdown === name ? null : name);
@@ -54,17 +59,29 @@ export const FloatingNav = ({
     <div className="fixed z-[5000] top-0 inset-x-0 w-full">
       <AnimatePresence mode="wait">
         <motion.div
-          initial={{
-            opacity: 1,
-            y: -100,
-          }}
-          animate={{
-            y: visible ? 0 : -100,
-            opacity: visible ? 1 : 0,
-          }}
-          transition={{
-            duration: 0.2,
-          }}
+          initial={
+            isStatic
+              ? false
+              : {
+                  opacity: 1,
+                  y: -100,
+                }
+          }
+          animate={
+            isStatic
+              ? false
+              : {
+                  y: visible ? 0 : -100,
+                  opacity: visible ? 1 : 0,
+                }
+          }
+          transition={
+            isStatic
+              ? undefined
+              : {
+                  duration: 0.2,
+                }
+          }
           className={cn(
             "flex max-w-fit md:min-w-[70vw] lg:min-w-fit mx-auto mt-10 px-10 py-5 rounded-lg items-center justify-center space-x-4",
             className
