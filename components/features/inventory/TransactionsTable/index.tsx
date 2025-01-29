@@ -20,7 +20,7 @@ import {
   SearchBar,
   ActionButton,
 } from "@/components/shared/table";
-import type { TransactionRow } from "@/types/database/transactions";
+import type { TransactionRow } from "@/types/database/inventory/transactions";
 import { cn } from "@/lib/utils";
 
 const ROW_HEIGHT = 30; // Adjust this value as needed

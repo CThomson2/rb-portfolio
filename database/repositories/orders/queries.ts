@@ -1,7 +1,11 @@
 import { prisma } from "@/database/client";
-import type { NewOrder, OrderGetResponse } from "@/types/database/orders";
-import { OrderStatus } from "../shared/types";
-import type { OrderQueryParams } from "@/types/database/orders";
+import type {
+  NewOrder,
+  OrderGetResponse,
+} from "@/types/database/inventory/orders";
+import { OrderStatusType } from "@/types/constant/inventory/orders";
+import type { OrderQueryParams } from "@/types/database/inventory/orders";
+
 export const queries = {
   getOrders: async ({
     page = 1,
@@ -28,7 +32,7 @@ export const queries = {
       quantity: row.quantity,
       date_ordered: row.date_ordered?.toISOString(),
       quantity_received: row.quantity_received,
-      delivery_status: row.delivery_status as OrderStatus,
+      delivery_status: row.delivery_status as OrderStatusType,
       created_at: row.created_at?.toISOString(),
       updated_at: row.updated_at?.toISOString(),
     }));
@@ -95,7 +99,7 @@ export const queries = {
     });
   },
 
-  updateDeliveryStatus: async (orderId: number, status: OrderStatus) => {
+  updateDeliveryStatus: async (orderId: number, status: OrderStatusType) => {
     return prisma.orders.update({
       where: {
         order_id: orderId,

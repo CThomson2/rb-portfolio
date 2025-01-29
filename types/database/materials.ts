@@ -1,4 +1,4 @@
-import { ChemicalGroupType } from "../constant/materials";
+import { ChemicalGroupType } from "../constant/public/materials";
 
 /*
 Prisma Model:
@@ -24,7 +24,7 @@ export type RawMaterial = {
   raw_material_id: number;
   name: string;
   cas_number: string;
-  chemical_group: string;
+  chemical_group: ChemicalGroupType;
   description: string | "To be written";
   un_code?: UNCode;
   flash_point?: number;
@@ -34,7 +34,7 @@ export type RawMaterialPostParams = Omit<RawMaterial, "raw_material_id">;
 
 export type RawMaterialGetAllParams = RawMaterial;
 export type RawMaterialUpdateParams = Partial<RawMaterial>;
-export type RawMaterialDeleteParams = Pick<RawMaterial, "raw_material_id">;
+export type RawMaterialDeleteParams = Pick<RawMaterial, "raw_material_id">; // Development only
 
 export type RawMaterialGetGroupParams = {
   group: ChemicalGroupType;

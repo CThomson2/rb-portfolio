@@ -1,4 +1,4 @@
-import type { OrderStatusType } from "@/types/constant/orders";
+import type { OrderStatusType } from "@/types/constant/inventory/orders";
 
 export interface NewOrder {
   supplier: string;
@@ -31,7 +31,7 @@ export interface Order {
   delivery_status: OrderStatusType;
   eta_start?: Date | string | null;
   eta_end?: Date | string | null;
-  eta_status: "tbc" | "confirmed" | "overdue";
+  eta_status?: "tbc" | "confirmed" | "overdue";
 }
 
 export interface OrderQueryParams {

@@ -1,5 +1,8 @@
 // types/database/inventory.ts
-import { DrumLocationType, DrumStatusType } from "@/types/constant/drums";
+import {
+  DrumLocationType,
+  DrumStatusType,
+} from "@/types/constant/inventory/drums";
 
 // Base type that matches the SQL/Prisma schema
 export interface NewDrumBase {

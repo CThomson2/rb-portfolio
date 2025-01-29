@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { queries } from "@/database/repositories/orders/queries";
 import { prisma } from "@/database/client";
-import type { OrderFormData } from "@/types/database/orders";
+import type { OrderFormData } from "@/types/database/inventory/orders";
 import { PrismaClientKnownRequestError } from "@/database/prisma/generated/public-client/runtime/library";
 
 // Example request for Postman: http://localhost:3000/api/inventory/orders?page=1&limit=10

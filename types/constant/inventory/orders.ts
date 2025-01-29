@@ -12,6 +12,6 @@ export type OrderStatusType = (typeof OrderStatus)[keyof typeof OrderStatus];
 
 // OrderStatusOptions is an array of the string literal values
 // Type: readonly ["pending", "partial", "complete"]
-export const OrderStatusOptions = Object.values(OrderStatus);
+export const OrderStatusOptions: OrderStatusType[] = Object.values(OrderStatus);
 
 // TODO: Combine these files from /types/constant/* into their respective files in /types/database/*

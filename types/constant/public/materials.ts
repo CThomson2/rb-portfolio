@@ -22,3 +22,5 @@ export const ChemicalGroup = {
 
 export type ChemicalGroupType =
   (typeof ChemicalGroup)[keyof typeof ChemicalGroup];
+
+// TODO: Add a list of materials that we have in our database

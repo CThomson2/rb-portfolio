@@ -16,7 +16,7 @@ export function hexToRgb(hex: string) {
 }
 
 // Helper function to format currency values
-function formatCurrency(amount: number) {
+export function formatCurrency(amount: number) {
   if (amount >= 1000) {
     return `US$ ${(amount / 1000).toFixed(1)}k`;
   }

@@ -3,11 +3,11 @@ import { prisma } from "@/database/client";
 import type {
   Transaction,
   TransactionRow,
-} from "@/types/database/transactions";
+} from "@/types/database/inventory/transactions";
 import {
   TransactionVariant,
   type TransactionVariantType,
-} from "@/types/constant/transactions";
+} from "@/types/constant/inventory/transactions";
 
 interface CreateTransactionInput {
   tx_type: TransactionVariantType; // "import" | "processing" | "reprocessing" | "disposal" | "loss"

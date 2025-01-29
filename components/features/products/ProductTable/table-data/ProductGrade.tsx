@@ -1,4 +1,4 @@
-import { Grade, GradeType } from "@/types/constant/products";
+import { Grade, GradeType } from "@/types/constant/public/products";
 
 const gradeBackgroundColors = {
   [Grade.GD]: "bg-red-100",

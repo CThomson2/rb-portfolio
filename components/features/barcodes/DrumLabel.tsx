@@ -1,5 +1,5 @@
 import React from "react";
-import { OrderFormData } from "@/types/database/orders";
+import { OrderFormData } from "@/types/database/inventory/orders";
 import { FileDown } from "lucide-react";
 
 interface DrumLabelProps {

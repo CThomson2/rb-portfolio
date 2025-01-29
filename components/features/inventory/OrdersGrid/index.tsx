@@ -8,7 +8,10 @@ import { SortingState } from "@tanstack/react-table";
 import Link from "next/link";
 import { ActionButton, SearchBar } from "@/components/shared/table";
 import { GridModal } from "./GridModal";
-import type { Order, OrderGetResponse } from "@/types/database/orders";
+import type {
+  Order,
+  OrderGetResponse,
+} from "@/types/database/inventory/orders";
 import { useQueryClient } from "@tanstack/react-query";
 
 const filterOptions = [

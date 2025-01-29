@@ -1,4 +1,4 @@
-import { HttpMethodType } from "@/types/constant/form";
+import { HttpMethodType } from "@/types/constant/http";
 import { formConfigurations } from "./formConfigurations";
 
 interface FormField {

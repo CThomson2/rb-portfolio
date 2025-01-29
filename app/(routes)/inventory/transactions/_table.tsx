@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/Table";
 import { TableHeader, TableFooter, SearchBar } from "@/components/shared/table";
 import { columns } from "@/components/features/inventory/TransactionsTable/columns";
-import type { Transaction } from "@/types/database/transactions";
+import type { Transaction } from "@/types/database/inventory/transactions";
 
 import {
   DropdownMenu,

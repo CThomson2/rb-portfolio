@@ -1,6 +1,6 @@
 "use client";
 
-import { OrderPostParams } from "@/types/database/orders";
+import { OrderPostParams } from "@/types/database/inventory/orders";
 import React, { useState, useRef, KeyboardEvent } from "react";
 import styles from "./form.module.css";
 import { cn } from "@/lib/utils";

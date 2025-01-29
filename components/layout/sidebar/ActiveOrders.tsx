@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
 import SidebarListItem from "./SidebarListItem";
-import type { Order } from "@/types/database/orders";
+import type { Order } from "@/types/database/inventory/orders";
 
 export default function ActiveOrders() {
   const [orders, setOrders] = useState<Order[]>([]);

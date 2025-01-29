@@ -13,7 +13,7 @@
 "use client";
 
 import { useState } from "react";
-import { OrderFormData } from "@/types/database/orders";
+import { OrderFormData } from "@/types/database/inventory/orders";
 import { CreateForm } from "@/components/features/inventory/CreateForm";
 import { DrumLabel } from "@/components/features/barcodes/DrumLabel";
 import { cn } from "@/lib/utils";

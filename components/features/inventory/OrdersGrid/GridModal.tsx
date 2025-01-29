@@ -10,7 +10,7 @@ import {
 import { Button } from "@/components/ui/Button";
 import { Download, Calendar } from "lucide-react";
 import { format } from "date-fns";
-import type { Order } from "@/types/database/orders";
+import type { Order } from "@/types/database/inventory/orders";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/Checkbox";
 
@@ -233,6 +233,7 @@ export const GridModal: React.FC<GridModalProps> = ({
                           setEtaStart(e.target.value);
                           if (!isDateRange) setEtaEnd(e.target.value);
                         }}
+                        min={new Date().toISOString().split("T")[0]}
                         className="w-full mt-1 px-3 py-2 bg-slate-700 border border-slate-600 rounded-md text-white"
                         title="Select ETA start date"
                         aria-label="ETA start date"

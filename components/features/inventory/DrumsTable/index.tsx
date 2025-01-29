@@ -49,9 +49,9 @@ import { TableHeader } from "@/components/shared/table/ux/TableHeader";
 import { TableFooter } from "@/components/shared/table";
 import { SearchBar } from "@/components/shared/table";
 import { ActionButton } from "@/components/shared/table";
-import { DrumStatus, DrumStatusType } from "@/types/constant/drums";
+import { DrumStatus, DrumStatusType } from "@/types/constant/inventory/drums";
 import { cn } from "@/lib/utils";
-import type { DrumsResponse } from "@/types/database/drums";
+import type { DrumsResponse } from "@/types/database/inventory/drums";
 
 // Filter options for the search bar dropdown
 const filterOptions = [

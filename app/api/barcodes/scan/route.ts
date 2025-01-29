@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/database/client";
 import { z } from "zod";
 import { drumEvents } from "@/lib/events/drumEvents";
+import { sendOrderCompleteNotification } from "@/lib/email/orderNotifications";
+import type { Order } from "@/types/database/inventory/orders";
 
 /**
  * Zod schema for the barcode data format
@@ -146,6 +148,63 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         drumEvents.emit("orderUpdate", orderId, drumId, 1);
 
         console.log("Events emitted successfully");
+        // After processing the scan, check if the order is now complete
+        console.log("\nChecking if order is complete for order ID:", orderId);
+        const dbOrder = await prisma.orders.findUnique({
+          where: { order_id: orderId },
+        });
+        console.log("Found order:", JSON.stringify(dbOrder, null, 2));
+
+        if (dbOrder && dbOrder.delivery_status === "complete") {
+          console.log("Order is complete, preparing email notification");
+
+          // Calculate eta_status
+          const now = new Date();
+          let eta_status: "tbc" | "confirmed" | "overdue" = "tbc";
+
+          if (dbOrder.eta_start) {
+            eta_status = "confirmed";
+            if (dbOrder.eta_end && now > dbOrder.eta_end) {
+              eta_status = "overdue";
+            }
+          }
+          console.log("Calculated ETA status:", eta_status);
+
+          // Create full order object with eta_status
+          const order: Order = {
+            order_id: dbOrder.order_id,
+            supplier: dbOrder.supplier,
+            material: dbOrder.material,
+            quantity: dbOrder.quantity,
+            quantity_received: dbOrder.quantity_received,
+            delivery_status:
+              dbOrder.delivery_status as Order["delivery_status"],
+            notes: dbOrder.notes || undefined,
+            eta_status,
+            date_ordered: dbOrder.date_ordered?.toISOString(),
+            created_at: dbOrder.created_at?.toISOString(),
+            updated_at: dbOrder.updated_at?.toISOString(),
+            eta_start: dbOrder.eta_start?.toISOString() || null,
+            eta_end: dbOrder.eta_end?.toISOString() || null,
+          };
+          console.log(
+            "Prepared order object for email:",
+            JSON.stringify(order, null, 2)
+          );
+
+          // Send email notification
+          console.log("Attempting to send email notification...");
+          try {
+            await sendOrderCompleteNotification(order);
+            console.log("Email notification sent successfully");
+          } catch (error) {
+            console.error("Failed to send email notification:", error);
+          }
+        } else {
+          console.log(
+            "Order not complete or not found - skipping email notification"
+          );
+        }
 
         return NextResponse.json({
           success: true,
