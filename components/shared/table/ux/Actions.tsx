@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import {
   MoreVertical,
   Eye,
@@ -8,10 +8,20 @@ import {
   PlayCircle,
   Calendar,
   Clock,
+  Scan,
+  ScanLine,
   ArrowRightLeft,
   FileText,
   Hash,
   Database,
+  ScanBarcode,
+  Truck,
+  Recycle,
+  FlaskRound,
+  Atom,
+  Disc3,
+  CheckCircle2,
+  Circle,
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import {
@@ -32,7 +42,12 @@ import { Badge } from "@/components/ui/Badge";
 import { Separator } from "@/components/ui/Separator";
 import { ScrollArea } from "@/components/ui/ScrollArea";
 import { getTxTypeVariant } from "@/lib/utils/formatters";
-import type { Transaction } from "@/types/database/inventory/transactions";
+import type {
+  Transaction,
+  TransactionImport,
+  TransactionProcessing,
+} from "@/types/database/inventory/transactions";
+import { cn } from "@/lib/utils";
 
 type ActionType = "view" | "edit" | "assign" | null;
 
@@ -55,12 +70,196 @@ const descriptions = {
   assign: "Assign this transaction for production.",
 } as const;
 
+interface ProgressStageProps {
+  number: number;
+  isCompleted: boolean;
+  isClickable: boolean;
+  onClick?: () => void;
+  label: string;
+}
+
+function ProgressStage({
+  number,
+  isCompleted,
+  isClickable,
+  onClick,
+  label,
+}: ProgressStageProps) {
+  return (
+    <div className="flex flex-col items-center">
+      <div className="h-10 flex items-center">
+        <button
+          className={cn(
+            "relative rounded-full w-10 h-10 flex items-center justify-center transition-colors",
+            isCompleted
+              ? "text-primary-foreground bg-primary"
+              : "text-muted-foreground bg-muted",
+            isClickable && "hover:bg-primary/90 cursor-pointer",
+            !isClickable && "cursor-default"
+          )}
+          onClick={isClickable ? onClick : undefined}
+          disabled={!isClickable}
+        >
+          {number}
+        </button>
+      </div>
+      <span className="text-xs mt-2 text-muted-foreground">{label}</span>
+    </div>
+  );
+}
+
+interface ProgressTrackerProps {
+  currentTransaction: TransactionImport | TransactionProcessing;
+  onNavigateToTransaction?: (txId: number) => void;
+}
+
+function ProgressTracker({
+  currentTransaction,
+  onNavigateToTransaction,
+}: ProgressTrackerProps) {
+  const [relatedTransactions, setRelatedTransactions] = useState<{
+    import?: TransactionImport;
+    processing?: TransactionProcessing;
+  }>({});
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Fetch related transactions when the component mounts
+  useEffect(() => {
+    const fetchRelatedTransactions = async () => {
+      console.log(
+        "Fetching related transactions for drum:",
+        currentTransaction.drum_id
+      );
+      try {
+        const response = await fetch(
+          `/api/inventory/transactions/drum/${currentTransaction.drum_id}`
+        );
+        const data = await response.json();
+        console.log("Related transactions response:", data);
+
+        // Organize transactions by type and cast to specific types
+        const transactions = data.transactions.reduce(
+          (
+            acc: {
+              import?: TransactionImport;
+              processing?: TransactionProcessing;
+            },
+            tx: Transaction
+          ) => {
+            if (tx.tx_type === "import") {
+              console.log("Found import transaction:", tx.tx_id);
+              acc.import = tx as TransactionImport;
+            } else if (tx.tx_type === "processing") {
+              console.log("Found processing transaction:", tx.tx_id);
+              acc.processing = tx as TransactionProcessing;
+            }
+            return acc;
+          },
+          {}
+        );
+
+        console.log("Organized transactions:", transactions);
+        setRelatedTransactions(transactions);
+      } catch (error) {
+        console.error("Failed to fetch related transactions:", error);
+      }
+    };
+
+    fetchRelatedTransactions();
+  }, [currentTransaction.drum_id]);
+
+  const latestTxType = currentTransaction.tx_type.toLowerCase();
+  const isProcessingStage = latestTxType === "processing";
+
+  const handleStageClick = async (txId: number) => {
+    console.log("Clicked stage for transaction:", txId);
+    setIsLoading(true);
+    onNavigateToTransaction?.(txId);
+    setIsLoading(false);
+  };
+
+  return (
+    <div className="mt-8 pt-4 border-t">
+      <h3 className="text-lg font-semibold mb-6">
+        Drum Progress
+        {isLoading && <span className="ml-2 text-sm">(Loading...)</span>}
+      </h3>
+      <div className="flex items-center justify-center gap-4">
+        <ProgressStage
+          number={1}
+          isCompleted={true}
+          isClickable={
+            isProcessingStage &&
+            relatedTransactions.import?.tx_id !== currentTransaction.tx_id
+          }
+          onClick={() =>
+            relatedTransactions.import &&
+            handleStageClick(relatedTransactions.import.tx_id)
+          }
+          label="Import"
+        />
+        <div className="w-16 h-[2px] bg-muted self-center -mt-6" />
+        <ProgressStage
+          number={2}
+          isCompleted={isProcessingStage}
+          isClickable={
+            !isProcessingStage &&
+            relatedTransactions.processing?.tx_id !== currentTransaction.tx_id
+          }
+          onClick={() =>
+            relatedTransactions.processing &&
+            handleStageClick(relatedTransactions.processing.tx_id)
+          }
+          label="Processing"
+        />
+        <div className="w-16 h-[2px] bg-muted self-center -mt-6" />
+        <ProgressStage
+          number={3}
+          isCompleted={false}
+          isClickable={false}
+          label="Future"
+        />
+      </div>
+    </div>
+  );
+}
+
 function ActionModal({
   isOpen,
   onOpenChange,
   action,
   transaction,
 }: ActionModalProps) {
+  const [currentTx, setCurrentTx] = useState(transaction);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleNavigateToTransaction = useCallback(async (txId: number) => {
+    console.log("Navigating to transaction:", txId);
+    setIsLoading(true);
+
+    try {
+      const response = await fetch(`/api/inventory/transactions/${txId}`);
+      const data = await response.json();
+      console.log("Navigation response:", data);
+
+      if (!data.transaction) {
+        console.error("No transaction data received");
+        return;
+      }
+
+      // Cast the transaction based on its type
+      const tx = data.transaction as Transaction;
+      if (tx.tx_type === "import" || tx.tx_type === "processing") {
+        console.log("Updating current transaction to:", tx);
+        setCurrentTx(tx as TransactionImport | TransactionProcessing);
+      }
+    } catch (error) {
+      console.error("Failed to fetch transaction:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
   if (!action) return null;
 
   const renderDetailItem = (
@@ -83,13 +282,14 @@ function ActionModal({
         <DialogHeader>
           <div className="flex items-center justify-between">
             <DialogTitle className="text-xl">
-              Transaction #{transaction.tx_id}
+              Scan #{currentTx.tx_id}
+              {isLoading && <span className="ml-2 text-sm">(Loading...)</span>}
             </DialogTitle>
             <Badge
-              variant={getTxTypeVariant(transaction.tx_type)}
-              className="uppercase"
+              variant={getTxTypeVariant(currentTx.tx_type)}
+              className="uppercase mr-8 mt-1"
             >
-              {transaction.tx_type}
+              {currentTx.tx_type}
             </Badge>
           </div>
           <DialogDescription>
@@ -105,17 +305,12 @@ function ActionModal({
               <h3 className="text-lg font-semibold">Primary Information</h3>
               {renderDetailItem(
                 <Calendar className="h-4 w-4" />,
-                "Transaction Date",
+                "Recorded Date",
                 format(new Date(transaction.tx_date), "PPP")
               )}
               {renderDetailItem(
-                <Clock className="h-4 w-4" />,
-                "Created At",
-                format(new Date(transaction.created_at), "PPP 'at' pp")
-              )}
-              {renderDetailItem(
-                <Clock className="h-4 w-4" />,
-                "Last Updated",
+                <ScanBarcode className="h-4 w-4" />,
+                "Time of Scan",
                 format(new Date(transaction.updated_at), "PPP 'at' pp")
               )}
               {renderDetailItem(
@@ -131,7 +326,7 @@ function ActionModal({
               )}
               {transaction.material &&
                 renderDetailItem(
-                  <Database className="h-4 w-4" />,
+                  <Atom className="h-4 w-4" />,
                   "Material",
                   transaction.material
                 )}
@@ -153,30 +348,40 @@ function ActionModal({
                 )}
               {transaction.delivery_id &&
                 renderDetailItem(
-                  <Database className="h-4 w-4" />,
+                  <Truck className="h-4 w-4" />,
                   "Delivery ID",
                   transaction.delivery_id
                 )}
               {transaction.drum_id &&
                 renderDetailItem(
-                  <Database className="h-4 w-4" />,
+                  <Disc3 className="h-4 w-4" />,
                   "Drum ID",
                   transaction.drum_id
                 )}
               {transaction.repro_id &&
                 renderDetailItem(
-                  <Database className="h-4 w-4" />,
+                  <Recycle className="h-4 w-4" />,
                   "Repro ID",
                   transaction.repro_id
                 )}
               {transaction.process_id &&
                 renderDetailItem(
-                  <Database className="h-4 w-4" />,
+                  <FlaskRound className="h-4 w-4" />,
                   "Process ID",
                   transaction.process_id
                 )}
             </div>
           </div>
+
+          {(currentTx.tx_type === "import" ||
+            currentTx.tx_type === "processing") && (
+            <ProgressTracker
+              currentTransaction={
+                currentTx as TransactionImport | TransactionProcessing
+              }
+              onNavigateToTransaction={handleNavigateToTransaction}
+            />
+          )}
         </ScrollArea>
       </DialogContent>
     </Dialog>

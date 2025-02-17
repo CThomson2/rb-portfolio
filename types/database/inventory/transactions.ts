@@ -5,8 +5,8 @@ export interface Transaction {
   tx_id: number;
   tx_type: TransactionVariantType;
   tx_date: Date;
+  material: string;
   direction: "IN" | "OUT";
-  material: string | null;
   // Source of transaction foreign keys
   delivery_id: number | null;
   drum_id: number | null;
@@ -22,12 +22,21 @@ export interface Transaction {
   updated_at: Date;
 }
 
-export interface TransactionRow extends Transaction {
-  material_name: string | null;
+export interface TransactionImport extends Transaction {
+  direction: "IN";
+  drum_id: number; // TODO: Update all import records without a drum_id (the first 362 records from tx_id = 1 and upwards) to use drum ID of 0, for the drums which represents all the drums in-stock prior to the new system implmentation. I.e. create that record in `deliveries` first, then assign transactions with tx_type = 'import' to that delivery_id.
+  delivery_id: number;
+}
+
+export interface TransactionProcessing extends Transaction {
+  direction: "OUT";
+  drum_id: number;
+  // TODO: Change `process_id` to REFERENCE the distillation records table in the `production` schema once that table is completed.
+  // process_id: number;
 }
 
 export interface TransactionResponse {
-  rows: TransactionRow[];
+  rows: Transaction[];
   total: number;
 }
 

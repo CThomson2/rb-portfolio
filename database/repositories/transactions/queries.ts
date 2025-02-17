@@ -1,9 +1,6 @@
 // database/repositories/products/queries.ts
 import { prisma } from "@/database/client";
-import type {
-  Transaction,
-  TransactionRow,
-} from "@/types/database/inventory/transactions";
+import type { Transaction } from "@/types/database/inventory/transactions";
 import {
   TransactionVariant,
   type TransactionVariantType,
@@ -32,7 +29,7 @@ export const queries = {
   getTransactions: async (
     page = 1,
     limit = 50
-  ): Promise<{ rows: TransactionRow[]; total: number }> => {
+  ): Promise<{ rows: Transaction[]; total: number }> => {
     const offset = (page - 1) * limit;
 
     // Get the total number of transactions
@@ -61,7 +58,7 @@ export const queries = {
   `;
 
     return {
-      rows: result as TransactionRow[],
+      rows: result as Transaction[],
       total,
     };
 

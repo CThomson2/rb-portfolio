@@ -227,7 +227,7 @@ model transactions {
   tx_id       Int          @id @default(autoincrement())
   tx_type     String       @default("import") @db.VarChar(20)
   tx_date     DateTime     @default(dbgenerated("CURRENT_DATE")) @db.Date
-  material    String?      @db.VarChar(100)
+  material    String       @db.VarChar(100)
   drum_id     Int?
   repro_id    Int?
   tx_notes    String?
@@ -237,7 +237,7 @@ model transactions {
   delivery_id Int?
   batch_code  String?      @db.VarChar(50)
   order_id    Int?
-  direction   String?      @default(dbgenerated("\nCASE tx_type\n    WHEN 'import'::text THEN 'IN'::text\n    WHEN 'processing'::text THEN 'OUT'::text\n    WHEN 'reprocessing'::text THEN 'OUT'::text\n    WHEN 'disposal'::text THEN 'OUT'::text\n    WHEN 'loss'::text THEN 'OUT'::text\n    WHEN 'cancelled'::text THEN 'OUT'::text\n    ELSE NULL::text\nEND")) @db.VarChar(3)
+  direction   String       @default(dbgenerated("\nCASE tx_type\n    WHEN 'import'::text THEN 'IN'::text\n    WHEN 'processing'::text THEN 'OUT'::text\n    WHEN 'reprocessing'::text THEN 'OUT'::text\n    WHEN 'disposal'::text THEN 'OUT'::text\n    WHEN 'loss'::text THEN 'OUT'::text\n    WHEN 'cancelled'::text THEN 'OUT'::text\n    ELSE NULL::text\nEND")) @db.VarChar(3)
   deliveries  deliveries?  @relation(fields: [delivery_id], references: [delivery_id], onDelete: Cascade, onUpdate: NoAction)
   new_drums   new_drums?   @relation(fields: [drum_id], references: [drum_id], onDelete: NoAction, onUpdate: NoAction)
   processes   processes?   @relation(fields: [process_id], references: [process_id], onDelete: NoAction, onUpdate: NoAction)

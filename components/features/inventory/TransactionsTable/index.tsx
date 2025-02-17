@@ -20,7 +20,7 @@ import {
   SearchBar,
   ActionButton,
 } from "@/components/shared/table";
-import type { TransactionRow } from "@/types/database/inventory/transactions";
+import type { Transaction } from "@/types/database/inventory/transactions";
 import { cn } from "@/lib/utils";
 
 const ROW_HEIGHT = 30; // Adjust this value as needed
@@ -55,7 +55,7 @@ export const TransactionsTable = Object.assign(
         );
         if (!response.ok) throw new Error("Failed to fetch transactions");
         return response.json() as Promise<{
-          rows: TransactionRow[];
+          rows: Transaction[];
           total: number;
         }>;
       },

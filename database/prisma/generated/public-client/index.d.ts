@@ -19110,7 +19110,7 @@ export namespace Prisma {
     tx_id: number
     tx_type: string
     tx_date: Date
-    material: string | null
+    material: string
     drum_id: number | null
     repro_id: number | null
     tx_notes: string | null
@@ -19120,7 +19120,7 @@ export namespace Prisma {
     delivery_id: number | null
     batch_code: string | null
     order_id: number | null
-    direction: string | null
+    direction: string
     _count: TransactionsCountAggregateOutputType | null
     _avg: TransactionsAvgAggregateOutputType | null
     _sum: TransactionsSumAggregateOutputType | null
@@ -19254,7 +19254,7 @@ export namespace Prisma {
       tx_id: number
       tx_type: string
       tx_date: Date
-      material: string | null
+      material: string
       drum_id: number | null
       repro_id: number | null
       tx_notes: string | null
@@ -19264,7 +19264,7 @@ export namespace Prisma {
       delivery_id: number | null
       batch_code: string | null
       order_id: number | null
-      direction: string | null
+      direction: string
     }, ExtArgs["result"]["transactions"]>
     composites: {}
   }
@@ -19924,7 +19924,7 @@ export namespace Prisma {
     /**
      * The data needed to create a transactions.
      */
-    data?: XOR<transactionsCreateInput, transactionsUncheckedCreateInput>
+    data: XOR<transactionsCreateInput, transactionsUncheckedCreateInput>
   }
 
   /**
@@ -23698,7 +23698,7 @@ export namespace Prisma {
     tx_id?: IntFilter<"transactions"> | number
     tx_type?: StringFilter<"transactions"> | string
     tx_date?: DateTimeFilter<"transactions"> | Date | string
-    material?: StringNullableFilter<"transactions"> | string | null
+    material?: StringFilter<"transactions"> | string
     drum_id?: IntNullableFilter<"transactions"> | number | null
     repro_id?: IntNullableFilter<"transactions"> | number | null
     tx_notes?: StringNullableFilter<"transactions"> | string | null
@@ -23708,7 +23708,7 @@ export namespace Prisma {
     delivery_id?: IntNullableFilter<"transactions"> | number | null
     batch_code?: StringNullableFilter<"transactions"> | string | null
     order_id?: IntNullableFilter<"transactions"> | number | null
-    direction?: StringNullableFilter<"transactions"> | string | null
+    direction?: StringFilter<"transactions"> | string
     deliveries?: XOR<DeliveriesNullableScalarRelationFilter, deliveriesWhereInput> | null
     new_drums?: XOR<New_drumsNullableScalarRelationFilter, new_drumsWhereInput> | null
     processes?: XOR<ProcessesNullableScalarRelationFilter, processesWhereInput> | null
@@ -23719,7 +23719,7 @@ export namespace Prisma {
     tx_id?: SortOrder
     tx_type?: SortOrder
     tx_date?: SortOrder
-    material?: SortOrderInput | SortOrder
+    material?: SortOrder
     drum_id?: SortOrderInput | SortOrder
     repro_id?: SortOrderInput | SortOrder
     tx_notes?: SortOrderInput | SortOrder
@@ -23729,7 +23729,7 @@ export namespace Prisma {
     delivery_id?: SortOrderInput | SortOrder
     batch_code?: SortOrderInput | SortOrder
     order_id?: SortOrderInput | SortOrder
-    direction?: SortOrderInput | SortOrder
+    direction?: SortOrder
     deliveries?: deliveriesOrderByWithRelationInput
     new_drums?: new_drumsOrderByWithRelationInput
     processes?: processesOrderByWithRelationInput
@@ -23743,7 +23743,7 @@ export namespace Prisma {
     NOT?: transactionsWhereInput | transactionsWhereInput[]
     tx_type?: StringFilter<"transactions"> | string
     tx_date?: DateTimeFilter<"transactions"> | Date | string
-    material?: StringNullableFilter<"transactions"> | string | null
+    material?: StringFilter<"transactions"> | string
     drum_id?: IntNullableFilter<"transactions"> | number | null
     repro_id?: IntNullableFilter<"transactions"> | number | null
     tx_notes?: StringNullableFilter<"transactions"> | string | null
@@ -23753,7 +23753,7 @@ export namespace Prisma {
     delivery_id?: IntNullableFilter<"transactions"> | number | null
     batch_code?: StringNullableFilter<"transactions"> | string | null
     order_id?: IntNullableFilter<"transactions"> | number | null
-    direction?: StringNullableFilter<"transactions"> | string | null
+    direction?: StringFilter<"transactions"> | string
     deliveries?: XOR<DeliveriesNullableScalarRelationFilter, deliveriesWhereInput> | null
     new_drums?: XOR<New_drumsNullableScalarRelationFilter, new_drumsWhereInput> | null
     processes?: XOR<ProcessesNullableScalarRelationFilter, processesWhereInput> | null
@@ -23764,7 +23764,7 @@ export namespace Prisma {
     tx_id?: SortOrder
     tx_type?: SortOrder
     tx_date?: SortOrder
-    material?: SortOrderInput | SortOrder
+    material?: SortOrder
     drum_id?: SortOrderInput | SortOrder
     repro_id?: SortOrderInput | SortOrder
     tx_notes?: SortOrderInput | SortOrder
@@ -23774,7 +23774,7 @@ export namespace Prisma {
     delivery_id?: SortOrderInput | SortOrder
     batch_code?: SortOrderInput | SortOrder
     order_id?: SortOrderInput | SortOrder
-    direction?: SortOrderInput | SortOrder
+    direction?: SortOrder
     _count?: transactionsCountOrderByAggregateInput
     _avg?: transactionsAvgOrderByAggregateInput
     _max?: transactionsMaxOrderByAggregateInput
@@ -23789,7 +23789,7 @@ export namespace Prisma {
     tx_id?: IntWithAggregatesFilter<"transactions"> | number
     tx_type?: StringWithAggregatesFilter<"transactions"> | string
     tx_date?: DateTimeWithAggregatesFilter<"transactions"> | Date | string
-    material?: StringNullableWithAggregatesFilter<"transactions"> | string | null
+    material?: StringWithAggregatesFilter<"transactions"> | string
     drum_id?: IntNullableWithAggregatesFilter<"transactions"> | number | null
     repro_id?: IntNullableWithAggregatesFilter<"transactions"> | number | null
     tx_notes?: StringNullableWithAggregatesFilter<"transactions"> | string | null
@@ -23799,7 +23799,7 @@ export namespace Prisma {
     delivery_id?: IntNullableWithAggregatesFilter<"transactions"> | number | null
     batch_code?: StringNullableWithAggregatesFilter<"transactions"> | string | null
     order_id?: IntNullableWithAggregatesFilter<"transactions"> | number | null
-    direction?: StringNullableWithAggregatesFilter<"transactions"> | string | null
+    direction?: StringWithAggregatesFilter<"transactions"> | string
   }
 
   export type stillsWhereInput = {
@@ -24973,13 +24973,13 @@ export namespace Prisma {
   export type transactionsCreateInput = {
     tx_type?: string
     tx_date?: Date | string
-    material?: string | null
+    material: string
     tx_notes?: string | null
     created_at?: Date | string
     updated_at?: Date | string
     batch_code?: string | null
     order_id?: number | null
-    direction?: string | null
+    direction?: string
     deliveries?: deliveriesCreateNestedOneWithoutTransactionsInput
     new_drums?: new_drumsCreateNestedOneWithoutTransactionsInput
     processes?: processesCreateNestedOneWithoutTransactionsInput
@@ -24990,7 +24990,7 @@ export namespace Prisma {
     tx_id?: number
     tx_type?: string
     tx_date?: Date | string
-    material?: string | null
+    material: string
     drum_id?: number | null
     repro_id?: number | null
     tx_notes?: string | null
@@ -25000,19 +25000,19 @@ export namespace Prisma {
     delivery_id?: number | null
     batch_code?: string | null
     order_id?: number | null
-    direction?: string | null
+    direction?: string
   }
 
   export type transactionsUpdateInput = {
     tx_type?: StringFieldUpdateOperationsInput | string
     tx_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    material?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: StringFieldUpdateOperationsInput | string
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
-    direction?: NullableStringFieldUpdateOperationsInput | string | null
+    direction?: StringFieldUpdateOperationsInput | string
     deliveries?: deliveriesUpdateOneWithoutTransactionsNestedInput
     new_drums?: new_drumsUpdateOneWithoutTransactionsNestedInput
     processes?: processesUpdateOneWithoutTransactionsNestedInput
@@ -25023,7 +25023,7 @@ export namespace Prisma {
     tx_id?: IntFieldUpdateOperationsInput | number
     tx_type?: StringFieldUpdateOperationsInput | string
     tx_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    material?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: StringFieldUpdateOperationsInput | string
     drum_id?: NullableIntFieldUpdateOperationsInput | number | null
     repro_id?: NullableIntFieldUpdateOperationsInput | number | null
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25033,14 +25033,14 @@ export namespace Prisma {
     delivery_id?: NullableIntFieldUpdateOperationsInput | number | null
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
-    direction?: NullableStringFieldUpdateOperationsInput | string | null
+    direction?: StringFieldUpdateOperationsInput | string
   }
 
   export type transactionsCreateManyInput = {
     tx_id?: number
     tx_type?: string
     tx_date?: Date | string
-    material?: string | null
+    material: string
     drum_id?: number | null
     repro_id?: number | null
     tx_notes?: string | null
@@ -25050,26 +25050,26 @@ export namespace Prisma {
     delivery_id?: number | null
     batch_code?: string | null
     order_id?: number | null
-    direction?: string | null
+    direction?: string
   }
 
   export type transactionsUpdateManyMutationInput = {
     tx_type?: StringFieldUpdateOperationsInput | string
     tx_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    material?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: StringFieldUpdateOperationsInput | string
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
-    direction?: NullableStringFieldUpdateOperationsInput | string | null
+    direction?: StringFieldUpdateOperationsInput | string
   }
 
   export type transactionsUncheckedUpdateManyInput = {
     tx_id?: IntFieldUpdateOperationsInput | number
     tx_type?: StringFieldUpdateOperationsInput | string
     tx_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    material?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: StringFieldUpdateOperationsInput | string
     drum_id?: NullableIntFieldUpdateOperationsInput | number | null
     repro_id?: NullableIntFieldUpdateOperationsInput | number | null
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25079,7 +25079,7 @@ export namespace Prisma {
     delivery_id?: NullableIntFieldUpdateOperationsInput | number | null
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
-    direction?: NullableStringFieldUpdateOperationsInput | string | null
+    direction?: StringFieldUpdateOperationsInput | string
   }
 
   export type stillsCreateInput = {
@@ -27840,13 +27840,13 @@ export namespace Prisma {
   export type transactionsCreateWithoutDeliveriesInput = {
     tx_type?: string
     tx_date?: Date | string
-    material?: string | null
+    material: string
     tx_notes?: string | null
     created_at?: Date | string
     updated_at?: Date | string
     batch_code?: string | null
     order_id?: number | null
-    direction?: string | null
+    direction?: string
     new_drums?: new_drumsCreateNestedOneWithoutTransactionsInput
     processes?: processesCreateNestedOneWithoutTransactionsInput
     repro_drums?: repro_drumsCreateNestedOneWithoutTransactionsInput
@@ -27856,7 +27856,7 @@ export namespace Prisma {
     tx_id?: number
     tx_type?: string
     tx_date?: Date | string
-    material?: string | null
+    material: string
     drum_id?: number | null
     repro_id?: number | null
     tx_notes?: string | null
@@ -27865,7 +27865,7 @@ export namespace Prisma {
     process_id?: number | null
     batch_code?: string | null
     order_id?: number | null
-    direction?: string | null
+    direction?: string
   }
 
   export type transactionsCreateOrConnectWithoutDeliveriesInput = {
@@ -27945,7 +27945,7 @@ export namespace Prisma {
     tx_id?: IntFilter<"transactions"> | number
     tx_type?: StringFilter<"transactions"> | string
     tx_date?: DateTimeFilter<"transactions"> | Date | string
-    material?: StringNullableFilter<"transactions"> | string | null
+    material?: StringFilter<"transactions"> | string
     drum_id?: IntNullableFilter<"transactions"> | number | null
     repro_id?: IntNullableFilter<"transactions"> | number | null
     tx_notes?: StringNullableFilter<"transactions"> | string | null
@@ -27955,7 +27955,7 @@ export namespace Prisma {
     delivery_id?: IntNullableFilter<"transactions"> | number | null
     batch_code?: StringNullableFilter<"transactions"> | string | null
     order_id?: IntNullableFilter<"transactions"> | number | null
-    direction?: StringNullableFilter<"transactions"> | string | null
+    direction?: StringFilter<"transactions"> | string
   }
 
   export type batchesCreateWithoutDistillationsInput = {
@@ -28150,13 +28150,13 @@ export namespace Prisma {
   export type transactionsCreateWithoutNew_drumsInput = {
     tx_type?: string
     tx_date?: Date | string
-    material?: string | null
+    material: string
     tx_notes?: string | null
     created_at?: Date | string
     updated_at?: Date | string
     batch_code?: string | null
     order_id?: number | null
-    direction?: string | null
+    direction?: string
     deliveries?: deliveriesCreateNestedOneWithoutTransactionsInput
     processes?: processesCreateNestedOneWithoutTransactionsInput
     repro_drums?: repro_drumsCreateNestedOneWithoutTransactionsInput
@@ -28166,7 +28166,7 @@ export namespace Prisma {
     tx_id?: number
     tx_type?: string
     tx_date?: Date | string
-    material?: string | null
+    material: string
     repro_id?: number | null
     tx_notes?: string | null
     created_at?: Date | string
@@ -28175,7 +28175,7 @@ export namespace Prisma {
     delivery_id?: number | null
     batch_code?: string | null
     order_id?: number | null
-    direction?: string | null
+    direction?: string
   }
 
   export type transactionsCreateOrConnectWithoutNew_drumsInput = {
@@ -28463,13 +28463,13 @@ export namespace Prisma {
   export type transactionsCreateWithoutProcessesInput = {
     tx_type?: string
     tx_date?: Date | string
-    material?: string | null
+    material: string
     tx_notes?: string | null
     created_at?: Date | string
     updated_at?: Date | string
     batch_code?: string | null
     order_id?: number | null
-    direction?: string | null
+    direction?: string
     deliveries?: deliveriesCreateNestedOneWithoutTransactionsInput
     new_drums?: new_drumsCreateNestedOneWithoutTransactionsInput
     repro_drums?: repro_drumsCreateNestedOneWithoutTransactionsInput
@@ -28479,7 +28479,7 @@ export namespace Prisma {
     tx_id?: number
     tx_type?: string
     tx_date?: Date | string
-    material?: string | null
+    material: string
     drum_id?: number | null
     repro_id?: number | null
     tx_notes?: string | null
@@ -28488,7 +28488,7 @@ export namespace Prisma {
     delivery_id?: number | null
     batch_code?: string | null
     order_id?: number | null
-    direction?: string | null
+    direction?: string
   }
 
   export type transactionsCreateOrConnectWithoutProcessesInput = {
@@ -28768,13 +28768,13 @@ export namespace Prisma {
   export type transactionsCreateWithoutRepro_drumsInput = {
     tx_type?: string
     tx_date?: Date | string
-    material?: string | null
+    material: string
     tx_notes?: string | null
     created_at?: Date | string
     updated_at?: Date | string
     batch_code?: string | null
     order_id?: number | null
-    direction?: string | null
+    direction?: string
     deliveries?: deliveriesCreateNestedOneWithoutTransactionsInput
     new_drums?: new_drumsCreateNestedOneWithoutTransactionsInput
     processes?: processesCreateNestedOneWithoutTransactionsInput
@@ -28784,7 +28784,7 @@ export namespace Prisma {
     tx_id?: number
     tx_type?: string
     tx_date?: Date | string
-    material?: string | null
+    material: string
     drum_id?: number | null
     tx_notes?: string | null
     created_at?: Date | string
@@ -28793,7 +28793,7 @@ export namespace Prisma {
     delivery_id?: number | null
     batch_code?: string | null
     order_id?: number | null
-    direction?: string | null
+    direction?: string
   }
 
   export type transactionsCreateOrConnectWithoutRepro_drumsInput = {
@@ -29224,7 +29224,7 @@ export namespace Prisma {
     tx_id?: number
     tx_type?: string
     tx_date?: Date | string
-    material?: string | null
+    material: string
     drum_id?: number | null
     repro_id?: number | null
     tx_notes?: string | null
@@ -29233,19 +29233,19 @@ export namespace Prisma {
     process_id?: number | null
     batch_code?: string | null
     order_id?: number | null
-    direction?: string | null
+    direction?: string
   }
 
   export type transactionsUpdateWithoutDeliveriesInput = {
     tx_type?: StringFieldUpdateOperationsInput | string
     tx_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    material?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: StringFieldUpdateOperationsInput | string
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
-    direction?: NullableStringFieldUpdateOperationsInput | string | null
+    direction?: StringFieldUpdateOperationsInput | string
     new_drums?: new_drumsUpdateOneWithoutTransactionsNestedInput
     processes?: processesUpdateOneWithoutTransactionsNestedInput
     repro_drums?: repro_drumsUpdateOneWithoutTransactionsNestedInput
@@ -29255,7 +29255,7 @@ export namespace Prisma {
     tx_id?: IntFieldUpdateOperationsInput | number
     tx_type?: StringFieldUpdateOperationsInput | string
     tx_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    material?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: StringFieldUpdateOperationsInput | string
     drum_id?: NullableIntFieldUpdateOperationsInput | number | null
     repro_id?: NullableIntFieldUpdateOperationsInput | number | null
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29264,14 +29264,14 @@ export namespace Prisma {
     process_id?: NullableIntFieldUpdateOperationsInput | number | null
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
-    direction?: NullableStringFieldUpdateOperationsInput | string | null
+    direction?: StringFieldUpdateOperationsInput | string
   }
 
   export type transactionsUncheckedUpdateManyWithoutDeliveriesInput = {
     tx_id?: IntFieldUpdateOperationsInput | number
     tx_type?: StringFieldUpdateOperationsInput | string
     tx_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    material?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: StringFieldUpdateOperationsInput | string
     drum_id?: NullableIntFieldUpdateOperationsInput | number | null
     repro_id?: NullableIntFieldUpdateOperationsInput | number | null
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29280,7 +29280,7 @@ export namespace Prisma {
     process_id?: NullableIntFieldUpdateOperationsInput | number | null
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
-    direction?: NullableStringFieldUpdateOperationsInput | string | null
+    direction?: StringFieldUpdateOperationsInput | string
   }
 
   export type batchesCreateManyDistillationsInput = {
@@ -29376,7 +29376,7 @@ export namespace Prisma {
     tx_id?: number
     tx_type?: string
     tx_date?: Date | string
-    material?: string | null
+    material: string
     repro_id?: number | null
     tx_notes?: string | null
     created_at?: Date | string
@@ -29385,7 +29385,7 @@ export namespace Prisma {
     delivery_id?: number | null
     batch_code?: string | null
     order_id?: number | null
-    direction?: string | null
+    direction?: string
   }
 
   export type processesUpdateWithoutNew_drumsInput = {
@@ -29425,13 +29425,13 @@ export namespace Prisma {
   export type transactionsUpdateWithoutNew_drumsInput = {
     tx_type?: StringFieldUpdateOperationsInput | string
     tx_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    material?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: StringFieldUpdateOperationsInput | string
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
-    direction?: NullableStringFieldUpdateOperationsInput | string | null
+    direction?: StringFieldUpdateOperationsInput | string
     deliveries?: deliveriesUpdateOneWithoutTransactionsNestedInput
     processes?: processesUpdateOneWithoutTransactionsNestedInput
     repro_drums?: repro_drumsUpdateOneWithoutTransactionsNestedInput
@@ -29441,7 +29441,7 @@ export namespace Prisma {
     tx_id?: IntFieldUpdateOperationsInput | number
     tx_type?: StringFieldUpdateOperationsInput | string
     tx_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    material?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: StringFieldUpdateOperationsInput | string
     repro_id?: NullableIntFieldUpdateOperationsInput | number | null
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29450,14 +29450,14 @@ export namespace Prisma {
     delivery_id?: NullableIntFieldUpdateOperationsInput | number | null
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
-    direction?: NullableStringFieldUpdateOperationsInput | string | null
+    direction?: StringFieldUpdateOperationsInput | string
   }
 
   export type transactionsUncheckedUpdateManyWithoutNew_drumsInput = {
     tx_id?: IntFieldUpdateOperationsInput | number
     tx_type?: StringFieldUpdateOperationsInput | string
     tx_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    material?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: StringFieldUpdateOperationsInput | string
     repro_id?: NullableIntFieldUpdateOperationsInput | number | null
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29466,7 +29466,7 @@ export namespace Prisma {
     delivery_id?: NullableIntFieldUpdateOperationsInput | number | null
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
-    direction?: NullableStringFieldUpdateOperationsInput | string | null
+    direction?: StringFieldUpdateOperationsInput | string
   }
 
   export type deliveriesCreateManyOrdersInput = {
@@ -29565,7 +29565,7 @@ export namespace Prisma {
     tx_id?: number
     tx_type?: string
     tx_date?: Date | string
-    material?: string | null
+    material: string
     drum_id?: number | null
     repro_id?: number | null
     tx_notes?: string | null
@@ -29574,19 +29574,19 @@ export namespace Prisma {
     delivery_id?: number | null
     batch_code?: string | null
     order_id?: number | null
-    direction?: string | null
+    direction?: string
   }
 
   export type transactionsUpdateWithoutProcessesInput = {
     tx_type?: StringFieldUpdateOperationsInput | string
     tx_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    material?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: StringFieldUpdateOperationsInput | string
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
-    direction?: NullableStringFieldUpdateOperationsInput | string | null
+    direction?: StringFieldUpdateOperationsInput | string
     deliveries?: deliveriesUpdateOneWithoutTransactionsNestedInput
     new_drums?: new_drumsUpdateOneWithoutTransactionsNestedInput
     repro_drums?: repro_drumsUpdateOneWithoutTransactionsNestedInput
@@ -29596,7 +29596,7 @@ export namespace Prisma {
     tx_id?: IntFieldUpdateOperationsInput | number
     tx_type?: StringFieldUpdateOperationsInput | string
     tx_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    material?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: StringFieldUpdateOperationsInput | string
     drum_id?: NullableIntFieldUpdateOperationsInput | number | null
     repro_id?: NullableIntFieldUpdateOperationsInput | number | null
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29605,14 +29605,14 @@ export namespace Prisma {
     delivery_id?: NullableIntFieldUpdateOperationsInput | number | null
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
-    direction?: NullableStringFieldUpdateOperationsInput | string | null
+    direction?: StringFieldUpdateOperationsInput | string
   }
 
   export type transactionsUncheckedUpdateManyWithoutProcessesInput = {
     tx_id?: IntFieldUpdateOperationsInput | number
     tx_type?: StringFieldUpdateOperationsInput | string
     tx_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    material?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: StringFieldUpdateOperationsInput | string
     drum_id?: NullableIntFieldUpdateOperationsInput | number | null
     repro_id?: NullableIntFieldUpdateOperationsInput | number | null
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29621,7 +29621,7 @@ export namespace Prisma {
     delivery_id?: NullableIntFieldUpdateOperationsInput | number | null
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
-    direction?: NullableStringFieldUpdateOperationsInput | string | null
+    direction?: StringFieldUpdateOperationsInput | string
   }
 
   export type repro_additionsCreateManyRepro_drumsInput = {
@@ -29638,7 +29638,7 @@ export namespace Prisma {
     tx_id?: number
     tx_type?: string
     tx_date?: Date | string
-    material?: string | null
+    material: string
     drum_id?: number | null
     tx_notes?: string | null
     created_at?: Date | string
@@ -29647,7 +29647,7 @@ export namespace Prisma {
     delivery_id?: number | null
     batch_code?: string | null
     order_id?: number | null
-    direction?: string | null
+    direction?: string
   }
 
   export type repro_additionsUpdateWithoutRepro_drumsInput = {
@@ -29682,13 +29682,13 @@ export namespace Prisma {
   export type transactionsUpdateWithoutRepro_drumsInput = {
     tx_type?: StringFieldUpdateOperationsInput | string
     tx_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    material?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: StringFieldUpdateOperationsInput | string
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
-    direction?: NullableStringFieldUpdateOperationsInput | string | null
+    direction?: StringFieldUpdateOperationsInput | string
     deliveries?: deliveriesUpdateOneWithoutTransactionsNestedInput
     new_drums?: new_drumsUpdateOneWithoutTransactionsNestedInput
     processes?: processesUpdateOneWithoutTransactionsNestedInput
@@ -29698,7 +29698,7 @@ export namespace Prisma {
     tx_id?: IntFieldUpdateOperationsInput | number
     tx_type?: StringFieldUpdateOperationsInput | string
     tx_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    material?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: StringFieldUpdateOperationsInput | string
     drum_id?: NullableIntFieldUpdateOperationsInput | number | null
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29707,14 +29707,14 @@ export namespace Prisma {
     delivery_id?: NullableIntFieldUpdateOperationsInput | number | null
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
-    direction?: NullableStringFieldUpdateOperationsInput | string | null
+    direction?: StringFieldUpdateOperationsInput | string
   }
 
   export type transactionsUncheckedUpdateManyWithoutRepro_drumsInput = {
     tx_id?: IntFieldUpdateOperationsInput | number
     tx_type?: StringFieldUpdateOperationsInput | string
     tx_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    material?: NullableStringFieldUpdateOperationsInput | string | null
+    material?: StringFieldUpdateOperationsInput | string
     drum_id?: NullableIntFieldUpdateOperationsInput | number | null
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29723,7 +29723,7 @@ export namespace Prisma {
     delivery_id?: NullableIntFieldUpdateOperationsInput | number | null
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
-    direction?: NullableStringFieldUpdateOperationsInput | string | null
+    direction?: StringFieldUpdateOperationsInput | string
   }
 
   export type processesCreateManyStillsInput = {
