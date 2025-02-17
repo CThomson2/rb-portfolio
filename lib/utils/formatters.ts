@@ -23,7 +23,13 @@ export function formatCurrency(amount: number) {
   return `US$ ${amount}`;
 }
 
-type TxType = "import" | "processing" | "reprocessing" | "disposal" | "loss";
+type TxType =
+  | "import"
+  | "processing"
+  | "reprocessing"
+  | "disposal"
+  | "loss"
+  | "cancelled";
 
 export function getTxTypeColor(txType: TxType): string {
   const styles: Record<TxType, string> = {
@@ -32,13 +38,14 @@ export function getTxTypeColor(txType: TxType): string {
     reprocessing: "bg-yellow-100 text-yellow-800",
     disposal: "bg-red-100 text-red-800",
     loss: "bg-gray-100 text-gray-800",
+    cancelled: "bg-red-100 text-red-800",
   };
   return styles[txType] || "bg-gray-100 text-gray-800";
 }
 
 export function getTxTypeVariant(
   txType: TxType
-): "default" | "secondary" | "outline" {
+): "default" | "secondary" | "outline" | "destructive" {
   switch (txType.toLowerCase()) {
     case "import":
       return "default";
@@ -46,6 +53,8 @@ export function getTxTypeVariant(
       return "secondary";
     case "reprocessing":
       return "outline";
+    case "cancelled":
+      return "destructive";
     default:
       return "default";
   }

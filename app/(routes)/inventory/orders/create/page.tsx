@@ -26,6 +26,7 @@ interface FormValues {
   material: string;
   supplier: string;
   quantity: number;
+  po_number: string | null;
 }
 
 /**
@@ -36,7 +37,7 @@ interface FormValues {
  *
  * @returns {JSX.Element} The rendered OrderCreationPage component
  */
-function OrderCreationPage() {
+function OrderCreationPage(): JSX.Element {
   // Change to array of orders instead of single order
   const [orders, setOrders] = useState<OrderFormData[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -47,7 +48,7 @@ function OrderCreationPage() {
    * @param {FormValues} formValues - The form values containing order details
    * @returns {Promise<void>}
    */
-  const handleCreateOrder = async (formValues: FormValues) => {
+  const handleCreateOrder = async (formValues: FormValues): Promise<void> => {
     try {
       setError(null);
       const res = await fetch("/api/inventory/orders", {

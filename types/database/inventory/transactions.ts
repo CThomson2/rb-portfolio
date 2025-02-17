@@ -55,6 +55,7 @@ rathburn-2025=# \d+ inventory.transactions;
              |                          |           |          |     WHEN 'reprocessing'::text THEN 'OUT'::text+|          |             |              | 
              |                          |           |          |     WHEN 'disposal'::text THEN 'OUT'::text    +|          |             |              | 
              |                          |           |          |     WHEN 'loss'::text THEN 'OUT'::text        +|          |             |              | 
+             |                          |           |          |     WHEN 'cancelled'::text THEN 'OUT'::text   +|          |             |              | 
              |                          |           |          |     ELSE NULL::text                           +|          |             |              | 
              |                          |           |          | END) stored                                    |          |             |              | 
  delivery_id | integer                  |           |          |                                                | plain    |             |              | 

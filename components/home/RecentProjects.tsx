@@ -27,26 +27,24 @@ const QueryForms = () => {
                   className="relative w-full h-full overflow-hidden lg:rounded-3xl"
                   style={{ backgroundColor: "#13162D" }}
                 >
-                  <img src="/bg.png" alt="bgimg" className="object-cover" />
-                  {/* <Image
+                  <Image
                     src="/bg.png"
-                    alt="bgimg"
+                    alt="Background image"
                     fill
                     className="object-cover"
-                  /> */}
+                    priority
+                  />
                 </div>
-                <img
-                  src={item.img}
-                  alt="cover"
-                  className="z-10 absolute bottom-0"
-                />
-                {/* <Image
-                  src={item.img}
-                  alt="cover"
-                  width={100}
-                  height={100}
-                  className="z-10 absolute bottom-0"
-                /> */}
+                <div className="z-10 absolute bottom-0">
+                  <Image
+                    src={item.img}
+                    alt={`Project ${item.id} cover`}
+                    width={100}
+                    height={100}
+                    className="object-contain"
+                    priority
+                  />
+                </div>
               </div>
 
               <h1 className="font-bold lg:text-2xl md:text-xl text-base line-clamp-1">

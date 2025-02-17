@@ -50,6 +50,7 @@ export interface OrderPostParams {
   supplier: string;
   material: string;
   quantity: number;
+  po_number: string | null;
 }
 export interface OrderFormData {
   order_id: number;
@@ -62,6 +63,7 @@ export interface OrderFormData {
   updated_at: Date | string | null;
   quantity_received: number;
   delivery_status: string;
+  po_number: string | null;
 }
 
 export interface OrderPostResponse extends OrderFormData {

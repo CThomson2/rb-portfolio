@@ -17,12 +17,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.2.1
- * Query Engine version: 4123509d24aa4dede1e864b46351bf2790323b69
+ * Prisma Client JS version: 6.3.1
+ * Query Engine version: acc0b9dd43eb689cbd20c9470515d719db10d0b0
  */
 Prisma.prismaVersion = {
-  client: "6.2.1",
-  engine: "4123509d24aa4dede1e864b46351bf2790323b69"
+  client: "6.3.1",
+  engine: "acc0b9dd43eb689cbd20c9470515d719db10d0b0"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -191,12 +191,6 @@ exports.Prisma.DistillationsScalarFieldEnum = {
   updated_at: 'updated_at'
 };
 
-exports.Prisma.Drum_distillationsScalarFieldEnum = {
-  drum_id: 'drum_id',
-  distillation_id: 'distillation_id',
-  fraction_used: 'fraction_used'
-};
-
 exports.Prisma.ImportsScalarFieldEnum = {
   import_id: 'import_id',
   supplier_name: 'supplier_name',
@@ -234,7 +228,8 @@ exports.Prisma.OrdersScalarFieldEnum = {
   quantity_received: 'quantity_received',
   delivery_status: 'delivery_status',
   eta_start: 'eta_start',
-  eta_end: 'eta_end'
+  eta_end: 'eta_end',
+  po_number: 'po_number'
 };
 
 exports.Prisma.ProcessesScalarFieldEnum = {
@@ -285,19 +280,24 @@ exports.Prisma.TransactionsScalarFieldEnum = {
   created_at: 'created_at',
   updated_at: 'updated_at',
   process_id: 'process_id',
-  direction: 'direction',
   delivery_id: 'delivery_id',
   batch_code: 'batch_code',
-  order_id: 'order_id'
+  order_id: 'order_id',
+  direction: 'direction'
 };
 
-exports.Prisma.StillScalarFieldEnum = {
+exports.Prisma.StillsScalarFieldEnum = {
   code: 'code',
   site: 'site',
   power: 'power',
   capacity: 'capacity',
-  isVacuum: 'isVacuum',
-  isOperational: 'isOperational'
+  is_vacuum: 'is_vacuum',
+  is_operational: 'is_operational'
+};
+
+exports.Prisma.SuppliersScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
 };
 
 exports.Prisma.SortOrder = {
@@ -325,7 +325,6 @@ exports.Prisma.ModelName = {
   batches: 'batches',
   deliveries: 'deliveries',
   distillations: 'distillations',
-  drum_distillations: 'drum_distillations',
   imports: 'imports',
   new_drums: 'new_drums',
   orders: 'orders',
@@ -333,7 +332,8 @@ exports.Prisma.ModelName = {
   repro_additions: 'repro_additions',
   repro_drums: 'repro_drums',
   transactions: 'transactions',
-  Still: 'Still'
+  stills: 'stills',
+  suppliers: 'suppliers'
 };
 
 /**

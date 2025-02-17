@@ -54,11 +54,6 @@ export type deliveries = $Result.DefaultSelection<Prisma.$deliveriesPayload>
  */
 export type distillations = $Result.DefaultSelection<Prisma.$distillationsPayload>
 /**
- * Model drum_distillations
- * This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
- */
-export type drum_distillations = $Result.DefaultSelection<Prisma.$drum_distillationsPayload>
-/**
  * Model imports
  * This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
  */
@@ -94,10 +89,15 @@ export type repro_drums = $Result.DefaultSelection<Prisma.$repro_drumsPayload>
  */
 export type transactions = $Result.DefaultSelection<Prisma.$transactionsPayload>
 /**
- * Model Still
+ * Model stills
  * This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
  */
-export type Still = $Result.DefaultSelection<Prisma.$StillPayload>
+export type stills = $Result.DefaultSelection<Prisma.$stillsPayload>
+/**
+ * Model suppliers
+ * 
+ */
+export type suppliers = $Result.DefaultSelection<Prisma.$suppliersPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -305,16 +305,6 @@ export class PrismaClient<
   get distillations(): Prisma.distillationsDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.drum_distillations`: Exposes CRUD operations for the **drum_distillations** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Drum_distillations
-    * const drum_distillations = await prisma.drum_distillations.findMany()
-    * ```
-    */
-  get drum_distillations(): Prisma.drum_distillationsDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.imports`: Exposes CRUD operations for the **imports** model.
     * Example usage:
     * ```ts
@@ -385,14 +375,24 @@ export class PrismaClient<
   get transactions(): Prisma.transactionsDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.still`: Exposes CRUD operations for the **Still** model.
+   * `prisma.stills`: Exposes CRUD operations for the **stills** model.
     * Example usage:
     * ```ts
     * // Fetch zero or more Stills
-    * const stills = await prisma.still.findMany()
+    * const stills = await prisma.stills.findMany()
     * ```
     */
-  get still(): Prisma.StillDelegate<ExtArgs, ClientOptions>;
+  get stills(): Prisma.stillsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.suppliers`: Exposes CRUD operations for the **suppliers** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Suppliers
+    * const suppliers = await prisma.suppliers.findMany()
+    * ```
+    */
+  get suppliers(): Prisma.suppliersDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -433,7 +433,7 @@ export namespace Prisma {
   export type DecimalJsLike = runtime.DecimalJsLike
 
   /**
-   * Metrics 
+   * Metrics
    */
   export type Metrics = runtime.Metrics
   export type Metric<T> = runtime.Metric<T>
@@ -451,14 +451,14 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.2.1
-   * Query Engine version: 4123509d24aa4dede1e864b46351bf2790323b69
+   * Prisma Client JS version: 6.3.1
+   * Query Engine version: acc0b9dd43eb689cbd20c9470515d719db10d0b0
    */
   export type PrismaVersion = {
     client: string
   }
 
-  export const prismaVersion: PrismaVersion 
+  export const prismaVersion: PrismaVersion
 
   /**
    * Utility Types
@@ -474,15 +474,15 @@ export namespace Prisma {
 
   /**
    * Types of the values used to represent different kinds of `null` values when working with JSON fields.
-   * 
+   *
    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
    */
   namespace NullTypes {
     /**
     * Type of `Prisma.DbNull`.
-    * 
+    *
     * You cannot use other instances of this class. Please use the `Prisma.DbNull` value.
-    * 
+    *
     * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
     */
     class DbNull {
@@ -492,9 +492,9 @@ export namespace Prisma {
 
     /**
     * Type of `Prisma.JsonNull`.
-    * 
+    *
     * You cannot use other instances of this class. Please use the `Prisma.JsonNull` value.
-    * 
+    *
     * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
     */
     class JsonNull {
@@ -504,9 +504,9 @@ export namespace Prisma {
 
     /**
     * Type of `Prisma.AnyNull`.
-    * 
+    *
     * You cannot use other instances of this class. Please use the `Prisma.AnyNull` value.
-    * 
+    *
     * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
     */
     class AnyNull {
@@ -517,21 +517,21 @@ export namespace Prisma {
 
   /**
    * Helper for filtering JSON entries that have `null` on the database (empty on the db)
-   * 
+   *
    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
    */
   export const DbNull: NullTypes.DbNull
 
   /**
    * Helper for filtering JSON entries that have JSON `null` values (not empty on the db)
-   * 
+   *
    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
    */
   export const JsonNull: NullTypes.JsonNull
 
   /**
    * Helper for filtering JSON entries that are `Prisma.DbNull` or `Prisma.JsonNull`
-   * 
+   *
    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
    */
   export const AnyNull: NullTypes.AnyNull
@@ -841,7 +841,6 @@ export namespace Prisma {
     batches: 'batches',
     deliveries: 'deliveries',
     distillations: 'distillations',
-    drum_distillations: 'drum_distillations',
     imports: 'imports',
     new_drums: 'new_drums',
     orders: 'orders',
@@ -849,7 +848,8 @@ export namespace Prisma {
     repro_additions: 'repro_additions',
     repro_drums: 'repro_drums',
     transactions: 'transactions',
-    Still: 'Still'
+    stills: 'stills',
+    suppliers: 'suppliers'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -865,7 +865,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "bottle_sizes" | "chemical_groups" | "product_prices" | "products" | "raw_materials" | "batches" | "deliveries" | "distillations" | "drum_distillations" | "imports" | "new_drums" | "orders" | "processes" | "repro_additions" | "repro_drums" | "transactions" | "still"
+      modelProps: "bottle_sizes" | "chemical_groups" | "product_prices" | "products" | "raw_materials" | "batches" | "deliveries" | "distillations" | "imports" | "new_drums" | "orders" | "processes" | "repro_additions" | "repro_drums" | "transactions" | "stills" | "suppliers"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1461,80 +1461,6 @@ export namespace Prisma {
           }
         }
       }
-      drum_distillations: {
-        payload: Prisma.$drum_distillationsPayload<ExtArgs>
-        fields: Prisma.drum_distillationsFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.drum_distillationsFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$drum_distillationsPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.drum_distillationsFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$drum_distillationsPayload>
-          }
-          findFirst: {
-            args: Prisma.drum_distillationsFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$drum_distillationsPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.drum_distillationsFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$drum_distillationsPayload>
-          }
-          findMany: {
-            args: Prisma.drum_distillationsFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$drum_distillationsPayload>[]
-          }
-          create: {
-            args: Prisma.drum_distillationsCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$drum_distillationsPayload>
-          }
-          createMany: {
-            args: Prisma.drum_distillationsCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.drum_distillationsCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$drum_distillationsPayload>[]
-          }
-          delete: {
-            args: Prisma.drum_distillationsDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$drum_distillationsPayload>
-          }
-          update: {
-            args: Prisma.drum_distillationsUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$drum_distillationsPayload>
-          }
-          deleteMany: {
-            args: Prisma.drum_distillationsDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.drum_distillationsUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.drum_distillationsUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$drum_distillationsPayload>[]
-          }
-          upsert: {
-            args: Prisma.drum_distillationsUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$drum_distillationsPayload>
-          }
-          aggregate: {
-            args: Prisma.Drum_distillationsAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateDrum_distillations>
-          }
-          groupBy: {
-            args: Prisma.drum_distillationsGroupByArgs<ExtArgs>
-            result: $Utils.Optional<Drum_distillationsGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.drum_distillationsCountArgs<ExtArgs>
-            result: $Utils.Optional<Drum_distillationsCountAggregateOutputType> | number
-          }
-        }
-      }
       imports: {
         payload: Prisma.$importsPayload<ExtArgs>
         fields: Prisma.importsFieldRefs
@@ -2053,77 +1979,151 @@ export namespace Prisma {
           }
         }
       }
-      Still: {
-        payload: Prisma.$StillPayload<ExtArgs>
-        fields: Prisma.StillFieldRefs
+      stills: {
+        payload: Prisma.$stillsPayload<ExtArgs>
+        fields: Prisma.stillsFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.StillFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StillPayload> | null
+            args: Prisma.stillsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$stillsPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.StillFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StillPayload>
+            args: Prisma.stillsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$stillsPayload>
           }
           findFirst: {
-            args: Prisma.StillFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StillPayload> | null
+            args: Prisma.stillsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$stillsPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.StillFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StillPayload>
+            args: Prisma.stillsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$stillsPayload>
           }
           findMany: {
-            args: Prisma.StillFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StillPayload>[]
+            args: Prisma.stillsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$stillsPayload>[]
           }
           create: {
-            args: Prisma.StillCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StillPayload>
+            args: Prisma.stillsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$stillsPayload>
           }
           createMany: {
-            args: Prisma.StillCreateManyArgs<ExtArgs>
+            args: Prisma.stillsCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.StillCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StillPayload>[]
+            args: Prisma.stillsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$stillsPayload>[]
           }
           delete: {
-            args: Prisma.StillDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StillPayload>
+            args: Prisma.stillsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$stillsPayload>
           }
           update: {
-            args: Prisma.StillUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StillPayload>
+            args: Prisma.stillsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$stillsPayload>
           }
           deleteMany: {
-            args: Prisma.StillDeleteManyArgs<ExtArgs>
+            args: Prisma.stillsDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.StillUpdateManyArgs<ExtArgs>
+            args: Prisma.stillsUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.StillUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StillPayload>[]
+            args: Prisma.stillsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$stillsPayload>[]
           }
           upsert: {
-            args: Prisma.StillUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StillPayload>
+            args: Prisma.stillsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$stillsPayload>
           }
           aggregate: {
-            args: Prisma.StillAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateStill>
+            args: Prisma.StillsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateStills>
           }
           groupBy: {
-            args: Prisma.StillGroupByArgs<ExtArgs>
-            result: $Utils.Optional<StillGroupByOutputType>[]
+            args: Prisma.stillsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<StillsGroupByOutputType>[]
           }
           count: {
-            args: Prisma.StillCountArgs<ExtArgs>
-            result: $Utils.Optional<StillCountAggregateOutputType> | number
+            args: Prisma.stillsCountArgs<ExtArgs>
+            result: $Utils.Optional<StillsCountAggregateOutputType> | number
+          }
+        }
+      }
+      suppliers: {
+        payload: Prisma.$suppliersPayload<ExtArgs>
+        fields: Prisma.suppliersFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.suppliersFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$suppliersPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.suppliersFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$suppliersPayload>
+          }
+          findFirst: {
+            args: Prisma.suppliersFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$suppliersPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.suppliersFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$suppliersPayload>
+          }
+          findMany: {
+            args: Prisma.suppliersFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$suppliersPayload>[]
+          }
+          create: {
+            args: Prisma.suppliersCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$suppliersPayload>
+          }
+          createMany: {
+            args: Prisma.suppliersCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.suppliersCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$suppliersPayload>[]
+          }
+          delete: {
+            args: Prisma.suppliersDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$suppliersPayload>
+          }
+          update: {
+            args: Prisma.suppliersUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$suppliersPayload>
+          }
+          deleteMany: {
+            args: Prisma.suppliersDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.suppliersUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.suppliersUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$suppliersPayload>[]
+          }
+          upsert: {
+            args: Prisma.suppliersUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$suppliersPayload>
+          }
+          aggregate: {
+            args: Prisma.SuppliersAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSuppliers>
+          }
+          groupBy: {
+            args: Prisma.suppliersGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SuppliersGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.suppliersCountArgs<ExtArgs>
+            result: $Utils.Optional<SuppliersCountAggregateOutputType> | number
           }
         }
       }
@@ -2219,7 +2219,6 @@ export namespace Prisma {
     batches?: batchesOmit
     deliveries?: deliveriesOmit
     distillations?: distillationsOmit
-    drum_distillations?: drum_distillationsOmit
     imports?: importsOmit
     new_drums?: new_drumsOmit
     orders?: ordersOmit
@@ -2227,7 +2226,8 @@ export namespace Prisma {
     repro_additions?: repro_additionsOmit
     repro_drums?: repro_drumsOmit
     transactions?: transactionsOmit
-    still?: StillOmit
+    stills?: stillsOmit
+    suppliers?: suppliersOmit
   }
 
   /* Types for Logging */
@@ -2447,13 +2447,11 @@ export namespace Prisma {
 
   export type DistillationsCountOutputType = {
     batches: number
-    drum_distillations: number
     repro_additions: number
   }
 
   export type DistillationsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     batches?: boolean | DistillationsCountOutputTypeCountBatchesArgs
-    drum_distillations?: boolean | DistillationsCountOutputTypeCountDrum_distillationsArgs
     repro_additions?: boolean | DistillationsCountOutputTypeCountRepro_additionsArgs
   }
 
@@ -2478,13 +2476,6 @@ export namespace Prisma {
   /**
    * DistillationsCountOutputType without action
    */
-  export type DistillationsCountOutputTypeCountDrum_distillationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: drum_distillationsWhereInput
-  }
-
-  /**
-   * DistillationsCountOutputType without action
-   */
   export type DistillationsCountOutputTypeCountRepro_additionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: repro_additionsWhereInput
   }
@@ -2495,13 +2486,11 @@ export namespace Prisma {
    */
 
   export type New_drumsCountOutputType = {
-    drum_distillations: number
     processes: number
     transactions: number
   }
 
   export type New_drumsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    drum_distillations?: boolean | New_drumsCountOutputTypeCountDrum_distillationsArgs
     processes?: boolean | New_drumsCountOutputTypeCountProcessesArgs
     transactions?: boolean | New_drumsCountOutputTypeCountTransactionsArgs
   }
@@ -2515,13 +2504,6 @@ export namespace Prisma {
      * Select specific fields to fetch from the New_drumsCountOutputType
      */
     select?: New_drumsCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * New_drumsCountOutputType without action
-   */
-  export type New_drumsCountOutputTypeCountDrum_distillationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: drum_distillationsWhereInput
   }
 
   /**
@@ -2651,32 +2633,32 @@ export namespace Prisma {
 
 
   /**
-   * Count Type StillCountOutputType
+   * Count Type StillsCountOutputType
    */
 
-  export type StillCountOutputType = {
+  export type StillsCountOutputType = {
     processes: number
   }
 
-  export type StillCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    processes?: boolean | StillCountOutputTypeCountProcessesArgs
+  export type StillsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    processes?: boolean | StillsCountOutputTypeCountProcessesArgs
   }
 
   // Custom InputTypes
   /**
-   * StillCountOutputType without action
+   * StillsCountOutputType without action
    */
-  export type StillCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StillsCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StillCountOutputType
+     * Select specific fields to fetch from the StillsCountOutputType
      */
-    select?: StillCountOutputTypeSelect<ExtArgs> | null
+    select?: StillsCountOutputTypeSelect<ExtArgs> | null
   }
 
   /**
-   * StillCountOutputType without action
+   * StillsCountOutputType without action
    */
-  export type StillCountOutputTypeCountProcessesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StillsCountOutputTypeCountProcessesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: processesWhereInput
   }
 
@@ -3609,6 +3591,10 @@ export namespace Prisma {
      * Filter which bottle_sizes to update
      */
     where?: bottle_sizesWhereInput
+    /**
+     * Limit how many bottle_sizes to update.
+     */
+    limit?: number
   }
 
   /**
@@ -3631,6 +3617,10 @@ export namespace Prisma {
      * Filter which bottle_sizes to update
      */
     where?: bottle_sizesWhereInput
+    /**
+     * Limit how many bottle_sizes to update.
+     */
+    limit?: number
   }
 
   /**
@@ -3693,6 +3683,10 @@ export namespace Prisma {
      * Filter which bottle_sizes to delete
      */
     where?: bottle_sizesWhereInput
+    /**
+     * Limit how many bottle_sizes to delete.
+     */
+    limit?: number
   }
 
   /**
@@ -4623,6 +4617,10 @@ export namespace Prisma {
      * Filter which chemical_groups to update
      */
     where?: chemical_groupsWhereInput
+    /**
+     * Limit how many chemical_groups to update.
+     */
+    limit?: number
   }
 
   /**
@@ -4645,6 +4643,10 @@ export namespace Prisma {
      * Filter which chemical_groups to update
      */
     where?: chemical_groupsWhereInput
+    /**
+     * Limit how many chemical_groups to update.
+     */
+    limit?: number
   }
 
   /**
@@ -4699,6 +4701,10 @@ export namespace Prisma {
      * Filter which chemical_groups to delete
      */
     where?: chemical_groupsWhereInput
+    /**
+     * Limit how many chemical_groups to delete.
+     */
+    limit?: number
   }
 
   /**
@@ -5677,6 +5683,10 @@ export namespace Prisma {
      * Filter which product_prices to update
      */
     where?: product_pricesWhereInput
+    /**
+     * Limit how many product_prices to update.
+     */
+    limit?: number
   }
 
   /**
@@ -5699,6 +5709,10 @@ export namespace Prisma {
      * Filter which product_prices to update
      */
     where?: product_pricesWhereInput
+    /**
+     * Limit how many product_prices to update.
+     */
+    limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
@@ -5765,6 +5779,10 @@ export namespace Prisma {
      * Filter which product_prices to delete
      */
     where?: product_pricesWhereInput
+    /**
+     * Limit how many product_prices to delete.
+     */
+    limit?: number
   }
 
   /**
@@ -6767,6 +6785,10 @@ export namespace Prisma {
      * Filter which products to update
      */
     where?: productsWhereInput
+    /**
+     * Limit how many products to update.
+     */
+    limit?: number
   }
 
   /**
@@ -6789,6 +6811,10 @@ export namespace Prisma {
      * Filter which products to update
      */
     where?: productsWhereInput
+    /**
+     * Limit how many products to update.
+     */
+    limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
@@ -6855,6 +6881,10 @@ export namespace Prisma {
      * Filter which products to delete
      */
     where?: productsWhereInput
+    /**
+     * Limit how many products to delete.
+     */
+    limit?: number
   }
 
   /**
@@ -7912,6 +7942,10 @@ export namespace Prisma {
      * Filter which raw_materials to update
      */
     where?: raw_materialsWhereInput
+    /**
+     * Limit how many raw_materials to update.
+     */
+    limit?: number
   }
 
   /**
@@ -7934,6 +7968,10 @@ export namespace Prisma {
      * Filter which raw_materials to update
      */
     where?: raw_materialsWhereInput
+    /**
+     * Limit how many raw_materials to update.
+     */
+    limit?: number
   }
 
   /**
@@ -7996,6 +8034,10 @@ export namespace Prisma {
      * Filter which raw_materials to delete
      */
     where?: raw_materialsWhereInput
+    /**
+     * Limit how many raw_materials to delete.
+     */
+    limit?: number
   }
 
   /**
@@ -9059,6 +9101,10 @@ export namespace Prisma {
      * Filter which batches to update
      */
     where?: batchesWhereInput
+    /**
+     * Limit how many batches to update.
+     */
+    limit?: number
   }
 
   /**
@@ -9081,6 +9127,10 @@ export namespace Prisma {
      * Filter which batches to update
      */
     where?: batchesWhereInput
+    /**
+     * Limit how many batches to update.
+     */
+    limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
@@ -9147,6 +9197,10 @@ export namespace Prisma {
      * Filter which batches to delete
      */
     where?: batchesWhereInput
+    /**
+     * Limit how many batches to delete.
+     */
+    limit?: number
   }
 
   /**
@@ -10237,6 +10291,10 @@ export namespace Prisma {
      * Filter which deliveries to update
      */
     where?: deliveriesWhereInput
+    /**
+     * Limit how many deliveries to update.
+     */
+    limit?: number
   }
 
   /**
@@ -10259,6 +10317,10 @@ export namespace Prisma {
      * Filter which deliveries to update
      */
     where?: deliveriesWhereInput
+    /**
+     * Limit how many deliveries to update.
+     */
+    limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
@@ -10325,6 +10387,10 @@ export namespace Prisma {
      * Filter which deliveries to delete
      */
     where?: deliveriesWhereInput
+    /**
+     * Limit how many deliveries to delete.
+     */
+    limit?: number
   }
 
   /**
@@ -10645,7 +10711,6 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     batches?: boolean | distillations$batchesArgs<ExtArgs>
-    drum_distillations?: boolean | distillations$drum_distillationsArgs<ExtArgs>
     repro_additions?: boolean | distillations$repro_additionsArgs<ExtArgs>
     _count?: boolean | DistillationsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["distillations"]>
@@ -10701,7 +10766,6 @@ export namespace Prisma {
   export type distillationsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"distillation_id" | "loading_date" | "start_date" | "still_code" | "volume_in" | "transporter" | "loader" | "operator" | "completion_date" | "volume_in_spec" | "volume_repro" | "created_at" | "updated_at", ExtArgs["result"]["distillations"]>
   export type distillationsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     batches?: boolean | distillations$batchesArgs<ExtArgs>
-    drum_distillations?: boolean | distillations$drum_distillationsArgs<ExtArgs>
     repro_additions?: boolean | distillations$repro_additionsArgs<ExtArgs>
     _count?: boolean | DistillationsCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -10712,7 +10776,6 @@ export namespace Prisma {
     name: "distillations"
     objects: {
       batches: Prisma.$batchesPayload<ExtArgs>[]
-      drum_distillations: Prisma.$drum_distillationsPayload<ExtArgs>[]
       repro_additions: Prisma.$repro_additionsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -11124,7 +11187,6 @@ export namespace Prisma {
   export interface Prisma__distillationsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     batches<T extends distillations$batchesArgs<ExtArgs> = {}>(args?: Subset<T, distillations$batchesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$batchesPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
-    drum_distillations<T extends distillations$drum_distillationsArgs<ExtArgs> = {}>(args?: Subset<T, distillations$drum_distillationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$drum_distillationsPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     repro_additions<T extends distillations$repro_additionsArgs<ExtArgs> = {}>(args?: Subset<T, distillations$repro_additionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$repro_additionsPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -11457,6 +11519,10 @@ export namespace Prisma {
      * Filter which distillations to update
      */
     where?: distillationsWhereInput
+    /**
+     * Limit how many distillations to update.
+     */
+    limit?: number
   }
 
   /**
@@ -11479,6 +11545,10 @@ export namespace Prisma {
      * Filter which distillations to update
      */
     where?: distillationsWhereInput
+    /**
+     * Limit how many distillations to update.
+     */
+    limit?: number
   }
 
   /**
@@ -11541,6 +11611,10 @@ export namespace Prisma {
      * Filter which distillations to delete
      */
     where?: distillationsWhereInput
+    /**
+     * Limit how many distillations to delete.
+     */
+    limit?: number
   }
 
   /**
@@ -11565,30 +11639,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: BatchesScalarFieldEnum | BatchesScalarFieldEnum[]
-  }
-
-  /**
-   * distillations.drum_distillations
-   */
-  export type distillations$drum_distillationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the drum_distillations
-     */
-    select?: drum_distillationsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the drum_distillations
-     */
-    omit?: drum_distillationsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: drum_distillationsInclude<ExtArgs> | null
-    where?: drum_distillationsWhereInput
-    orderBy?: drum_distillationsOrderByWithRelationInput | drum_distillationsOrderByWithRelationInput[]
-    cursor?: drum_distillationsWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: Drum_distillationsScalarFieldEnum | Drum_distillationsScalarFieldEnum[]
   }
 
   /**
@@ -11631,1076 +11681,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: distillationsInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model drum_distillations
-   */
-
-  export type AggregateDrum_distillations = {
-    _count: Drum_distillationsCountAggregateOutputType | null
-    _avg: Drum_distillationsAvgAggregateOutputType | null
-    _sum: Drum_distillationsSumAggregateOutputType | null
-    _min: Drum_distillationsMinAggregateOutputType | null
-    _max: Drum_distillationsMaxAggregateOutputType | null
-  }
-
-  export type Drum_distillationsAvgAggregateOutputType = {
-    drum_id: number | null
-    distillation_id: number | null
-    fraction_used: Decimal | null
-  }
-
-  export type Drum_distillationsSumAggregateOutputType = {
-    drum_id: number | null
-    distillation_id: number | null
-    fraction_used: Decimal | null
-  }
-
-  export type Drum_distillationsMinAggregateOutputType = {
-    drum_id: number | null
-    distillation_id: number | null
-    fraction_used: Decimal | null
-  }
-
-  export type Drum_distillationsMaxAggregateOutputType = {
-    drum_id: number | null
-    distillation_id: number | null
-    fraction_used: Decimal | null
-  }
-
-  export type Drum_distillationsCountAggregateOutputType = {
-    drum_id: number
-    distillation_id: number
-    fraction_used: number
-    _all: number
-  }
-
-
-  export type Drum_distillationsAvgAggregateInputType = {
-    drum_id?: true
-    distillation_id?: true
-    fraction_used?: true
-  }
-
-  export type Drum_distillationsSumAggregateInputType = {
-    drum_id?: true
-    distillation_id?: true
-    fraction_used?: true
-  }
-
-  export type Drum_distillationsMinAggregateInputType = {
-    drum_id?: true
-    distillation_id?: true
-    fraction_used?: true
-  }
-
-  export type Drum_distillationsMaxAggregateInputType = {
-    drum_id?: true
-    distillation_id?: true
-    fraction_used?: true
-  }
-
-  export type Drum_distillationsCountAggregateInputType = {
-    drum_id?: true
-    distillation_id?: true
-    fraction_used?: true
-    _all?: true
-  }
-
-  export type Drum_distillationsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which drum_distillations to aggregate.
-     */
-    where?: drum_distillationsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of drum_distillations to fetch.
-     */
-    orderBy?: drum_distillationsOrderByWithRelationInput | drum_distillationsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: drum_distillationsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` drum_distillations from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` drum_distillations.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned drum_distillations
-    **/
-    _count?: true | Drum_distillationsCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: Drum_distillationsAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: Drum_distillationsSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: Drum_distillationsMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: Drum_distillationsMaxAggregateInputType
-  }
-
-  export type GetDrum_distillationsAggregateType<T extends Drum_distillationsAggregateArgs> = {
-        [P in keyof T & keyof AggregateDrum_distillations]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateDrum_distillations[P]>
-      : GetScalarType<T[P], AggregateDrum_distillations[P]>
-  }
-
-
-
-
-  export type drum_distillationsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: drum_distillationsWhereInput
-    orderBy?: drum_distillationsOrderByWithAggregationInput | drum_distillationsOrderByWithAggregationInput[]
-    by: Drum_distillationsScalarFieldEnum[] | Drum_distillationsScalarFieldEnum
-    having?: drum_distillationsScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: Drum_distillationsCountAggregateInputType | true
-    _avg?: Drum_distillationsAvgAggregateInputType
-    _sum?: Drum_distillationsSumAggregateInputType
-    _min?: Drum_distillationsMinAggregateInputType
-    _max?: Drum_distillationsMaxAggregateInputType
-  }
-
-  export type Drum_distillationsGroupByOutputType = {
-    drum_id: number
-    distillation_id: number
-    fraction_used: Decimal
-    _count: Drum_distillationsCountAggregateOutputType | null
-    _avg: Drum_distillationsAvgAggregateOutputType | null
-    _sum: Drum_distillationsSumAggregateOutputType | null
-    _min: Drum_distillationsMinAggregateOutputType | null
-    _max: Drum_distillationsMaxAggregateOutputType | null
-  }
-
-  type GetDrum_distillationsGroupByPayload<T extends drum_distillationsGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<Drum_distillationsGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof Drum_distillationsGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], Drum_distillationsGroupByOutputType[P]>
-            : GetScalarType<T[P], Drum_distillationsGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type drum_distillationsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    drum_id?: boolean
-    distillation_id?: boolean
-    fraction_used?: boolean
-    distillations?: boolean | distillationsDefaultArgs<ExtArgs>
-    new_drums?: boolean | new_drumsDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["drum_distillations"]>
-
-  export type drum_distillationsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    drum_id?: boolean
-    distillation_id?: boolean
-    fraction_used?: boolean
-    distillations?: boolean | distillationsDefaultArgs<ExtArgs>
-    new_drums?: boolean | new_drumsDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["drum_distillations"]>
-
-  export type drum_distillationsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    drum_id?: boolean
-    distillation_id?: boolean
-    fraction_used?: boolean
-    distillations?: boolean | distillationsDefaultArgs<ExtArgs>
-    new_drums?: boolean | new_drumsDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["drum_distillations"]>
-
-  export type drum_distillationsSelectScalar = {
-    drum_id?: boolean
-    distillation_id?: boolean
-    fraction_used?: boolean
-  }
-
-  export type drum_distillationsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"drum_id" | "distillation_id" | "fraction_used", ExtArgs["result"]["drum_distillations"]>
-  export type drum_distillationsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    distillations?: boolean | distillationsDefaultArgs<ExtArgs>
-    new_drums?: boolean | new_drumsDefaultArgs<ExtArgs>
-  }
-  export type drum_distillationsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    distillations?: boolean | distillationsDefaultArgs<ExtArgs>
-    new_drums?: boolean | new_drumsDefaultArgs<ExtArgs>
-  }
-  export type drum_distillationsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    distillations?: boolean | distillationsDefaultArgs<ExtArgs>
-    new_drums?: boolean | new_drumsDefaultArgs<ExtArgs>
-  }
-
-  export type $drum_distillationsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "drum_distillations"
-    objects: {
-      distillations: Prisma.$distillationsPayload<ExtArgs>
-      new_drums: Prisma.$new_drumsPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      drum_id: number
-      distillation_id: number
-      fraction_used: Prisma.Decimal
-    }, ExtArgs["result"]["drum_distillations"]>
-    composites: {}
-  }
-
-  type drum_distillationsGetPayload<S extends boolean | null | undefined | drum_distillationsDefaultArgs> = $Result.GetResult<Prisma.$drum_distillationsPayload, S>
-
-  type drum_distillationsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<drum_distillationsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: Drum_distillationsCountAggregateInputType | true
-    }
-
-  export interface drum_distillationsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['drum_distillations'], meta: { name: 'drum_distillations' } }
-    /**
-     * Find zero or one Drum_distillations that matches the filter.
-     * @param {drum_distillationsFindUniqueArgs} args - Arguments to find a Drum_distillations
-     * @example
-     * // Get one Drum_distillations
-     * const drum_distillations = await prisma.drum_distillations.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends drum_distillationsFindUniqueArgs>(args: SelectSubset<T, drum_distillationsFindUniqueArgs<ExtArgs>>): Prisma__drum_distillationsClient<$Result.GetResult<Prisma.$drum_distillationsPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
-
-    /**
-     * Find one Drum_distillations that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {drum_distillationsFindUniqueOrThrowArgs} args - Arguments to find a Drum_distillations
-     * @example
-     * // Get one Drum_distillations
-     * const drum_distillations = await prisma.drum_distillations.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends drum_distillationsFindUniqueOrThrowArgs>(args: SelectSubset<T, drum_distillationsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__drum_distillationsClient<$Result.GetResult<Prisma.$drum_distillationsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Find the first Drum_distillations that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {drum_distillationsFindFirstArgs} args - Arguments to find a Drum_distillations
-     * @example
-     * // Get one Drum_distillations
-     * const drum_distillations = await prisma.drum_distillations.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends drum_distillationsFindFirstArgs>(args?: SelectSubset<T, drum_distillationsFindFirstArgs<ExtArgs>>): Prisma__drum_distillationsClient<$Result.GetResult<Prisma.$drum_distillationsPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
-
-    /**
-     * Find the first Drum_distillations that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {drum_distillationsFindFirstOrThrowArgs} args - Arguments to find a Drum_distillations
-     * @example
-     * // Get one Drum_distillations
-     * const drum_distillations = await prisma.drum_distillations.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends drum_distillationsFindFirstOrThrowArgs>(args?: SelectSubset<T, drum_distillationsFindFirstOrThrowArgs<ExtArgs>>): Prisma__drum_distillationsClient<$Result.GetResult<Prisma.$drum_distillationsPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Find zero or more Drum_distillations that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {drum_distillationsFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Drum_distillations
-     * const drum_distillations = await prisma.drum_distillations.findMany()
-     * 
-     * // Get first 10 Drum_distillations
-     * const drum_distillations = await prisma.drum_distillations.findMany({ take: 10 })
-     * 
-     * // Only select the `drum_id`
-     * const drum_distillationsWithDrum_idOnly = await prisma.drum_distillations.findMany({ select: { drum_id: true } })
-     * 
-     */
-    findMany<T extends drum_distillationsFindManyArgs>(args?: SelectSubset<T, drum_distillationsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$drum_distillationsPayload<ExtArgs>, T, "findMany", ClientOptions>>
-
-    /**
-     * Create a Drum_distillations.
-     * @param {drum_distillationsCreateArgs} args - Arguments to create a Drum_distillations.
-     * @example
-     * // Create one Drum_distillations
-     * const Drum_distillations = await prisma.drum_distillations.create({
-     *   data: {
-     *     // ... data to create a Drum_distillations
-     *   }
-     * })
-     * 
-     */
-    create<T extends drum_distillationsCreateArgs>(args: SelectSubset<T, drum_distillationsCreateArgs<ExtArgs>>): Prisma__drum_distillationsClient<$Result.GetResult<Prisma.$drum_distillationsPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Create many Drum_distillations.
-     * @param {drum_distillationsCreateManyArgs} args - Arguments to create many Drum_distillations.
-     * @example
-     * // Create many Drum_distillations
-     * const drum_distillations = await prisma.drum_distillations.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends drum_distillationsCreateManyArgs>(args?: SelectSubset<T, drum_distillationsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Drum_distillations and returns the data saved in the database.
-     * @param {drum_distillationsCreateManyAndReturnArgs} args - Arguments to create many Drum_distillations.
-     * @example
-     * // Create many Drum_distillations
-     * const drum_distillations = await prisma.drum_distillations.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Drum_distillations and only return the `drum_id`
-     * const drum_distillationsWithDrum_idOnly = await prisma.drum_distillations.createManyAndReturn({
-     *   select: { drum_id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends drum_distillationsCreateManyAndReturnArgs>(args?: SelectSubset<T, drum_distillationsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$drum_distillationsPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
-
-    /**
-     * Delete a Drum_distillations.
-     * @param {drum_distillationsDeleteArgs} args - Arguments to delete one Drum_distillations.
-     * @example
-     * // Delete one Drum_distillations
-     * const Drum_distillations = await prisma.drum_distillations.delete({
-     *   where: {
-     *     // ... filter to delete one Drum_distillations
-     *   }
-     * })
-     * 
-     */
-    delete<T extends drum_distillationsDeleteArgs>(args: SelectSubset<T, drum_distillationsDeleteArgs<ExtArgs>>): Prisma__drum_distillationsClient<$Result.GetResult<Prisma.$drum_distillationsPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Update one Drum_distillations.
-     * @param {drum_distillationsUpdateArgs} args - Arguments to update one Drum_distillations.
-     * @example
-     * // Update one Drum_distillations
-     * const drum_distillations = await prisma.drum_distillations.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends drum_distillationsUpdateArgs>(args: SelectSubset<T, drum_distillationsUpdateArgs<ExtArgs>>): Prisma__drum_distillationsClient<$Result.GetResult<Prisma.$drum_distillationsPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Delete zero or more Drum_distillations.
-     * @param {drum_distillationsDeleteManyArgs} args - Arguments to filter Drum_distillations to delete.
-     * @example
-     * // Delete a few Drum_distillations
-     * const { count } = await prisma.drum_distillations.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends drum_distillationsDeleteManyArgs>(args?: SelectSubset<T, drum_distillationsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Drum_distillations.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {drum_distillationsUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Drum_distillations
-     * const drum_distillations = await prisma.drum_distillations.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends drum_distillationsUpdateManyArgs>(args: SelectSubset<T, drum_distillationsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Drum_distillations and returns the data updated in the database.
-     * @param {drum_distillationsUpdateManyAndReturnArgs} args - Arguments to update many Drum_distillations.
-     * @example
-     * // Update many Drum_distillations
-     * const drum_distillations = await prisma.drum_distillations.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Drum_distillations and only return the `drum_id`
-     * const drum_distillationsWithDrum_idOnly = await prisma.drum_distillations.updateManyAndReturn({
-     *   select: { drum_id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends drum_distillationsUpdateManyAndReturnArgs>(args: SelectSubset<T, drum_distillationsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$drum_distillationsPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
-
-    /**
-     * Create or update one Drum_distillations.
-     * @param {drum_distillationsUpsertArgs} args - Arguments to update or create a Drum_distillations.
-     * @example
-     * // Update or create a Drum_distillations
-     * const drum_distillations = await prisma.drum_distillations.upsert({
-     *   create: {
-     *     // ... data to create a Drum_distillations
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Drum_distillations we want to update
-     *   }
-     * })
-     */
-    upsert<T extends drum_distillationsUpsertArgs>(args: SelectSubset<T, drum_distillationsUpsertArgs<ExtArgs>>): Prisma__drum_distillationsClient<$Result.GetResult<Prisma.$drum_distillationsPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
-
-
-    /**
-     * Count the number of Drum_distillations.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {drum_distillationsCountArgs} args - Arguments to filter Drum_distillations to count.
-     * @example
-     * // Count the number of Drum_distillations
-     * const count = await prisma.drum_distillations.count({
-     *   where: {
-     *     // ... the filter for the Drum_distillations we want to count
-     *   }
-     * })
-    **/
-    count<T extends drum_distillationsCountArgs>(
-      args?: Subset<T, drum_distillationsCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], Drum_distillationsCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Drum_distillations.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {Drum_distillationsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends Drum_distillationsAggregateArgs>(args: Subset<T, Drum_distillationsAggregateArgs>): Prisma.PrismaPromise<GetDrum_distillationsAggregateType<T>>
-
-    /**
-     * Group by Drum_distillations.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {drum_distillationsGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends drum_distillationsGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: drum_distillationsGroupByArgs['orderBy'] }
-        : { orderBy?: drum_distillationsGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, drum_distillationsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDrum_distillationsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the drum_distillations model
-   */
-  readonly fields: drum_distillationsFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for drum_distillations.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__drum_distillationsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    distillations<T extends distillationsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, distillationsDefaultArgs<ExtArgs>>): Prisma__distillationsClient<$Result.GetResult<Prisma.$distillationsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
-    new_drums<T extends new_drumsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, new_drumsDefaultArgs<ExtArgs>>): Prisma__new_drumsClient<$Result.GetResult<Prisma.$new_drumsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the drum_distillations model
-   */ 
-  interface drum_distillationsFieldRefs {
-    readonly drum_id: FieldRef<"drum_distillations", 'Int'>
-    readonly distillation_id: FieldRef<"drum_distillations", 'Int'>
-    readonly fraction_used: FieldRef<"drum_distillations", 'Decimal'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * drum_distillations findUnique
-   */
-  export type drum_distillationsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the drum_distillations
-     */
-    select?: drum_distillationsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the drum_distillations
-     */
-    omit?: drum_distillationsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: drum_distillationsInclude<ExtArgs> | null
-    /**
-     * Filter, which drum_distillations to fetch.
-     */
-    where: drum_distillationsWhereUniqueInput
-  }
-
-  /**
-   * drum_distillations findUniqueOrThrow
-   */
-  export type drum_distillationsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the drum_distillations
-     */
-    select?: drum_distillationsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the drum_distillations
-     */
-    omit?: drum_distillationsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: drum_distillationsInclude<ExtArgs> | null
-    /**
-     * Filter, which drum_distillations to fetch.
-     */
-    where: drum_distillationsWhereUniqueInput
-  }
-
-  /**
-   * drum_distillations findFirst
-   */
-  export type drum_distillationsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the drum_distillations
-     */
-    select?: drum_distillationsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the drum_distillations
-     */
-    omit?: drum_distillationsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: drum_distillationsInclude<ExtArgs> | null
-    /**
-     * Filter, which drum_distillations to fetch.
-     */
-    where?: drum_distillationsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of drum_distillations to fetch.
-     */
-    orderBy?: drum_distillationsOrderByWithRelationInput | drum_distillationsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for drum_distillations.
-     */
-    cursor?: drum_distillationsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` drum_distillations from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` drum_distillations.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of drum_distillations.
-     */
-    distinct?: Drum_distillationsScalarFieldEnum | Drum_distillationsScalarFieldEnum[]
-  }
-
-  /**
-   * drum_distillations findFirstOrThrow
-   */
-  export type drum_distillationsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the drum_distillations
-     */
-    select?: drum_distillationsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the drum_distillations
-     */
-    omit?: drum_distillationsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: drum_distillationsInclude<ExtArgs> | null
-    /**
-     * Filter, which drum_distillations to fetch.
-     */
-    where?: drum_distillationsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of drum_distillations to fetch.
-     */
-    orderBy?: drum_distillationsOrderByWithRelationInput | drum_distillationsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for drum_distillations.
-     */
-    cursor?: drum_distillationsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` drum_distillations from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` drum_distillations.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of drum_distillations.
-     */
-    distinct?: Drum_distillationsScalarFieldEnum | Drum_distillationsScalarFieldEnum[]
-  }
-
-  /**
-   * drum_distillations findMany
-   */
-  export type drum_distillationsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the drum_distillations
-     */
-    select?: drum_distillationsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the drum_distillations
-     */
-    omit?: drum_distillationsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: drum_distillationsInclude<ExtArgs> | null
-    /**
-     * Filter, which drum_distillations to fetch.
-     */
-    where?: drum_distillationsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of drum_distillations to fetch.
-     */
-    orderBy?: drum_distillationsOrderByWithRelationInput | drum_distillationsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing drum_distillations.
-     */
-    cursor?: drum_distillationsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` drum_distillations from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` drum_distillations.
-     */
-    skip?: number
-    distinct?: Drum_distillationsScalarFieldEnum | Drum_distillationsScalarFieldEnum[]
-  }
-
-  /**
-   * drum_distillations create
-   */
-  export type drum_distillationsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the drum_distillations
-     */
-    select?: drum_distillationsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the drum_distillations
-     */
-    omit?: drum_distillationsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: drum_distillationsInclude<ExtArgs> | null
-    /**
-     * The data needed to create a drum_distillations.
-     */
-    data: XOR<drum_distillationsCreateInput, drum_distillationsUncheckedCreateInput>
-  }
-
-  /**
-   * drum_distillations createMany
-   */
-  export type drum_distillationsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many drum_distillations.
-     */
-    data: drum_distillationsCreateManyInput | drum_distillationsCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * drum_distillations createManyAndReturn
-   */
-  export type drum_distillationsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the drum_distillations
-     */
-    select?: drum_distillationsSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the drum_distillations
-     */
-    omit?: drum_distillationsOmit<ExtArgs> | null
-    /**
-     * The data used to create many drum_distillations.
-     */
-    data: drum_distillationsCreateManyInput | drum_distillationsCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: drum_distillationsIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * drum_distillations update
-   */
-  export type drum_distillationsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the drum_distillations
-     */
-    select?: drum_distillationsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the drum_distillations
-     */
-    omit?: drum_distillationsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: drum_distillationsInclude<ExtArgs> | null
-    /**
-     * The data needed to update a drum_distillations.
-     */
-    data: XOR<drum_distillationsUpdateInput, drum_distillationsUncheckedUpdateInput>
-    /**
-     * Choose, which drum_distillations to update.
-     */
-    where: drum_distillationsWhereUniqueInput
-  }
-
-  /**
-   * drum_distillations updateMany
-   */
-  export type drum_distillationsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update drum_distillations.
-     */
-    data: XOR<drum_distillationsUpdateManyMutationInput, drum_distillationsUncheckedUpdateManyInput>
-    /**
-     * Filter which drum_distillations to update
-     */
-    where?: drum_distillationsWhereInput
-  }
-
-  /**
-   * drum_distillations updateManyAndReturn
-   */
-  export type drum_distillationsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the drum_distillations
-     */
-    select?: drum_distillationsSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the drum_distillations
-     */
-    omit?: drum_distillationsOmit<ExtArgs> | null
-    /**
-     * The data used to update drum_distillations.
-     */
-    data: XOR<drum_distillationsUpdateManyMutationInput, drum_distillationsUncheckedUpdateManyInput>
-    /**
-     * Filter which drum_distillations to update
-     */
-    where?: drum_distillationsWhereInput
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: drum_distillationsIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * drum_distillations upsert
-   */
-  export type drum_distillationsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the drum_distillations
-     */
-    select?: drum_distillationsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the drum_distillations
-     */
-    omit?: drum_distillationsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: drum_distillationsInclude<ExtArgs> | null
-    /**
-     * The filter to search for the drum_distillations to update in case it exists.
-     */
-    where: drum_distillationsWhereUniqueInput
-    /**
-     * In case the drum_distillations found by the `where` argument doesn't exist, create a new drum_distillations with this data.
-     */
-    create: XOR<drum_distillationsCreateInput, drum_distillationsUncheckedCreateInput>
-    /**
-     * In case the drum_distillations was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<drum_distillationsUpdateInput, drum_distillationsUncheckedUpdateInput>
-  }
-
-  /**
-   * drum_distillations delete
-   */
-  export type drum_distillationsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the drum_distillations
-     */
-    select?: drum_distillationsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the drum_distillations
-     */
-    omit?: drum_distillationsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: drum_distillationsInclude<ExtArgs> | null
-    /**
-     * Filter which drum_distillations to delete.
-     */
-    where: drum_distillationsWhereUniqueInput
-  }
-
-  /**
-   * drum_distillations deleteMany
-   */
-  export type drum_distillationsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which drum_distillations to delete
-     */
-    where?: drum_distillationsWhereInput
-  }
-
-  /**
-   * drum_distillations without action
-   */
-  export type drum_distillationsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the drum_distillations
-     */
-    select?: drum_distillationsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the drum_distillations
-     */
-    omit?: drum_distillationsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: drum_distillationsInclude<ExtArgs> | null
   }
 
 
@@ -13710,6 +12690,10 @@ export namespace Prisma {
      * Filter which imports to update
      */
     where?: importsWhereInput
+    /**
+     * Limit how many imports to update.
+     */
+    limit?: number
   }
 
   /**
@@ -13732,6 +12716,10 @@ export namespace Prisma {
      * Filter which imports to update
      */
     where?: importsWhereInput
+    /**
+     * Limit how many imports to update.
+     */
+    limit?: number
   }
 
   /**
@@ -13786,6 +12774,10 @@ export namespace Prisma {
      * Filter which imports to delete
      */
     where?: importsWhereInput
+    /**
+     * Limit how many imports to delete.
+     */
+    limit?: number
   }
 
   /**
@@ -13996,8 +12988,8 @@ export namespace Prisma {
     date_processed: Date | null
     status: string
     location: string | null
-    created_at: Date | null
-    updated_at: Date | null
+    created_at: Date
+    updated_at: Date
     order_id: number | null
     _count: New_drumsCountAggregateOutputType | null
     _avg: New_drumsAvgAggregateOutputType | null
@@ -14029,7 +13021,6 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     order_id?: boolean
-    drum_distillations?: boolean | new_drums$drum_distillationsArgs<ExtArgs>
     orders?: boolean | new_drums$ordersArgs<ExtArgs>
     processes?: boolean | new_drums$processesArgs<ExtArgs>
     transactions?: boolean | new_drums$transactionsArgs<ExtArgs>
@@ -14073,7 +13064,6 @@ export namespace Prisma {
 
   export type new_drumsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"drum_id" | "material" | "date_processed" | "status" | "location" | "created_at" | "updated_at" | "order_id", ExtArgs["result"]["new_drums"]>
   export type new_drumsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    drum_distillations?: boolean | new_drums$drum_distillationsArgs<ExtArgs>
     orders?: boolean | new_drums$ordersArgs<ExtArgs>
     processes?: boolean | new_drums$processesArgs<ExtArgs>
     transactions?: boolean | new_drums$transactionsArgs<ExtArgs>
@@ -14089,7 +13079,6 @@ export namespace Prisma {
   export type $new_drumsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "new_drums"
     objects: {
-      drum_distillations: Prisma.$drum_distillationsPayload<ExtArgs>[]
       orders: Prisma.$ordersPayload<ExtArgs> | null
       processes: Prisma.$processesPayload<ExtArgs>[]
       transactions: Prisma.$transactionsPayload<ExtArgs>[]
@@ -14100,8 +13089,8 @@ export namespace Prisma {
       date_processed: Date | null
       status: string
       location: string | null
-      created_at: Date | null
-      updated_at: Date | null
+      created_at: Date
+      updated_at: Date
       order_id: number | null
     }, ExtArgs["result"]["new_drums"]>
     composites: {}
@@ -14497,7 +13486,6 @@ export namespace Prisma {
    */
   export interface Prisma__new_drumsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    drum_distillations<T extends new_drums$drum_distillationsArgs<ExtArgs> = {}>(args?: Subset<T, new_drums$drum_distillationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$drum_distillationsPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     orders<T extends new_drums$ordersArgs<ExtArgs> = {}>(args?: Subset<T, new_drums$ordersArgs<ExtArgs>>): Prisma__ordersClient<$Result.GetResult<Prisma.$ordersPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
     processes<T extends new_drums$processesArgs<ExtArgs> = {}>(args?: Subset<T, new_drums$processesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$processesPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     transactions<T extends new_drums$transactionsArgs<ExtArgs> = {}>(args?: Subset<T, new_drums$transactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$transactionsPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
@@ -14831,6 +13819,10 @@ export namespace Prisma {
      * Filter which new_drums to update
      */
     where?: new_drumsWhereInput
+    /**
+     * Limit how many new_drums to update.
+     */
+    limit?: number
   }
 
   /**
@@ -14853,6 +13845,10 @@ export namespace Prisma {
      * Filter which new_drums to update
      */
     where?: new_drumsWhereInput
+    /**
+     * Limit how many new_drums to update.
+     */
+    limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
@@ -14919,30 +13915,10 @@ export namespace Prisma {
      * Filter which new_drums to delete
      */
     where?: new_drumsWhereInput
-  }
-
-  /**
-   * new_drums.drum_distillations
-   */
-  export type new_drums$drum_distillationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the drum_distillations
+     * Limit how many new_drums to delete.
      */
-    select?: drum_distillationsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the drum_distillations
-     */
-    omit?: drum_distillationsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: drum_distillationsInclude<ExtArgs> | null
-    where?: drum_distillationsWhereInput
-    orderBy?: drum_distillationsOrderByWithRelationInput | drum_distillationsOrderByWithRelationInput[]
-    cursor?: drum_distillationsWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: Drum_distillationsScalarFieldEnum | Drum_distillationsScalarFieldEnum[]
+    limit?: number
   }
 
   /**
@@ -15068,6 +14044,7 @@ export namespace Prisma {
     delivery_status: string | null
     eta_start: Date | null
     eta_end: Date | null
+    po_number: string | null
   }
 
   export type OrdersMaxAggregateOutputType = {
@@ -15083,6 +14060,7 @@ export namespace Prisma {
     delivery_status: string | null
     eta_start: Date | null
     eta_end: Date | null
+    po_number: string | null
   }
 
   export type OrdersCountAggregateOutputType = {
@@ -15098,6 +14076,7 @@ export namespace Prisma {
     delivery_status: number
     eta_start: number
     eta_end: number
+    po_number: number
     _all: number
   }
 
@@ -15127,6 +14106,7 @@ export namespace Prisma {
     delivery_status?: true
     eta_start?: true
     eta_end?: true
+    po_number?: true
   }
 
   export type OrdersMaxAggregateInputType = {
@@ -15142,6 +14122,7 @@ export namespace Prisma {
     delivery_status?: true
     eta_start?: true
     eta_end?: true
+    po_number?: true
   }
 
   export type OrdersCountAggregateInputType = {
@@ -15157,6 +14138,7 @@ export namespace Prisma {
     delivery_status?: true
     eta_start?: true
     eta_end?: true
+    po_number?: true
     _all?: true
   }
 
@@ -15259,6 +14241,7 @@ export namespace Prisma {
     delivery_status: string
     eta_start: Date | null
     eta_end: Date | null
+    po_number: string | null
     _count: OrdersCountAggregateOutputType | null
     _avg: OrdersAvgAggregateOutputType | null
     _sum: OrdersSumAggregateOutputType | null
@@ -15293,6 +14276,7 @@ export namespace Prisma {
     delivery_status?: boolean
     eta_start?: boolean
     eta_end?: boolean
+    po_number?: boolean
     deliveries?: boolean | orders$deliveriesArgs<ExtArgs>
     new_drums?: boolean | orders$new_drumsArgs<ExtArgs>
     _count?: boolean | OrdersCountOutputTypeDefaultArgs<ExtArgs>
@@ -15311,6 +14295,7 @@ export namespace Prisma {
     delivery_status?: boolean
     eta_start?: boolean
     eta_end?: boolean
+    po_number?: boolean
   }, ExtArgs["result"]["orders"]>
 
   export type ordersSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -15326,6 +14311,7 @@ export namespace Prisma {
     delivery_status?: boolean
     eta_start?: boolean
     eta_end?: boolean
+    po_number?: boolean
   }, ExtArgs["result"]["orders"]>
 
   export type ordersSelectScalar = {
@@ -15341,9 +14327,10 @@ export namespace Prisma {
     delivery_status?: boolean
     eta_start?: boolean
     eta_end?: boolean
+    po_number?: boolean
   }
 
-  export type ordersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"order_id" | "supplier" | "material" | "quantity" | "date_ordered" | "notes" | "created_at" | "updated_at" | "quantity_received" | "delivery_status" | "eta_start" | "eta_end", ExtArgs["result"]["orders"]>
+  export type ordersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"order_id" | "supplier" | "material" | "quantity" | "date_ordered" | "notes" | "created_at" | "updated_at" | "quantity_received" | "delivery_status" | "eta_start" | "eta_end" | "po_number", ExtArgs["result"]["orders"]>
   export type ordersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     deliveries?: boolean | orders$deliveriesArgs<ExtArgs>
     new_drums?: boolean | orders$new_drumsArgs<ExtArgs>
@@ -15371,6 +14358,7 @@ export namespace Prisma {
       delivery_status: string
       eta_start: Date | null
       eta_end: Date | null
+      po_number: string | null
     }, ExtArgs["result"]["orders"]>
     composites: {}
   }
@@ -15808,6 +14796,7 @@ export namespace Prisma {
     readonly delivery_status: FieldRef<"orders", 'String'>
     readonly eta_start: FieldRef<"orders", 'DateTime'>
     readonly eta_end: FieldRef<"orders", 'DateTime'>
+    readonly po_number: FieldRef<"orders", 'String'>
   }
     
 
@@ -16097,6 +15086,10 @@ export namespace Prisma {
      * Filter which orders to update
      */
     where?: ordersWhereInput
+    /**
+     * Limit how many orders to update.
+     */
+    limit?: number
   }
 
   /**
@@ -16119,6 +15112,10 @@ export namespace Prisma {
      * Filter which orders to update
      */
     where?: ordersWhereInput
+    /**
+     * Limit how many orders to update.
+     */
+    limit?: number
   }
 
   /**
@@ -16181,6 +15178,10 @@ export namespace Prisma {
      * Filter which orders to delete
      */
     where?: ordersWhereInput
+    /**
+     * Limit how many orders to delete.
+     */
+    limit?: number
   }
 
   /**
@@ -16485,7 +15486,7 @@ export namespace Prisma {
     transporter?: boolean
     date_processed?: boolean
     new_drums?: boolean | processes$new_drumsArgs<ExtArgs>
-    stills?: boolean | StillDefaultArgs<ExtArgs>
+    stills?: boolean | stillsDefaultArgs<ExtArgs>
     transactions?: boolean | processes$transactionsArgs<ExtArgs>
     _count?: boolean | ProcessesCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["processes"]>
@@ -16501,7 +15502,7 @@ export namespace Prisma {
     transporter?: boolean
     date_processed?: boolean
     new_drums?: boolean | processes$new_drumsArgs<ExtArgs>
-    stills?: boolean | StillDefaultArgs<ExtArgs>
+    stills?: boolean | stillsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["processes"]>
 
   export type processesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -16515,7 +15516,7 @@ export namespace Prisma {
     transporter?: boolean
     date_processed?: boolean
     new_drums?: boolean | processes$new_drumsArgs<ExtArgs>
-    stills?: boolean | StillDefaultArgs<ExtArgs>
+    stills?: boolean | stillsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["processes"]>
 
   export type processesSelectScalar = {
@@ -16533,24 +15534,24 @@ export namespace Prisma {
   export type processesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"process_id" | "material" | "drum_id" | "supplier" | "still_code" | "operator" | "loader" | "transporter" | "date_processed", ExtArgs["result"]["processes"]>
   export type processesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     new_drums?: boolean | processes$new_drumsArgs<ExtArgs>
-    stills?: boolean | StillDefaultArgs<ExtArgs>
+    stills?: boolean | stillsDefaultArgs<ExtArgs>
     transactions?: boolean | processes$transactionsArgs<ExtArgs>
     _count?: boolean | ProcessesCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type processesIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     new_drums?: boolean | processes$new_drumsArgs<ExtArgs>
-    stills?: boolean | StillDefaultArgs<ExtArgs>
+    stills?: boolean | stillsDefaultArgs<ExtArgs>
   }
   export type processesIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     new_drums?: boolean | processes$new_drumsArgs<ExtArgs>
-    stills?: boolean | StillDefaultArgs<ExtArgs>
+    stills?: boolean | stillsDefaultArgs<ExtArgs>
   }
 
   export type $processesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "processes"
     objects: {
       new_drums: Prisma.$new_drumsPayload<ExtArgs> | null
-      stills: Prisma.$StillPayload<ExtArgs>
+      stills: Prisma.$stillsPayload<ExtArgs>
       transactions: Prisma.$transactionsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -16958,7 +15959,7 @@ export namespace Prisma {
   export interface Prisma__processesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     new_drums<T extends processes$new_drumsArgs<ExtArgs> = {}>(args?: Subset<T, processes$new_drumsArgs<ExtArgs>>): Prisma__new_drumsClient<$Result.GetResult<Prisma.$new_drumsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
-    stills<T extends StillDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StillDefaultArgs<ExtArgs>>): Prisma__StillClient<$Result.GetResult<Prisma.$StillPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    stills<T extends stillsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, stillsDefaultArgs<ExtArgs>>): Prisma__stillsClient<$Result.GetResult<Prisma.$stillsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
     transactions<T extends processes$transactionsArgs<ExtArgs> = {}>(args?: Subset<T, processes$transactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$transactionsPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -17291,6 +16292,10 @@ export namespace Prisma {
      * Filter which processes to update
      */
     where?: processesWhereInput
+    /**
+     * Limit how many processes to update.
+     */
+    limit?: number
   }
 
   /**
@@ -17313,6 +16318,10 @@ export namespace Prisma {
      * Filter which processes to update
      */
     where?: processesWhereInput
+    /**
+     * Limit how many processes to update.
+     */
+    limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
@@ -17379,6 +16388,10 @@ export namespace Prisma {
      * Filter which processes to delete
      */
     where?: processesWhereInput
+    /**
+     * Limit how many processes to delete.
+     */
+    limit?: number
   }
 
   /**
@@ -18477,6 +17490,10 @@ export namespace Prisma {
      * Filter which repro_additions to update
      */
     where?: repro_additionsWhereInput
+    /**
+     * Limit how many repro_additions to update.
+     */
+    limit?: number
   }
 
   /**
@@ -18499,6 +17516,10 @@ export namespace Prisma {
      * Filter which repro_additions to update
      */
     where?: repro_additionsWhereInput
+    /**
+     * Limit how many repro_additions to update.
+     */
+    limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
@@ -18565,6 +17586,10 @@ export namespace Prisma {
      * Filter which repro_additions to delete
      */
     where?: repro_additionsWhereInput
+    /**
+     * Limit how many repro_additions to delete.
+     */
+    limit?: number
   }
 
   /**
@@ -19677,6 +18702,10 @@ export namespace Prisma {
      * Filter which repro_drums to update
      */
     where?: repro_drumsWhereInput
+    /**
+     * Limit how many repro_drums to update.
+     */
+    limit?: number
   }
 
   /**
@@ -19699,6 +18728,10 @@ export namespace Prisma {
      * Filter which repro_drums to update
      */
     where?: repro_drumsWhereInput
+    /**
+     * Limit how many repro_drums to update.
+     */
+    limit?: number
   }
 
   /**
@@ -19761,6 +18794,10 @@ export namespace Prisma {
      * Filter which repro_drums to delete
      */
     where?: repro_drumsWhereInput
+    /**
+     * Limit how many repro_drums to delete.
+     */
+    limit?: number
   }
 
   /**
@@ -19871,10 +18908,10 @@ export namespace Prisma {
     created_at: Date | null
     updated_at: Date | null
     process_id: number | null
-    direction: string | null
     delivery_id: number | null
     batch_code: string | null
     order_id: number | null
+    direction: string | null
   }
 
   export type TransactionsMaxAggregateOutputType = {
@@ -19888,10 +18925,10 @@ export namespace Prisma {
     created_at: Date | null
     updated_at: Date | null
     process_id: number | null
-    direction: string | null
     delivery_id: number | null
     batch_code: string | null
     order_id: number | null
+    direction: string | null
   }
 
   export type TransactionsCountAggregateOutputType = {
@@ -19905,10 +18942,10 @@ export namespace Prisma {
     created_at: number
     updated_at: number
     process_id: number
-    direction: number
     delivery_id: number
     batch_code: number
     order_id: number
+    direction: number
     _all: number
   }
 
@@ -19942,10 +18979,10 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     process_id?: true
-    direction?: true
     delivery_id?: true
     batch_code?: true
     order_id?: true
+    direction?: true
   }
 
   export type TransactionsMaxAggregateInputType = {
@@ -19959,10 +18996,10 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     process_id?: true
-    direction?: true
     delivery_id?: true
     batch_code?: true
     order_id?: true
+    direction?: true
   }
 
   export type TransactionsCountAggregateInputType = {
@@ -19976,10 +19013,10 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     process_id?: true
-    direction?: true
     delivery_id?: true
     batch_code?: true
     order_id?: true
+    direction?: true
     _all?: true
   }
 
@@ -20077,13 +19114,13 @@ export namespace Prisma {
     drum_id: number | null
     repro_id: number | null
     tx_notes: string | null
-    created_at: Date | null
-    updated_at: Date | null
+    created_at: Date
+    updated_at: Date
     process_id: number | null
-    direction: string | null
     delivery_id: number | null
     batch_code: string | null
     order_id: number | null
+    direction: string | null
     _count: TransactionsCountAggregateOutputType | null
     _avg: TransactionsAvgAggregateOutputType | null
     _sum: TransactionsSumAggregateOutputType | null
@@ -20116,10 +19153,10 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     process_id?: boolean
-    direction?: boolean
     delivery_id?: boolean
     batch_code?: boolean
     order_id?: boolean
+    direction?: boolean
     deliveries?: boolean | transactions$deliveriesArgs<ExtArgs>
     new_drums?: boolean | transactions$new_drumsArgs<ExtArgs>
     processes?: boolean | transactions$processesArgs<ExtArgs>
@@ -20137,10 +19174,10 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     process_id?: boolean
-    direction?: boolean
     delivery_id?: boolean
     batch_code?: boolean
     order_id?: boolean
+    direction?: boolean
     deliveries?: boolean | transactions$deliveriesArgs<ExtArgs>
     new_drums?: boolean | transactions$new_drumsArgs<ExtArgs>
     processes?: boolean | transactions$processesArgs<ExtArgs>
@@ -20158,10 +19195,10 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     process_id?: boolean
-    direction?: boolean
     delivery_id?: boolean
     batch_code?: boolean
     order_id?: boolean
+    direction?: boolean
     deliveries?: boolean | transactions$deliveriesArgs<ExtArgs>
     new_drums?: boolean | transactions$new_drumsArgs<ExtArgs>
     processes?: boolean | transactions$processesArgs<ExtArgs>
@@ -20179,13 +19216,13 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     process_id?: boolean
-    direction?: boolean
     delivery_id?: boolean
     batch_code?: boolean
     order_id?: boolean
+    direction?: boolean
   }
 
-  export type transactionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"tx_id" | "tx_type" | "tx_date" | "material" | "drum_id" | "repro_id" | "tx_notes" | "created_at" | "updated_at" | "process_id" | "direction" | "delivery_id" | "batch_code" | "order_id", ExtArgs["result"]["transactions"]>
+  export type transactionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"tx_id" | "tx_type" | "tx_date" | "material" | "drum_id" | "repro_id" | "tx_notes" | "created_at" | "updated_at" | "process_id" | "delivery_id" | "batch_code" | "order_id" | "direction", ExtArgs["result"]["transactions"]>
   export type transactionsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     deliveries?: boolean | transactions$deliveriesArgs<ExtArgs>
     new_drums?: boolean | transactions$new_drumsArgs<ExtArgs>
@@ -20221,13 +19258,13 @@ export namespace Prisma {
       drum_id: number | null
       repro_id: number | null
       tx_notes: string | null
-      created_at: Date | null
-      updated_at: Date | null
+      created_at: Date
+      updated_at: Date
       process_id: number | null
-      direction: string | null
       delivery_id: number | null
       batch_code: string | null
       order_id: number | null
+      direction: string | null
     }, ExtArgs["result"]["transactions"]>
     composites: {}
   }
@@ -20665,10 +19702,10 @@ export namespace Prisma {
     readonly created_at: FieldRef<"transactions", 'DateTime'>
     readonly updated_at: FieldRef<"transactions", 'DateTime'>
     readonly process_id: FieldRef<"transactions", 'Int'>
-    readonly direction: FieldRef<"transactions", 'String'>
     readonly delivery_id: FieldRef<"transactions", 'Int'>
     readonly batch_code: FieldRef<"transactions", 'String'>
     readonly order_id: FieldRef<"transactions", 'Int'>
+    readonly direction: FieldRef<"transactions", 'String'>
   }
     
 
@@ -20962,6 +19999,10 @@ export namespace Prisma {
      * Filter which transactions to update
      */
     where?: transactionsWhereInput
+    /**
+     * Limit how many transactions to update.
+     */
+    limit?: number
   }
 
   /**
@@ -20984,6 +20025,10 @@ export namespace Prisma {
      * Filter which transactions to update
      */
     where?: transactionsWhereInput
+    /**
+     * Limit how many transactions to update.
+     */
+    limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
@@ -21050,6 +20095,10 @@ export namespace Prisma {
      * Filter which transactions to delete
      */
     where?: transactionsWhereInput
+    /**
+     * Limit how many transactions to delete.
+     */
+    limit?: number
   }
 
   /**
@@ -21148,256 +20197,256 @@ export namespace Prisma {
 
 
   /**
-   * Model Still
+   * Model stills
    */
 
-  export type AggregateStill = {
-    _count: StillCountAggregateOutputType | null
-    _avg: StillAvgAggregateOutputType | null
-    _sum: StillSumAggregateOutputType | null
-    _min: StillMinAggregateOutputType | null
-    _max: StillMaxAggregateOutputType | null
+  export type AggregateStills = {
+    _count: StillsCountAggregateOutputType | null
+    _avg: StillsAvgAggregateOutputType | null
+    _sum: StillsSumAggregateOutputType | null
+    _min: StillsMinAggregateOutputType | null
+    _max: StillsMaxAggregateOutputType | null
   }
 
-  export type StillAvgAggregateOutputType = {
+  export type StillsAvgAggregateOutputType = {
     power: number | null
     capacity: number | null
   }
 
-  export type StillSumAggregateOutputType = {
+  export type StillsSumAggregateOutputType = {
     power: number | null
     capacity: number | null
   }
 
-  export type StillMinAggregateOutputType = {
+  export type StillsMinAggregateOutputType = {
     code: string | null
     site: string | null
     power: number | null
     capacity: number | null
-    isVacuum: boolean | null
-    isOperational: boolean | null
+    is_vacuum: boolean | null
+    is_operational: boolean | null
   }
 
-  export type StillMaxAggregateOutputType = {
+  export type StillsMaxAggregateOutputType = {
     code: string | null
     site: string | null
     power: number | null
     capacity: number | null
-    isVacuum: boolean | null
-    isOperational: boolean | null
+    is_vacuum: boolean | null
+    is_operational: boolean | null
   }
 
-  export type StillCountAggregateOutputType = {
+  export type StillsCountAggregateOutputType = {
     code: number
     site: number
     power: number
     capacity: number
-    isVacuum: number
-    isOperational: number
+    is_vacuum: number
+    is_operational: number
     _all: number
   }
 
 
-  export type StillAvgAggregateInputType = {
+  export type StillsAvgAggregateInputType = {
     power?: true
     capacity?: true
   }
 
-  export type StillSumAggregateInputType = {
+  export type StillsSumAggregateInputType = {
     power?: true
     capacity?: true
   }
 
-  export type StillMinAggregateInputType = {
+  export type StillsMinAggregateInputType = {
     code?: true
     site?: true
     power?: true
     capacity?: true
-    isVacuum?: true
-    isOperational?: true
+    is_vacuum?: true
+    is_operational?: true
   }
 
-  export type StillMaxAggregateInputType = {
+  export type StillsMaxAggregateInputType = {
     code?: true
     site?: true
     power?: true
     capacity?: true
-    isVacuum?: true
-    isOperational?: true
+    is_vacuum?: true
+    is_operational?: true
   }
 
-  export type StillCountAggregateInputType = {
+  export type StillsCountAggregateInputType = {
     code?: true
     site?: true
     power?: true
     capacity?: true
-    isVacuum?: true
-    isOperational?: true
+    is_vacuum?: true
+    is_operational?: true
     _all?: true
   }
 
-  export type StillAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StillsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Still to aggregate.
+     * Filter which stills to aggregate.
      */
-    where?: StillWhereInput
+    where?: stillsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Stills to fetch.
+     * Determine the order of stills to fetch.
      */
-    orderBy?: StillOrderByWithRelationInput | StillOrderByWithRelationInput[]
+    orderBy?: stillsOrderByWithRelationInput | stillsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: StillWhereUniqueInput
+    cursor?: stillsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Stills from the position of the cursor.
+     * Take `±n` stills from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Stills.
+     * Skip the first `n` stills.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Stills
+     * Count returned stills
     **/
-    _count?: true | StillCountAggregateInputType
+    _count?: true | StillsCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: StillAvgAggregateInputType
+    _avg?: StillsAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: StillSumAggregateInputType
+    _sum?: StillsSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: StillMinAggregateInputType
+    _min?: StillsMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: StillMaxAggregateInputType
+    _max?: StillsMaxAggregateInputType
   }
 
-  export type GetStillAggregateType<T extends StillAggregateArgs> = {
-        [P in keyof T & keyof AggregateStill]: P extends '_count' | 'count'
+  export type GetStillsAggregateType<T extends StillsAggregateArgs> = {
+        [P in keyof T & keyof AggregateStills]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateStill[P]>
-      : GetScalarType<T[P], AggregateStill[P]>
+        : GetScalarType<T[P], AggregateStills[P]>
+      : GetScalarType<T[P], AggregateStills[P]>
   }
 
 
 
 
-  export type StillGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: StillWhereInput
-    orderBy?: StillOrderByWithAggregationInput | StillOrderByWithAggregationInput[]
-    by: StillScalarFieldEnum[] | StillScalarFieldEnum
-    having?: StillScalarWhereWithAggregatesInput
+  export type stillsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: stillsWhereInput
+    orderBy?: stillsOrderByWithAggregationInput | stillsOrderByWithAggregationInput[]
+    by: StillsScalarFieldEnum[] | StillsScalarFieldEnum
+    having?: stillsScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: StillCountAggregateInputType | true
-    _avg?: StillAvgAggregateInputType
-    _sum?: StillSumAggregateInputType
-    _min?: StillMinAggregateInputType
-    _max?: StillMaxAggregateInputType
+    _count?: StillsCountAggregateInputType | true
+    _avg?: StillsAvgAggregateInputType
+    _sum?: StillsSumAggregateInputType
+    _min?: StillsMinAggregateInputType
+    _max?: StillsMaxAggregateInputType
   }
 
-  export type StillGroupByOutputType = {
+  export type StillsGroupByOutputType = {
     code: string
     site: string
     power: number
     capacity: number
-    isVacuum: boolean | null
-    isOperational: boolean | null
-    _count: StillCountAggregateOutputType | null
-    _avg: StillAvgAggregateOutputType | null
-    _sum: StillSumAggregateOutputType | null
-    _min: StillMinAggregateOutputType | null
-    _max: StillMaxAggregateOutputType | null
+    is_vacuum: boolean | null
+    is_operational: boolean | null
+    _count: StillsCountAggregateOutputType | null
+    _avg: StillsAvgAggregateOutputType | null
+    _sum: StillsSumAggregateOutputType | null
+    _min: StillsMinAggregateOutputType | null
+    _max: StillsMaxAggregateOutputType | null
   }
 
-  type GetStillGroupByPayload<T extends StillGroupByArgs> = Prisma.PrismaPromise<
+  type GetStillsGroupByPayload<T extends stillsGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<StillGroupByOutputType, T['by']> &
+      PickEnumerable<StillsGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof StillGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof StillsGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], StillGroupByOutputType[P]>
-            : GetScalarType<T[P], StillGroupByOutputType[P]>
+              : GetScalarType<T[P], StillsGroupByOutputType[P]>
+            : GetScalarType<T[P], StillsGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type StillSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type stillsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     code?: boolean
     site?: boolean
     power?: boolean
     capacity?: boolean
-    isVacuum?: boolean
-    isOperational?: boolean
-    processes?: boolean | Still$processesArgs<ExtArgs>
-    _count?: boolean | StillCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["still"]>
+    is_vacuum?: boolean
+    is_operational?: boolean
+    processes?: boolean | stills$processesArgs<ExtArgs>
+    _count?: boolean | StillsCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["stills"]>
 
-  export type StillSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type stillsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     code?: boolean
     site?: boolean
     power?: boolean
     capacity?: boolean
-    isVacuum?: boolean
-    isOperational?: boolean
-  }, ExtArgs["result"]["still"]>
+    is_vacuum?: boolean
+    is_operational?: boolean
+  }, ExtArgs["result"]["stills"]>
 
-  export type StillSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type stillsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     code?: boolean
     site?: boolean
     power?: boolean
     capacity?: boolean
-    isVacuum?: boolean
-    isOperational?: boolean
-  }, ExtArgs["result"]["still"]>
+    is_vacuum?: boolean
+    is_operational?: boolean
+  }, ExtArgs["result"]["stills"]>
 
-  export type StillSelectScalar = {
+  export type stillsSelectScalar = {
     code?: boolean
     site?: boolean
     power?: boolean
     capacity?: boolean
-    isVacuum?: boolean
-    isOperational?: boolean
+    is_vacuum?: boolean
+    is_operational?: boolean
   }
 
-  export type StillOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"code" | "site" | "power" | "capacity" | "isVacuum" | "isOperational", ExtArgs["result"]["still"]>
-  export type StillInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    processes?: boolean | Still$processesArgs<ExtArgs>
-    _count?: boolean | StillCountOutputTypeDefaultArgs<ExtArgs>
+  export type stillsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"code" | "site" | "power" | "capacity" | "is_vacuum" | "is_operational", ExtArgs["result"]["stills"]>
+  export type stillsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    processes?: boolean | stills$processesArgs<ExtArgs>
+    _count?: boolean | StillsCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type StillIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type StillIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type stillsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type stillsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
-  export type $StillPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Still"
+  export type $stillsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "stills"
     objects: {
       processes: Prisma.$processesPayload<ExtArgs>[]
     }
@@ -21406,138 +20455,138 @@ export namespace Prisma {
       site: string
       power: number
       capacity: number
-      isVacuum: boolean | null
-      isOperational: boolean | null
-    }, ExtArgs["result"]["still"]>
+      is_vacuum: boolean | null
+      is_operational: boolean | null
+    }, ExtArgs["result"]["stills"]>
     composites: {}
   }
 
-  type StillGetPayload<S extends boolean | null | undefined | StillDefaultArgs> = $Result.GetResult<Prisma.$StillPayload, S>
+  type stillsGetPayload<S extends boolean | null | undefined | stillsDefaultArgs> = $Result.GetResult<Prisma.$stillsPayload, S>
 
-  type StillCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<StillFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: StillCountAggregateInputType | true
+  type stillsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<stillsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: StillsCountAggregateInputType | true
     }
 
-  export interface StillDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Still'], meta: { name: 'Still' } }
+  export interface stillsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['stills'], meta: { name: 'stills' } }
     /**
-     * Find zero or one Still that matches the filter.
-     * @param {StillFindUniqueArgs} args - Arguments to find a Still
+     * Find zero or one Stills that matches the filter.
+     * @param {stillsFindUniqueArgs} args - Arguments to find a Stills
      * @example
-     * // Get one Still
-     * const still = await prisma.still.findUnique({
+     * // Get one Stills
+     * const stills = await prisma.stills.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends StillFindUniqueArgs>(args: SelectSubset<T, StillFindUniqueArgs<ExtArgs>>): Prisma__StillClient<$Result.GetResult<Prisma.$StillPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends stillsFindUniqueArgs>(args: SelectSubset<T, stillsFindUniqueArgs<ExtArgs>>): Prisma__stillsClient<$Result.GetResult<Prisma.$stillsPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
 
     /**
-     * Find one Still that matches the filter or throw an error with `error.code='P2025'`
+     * Find one Stills that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {StillFindUniqueOrThrowArgs} args - Arguments to find a Still
+     * @param {stillsFindUniqueOrThrowArgs} args - Arguments to find a Stills
      * @example
-     * // Get one Still
-     * const still = await prisma.still.findUniqueOrThrow({
+     * // Get one Stills
+     * const stills = await prisma.stills.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends StillFindUniqueOrThrowArgs>(args: SelectSubset<T, StillFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StillClient<$Result.GetResult<Prisma.$StillPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends stillsFindUniqueOrThrowArgs>(args: SelectSubset<T, stillsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__stillsClient<$Result.GetResult<Prisma.$stillsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
-     * Find the first Still that matches the filter.
+     * Find the first Stills that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StillFindFirstArgs} args - Arguments to find a Still
+     * @param {stillsFindFirstArgs} args - Arguments to find a Stills
      * @example
-     * // Get one Still
-     * const still = await prisma.still.findFirst({
+     * // Get one Stills
+     * const stills = await prisma.stills.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends StillFindFirstArgs>(args?: SelectSubset<T, StillFindFirstArgs<ExtArgs>>): Prisma__StillClient<$Result.GetResult<Prisma.$StillPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends stillsFindFirstArgs>(args?: SelectSubset<T, stillsFindFirstArgs<ExtArgs>>): Prisma__stillsClient<$Result.GetResult<Prisma.$stillsPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
 
     /**
-     * Find the first Still that matches the filter or
+     * Find the first Stills that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StillFindFirstOrThrowArgs} args - Arguments to find a Still
+     * @param {stillsFindFirstOrThrowArgs} args - Arguments to find a Stills
      * @example
-     * // Get one Still
-     * const still = await prisma.still.findFirstOrThrow({
+     * // Get one Stills
+     * const stills = await prisma.stills.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends StillFindFirstOrThrowArgs>(args?: SelectSubset<T, StillFindFirstOrThrowArgs<ExtArgs>>): Prisma__StillClient<$Result.GetResult<Prisma.$StillPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends stillsFindFirstOrThrowArgs>(args?: SelectSubset<T, stillsFindFirstOrThrowArgs<ExtArgs>>): Prisma__stillsClient<$Result.GetResult<Prisma.$stillsPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Find zero or more Stills that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StillFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {stillsFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Stills
-     * const stills = await prisma.still.findMany()
+     * const stills = await prisma.stills.findMany()
      * 
      * // Get first 10 Stills
-     * const stills = await prisma.still.findMany({ take: 10 })
+     * const stills = await prisma.stills.findMany({ take: 10 })
      * 
      * // Only select the `code`
-     * const stillWithCodeOnly = await prisma.still.findMany({ select: { code: true } })
+     * const stillsWithCodeOnly = await prisma.stills.findMany({ select: { code: true } })
      * 
      */
-    findMany<T extends StillFindManyArgs>(args?: SelectSubset<T, StillFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StillPayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends stillsFindManyArgs>(args?: SelectSubset<T, stillsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$stillsPayload<ExtArgs>, T, "findMany", ClientOptions>>
 
     /**
-     * Create a Still.
-     * @param {StillCreateArgs} args - Arguments to create a Still.
+     * Create a Stills.
+     * @param {stillsCreateArgs} args - Arguments to create a Stills.
      * @example
-     * // Create one Still
-     * const Still = await prisma.still.create({
+     * // Create one Stills
+     * const Stills = await prisma.stills.create({
      *   data: {
-     *     // ... data to create a Still
+     *     // ... data to create a Stills
      *   }
      * })
      * 
      */
-    create<T extends StillCreateArgs>(args: SelectSubset<T, StillCreateArgs<ExtArgs>>): Prisma__StillClient<$Result.GetResult<Prisma.$StillPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends stillsCreateArgs>(args: SelectSubset<T, stillsCreateArgs<ExtArgs>>): Prisma__stillsClient<$Result.GetResult<Prisma.$stillsPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Create many Stills.
-     * @param {StillCreateManyArgs} args - Arguments to create many Stills.
+     * @param {stillsCreateManyArgs} args - Arguments to create many Stills.
      * @example
      * // Create many Stills
-     * const still = await prisma.still.createMany({
+     * const stills = await prisma.stills.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends StillCreateManyArgs>(args?: SelectSubset<T, StillCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends stillsCreateManyArgs>(args?: SelectSubset<T, stillsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create many Stills and returns the data saved in the database.
-     * @param {StillCreateManyAndReturnArgs} args - Arguments to create many Stills.
+     * @param {stillsCreateManyAndReturnArgs} args - Arguments to create many Stills.
      * @example
      * // Create many Stills
-     * const still = await prisma.still.createManyAndReturn({
+     * const stills = await prisma.stills.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
      * // Create many Stills and only return the `code`
-     * const stillWithCodeOnly = await prisma.still.createManyAndReturn({
+     * const stillsWithCodeOnly = await prisma.stills.createManyAndReturn({
      *   select: { code: true },
      *   data: [
      *     // ... provide data here
@@ -21547,28 +20596,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends StillCreateManyAndReturnArgs>(args?: SelectSubset<T, StillCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StillPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends stillsCreateManyAndReturnArgs>(args?: SelectSubset<T, stillsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$stillsPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
 
     /**
-     * Delete a Still.
-     * @param {StillDeleteArgs} args - Arguments to delete one Still.
+     * Delete a Stills.
+     * @param {stillsDeleteArgs} args - Arguments to delete one Stills.
      * @example
-     * // Delete one Still
-     * const Still = await prisma.still.delete({
+     * // Delete one Stills
+     * const Stills = await prisma.stills.delete({
      *   where: {
-     *     // ... filter to delete one Still
+     *     // ... filter to delete one Stills
      *   }
      * })
      * 
      */
-    delete<T extends StillDeleteArgs>(args: SelectSubset<T, StillDeleteArgs<ExtArgs>>): Prisma__StillClient<$Result.GetResult<Prisma.$StillPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends stillsDeleteArgs>(args: SelectSubset<T, stillsDeleteArgs<ExtArgs>>): Prisma__stillsClient<$Result.GetResult<Prisma.$stillsPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
-     * Update one Still.
-     * @param {StillUpdateArgs} args - Arguments to update one Still.
+     * Update one Stills.
+     * @param {stillsUpdateArgs} args - Arguments to update one Stills.
      * @example
-     * // Update one Still
-     * const still = await prisma.still.update({
+     * // Update one Stills
+     * const stills = await prisma.stills.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -21578,30 +20627,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends StillUpdateArgs>(args: SelectSubset<T, StillUpdateArgs<ExtArgs>>): Prisma__StillClient<$Result.GetResult<Prisma.$StillPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends stillsUpdateArgs>(args: SelectSubset<T, stillsUpdateArgs<ExtArgs>>): Prisma__stillsClient<$Result.GetResult<Prisma.$stillsPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Delete zero or more Stills.
-     * @param {StillDeleteManyArgs} args - Arguments to filter Stills to delete.
+     * @param {stillsDeleteManyArgs} args - Arguments to filter Stills to delete.
      * @example
      * // Delete a few Stills
-     * const { count } = await prisma.still.deleteMany({
+     * const { count } = await prisma.stills.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends StillDeleteManyArgs>(args?: SelectSubset<T, StillDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends stillsDeleteManyArgs>(args?: SelectSubset<T, stillsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Stills.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StillUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {stillsUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
      * // Update many Stills
-     * const still = await prisma.still.updateMany({
+     * const stills = await prisma.stills.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -21611,14 +20660,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends StillUpdateManyArgs>(args: SelectSubset<T, StillUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends stillsUpdateManyArgs>(args: SelectSubset<T, stillsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Stills and returns the data updated in the database.
-     * @param {StillUpdateManyAndReturnArgs} args - Arguments to update many Stills.
+     * @param {stillsUpdateManyAndReturnArgs} args - Arguments to update many Stills.
      * @example
      * // Update many Stills
-     * const still = await prisma.still.updateManyAndReturn({
+     * const stills = await prisma.stills.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -21628,7 +20677,7 @@ export namespace Prisma {
      * })
      * 
      * // Update zero or more Stills and only return the `code`
-     * const stillWithCodeOnly = await prisma.still.updateManyAndReturn({
+     * const stillsWithCodeOnly = await prisma.stills.updateManyAndReturn({
      *   select: { code: true },
      *   where: {
      *     // ... provide filter here
@@ -21641,56 +20690,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends StillUpdateManyAndReturnArgs>(args: SelectSubset<T, StillUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StillPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends stillsUpdateManyAndReturnArgs>(args: SelectSubset<T, stillsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$stillsPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
 
     /**
-     * Create or update one Still.
-     * @param {StillUpsertArgs} args - Arguments to update or create a Still.
+     * Create or update one Stills.
+     * @param {stillsUpsertArgs} args - Arguments to update or create a Stills.
      * @example
-     * // Update or create a Still
-     * const still = await prisma.still.upsert({
+     * // Update or create a Stills
+     * const stills = await prisma.stills.upsert({
      *   create: {
-     *     // ... data to create a Still
+     *     // ... data to create a Stills
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Still we want to update
+     *     // ... the filter for the Stills we want to update
      *   }
      * })
      */
-    upsert<T extends StillUpsertArgs>(args: SelectSubset<T, StillUpsertArgs<ExtArgs>>): Prisma__StillClient<$Result.GetResult<Prisma.$StillPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends stillsUpsertArgs>(args: SelectSubset<T, stillsUpsertArgs<ExtArgs>>): Prisma__stillsClient<$Result.GetResult<Prisma.$stillsPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
 
 
     /**
      * Count the number of Stills.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StillCountArgs} args - Arguments to filter Stills to count.
+     * @param {stillsCountArgs} args - Arguments to filter Stills to count.
      * @example
      * // Count the number of Stills
-     * const count = await prisma.still.count({
+     * const count = await prisma.stills.count({
      *   where: {
      *     // ... the filter for the Stills we want to count
      *   }
      * })
     **/
-    count<T extends StillCountArgs>(
-      args?: Subset<T, StillCountArgs>,
+    count<T extends stillsCountArgs>(
+      args?: Subset<T, stillsCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], StillCountAggregateOutputType>
+          : GetScalarType<T['select'], StillsCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Still.
+     * Allows you to perform aggregations operations on a Stills.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StillAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {StillsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -21710,13 +20759,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends StillAggregateArgs>(args: Subset<T, StillAggregateArgs>): Prisma.PrismaPromise<GetStillAggregateType<T>>
+    aggregate<T extends StillsAggregateArgs>(args: Subset<T, StillsAggregateArgs>): Prisma.PrismaPromise<GetStillsAggregateType<T>>
 
     /**
-     * Group by Still.
+     * Group by Stills.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StillGroupByArgs} args - Group by arguments.
+     * @param {stillsGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -21731,14 +20780,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends StillGroupByArgs,
+      T extends stillsGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: StillGroupByArgs['orderBy'] }
-        : { orderBy?: StillGroupByArgs['orderBy'] },
+        ? { orderBy: stillsGroupByArgs['orderBy'] }
+        : { orderBy?: stillsGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -21787,22 +20836,22 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, StillGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStillGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, stillsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStillsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the Still model
+   * Fields of the stills model
    */
-  readonly fields: StillFieldRefs;
+  readonly fields: stillsFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Still.
+   * The delegate class that acts as a "Promise-like" for stills.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__StillClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__stillsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    processes<T extends Still$processesArgs<ExtArgs> = {}>(args?: Subset<T, Still$processesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$processesPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    processes<T extends stills$processesArgs<ExtArgs> = {}>(args?: Subset<T, stills$processesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$processesPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -21829,394 +20878,406 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the Still model
+   * Fields of the stills model
    */ 
-  interface StillFieldRefs {
-    readonly code: FieldRef<"Still", 'String'>
-    readonly site: FieldRef<"Still", 'String'>
-    readonly power: FieldRef<"Still", 'Int'>
-    readonly capacity: FieldRef<"Still", 'Int'>
-    readonly isVacuum: FieldRef<"Still", 'Boolean'>
-    readonly isOperational: FieldRef<"Still", 'Boolean'>
+  interface stillsFieldRefs {
+    readonly code: FieldRef<"stills", 'String'>
+    readonly site: FieldRef<"stills", 'String'>
+    readonly power: FieldRef<"stills", 'Int'>
+    readonly capacity: FieldRef<"stills", 'Int'>
+    readonly is_vacuum: FieldRef<"stills", 'Boolean'>
+    readonly is_operational: FieldRef<"stills", 'Boolean'>
   }
     
 
   // Custom InputTypes
   /**
-   * Still findUnique
+   * stills findUnique
    */
-  export type StillFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type stillsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Still
+     * Select specific fields to fetch from the stills
      */
-    select?: StillSelect<ExtArgs> | null
+    select?: stillsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Still
+     * Omit specific fields from the stills
      */
-    omit?: StillOmit<ExtArgs> | null
+    omit?: stillsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StillInclude<ExtArgs> | null
+    include?: stillsInclude<ExtArgs> | null
     /**
-     * Filter, which Still to fetch.
+     * Filter, which stills to fetch.
      */
-    where: StillWhereUniqueInput
+    where: stillsWhereUniqueInput
   }
 
   /**
-   * Still findUniqueOrThrow
+   * stills findUniqueOrThrow
    */
-  export type StillFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type stillsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Still
+     * Select specific fields to fetch from the stills
      */
-    select?: StillSelect<ExtArgs> | null
+    select?: stillsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Still
+     * Omit specific fields from the stills
      */
-    omit?: StillOmit<ExtArgs> | null
+    omit?: stillsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StillInclude<ExtArgs> | null
+    include?: stillsInclude<ExtArgs> | null
     /**
-     * Filter, which Still to fetch.
+     * Filter, which stills to fetch.
      */
-    where: StillWhereUniqueInput
+    where: stillsWhereUniqueInput
   }
 
   /**
-   * Still findFirst
+   * stills findFirst
    */
-  export type StillFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type stillsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Still
+     * Select specific fields to fetch from the stills
      */
-    select?: StillSelect<ExtArgs> | null
+    select?: stillsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Still
+     * Omit specific fields from the stills
      */
-    omit?: StillOmit<ExtArgs> | null
+    omit?: stillsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StillInclude<ExtArgs> | null
+    include?: stillsInclude<ExtArgs> | null
     /**
-     * Filter, which Still to fetch.
+     * Filter, which stills to fetch.
      */
-    where?: StillWhereInput
+    where?: stillsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Stills to fetch.
+     * Determine the order of stills to fetch.
      */
-    orderBy?: StillOrderByWithRelationInput | StillOrderByWithRelationInput[]
+    orderBy?: stillsOrderByWithRelationInput | stillsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Stills.
+     * Sets the position for searching for stills.
      */
-    cursor?: StillWhereUniqueInput
+    cursor?: stillsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Stills from the position of the cursor.
+     * Take `±n` stills from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Stills.
+     * Skip the first `n` stills.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Stills.
+     * Filter by unique combinations of stills.
      */
-    distinct?: StillScalarFieldEnum | StillScalarFieldEnum[]
+    distinct?: StillsScalarFieldEnum | StillsScalarFieldEnum[]
   }
 
   /**
-   * Still findFirstOrThrow
+   * stills findFirstOrThrow
    */
-  export type StillFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type stillsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Still
+     * Select specific fields to fetch from the stills
      */
-    select?: StillSelect<ExtArgs> | null
+    select?: stillsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Still
+     * Omit specific fields from the stills
      */
-    omit?: StillOmit<ExtArgs> | null
+    omit?: stillsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StillInclude<ExtArgs> | null
+    include?: stillsInclude<ExtArgs> | null
     /**
-     * Filter, which Still to fetch.
+     * Filter, which stills to fetch.
      */
-    where?: StillWhereInput
+    where?: stillsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Stills to fetch.
+     * Determine the order of stills to fetch.
      */
-    orderBy?: StillOrderByWithRelationInput | StillOrderByWithRelationInput[]
+    orderBy?: stillsOrderByWithRelationInput | stillsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Stills.
+     * Sets the position for searching for stills.
      */
-    cursor?: StillWhereUniqueInput
+    cursor?: stillsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Stills from the position of the cursor.
+     * Take `±n` stills from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Stills.
+     * Skip the first `n` stills.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Stills.
+     * Filter by unique combinations of stills.
      */
-    distinct?: StillScalarFieldEnum | StillScalarFieldEnum[]
+    distinct?: StillsScalarFieldEnum | StillsScalarFieldEnum[]
   }
 
   /**
-   * Still findMany
+   * stills findMany
    */
-  export type StillFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type stillsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Still
+     * Select specific fields to fetch from the stills
      */
-    select?: StillSelect<ExtArgs> | null
+    select?: stillsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Still
+     * Omit specific fields from the stills
      */
-    omit?: StillOmit<ExtArgs> | null
+    omit?: stillsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StillInclude<ExtArgs> | null
+    include?: stillsInclude<ExtArgs> | null
     /**
-     * Filter, which Stills to fetch.
+     * Filter, which stills to fetch.
      */
-    where?: StillWhereInput
+    where?: stillsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Stills to fetch.
+     * Determine the order of stills to fetch.
      */
-    orderBy?: StillOrderByWithRelationInput | StillOrderByWithRelationInput[]
+    orderBy?: stillsOrderByWithRelationInput | stillsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Stills.
+     * Sets the position for listing stills.
      */
-    cursor?: StillWhereUniqueInput
+    cursor?: stillsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Stills from the position of the cursor.
+     * Take `±n` stills from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Stills.
+     * Skip the first `n` stills.
      */
     skip?: number
-    distinct?: StillScalarFieldEnum | StillScalarFieldEnum[]
+    distinct?: StillsScalarFieldEnum | StillsScalarFieldEnum[]
   }
 
   /**
-   * Still create
+   * stills create
    */
-  export type StillCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type stillsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Still
+     * Select specific fields to fetch from the stills
      */
-    select?: StillSelect<ExtArgs> | null
+    select?: stillsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Still
+     * Omit specific fields from the stills
      */
-    omit?: StillOmit<ExtArgs> | null
+    omit?: stillsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StillInclude<ExtArgs> | null
+    include?: stillsInclude<ExtArgs> | null
     /**
-     * The data needed to create a Still.
+     * The data needed to create a stills.
      */
-    data: XOR<StillCreateInput, StillUncheckedCreateInput>
+    data: XOR<stillsCreateInput, stillsUncheckedCreateInput>
   }
 
   /**
-   * Still createMany
+   * stills createMany
    */
-  export type StillCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type stillsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many Stills.
+     * The data used to create many stills.
      */
-    data: StillCreateManyInput | StillCreateManyInput[]
+    data: stillsCreateManyInput | stillsCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * Still createManyAndReturn
+   * stills createManyAndReturn
    */
-  export type StillCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type stillsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Still
+     * Select specific fields to fetch from the stills
      */
-    select?: StillSelectCreateManyAndReturn<ExtArgs> | null
+    select?: stillsSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Still
+     * Omit specific fields from the stills
      */
-    omit?: StillOmit<ExtArgs> | null
+    omit?: stillsOmit<ExtArgs> | null
     /**
-     * The data used to create many Stills.
+     * The data used to create many stills.
      */
-    data: StillCreateManyInput | StillCreateManyInput[]
+    data: stillsCreateManyInput | stillsCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * Still update
+   * stills update
    */
-  export type StillUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type stillsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Still
+     * Select specific fields to fetch from the stills
      */
-    select?: StillSelect<ExtArgs> | null
+    select?: stillsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Still
+     * Omit specific fields from the stills
      */
-    omit?: StillOmit<ExtArgs> | null
+    omit?: stillsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StillInclude<ExtArgs> | null
+    include?: stillsInclude<ExtArgs> | null
     /**
-     * The data needed to update a Still.
+     * The data needed to update a stills.
      */
-    data: XOR<StillUpdateInput, StillUncheckedUpdateInput>
+    data: XOR<stillsUpdateInput, stillsUncheckedUpdateInput>
     /**
-     * Choose, which Still to update.
+     * Choose, which stills to update.
      */
-    where: StillWhereUniqueInput
+    where: stillsWhereUniqueInput
   }
 
   /**
-   * Still updateMany
+   * stills updateMany
    */
-  export type StillUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type stillsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update Stills.
+     * The data used to update stills.
      */
-    data: XOR<StillUpdateManyMutationInput, StillUncheckedUpdateManyInput>
+    data: XOR<stillsUpdateManyMutationInput, stillsUncheckedUpdateManyInput>
     /**
-     * Filter which Stills to update
+     * Filter which stills to update
      */
-    where?: StillWhereInput
+    where?: stillsWhereInput
+    /**
+     * Limit how many stills to update.
+     */
+    limit?: number
   }
 
   /**
-   * Still updateManyAndReturn
+   * stills updateManyAndReturn
    */
-  export type StillUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type stillsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Still
+     * Select specific fields to fetch from the stills
      */
-    select?: StillSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: stillsSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Still
+     * Omit specific fields from the stills
      */
-    omit?: StillOmit<ExtArgs> | null
+    omit?: stillsOmit<ExtArgs> | null
     /**
-     * The data used to update Stills.
+     * The data used to update stills.
      */
-    data: XOR<StillUpdateManyMutationInput, StillUncheckedUpdateManyInput>
+    data: XOR<stillsUpdateManyMutationInput, stillsUncheckedUpdateManyInput>
     /**
-     * Filter which Stills to update
+     * Filter which stills to update
      */
-    where?: StillWhereInput
+    where?: stillsWhereInput
+    /**
+     * Limit how many stills to update.
+     */
+    limit?: number
   }
 
   /**
-   * Still upsert
+   * stills upsert
    */
-  export type StillUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type stillsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Still
+     * Select specific fields to fetch from the stills
      */
-    select?: StillSelect<ExtArgs> | null
+    select?: stillsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Still
+     * Omit specific fields from the stills
      */
-    omit?: StillOmit<ExtArgs> | null
+    omit?: stillsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StillInclude<ExtArgs> | null
+    include?: stillsInclude<ExtArgs> | null
     /**
-     * The filter to search for the Still to update in case it exists.
+     * The filter to search for the stills to update in case it exists.
      */
-    where: StillWhereUniqueInput
+    where: stillsWhereUniqueInput
     /**
-     * In case the Still found by the `where` argument doesn't exist, create a new Still with this data.
+     * In case the stills found by the `where` argument doesn't exist, create a new stills with this data.
      */
-    create: XOR<StillCreateInput, StillUncheckedCreateInput>
+    create: XOR<stillsCreateInput, stillsUncheckedCreateInput>
     /**
-     * In case the Still was found with the provided `where` argument, update it with this data.
+     * In case the stills was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<StillUpdateInput, StillUncheckedUpdateInput>
+    update: XOR<stillsUpdateInput, stillsUncheckedUpdateInput>
   }
 
   /**
-   * Still delete
+   * stills delete
    */
-  export type StillDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type stillsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Still
+     * Select specific fields to fetch from the stills
      */
-    select?: StillSelect<ExtArgs> | null
+    select?: stillsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Still
+     * Omit specific fields from the stills
      */
-    omit?: StillOmit<ExtArgs> | null
+    omit?: stillsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StillInclude<ExtArgs> | null
+    include?: stillsInclude<ExtArgs> | null
     /**
-     * Filter which Still to delete.
+     * Filter which stills to delete.
      */
-    where: StillWhereUniqueInput
+    where: stillsWhereUniqueInput
   }
 
   /**
-   * Still deleteMany
+   * stills deleteMany
    */
-  export type StillDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type stillsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Stills to delete
+     * Filter which stills to delete
      */
-    where?: StillWhereInput
+    where?: stillsWhereInput
+    /**
+     * Limit how many stills to delete.
+     */
+    limit?: number
   }
 
   /**
-   * Still.processes
+   * stills.processes
    */
-  export type Still$processesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type stills$processesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the processes
      */
@@ -22238,21 +21299,1011 @@ export namespace Prisma {
   }
 
   /**
-   * Still without action
+   * stills without action
    */
-  export type StillDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type stillsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Still
+     * Select specific fields to fetch from the stills
      */
-    select?: StillSelect<ExtArgs> | null
+    select?: stillsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Still
+     * Omit specific fields from the stills
      */
-    omit?: StillOmit<ExtArgs> | null
+    omit?: stillsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StillInclude<ExtArgs> | null
+    include?: stillsInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model suppliers
+   */
+
+  export type AggregateSuppliers = {
+    _count: SuppliersCountAggregateOutputType | null
+    _avg: SuppliersAvgAggregateOutputType | null
+    _sum: SuppliersSumAggregateOutputType | null
+    _min: SuppliersMinAggregateOutputType | null
+    _max: SuppliersMaxAggregateOutputType | null
+  }
+
+  export type SuppliersAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type SuppliersSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type SuppliersMinAggregateOutputType = {
+    id: number | null
+    name: string | null
+  }
+
+  export type SuppliersMaxAggregateOutputType = {
+    id: number | null
+    name: string | null
+  }
+
+  export type SuppliersCountAggregateOutputType = {
+    id: number
+    name: number
+    _all: number
+  }
+
+
+  export type SuppliersAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type SuppliersSumAggregateInputType = {
+    id?: true
+  }
+
+  export type SuppliersMinAggregateInputType = {
+    id?: true
+    name?: true
+  }
+
+  export type SuppliersMaxAggregateInputType = {
+    id?: true
+    name?: true
+  }
+
+  export type SuppliersCountAggregateInputType = {
+    id?: true
+    name?: true
+    _all?: true
+  }
+
+  export type SuppliersAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which suppliers to aggregate.
+     */
+    where?: suppliersWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of suppliers to fetch.
+     */
+    orderBy?: suppliersOrderByWithRelationInput | suppliersOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: suppliersWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` suppliers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` suppliers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned suppliers
+    **/
+    _count?: true | SuppliersCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SuppliersAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SuppliersSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SuppliersMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SuppliersMaxAggregateInputType
+  }
+
+  export type GetSuppliersAggregateType<T extends SuppliersAggregateArgs> = {
+        [P in keyof T & keyof AggregateSuppliers]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSuppliers[P]>
+      : GetScalarType<T[P], AggregateSuppliers[P]>
+  }
+
+
+
+
+  export type suppliersGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: suppliersWhereInput
+    orderBy?: suppliersOrderByWithAggregationInput | suppliersOrderByWithAggregationInput[]
+    by: SuppliersScalarFieldEnum[] | SuppliersScalarFieldEnum
+    having?: suppliersScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SuppliersCountAggregateInputType | true
+    _avg?: SuppliersAvgAggregateInputType
+    _sum?: SuppliersSumAggregateInputType
+    _min?: SuppliersMinAggregateInputType
+    _max?: SuppliersMaxAggregateInputType
+  }
+
+  export type SuppliersGroupByOutputType = {
+    id: number
+    name: string
+    _count: SuppliersCountAggregateOutputType | null
+    _avg: SuppliersAvgAggregateOutputType | null
+    _sum: SuppliersSumAggregateOutputType | null
+    _min: SuppliersMinAggregateOutputType | null
+    _max: SuppliersMaxAggregateOutputType | null
+  }
+
+  type GetSuppliersGroupByPayload<T extends suppliersGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SuppliersGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SuppliersGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SuppliersGroupByOutputType[P]>
+            : GetScalarType<T[P], SuppliersGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type suppliersSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+  }, ExtArgs["result"]["suppliers"]>
+
+  export type suppliersSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+  }, ExtArgs["result"]["suppliers"]>
+
+  export type suppliersSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+  }, ExtArgs["result"]["suppliers"]>
+
+  export type suppliersSelectScalar = {
+    id?: boolean
+    name?: boolean
+  }
+
+  export type suppliersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name", ExtArgs["result"]["suppliers"]>
+
+  export type $suppliersPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "suppliers"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      name: string
+    }, ExtArgs["result"]["suppliers"]>
+    composites: {}
+  }
+
+  type suppliersGetPayload<S extends boolean | null | undefined | suppliersDefaultArgs> = $Result.GetResult<Prisma.$suppliersPayload, S>
+
+  type suppliersCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<suppliersFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SuppliersCountAggregateInputType | true
+    }
+
+  export interface suppliersDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['suppliers'], meta: { name: 'suppliers' } }
+    /**
+     * Find zero or one Suppliers that matches the filter.
+     * @param {suppliersFindUniqueArgs} args - Arguments to find a Suppliers
+     * @example
+     * // Get one Suppliers
+     * const suppliers = await prisma.suppliers.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends suppliersFindUniqueArgs>(args: SelectSubset<T, suppliersFindUniqueArgs<ExtArgs>>): Prisma__suppliersClient<$Result.GetResult<Prisma.$suppliersPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one Suppliers that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {suppliersFindUniqueOrThrowArgs} args - Arguments to find a Suppliers
+     * @example
+     * // Get one Suppliers
+     * const suppliers = await prisma.suppliers.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends suppliersFindUniqueOrThrowArgs>(args: SelectSubset<T, suppliersFindUniqueOrThrowArgs<ExtArgs>>): Prisma__suppliersClient<$Result.GetResult<Prisma.$suppliersPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first Suppliers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {suppliersFindFirstArgs} args - Arguments to find a Suppliers
+     * @example
+     * // Get one Suppliers
+     * const suppliers = await prisma.suppliers.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends suppliersFindFirstArgs>(args?: SelectSubset<T, suppliersFindFirstArgs<ExtArgs>>): Prisma__suppliersClient<$Result.GetResult<Prisma.$suppliersPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first Suppliers that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {suppliersFindFirstOrThrowArgs} args - Arguments to find a Suppliers
+     * @example
+     * // Get one Suppliers
+     * const suppliers = await prisma.suppliers.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends suppliersFindFirstOrThrowArgs>(args?: SelectSubset<T, suppliersFindFirstOrThrowArgs<ExtArgs>>): Prisma__suppliersClient<$Result.GetResult<Prisma.$suppliersPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more Suppliers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {suppliersFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Suppliers
+     * const suppliers = await prisma.suppliers.findMany()
+     * 
+     * // Get first 10 Suppliers
+     * const suppliers = await prisma.suppliers.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const suppliersWithIdOnly = await prisma.suppliers.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends suppliersFindManyArgs>(args?: SelectSubset<T, suppliersFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$suppliersPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a Suppliers.
+     * @param {suppliersCreateArgs} args - Arguments to create a Suppliers.
+     * @example
+     * // Create one Suppliers
+     * const Suppliers = await prisma.suppliers.create({
+     *   data: {
+     *     // ... data to create a Suppliers
+     *   }
+     * })
+     * 
+     */
+    create<T extends suppliersCreateArgs>(args: SelectSubset<T, suppliersCreateArgs<ExtArgs>>): Prisma__suppliersClient<$Result.GetResult<Prisma.$suppliersPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many Suppliers.
+     * @param {suppliersCreateManyArgs} args - Arguments to create many Suppliers.
+     * @example
+     * // Create many Suppliers
+     * const suppliers = await prisma.suppliers.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends suppliersCreateManyArgs>(args?: SelectSubset<T, suppliersCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Suppliers and returns the data saved in the database.
+     * @param {suppliersCreateManyAndReturnArgs} args - Arguments to create many Suppliers.
+     * @example
+     * // Create many Suppliers
+     * const suppliers = await prisma.suppliers.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Suppliers and only return the `id`
+     * const suppliersWithIdOnly = await prisma.suppliers.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends suppliersCreateManyAndReturnArgs>(args?: SelectSubset<T, suppliersCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$suppliersPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a Suppliers.
+     * @param {suppliersDeleteArgs} args - Arguments to delete one Suppliers.
+     * @example
+     * // Delete one Suppliers
+     * const Suppliers = await prisma.suppliers.delete({
+     *   where: {
+     *     // ... filter to delete one Suppliers
+     *   }
+     * })
+     * 
+     */
+    delete<T extends suppliersDeleteArgs>(args: SelectSubset<T, suppliersDeleteArgs<ExtArgs>>): Prisma__suppliersClient<$Result.GetResult<Prisma.$suppliersPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one Suppliers.
+     * @param {suppliersUpdateArgs} args - Arguments to update one Suppliers.
+     * @example
+     * // Update one Suppliers
+     * const suppliers = await prisma.suppliers.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends suppliersUpdateArgs>(args: SelectSubset<T, suppliersUpdateArgs<ExtArgs>>): Prisma__suppliersClient<$Result.GetResult<Prisma.$suppliersPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more Suppliers.
+     * @param {suppliersDeleteManyArgs} args - Arguments to filter Suppliers to delete.
+     * @example
+     * // Delete a few Suppliers
+     * const { count } = await prisma.suppliers.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends suppliersDeleteManyArgs>(args?: SelectSubset<T, suppliersDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Suppliers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {suppliersUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Suppliers
+     * const suppliers = await prisma.suppliers.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends suppliersUpdateManyArgs>(args: SelectSubset<T, suppliersUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Suppliers and returns the data updated in the database.
+     * @param {suppliersUpdateManyAndReturnArgs} args - Arguments to update many Suppliers.
+     * @example
+     * // Update many Suppliers
+     * const suppliers = await prisma.suppliers.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Suppliers and only return the `id`
+     * const suppliersWithIdOnly = await prisma.suppliers.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends suppliersUpdateManyAndReturnArgs>(args: SelectSubset<T, suppliersUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$suppliersPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one Suppliers.
+     * @param {suppliersUpsertArgs} args - Arguments to update or create a Suppliers.
+     * @example
+     * // Update or create a Suppliers
+     * const suppliers = await prisma.suppliers.upsert({
+     *   create: {
+     *     // ... data to create a Suppliers
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Suppliers we want to update
+     *   }
+     * })
+     */
+    upsert<T extends suppliersUpsertArgs>(args: SelectSubset<T, suppliersUpsertArgs<ExtArgs>>): Prisma__suppliersClient<$Result.GetResult<Prisma.$suppliersPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of Suppliers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {suppliersCountArgs} args - Arguments to filter Suppliers to count.
+     * @example
+     * // Count the number of Suppliers
+     * const count = await prisma.suppliers.count({
+     *   where: {
+     *     // ... the filter for the Suppliers we want to count
+     *   }
+     * })
+    **/
+    count<T extends suppliersCountArgs>(
+      args?: Subset<T, suppliersCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SuppliersCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Suppliers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SuppliersAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SuppliersAggregateArgs>(args: Subset<T, SuppliersAggregateArgs>): Prisma.PrismaPromise<GetSuppliersAggregateType<T>>
+
+    /**
+     * Group by Suppliers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {suppliersGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends suppliersGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: suppliersGroupByArgs['orderBy'] }
+        : { orderBy?: suppliersGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, suppliersGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSuppliersGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the suppliers model
+   */
+  readonly fields: suppliersFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for suppliers.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__suppliersClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the suppliers model
+   */ 
+  interface suppliersFieldRefs {
+    readonly id: FieldRef<"suppliers", 'Int'>
+    readonly name: FieldRef<"suppliers", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * suppliers findUnique
+   */
+  export type suppliersFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the suppliers
+     */
+    select?: suppliersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the suppliers
+     */
+    omit?: suppliersOmit<ExtArgs> | null
+    /**
+     * Filter, which suppliers to fetch.
+     */
+    where: suppliersWhereUniqueInput
+  }
+
+  /**
+   * suppliers findUniqueOrThrow
+   */
+  export type suppliersFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the suppliers
+     */
+    select?: suppliersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the suppliers
+     */
+    omit?: suppliersOmit<ExtArgs> | null
+    /**
+     * Filter, which suppliers to fetch.
+     */
+    where: suppliersWhereUniqueInput
+  }
+
+  /**
+   * suppliers findFirst
+   */
+  export type suppliersFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the suppliers
+     */
+    select?: suppliersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the suppliers
+     */
+    omit?: suppliersOmit<ExtArgs> | null
+    /**
+     * Filter, which suppliers to fetch.
+     */
+    where?: suppliersWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of suppliers to fetch.
+     */
+    orderBy?: suppliersOrderByWithRelationInput | suppliersOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for suppliers.
+     */
+    cursor?: suppliersWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` suppliers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` suppliers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of suppliers.
+     */
+    distinct?: SuppliersScalarFieldEnum | SuppliersScalarFieldEnum[]
+  }
+
+  /**
+   * suppliers findFirstOrThrow
+   */
+  export type suppliersFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the suppliers
+     */
+    select?: suppliersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the suppliers
+     */
+    omit?: suppliersOmit<ExtArgs> | null
+    /**
+     * Filter, which suppliers to fetch.
+     */
+    where?: suppliersWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of suppliers to fetch.
+     */
+    orderBy?: suppliersOrderByWithRelationInput | suppliersOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for suppliers.
+     */
+    cursor?: suppliersWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` suppliers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` suppliers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of suppliers.
+     */
+    distinct?: SuppliersScalarFieldEnum | SuppliersScalarFieldEnum[]
+  }
+
+  /**
+   * suppliers findMany
+   */
+  export type suppliersFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the suppliers
+     */
+    select?: suppliersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the suppliers
+     */
+    omit?: suppliersOmit<ExtArgs> | null
+    /**
+     * Filter, which suppliers to fetch.
+     */
+    where?: suppliersWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of suppliers to fetch.
+     */
+    orderBy?: suppliersOrderByWithRelationInput | suppliersOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing suppliers.
+     */
+    cursor?: suppliersWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` suppliers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` suppliers.
+     */
+    skip?: number
+    distinct?: SuppliersScalarFieldEnum | SuppliersScalarFieldEnum[]
+  }
+
+  /**
+   * suppliers create
+   */
+  export type suppliersCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the suppliers
+     */
+    select?: suppliersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the suppliers
+     */
+    omit?: suppliersOmit<ExtArgs> | null
+    /**
+     * The data needed to create a suppliers.
+     */
+    data: XOR<suppliersCreateInput, suppliersUncheckedCreateInput>
+  }
+
+  /**
+   * suppliers createMany
+   */
+  export type suppliersCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many suppliers.
+     */
+    data: suppliersCreateManyInput | suppliersCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * suppliers createManyAndReturn
+   */
+  export type suppliersCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the suppliers
+     */
+    select?: suppliersSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the suppliers
+     */
+    omit?: suppliersOmit<ExtArgs> | null
+    /**
+     * The data used to create many suppliers.
+     */
+    data: suppliersCreateManyInput | suppliersCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * suppliers update
+   */
+  export type suppliersUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the suppliers
+     */
+    select?: suppliersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the suppliers
+     */
+    omit?: suppliersOmit<ExtArgs> | null
+    /**
+     * The data needed to update a suppliers.
+     */
+    data: XOR<suppliersUpdateInput, suppliersUncheckedUpdateInput>
+    /**
+     * Choose, which suppliers to update.
+     */
+    where: suppliersWhereUniqueInput
+  }
+
+  /**
+   * suppliers updateMany
+   */
+  export type suppliersUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update suppliers.
+     */
+    data: XOR<suppliersUpdateManyMutationInput, suppliersUncheckedUpdateManyInput>
+    /**
+     * Filter which suppliers to update
+     */
+    where?: suppliersWhereInput
+    /**
+     * Limit how many suppliers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * suppliers updateManyAndReturn
+   */
+  export type suppliersUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the suppliers
+     */
+    select?: suppliersSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the suppliers
+     */
+    omit?: suppliersOmit<ExtArgs> | null
+    /**
+     * The data used to update suppliers.
+     */
+    data: XOR<suppliersUpdateManyMutationInput, suppliersUncheckedUpdateManyInput>
+    /**
+     * Filter which suppliers to update
+     */
+    where?: suppliersWhereInput
+    /**
+     * Limit how many suppliers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * suppliers upsert
+   */
+  export type suppliersUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the suppliers
+     */
+    select?: suppliersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the suppliers
+     */
+    omit?: suppliersOmit<ExtArgs> | null
+    /**
+     * The filter to search for the suppliers to update in case it exists.
+     */
+    where: suppliersWhereUniqueInput
+    /**
+     * In case the suppliers found by the `where` argument doesn't exist, create a new suppliers with this data.
+     */
+    create: XOR<suppliersCreateInput, suppliersUncheckedCreateInput>
+    /**
+     * In case the suppliers was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<suppliersUpdateInput, suppliersUncheckedUpdateInput>
+  }
+
+  /**
+   * suppliers delete
+   */
+  export type suppliersDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the suppliers
+     */
+    select?: suppliersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the suppliers
+     */
+    omit?: suppliersOmit<ExtArgs> | null
+    /**
+     * Filter which suppliers to delete.
+     */
+    where: suppliersWhereUniqueInput
+  }
+
+  /**
+   * suppliers deleteMany
+   */
+  export type suppliersDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which suppliers to delete
+     */
+    where?: suppliersWhereInput
+    /**
+     * Limit how many suppliers to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * suppliers without action
+   */
+  export type suppliersDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the suppliers
+     */
+    select?: suppliersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the suppliers
+     */
+    omit?: suppliersOmit<ExtArgs> | null
   }
 
 
@@ -22368,15 +22419,6 @@ export namespace Prisma {
   export type DistillationsScalarFieldEnum = (typeof DistillationsScalarFieldEnum)[keyof typeof DistillationsScalarFieldEnum]
 
 
-  export const Drum_distillationsScalarFieldEnum: {
-    drum_id: 'drum_id',
-    distillation_id: 'distillation_id',
-    fraction_used: 'fraction_used'
-  };
-
-  export type Drum_distillationsScalarFieldEnum = (typeof Drum_distillationsScalarFieldEnum)[keyof typeof Drum_distillationsScalarFieldEnum]
-
-
   export const ImportsScalarFieldEnum: {
     import_id: 'import_id',
     supplier_name: 'supplier_name',
@@ -22420,7 +22462,8 @@ export namespace Prisma {
     quantity_received: 'quantity_received',
     delivery_status: 'delivery_status',
     eta_start: 'eta_start',
-    eta_end: 'eta_end'
+    eta_end: 'eta_end',
+    po_number: 'po_number'
   };
 
   export type OrdersScalarFieldEnum = (typeof OrdersScalarFieldEnum)[keyof typeof OrdersScalarFieldEnum]
@@ -22483,25 +22526,33 @@ export namespace Prisma {
     created_at: 'created_at',
     updated_at: 'updated_at',
     process_id: 'process_id',
-    direction: 'direction',
     delivery_id: 'delivery_id',
     batch_code: 'batch_code',
-    order_id: 'order_id'
+    order_id: 'order_id',
+    direction: 'direction'
   };
 
   export type TransactionsScalarFieldEnum = (typeof TransactionsScalarFieldEnum)[keyof typeof TransactionsScalarFieldEnum]
 
 
-  export const StillScalarFieldEnum: {
+  export const StillsScalarFieldEnum: {
     code: 'code',
     site: 'site',
     power: 'power',
     capacity: 'capacity',
-    isVacuum: 'isVacuum',
-    isOperational: 'isOperational'
+    is_vacuum: 'is_vacuum',
+    is_operational: 'is_operational'
   };
 
-  export type StillScalarFieldEnum = (typeof StillScalarFieldEnum)[keyof typeof StillScalarFieldEnum]
+  export type StillsScalarFieldEnum = (typeof StillsScalarFieldEnum)[keyof typeof StillsScalarFieldEnum]
+
+
+  export const SuppliersScalarFieldEnum: {
+    id: 'id',
+    name: 'name'
+  };
+
+  export type SuppliersScalarFieldEnum = (typeof SuppliersScalarFieldEnum)[keyof typeof SuppliersScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -23048,7 +23099,6 @@ export namespace Prisma {
     created_at?: DateTimeNullableFilter<"distillations"> | Date | string | null
     updated_at?: DateTimeNullableFilter<"distillations"> | Date | string | null
     batches?: BatchesListRelationFilter
-    drum_distillations?: Drum_distillationsListRelationFilter
     repro_additions?: Repro_additionsListRelationFilter
   }
 
@@ -23067,7 +23117,6 @@ export namespace Prisma {
     created_at?: SortOrderInput | SortOrder
     updated_at?: SortOrderInput | SortOrder
     batches?: batchesOrderByRelationAggregateInput
-    drum_distillations?: drum_distillationsOrderByRelationAggregateInput
     repro_additions?: repro_additionsOrderByRelationAggregateInput
   }
 
@@ -23089,7 +23138,6 @@ export namespace Prisma {
     created_at?: DateTimeNullableFilter<"distillations"> | Date | string | null
     updated_at?: DateTimeNullableFilter<"distillations"> | Date | string | null
     batches?: BatchesListRelationFilter
-    drum_distillations?: Drum_distillationsListRelationFilter
     repro_additions?: Repro_additionsListRelationFilter
   }, "distillation_id">
 
@@ -23131,57 +23179,6 @@ export namespace Prisma {
     volume_repro?: DecimalNullableWithAggregatesFilter<"distillations"> | Decimal | DecimalJsLike | number | string | null
     created_at?: DateTimeNullableWithAggregatesFilter<"distillations"> | Date | string | null
     updated_at?: DateTimeNullableWithAggregatesFilter<"distillations"> | Date | string | null
-  }
-
-  export type drum_distillationsWhereInput = {
-    AND?: drum_distillationsWhereInput | drum_distillationsWhereInput[]
-    OR?: drum_distillationsWhereInput[]
-    NOT?: drum_distillationsWhereInput | drum_distillationsWhereInput[]
-    drum_id?: IntFilter<"drum_distillations"> | number
-    distillation_id?: IntFilter<"drum_distillations"> | number
-    fraction_used?: DecimalFilter<"drum_distillations"> | Decimal | DecimalJsLike | number | string
-    distillations?: XOR<DistillationsScalarRelationFilter, distillationsWhereInput>
-    new_drums?: XOR<New_drumsScalarRelationFilter, new_drumsWhereInput>
-  }
-
-  export type drum_distillationsOrderByWithRelationInput = {
-    drum_id?: SortOrder
-    distillation_id?: SortOrder
-    fraction_used?: SortOrder
-    distillations?: distillationsOrderByWithRelationInput
-    new_drums?: new_drumsOrderByWithRelationInput
-  }
-
-  export type drum_distillationsWhereUniqueInput = Prisma.AtLeast<{
-    drum_id_distillation_id?: drum_distillationsDrum_idDistillation_idCompoundUniqueInput
-    AND?: drum_distillationsWhereInput | drum_distillationsWhereInput[]
-    OR?: drum_distillationsWhereInput[]
-    NOT?: drum_distillationsWhereInput | drum_distillationsWhereInput[]
-    drum_id?: IntFilter<"drum_distillations"> | number
-    distillation_id?: IntFilter<"drum_distillations"> | number
-    fraction_used?: DecimalFilter<"drum_distillations"> | Decimal | DecimalJsLike | number | string
-    distillations?: XOR<DistillationsScalarRelationFilter, distillationsWhereInput>
-    new_drums?: XOR<New_drumsScalarRelationFilter, new_drumsWhereInput>
-  }, "drum_id_distillation_id">
-
-  export type drum_distillationsOrderByWithAggregationInput = {
-    drum_id?: SortOrder
-    distillation_id?: SortOrder
-    fraction_used?: SortOrder
-    _count?: drum_distillationsCountOrderByAggregateInput
-    _avg?: drum_distillationsAvgOrderByAggregateInput
-    _max?: drum_distillationsMaxOrderByAggregateInput
-    _min?: drum_distillationsMinOrderByAggregateInput
-    _sum?: drum_distillationsSumOrderByAggregateInput
-  }
-
-  export type drum_distillationsScalarWhereWithAggregatesInput = {
-    AND?: drum_distillationsScalarWhereWithAggregatesInput | drum_distillationsScalarWhereWithAggregatesInput[]
-    OR?: drum_distillationsScalarWhereWithAggregatesInput[]
-    NOT?: drum_distillationsScalarWhereWithAggregatesInput | drum_distillationsScalarWhereWithAggregatesInput[]
-    drum_id?: IntWithAggregatesFilter<"drum_distillations"> | number
-    distillation_id?: IntWithAggregatesFilter<"drum_distillations"> | number
-    fraction_used?: DecimalWithAggregatesFilter<"drum_distillations"> | Decimal | DecimalJsLike | number | string
   }
 
   export type importsWhereInput = {
@@ -23277,10 +23274,9 @@ export namespace Prisma {
     date_processed?: DateTimeNullableFilter<"new_drums"> | Date | string | null
     status?: StringFilter<"new_drums"> | string
     location?: StringNullableFilter<"new_drums"> | string | null
-    created_at?: DateTimeNullableFilter<"new_drums"> | Date | string | null
-    updated_at?: DateTimeNullableFilter<"new_drums"> | Date | string | null
+    created_at?: DateTimeFilter<"new_drums"> | Date | string
+    updated_at?: DateTimeFilter<"new_drums"> | Date | string
     order_id?: IntNullableFilter<"new_drums"> | number | null
-    drum_distillations?: Drum_distillationsListRelationFilter
     orders?: XOR<OrdersNullableScalarRelationFilter, ordersWhereInput> | null
     processes?: ProcessesListRelationFilter
     transactions?: TransactionsListRelationFilter
@@ -23292,10 +23288,9 @@ export namespace Prisma {
     date_processed?: SortOrderInput | SortOrder
     status?: SortOrder
     location?: SortOrderInput | SortOrder
-    created_at?: SortOrderInput | SortOrder
-    updated_at?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
     order_id?: SortOrderInput | SortOrder
-    drum_distillations?: drum_distillationsOrderByRelationAggregateInput
     orders?: ordersOrderByWithRelationInput
     processes?: processesOrderByRelationAggregateInput
     transactions?: transactionsOrderByRelationAggregateInput
@@ -23310,10 +23305,9 @@ export namespace Prisma {
     date_processed?: DateTimeNullableFilter<"new_drums"> | Date | string | null
     status?: StringFilter<"new_drums"> | string
     location?: StringNullableFilter<"new_drums"> | string | null
-    created_at?: DateTimeNullableFilter<"new_drums"> | Date | string | null
-    updated_at?: DateTimeNullableFilter<"new_drums"> | Date | string | null
+    created_at?: DateTimeFilter<"new_drums"> | Date | string
+    updated_at?: DateTimeFilter<"new_drums"> | Date | string
     order_id?: IntNullableFilter<"new_drums"> | number | null
-    drum_distillations?: Drum_distillationsListRelationFilter
     orders?: XOR<OrdersNullableScalarRelationFilter, ordersWhereInput> | null
     processes?: ProcessesListRelationFilter
     transactions?: TransactionsListRelationFilter
@@ -23325,8 +23319,8 @@ export namespace Prisma {
     date_processed?: SortOrderInput | SortOrder
     status?: SortOrder
     location?: SortOrderInput | SortOrder
-    created_at?: SortOrderInput | SortOrder
-    updated_at?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
     order_id?: SortOrderInput | SortOrder
     _count?: new_drumsCountOrderByAggregateInput
     _avg?: new_drumsAvgOrderByAggregateInput
@@ -23344,8 +23338,8 @@ export namespace Prisma {
     date_processed?: DateTimeNullableWithAggregatesFilter<"new_drums"> | Date | string | null
     status?: StringWithAggregatesFilter<"new_drums"> | string
     location?: StringNullableWithAggregatesFilter<"new_drums"> | string | null
-    created_at?: DateTimeNullableWithAggregatesFilter<"new_drums"> | Date | string | null
-    updated_at?: DateTimeNullableWithAggregatesFilter<"new_drums"> | Date | string | null
+    created_at?: DateTimeWithAggregatesFilter<"new_drums"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"new_drums"> | Date | string
     order_id?: IntNullableWithAggregatesFilter<"new_drums"> | number | null
   }
 
@@ -23365,6 +23359,7 @@ export namespace Prisma {
     delivery_status?: StringFilter<"orders"> | string
     eta_start?: DateTimeNullableFilter<"orders"> | Date | string | null
     eta_end?: DateTimeNullableFilter<"orders"> | Date | string | null
+    po_number?: StringNullableFilter<"orders"> | string | null
     deliveries?: DeliveriesListRelationFilter
     new_drums?: New_drumsListRelationFilter
   }
@@ -23382,6 +23377,7 @@ export namespace Prisma {
     delivery_status?: SortOrder
     eta_start?: SortOrderInput | SortOrder
     eta_end?: SortOrderInput | SortOrder
+    po_number?: SortOrderInput | SortOrder
     deliveries?: deliveriesOrderByRelationAggregateInput
     new_drums?: new_drumsOrderByRelationAggregateInput
   }
@@ -23402,6 +23398,7 @@ export namespace Prisma {
     delivery_status?: StringFilter<"orders"> | string
     eta_start?: DateTimeNullableFilter<"orders"> | Date | string | null
     eta_end?: DateTimeNullableFilter<"orders"> | Date | string | null
+    po_number?: StringNullableFilter<"orders"> | string | null
     deliveries?: DeliveriesListRelationFilter
     new_drums?: New_drumsListRelationFilter
   }, "order_id">
@@ -23419,6 +23416,7 @@ export namespace Prisma {
     delivery_status?: SortOrder
     eta_start?: SortOrderInput | SortOrder
     eta_end?: SortOrderInput | SortOrder
+    po_number?: SortOrderInput | SortOrder
     _count?: ordersCountOrderByAggregateInput
     _avg?: ordersAvgOrderByAggregateInput
     _max?: ordersMaxOrderByAggregateInput
@@ -23442,6 +23440,7 @@ export namespace Prisma {
     delivery_status?: StringWithAggregatesFilter<"orders"> | string
     eta_start?: DateTimeNullableWithAggregatesFilter<"orders"> | Date | string | null
     eta_end?: DateTimeNullableWithAggregatesFilter<"orders"> | Date | string | null
+    po_number?: StringNullableWithAggregatesFilter<"orders"> | string | null
   }
 
   export type processesWhereInput = {
@@ -23458,7 +23457,7 @@ export namespace Prisma {
     transporter?: StringNullableFilter<"processes"> | string | null
     date_processed?: DateTimeNullableFilter<"processes"> | Date | string | null
     new_drums?: XOR<New_drumsNullableScalarRelationFilter, new_drumsWhereInput> | null
-    stills?: XOR<StillScalarRelationFilter, StillWhereInput>
+    stills?: XOR<StillsScalarRelationFilter, stillsWhereInput>
     transactions?: TransactionsListRelationFilter
   }
 
@@ -23473,7 +23472,7 @@ export namespace Prisma {
     transporter?: SortOrderInput | SortOrder
     date_processed?: SortOrderInput | SortOrder
     new_drums?: new_drumsOrderByWithRelationInput
-    stills?: StillOrderByWithRelationInput
+    stills?: stillsOrderByWithRelationInput
     transactions?: transactionsOrderByRelationAggregateInput
   }
 
@@ -23491,7 +23490,7 @@ export namespace Prisma {
     transporter?: StringNullableFilter<"processes"> | string | null
     date_processed?: DateTimeNullableFilter<"processes"> | Date | string | null
     new_drums?: XOR<New_drumsNullableScalarRelationFilter, new_drumsWhereInput> | null
-    stills?: XOR<StillScalarRelationFilter, StillWhereInput>
+    stills?: XOR<StillsScalarRelationFilter, stillsWhereInput>
     transactions?: TransactionsListRelationFilter
   }, "process_id">
 
@@ -23703,13 +23702,13 @@ export namespace Prisma {
     drum_id?: IntNullableFilter<"transactions"> | number | null
     repro_id?: IntNullableFilter<"transactions"> | number | null
     tx_notes?: StringNullableFilter<"transactions"> | string | null
-    created_at?: DateTimeNullableFilter<"transactions"> | Date | string | null
-    updated_at?: DateTimeNullableFilter<"transactions"> | Date | string | null
+    created_at?: DateTimeFilter<"transactions"> | Date | string
+    updated_at?: DateTimeFilter<"transactions"> | Date | string
     process_id?: IntNullableFilter<"transactions"> | number | null
-    direction?: StringNullableFilter<"transactions"> | string | null
     delivery_id?: IntNullableFilter<"transactions"> | number | null
     batch_code?: StringNullableFilter<"transactions"> | string | null
     order_id?: IntNullableFilter<"transactions"> | number | null
+    direction?: StringNullableFilter<"transactions"> | string | null
     deliveries?: XOR<DeliveriesNullableScalarRelationFilter, deliveriesWhereInput> | null
     new_drums?: XOR<New_drumsNullableScalarRelationFilter, new_drumsWhereInput> | null
     processes?: XOR<ProcessesNullableScalarRelationFilter, processesWhereInput> | null
@@ -23724,13 +23723,13 @@ export namespace Prisma {
     drum_id?: SortOrderInput | SortOrder
     repro_id?: SortOrderInput | SortOrder
     tx_notes?: SortOrderInput | SortOrder
-    created_at?: SortOrderInput | SortOrder
-    updated_at?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
     process_id?: SortOrderInput | SortOrder
-    direction?: SortOrderInput | SortOrder
     delivery_id?: SortOrderInput | SortOrder
     batch_code?: SortOrderInput | SortOrder
     order_id?: SortOrderInput | SortOrder
+    direction?: SortOrderInput | SortOrder
     deliveries?: deliveriesOrderByWithRelationInput
     new_drums?: new_drumsOrderByWithRelationInput
     processes?: processesOrderByWithRelationInput
@@ -23748,13 +23747,13 @@ export namespace Prisma {
     drum_id?: IntNullableFilter<"transactions"> | number | null
     repro_id?: IntNullableFilter<"transactions"> | number | null
     tx_notes?: StringNullableFilter<"transactions"> | string | null
-    created_at?: DateTimeNullableFilter<"transactions"> | Date | string | null
-    updated_at?: DateTimeNullableFilter<"transactions"> | Date | string | null
+    created_at?: DateTimeFilter<"transactions"> | Date | string
+    updated_at?: DateTimeFilter<"transactions"> | Date | string
     process_id?: IntNullableFilter<"transactions"> | number | null
-    direction?: StringNullableFilter<"transactions"> | string | null
     delivery_id?: IntNullableFilter<"transactions"> | number | null
     batch_code?: StringNullableFilter<"transactions"> | string | null
     order_id?: IntNullableFilter<"transactions"> | number | null
+    direction?: StringNullableFilter<"transactions"> | string | null
     deliveries?: XOR<DeliveriesNullableScalarRelationFilter, deliveriesWhereInput> | null
     new_drums?: XOR<New_drumsNullableScalarRelationFilter, new_drumsWhereInput> | null
     processes?: XOR<ProcessesNullableScalarRelationFilter, processesWhereInput> | null
@@ -23769,13 +23768,13 @@ export namespace Prisma {
     drum_id?: SortOrderInput | SortOrder
     repro_id?: SortOrderInput | SortOrder
     tx_notes?: SortOrderInput | SortOrder
-    created_at?: SortOrderInput | SortOrder
-    updated_at?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
     process_id?: SortOrderInput | SortOrder
-    direction?: SortOrderInput | SortOrder
     delivery_id?: SortOrderInput | SortOrder
     batch_code?: SortOrderInput | SortOrder
     order_id?: SortOrderInput | SortOrder
+    direction?: SortOrderInput | SortOrder
     _count?: transactionsCountOrderByAggregateInput
     _avg?: transactionsAvgOrderByAggregateInput
     _max?: transactionsMaxOrderByAggregateInput
@@ -23794,75 +23793,114 @@ export namespace Prisma {
     drum_id?: IntNullableWithAggregatesFilter<"transactions"> | number | null
     repro_id?: IntNullableWithAggregatesFilter<"transactions"> | number | null
     tx_notes?: StringNullableWithAggregatesFilter<"transactions"> | string | null
-    created_at?: DateTimeNullableWithAggregatesFilter<"transactions"> | Date | string | null
-    updated_at?: DateTimeNullableWithAggregatesFilter<"transactions"> | Date | string | null
+    created_at?: DateTimeWithAggregatesFilter<"transactions"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"transactions"> | Date | string
     process_id?: IntNullableWithAggregatesFilter<"transactions"> | number | null
-    direction?: StringNullableWithAggregatesFilter<"transactions"> | string | null
     delivery_id?: IntNullableWithAggregatesFilter<"transactions"> | number | null
     batch_code?: StringNullableWithAggregatesFilter<"transactions"> | string | null
     order_id?: IntNullableWithAggregatesFilter<"transactions"> | number | null
+    direction?: StringNullableWithAggregatesFilter<"transactions"> | string | null
   }
 
-  export type StillWhereInput = {
-    AND?: StillWhereInput | StillWhereInput[]
-    OR?: StillWhereInput[]
-    NOT?: StillWhereInput | StillWhereInput[]
-    code?: StringFilter<"Still"> | string
-    site?: StringFilter<"Still"> | string
-    power?: IntFilter<"Still"> | number
-    capacity?: IntFilter<"Still"> | number
-    isVacuum?: BoolNullableFilter<"Still"> | boolean | null
-    isOperational?: BoolNullableFilter<"Still"> | boolean | null
+  export type stillsWhereInput = {
+    AND?: stillsWhereInput | stillsWhereInput[]
+    OR?: stillsWhereInput[]
+    NOT?: stillsWhereInput | stillsWhereInput[]
+    code?: StringFilter<"stills"> | string
+    site?: StringFilter<"stills"> | string
+    power?: IntFilter<"stills"> | number
+    capacity?: IntFilter<"stills"> | number
+    is_vacuum?: BoolNullableFilter<"stills"> | boolean | null
+    is_operational?: BoolNullableFilter<"stills"> | boolean | null
     processes?: ProcessesListRelationFilter
   }
 
-  export type StillOrderByWithRelationInput = {
+  export type stillsOrderByWithRelationInput = {
     code?: SortOrder
     site?: SortOrder
     power?: SortOrder
     capacity?: SortOrder
-    isVacuum?: SortOrderInput | SortOrder
-    isOperational?: SortOrderInput | SortOrder
+    is_vacuum?: SortOrderInput | SortOrder
+    is_operational?: SortOrderInput | SortOrder
     processes?: processesOrderByRelationAggregateInput
   }
 
-  export type StillWhereUniqueInput = Prisma.AtLeast<{
+  export type stillsWhereUniqueInput = Prisma.AtLeast<{
     code?: string
-    AND?: StillWhereInput | StillWhereInput[]
-    OR?: StillWhereInput[]
-    NOT?: StillWhereInput | StillWhereInput[]
-    site?: StringFilter<"Still"> | string
-    power?: IntFilter<"Still"> | number
-    capacity?: IntFilter<"Still"> | number
-    isVacuum?: BoolNullableFilter<"Still"> | boolean | null
-    isOperational?: BoolNullableFilter<"Still"> | boolean | null
+    AND?: stillsWhereInput | stillsWhereInput[]
+    OR?: stillsWhereInput[]
+    NOT?: stillsWhereInput | stillsWhereInput[]
+    site?: StringFilter<"stills"> | string
+    power?: IntFilter<"stills"> | number
+    capacity?: IntFilter<"stills"> | number
+    is_vacuum?: BoolNullableFilter<"stills"> | boolean | null
+    is_operational?: BoolNullableFilter<"stills"> | boolean | null
     processes?: ProcessesListRelationFilter
   }, "code" | "code">
 
-  export type StillOrderByWithAggregationInput = {
+  export type stillsOrderByWithAggregationInput = {
     code?: SortOrder
     site?: SortOrder
     power?: SortOrder
     capacity?: SortOrder
-    isVacuum?: SortOrderInput | SortOrder
-    isOperational?: SortOrderInput | SortOrder
-    _count?: StillCountOrderByAggregateInput
-    _avg?: StillAvgOrderByAggregateInput
-    _max?: StillMaxOrderByAggregateInput
-    _min?: StillMinOrderByAggregateInput
-    _sum?: StillSumOrderByAggregateInput
+    is_vacuum?: SortOrderInput | SortOrder
+    is_operational?: SortOrderInput | SortOrder
+    _count?: stillsCountOrderByAggregateInput
+    _avg?: stillsAvgOrderByAggregateInput
+    _max?: stillsMaxOrderByAggregateInput
+    _min?: stillsMinOrderByAggregateInput
+    _sum?: stillsSumOrderByAggregateInput
   }
 
-  export type StillScalarWhereWithAggregatesInput = {
-    AND?: StillScalarWhereWithAggregatesInput | StillScalarWhereWithAggregatesInput[]
-    OR?: StillScalarWhereWithAggregatesInput[]
-    NOT?: StillScalarWhereWithAggregatesInput | StillScalarWhereWithAggregatesInput[]
-    code?: StringWithAggregatesFilter<"Still"> | string
-    site?: StringWithAggregatesFilter<"Still"> | string
-    power?: IntWithAggregatesFilter<"Still"> | number
-    capacity?: IntWithAggregatesFilter<"Still"> | number
-    isVacuum?: BoolNullableWithAggregatesFilter<"Still"> | boolean | null
-    isOperational?: BoolNullableWithAggregatesFilter<"Still"> | boolean | null
+  export type stillsScalarWhereWithAggregatesInput = {
+    AND?: stillsScalarWhereWithAggregatesInput | stillsScalarWhereWithAggregatesInput[]
+    OR?: stillsScalarWhereWithAggregatesInput[]
+    NOT?: stillsScalarWhereWithAggregatesInput | stillsScalarWhereWithAggregatesInput[]
+    code?: StringWithAggregatesFilter<"stills"> | string
+    site?: StringWithAggregatesFilter<"stills"> | string
+    power?: IntWithAggregatesFilter<"stills"> | number
+    capacity?: IntWithAggregatesFilter<"stills"> | number
+    is_vacuum?: BoolNullableWithAggregatesFilter<"stills"> | boolean | null
+    is_operational?: BoolNullableWithAggregatesFilter<"stills"> | boolean | null
+  }
+
+  export type suppliersWhereInput = {
+    AND?: suppliersWhereInput | suppliersWhereInput[]
+    OR?: suppliersWhereInput[]
+    NOT?: suppliersWhereInput | suppliersWhereInput[]
+    id?: IntFilter<"suppliers"> | number
+    name?: StringFilter<"suppliers"> | string
+  }
+
+  export type suppliersOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type suppliersWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: suppliersWhereInput | suppliersWhereInput[]
+    OR?: suppliersWhereInput[]
+    NOT?: suppliersWhereInput | suppliersWhereInput[]
+    name?: StringFilter<"suppliers"> | string
+  }, "id">
+
+  export type suppliersOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    _count?: suppliersCountOrderByAggregateInput
+    _avg?: suppliersAvgOrderByAggregateInput
+    _max?: suppliersMaxOrderByAggregateInput
+    _min?: suppliersMinOrderByAggregateInput
+    _sum?: suppliersSumOrderByAggregateInput
+  }
+
+  export type suppliersScalarWhereWithAggregatesInput = {
+    AND?: suppliersScalarWhereWithAggregatesInput | suppliersScalarWhereWithAggregatesInput[]
+    OR?: suppliersScalarWhereWithAggregatesInput[]
+    NOT?: suppliersScalarWhereWithAggregatesInput | suppliersScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"suppliers"> | number
+    name?: StringWithAggregatesFilter<"suppliers"> | string
   }
 
   export type bottle_sizesCreateInput = {
@@ -24278,7 +24316,6 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     batches?: batchesCreateNestedManyWithoutDistillationsInput
-    drum_distillations?: drum_distillationsCreateNestedManyWithoutDistillationsInput
     repro_additions?: repro_additionsCreateNestedManyWithoutDistillationsInput
   }
 
@@ -24297,7 +24334,6 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     batches?: batchesUncheckedCreateNestedManyWithoutDistillationsInput
-    drum_distillations?: drum_distillationsUncheckedCreateNestedManyWithoutDistillationsInput
     repro_additions?: repro_additionsUncheckedCreateNestedManyWithoutDistillationsInput
   }
 
@@ -24315,7 +24351,6 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     batches?: batchesUpdateManyWithoutDistillationsNestedInput
-    drum_distillations?: drum_distillationsUpdateManyWithoutDistillationsNestedInput
     repro_additions?: repro_additionsUpdateManyWithoutDistillationsNestedInput
   }
 
@@ -24334,7 +24369,6 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     batches?: batchesUncheckedUpdateManyWithoutDistillationsNestedInput
-    drum_distillations?: drum_distillationsUncheckedUpdateManyWithoutDistillationsNestedInput
     repro_additions?: repro_additionsUncheckedUpdateManyWithoutDistillationsNestedInput
   }
 
@@ -24383,46 +24417,6 @@ export namespace Prisma {
     volume_repro?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type drum_distillationsCreateInput = {
-    fraction_used?: Decimal | DecimalJsLike | number | string
-    distillations: distillationsCreateNestedOneWithoutDrum_distillationsInput
-    new_drums: new_drumsCreateNestedOneWithoutDrum_distillationsInput
-  }
-
-  export type drum_distillationsUncheckedCreateInput = {
-    drum_id: number
-    distillation_id: number
-    fraction_used?: Decimal | DecimalJsLike | number | string
-  }
-
-  export type drum_distillationsUpdateInput = {
-    fraction_used?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    distillations?: distillationsUpdateOneRequiredWithoutDrum_distillationsNestedInput
-    new_drums?: new_drumsUpdateOneRequiredWithoutDrum_distillationsNestedInput
-  }
-
-  export type drum_distillationsUncheckedUpdateInput = {
-    drum_id?: IntFieldUpdateOperationsInput | number
-    distillation_id?: IntFieldUpdateOperationsInput | number
-    fraction_used?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-  }
-
-  export type drum_distillationsCreateManyInput = {
-    drum_id: number
-    distillation_id: number
-    fraction_used?: Decimal | DecimalJsLike | number | string
-  }
-
-  export type drum_distillationsUpdateManyMutationInput = {
-    fraction_used?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-  }
-
-  export type drum_distillationsUncheckedUpdateManyInput = {
-    drum_id?: IntFieldUpdateOperationsInput | number
-    distillation_id?: IntFieldUpdateOperationsInput | number
-    fraction_used?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
   }
 
   export type importsCreateInput = {
@@ -24525,9 +24519,8 @@ export namespace Prisma {
     date_processed?: Date | string | null
     status?: string
     location?: string | null
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
-    drum_distillations?: drum_distillationsCreateNestedManyWithoutNew_drumsInput
+    created_at?: Date | string
+    updated_at?: Date | string
     orders?: ordersCreateNestedOneWithoutNew_drumsInput
     processes?: processesCreateNestedManyWithoutNew_drumsInput
     transactions?: transactionsCreateNestedManyWithoutNew_drumsInput
@@ -24539,10 +24532,9 @@ export namespace Prisma {
     date_processed?: Date | string | null
     status?: string
     location?: string | null
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
     order_id?: number | null
-    drum_distillations?: drum_distillationsUncheckedCreateNestedManyWithoutNew_drumsInput
     processes?: processesUncheckedCreateNestedManyWithoutNew_drumsInput
     transactions?: transactionsUncheckedCreateNestedManyWithoutNew_drumsInput
   }
@@ -24552,9 +24544,8 @@ export namespace Prisma {
     date_processed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    drum_distillations?: drum_distillationsUpdateManyWithoutNew_drumsNestedInput
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     orders?: ordersUpdateOneWithoutNew_drumsNestedInput
     processes?: processesUpdateManyWithoutNew_drumsNestedInput
     transactions?: transactionsUpdateManyWithoutNew_drumsNestedInput
@@ -24566,10 +24557,9 @@ export namespace Prisma {
     date_processed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
-    drum_distillations?: drum_distillationsUncheckedUpdateManyWithoutNew_drumsNestedInput
     processes?: processesUncheckedUpdateManyWithoutNew_drumsNestedInput
     transactions?: transactionsUncheckedUpdateManyWithoutNew_drumsNestedInput
   }
@@ -24580,8 +24570,8 @@ export namespace Prisma {
     date_processed?: Date | string | null
     status?: string
     location?: string | null
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
     order_id?: number | null
   }
 
@@ -24590,8 +24580,8 @@ export namespace Prisma {
     date_processed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type new_drumsUncheckedUpdateManyInput = {
@@ -24600,8 +24590,8 @@ export namespace Prisma {
     date_processed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
@@ -24617,6 +24607,7 @@ export namespace Prisma {
     delivery_status?: string
     eta_start?: Date | string | null
     eta_end?: Date | string | null
+    po_number?: string | null
     deliveries?: deliveriesCreateNestedManyWithoutOrdersInput
     new_drums?: new_drumsCreateNestedManyWithoutOrdersInput
   }
@@ -24634,6 +24625,7 @@ export namespace Prisma {
     delivery_status?: string
     eta_start?: Date | string | null
     eta_end?: Date | string | null
+    po_number?: string | null
     deliveries?: deliveriesUncheckedCreateNestedManyWithoutOrdersInput
     new_drums?: new_drumsUncheckedCreateNestedManyWithoutOrdersInput
   }
@@ -24650,6 +24642,7 @@ export namespace Prisma {
     delivery_status?: StringFieldUpdateOperationsInput | string
     eta_start?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     eta_end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    po_number?: NullableStringFieldUpdateOperationsInput | string | null
     deliveries?: deliveriesUpdateManyWithoutOrdersNestedInput
     new_drums?: new_drumsUpdateManyWithoutOrdersNestedInput
   }
@@ -24667,6 +24660,7 @@ export namespace Prisma {
     delivery_status?: StringFieldUpdateOperationsInput | string
     eta_start?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     eta_end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    po_number?: NullableStringFieldUpdateOperationsInput | string | null
     deliveries?: deliveriesUncheckedUpdateManyWithoutOrdersNestedInput
     new_drums?: new_drumsUncheckedUpdateManyWithoutOrdersNestedInput
   }
@@ -24684,6 +24678,7 @@ export namespace Prisma {
     delivery_status?: string
     eta_start?: Date | string | null
     eta_end?: Date | string | null
+    po_number?: string | null
   }
 
   export type ordersUpdateManyMutationInput = {
@@ -24698,6 +24693,7 @@ export namespace Prisma {
     delivery_status?: StringFieldUpdateOperationsInput | string
     eta_start?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     eta_end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    po_number?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ordersUncheckedUpdateManyInput = {
@@ -24713,6 +24709,7 @@ export namespace Prisma {
     delivery_status?: StringFieldUpdateOperationsInput | string
     eta_start?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     eta_end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    po_number?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type processesCreateInput = {
@@ -24723,7 +24720,7 @@ export namespace Prisma {
     transporter?: string | null
     date_processed?: Date | string | null
     new_drums?: new_drumsCreateNestedOneWithoutProcessesInput
-    stills: StillCreateNestedOneWithoutProcessesInput
+    stills: stillsCreateNestedOneWithoutProcessesInput
     transactions?: transactionsCreateNestedManyWithoutProcessesInput
   }
 
@@ -24748,7 +24745,7 @@ export namespace Prisma {
     transporter?: NullableStringFieldUpdateOperationsInput | string | null
     date_processed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     new_drums?: new_drumsUpdateOneWithoutProcessesNestedInput
-    stills?: StillUpdateOneRequiredWithoutProcessesNestedInput
+    stills?: stillsUpdateOneRequiredWithoutProcessesNestedInput
     transactions?: transactionsUpdateManyWithoutProcessesNestedInput
   }
 
@@ -24978,11 +24975,11 @@ export namespace Prisma {
     tx_date?: Date | string
     material?: string | null
     tx_notes?: string | null
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
-    direction?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
     batch_code?: string | null
     order_id?: number | null
+    direction?: string | null
     deliveries?: deliveriesCreateNestedOneWithoutTransactionsInput
     new_drums?: new_drumsCreateNestedOneWithoutTransactionsInput
     processes?: processesCreateNestedOneWithoutTransactionsInput
@@ -24997,13 +24994,13 @@ export namespace Prisma {
     drum_id?: number | null
     repro_id?: number | null
     tx_notes?: string | null
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
     process_id?: number | null
-    direction?: string | null
     delivery_id?: number | null
     batch_code?: string | null
     order_id?: number | null
+    direction?: string | null
   }
 
   export type transactionsUpdateInput = {
@@ -25011,11 +25008,11 @@ export namespace Prisma {
     tx_date?: DateTimeFieldUpdateOperationsInput | Date | string
     material?: NullableStringFieldUpdateOperationsInput | string | null
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    direction?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
+    direction?: NullableStringFieldUpdateOperationsInput | string | null
     deliveries?: deliveriesUpdateOneWithoutTransactionsNestedInput
     new_drums?: new_drumsUpdateOneWithoutTransactionsNestedInput
     processes?: processesUpdateOneWithoutTransactionsNestedInput
@@ -25030,13 +25027,13 @@ export namespace Prisma {
     drum_id?: NullableIntFieldUpdateOperationsInput | number | null
     repro_id?: NullableIntFieldUpdateOperationsInput | number | null
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     process_id?: NullableIntFieldUpdateOperationsInput | number | null
-    direction?: NullableStringFieldUpdateOperationsInput | string | null
     delivery_id?: NullableIntFieldUpdateOperationsInput | number | null
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
+    direction?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type transactionsCreateManyInput = {
@@ -25047,13 +25044,13 @@ export namespace Prisma {
     drum_id?: number | null
     repro_id?: number | null
     tx_notes?: string | null
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
     process_id?: number | null
-    direction?: string | null
     delivery_id?: number | null
     batch_code?: string | null
     order_id?: number | null
+    direction?: string | null
   }
 
   export type transactionsUpdateManyMutationInput = {
@@ -25061,11 +25058,11 @@ export namespace Prisma {
     tx_date?: DateTimeFieldUpdateOperationsInput | Date | string
     material?: NullableStringFieldUpdateOperationsInput | string | null
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    direction?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
+    direction?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type transactionsUncheckedUpdateManyInput = {
@@ -25076,80 +25073,112 @@ export namespace Prisma {
     drum_id?: NullableIntFieldUpdateOperationsInput | number | null
     repro_id?: NullableIntFieldUpdateOperationsInput | number | null
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     process_id?: NullableIntFieldUpdateOperationsInput | number | null
-    direction?: NullableStringFieldUpdateOperationsInput | string | null
     delivery_id?: NullableIntFieldUpdateOperationsInput | number | null
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
+    direction?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type StillCreateInput = {
+  export type stillsCreateInput = {
     code: string
     site: string
     power: number
     capacity: number
-    isVacuum?: boolean | null
-    isOperational?: boolean | null
+    is_vacuum?: boolean | null
+    is_operational?: boolean | null
     processes?: processesCreateNestedManyWithoutStillsInput
   }
 
-  export type StillUncheckedCreateInput = {
+  export type stillsUncheckedCreateInput = {
     code: string
     site: string
     power: number
     capacity: number
-    isVacuum?: boolean | null
-    isOperational?: boolean | null
+    is_vacuum?: boolean | null
+    is_operational?: boolean | null
     processes?: processesUncheckedCreateNestedManyWithoutStillsInput
   }
 
-  export type StillUpdateInput = {
+  export type stillsUpdateInput = {
     code?: StringFieldUpdateOperationsInput | string
     site?: StringFieldUpdateOperationsInput | string
     power?: IntFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
-    isVacuum?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    isOperational?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    is_vacuum?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    is_operational?: NullableBoolFieldUpdateOperationsInput | boolean | null
     processes?: processesUpdateManyWithoutStillsNestedInput
   }
 
-  export type StillUncheckedUpdateInput = {
+  export type stillsUncheckedUpdateInput = {
     code?: StringFieldUpdateOperationsInput | string
     site?: StringFieldUpdateOperationsInput | string
     power?: IntFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
-    isVacuum?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    isOperational?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    is_vacuum?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    is_operational?: NullableBoolFieldUpdateOperationsInput | boolean | null
     processes?: processesUncheckedUpdateManyWithoutStillsNestedInput
   }
 
-  export type StillCreateManyInput = {
+  export type stillsCreateManyInput = {
     code: string
     site: string
     power: number
     capacity: number
-    isVacuum?: boolean | null
-    isOperational?: boolean | null
+    is_vacuum?: boolean | null
+    is_operational?: boolean | null
   }
 
-  export type StillUpdateManyMutationInput = {
+  export type stillsUpdateManyMutationInput = {
     code?: StringFieldUpdateOperationsInput | string
     site?: StringFieldUpdateOperationsInput | string
     power?: IntFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
-    isVacuum?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    isOperational?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    is_vacuum?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    is_operational?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
-  export type StillUncheckedUpdateManyInput = {
+  export type stillsUncheckedUpdateManyInput = {
     code?: StringFieldUpdateOperationsInput | string
     site?: StringFieldUpdateOperationsInput | string
     power?: IntFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
-    isVacuum?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    isOperational?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    is_vacuum?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    is_operational?: NullableBoolFieldUpdateOperationsInput | boolean | null
+  }
+
+  export type suppliersCreateInput = {
+    name: string
+  }
+
+  export type suppliersUncheckedCreateInput = {
+    id?: number
+    name: string
+  }
+
+  export type suppliersUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type suppliersUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type suppliersCreateManyInput = {
+    id?: number
+    name: string
+  }
+
+  export type suppliersUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type suppliersUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -25711,12 +25740,6 @@ export namespace Prisma {
     none?: batchesWhereInput
   }
 
-  export type Drum_distillationsListRelationFilter = {
-    every?: drum_distillationsWhereInput
-    some?: drum_distillationsWhereInput
-    none?: drum_distillationsWhereInput
-  }
-
   export type Repro_additionsListRelationFilter = {
     every?: repro_additionsWhereInput
     some?: repro_additionsWhereInput
@@ -25724,10 +25747,6 @@ export namespace Prisma {
   }
 
   export type batchesOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type drum_distillationsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -25795,51 +25814,6 @@ export namespace Prisma {
     volume_in?: SortOrder
     volume_in_spec?: SortOrder
     volume_repro?: SortOrder
-  }
-
-  export type DistillationsScalarRelationFilter = {
-    is?: distillationsWhereInput
-    isNot?: distillationsWhereInput
-  }
-
-  export type New_drumsScalarRelationFilter = {
-    is?: new_drumsWhereInput
-    isNot?: new_drumsWhereInput
-  }
-
-  export type drum_distillationsDrum_idDistillation_idCompoundUniqueInput = {
-    drum_id: number
-    distillation_id: number
-  }
-
-  export type drum_distillationsCountOrderByAggregateInput = {
-    drum_id?: SortOrder
-    distillation_id?: SortOrder
-    fraction_used?: SortOrder
-  }
-
-  export type drum_distillationsAvgOrderByAggregateInput = {
-    drum_id?: SortOrder
-    distillation_id?: SortOrder
-    fraction_used?: SortOrder
-  }
-
-  export type drum_distillationsMaxOrderByAggregateInput = {
-    drum_id?: SortOrder
-    distillation_id?: SortOrder
-    fraction_used?: SortOrder
-  }
-
-  export type drum_distillationsMinOrderByAggregateInput = {
-    drum_id?: SortOrder
-    distillation_id?: SortOrder
-    fraction_used?: SortOrder
-  }
-
-  export type drum_distillationsSumOrderByAggregateInput = {
-    drum_id?: SortOrder
-    distillation_id?: SortOrder
-    fraction_used?: SortOrder
   }
 
   export type importsCountOrderByAggregateInput = {
@@ -25985,6 +25959,7 @@ export namespace Prisma {
     delivery_status?: SortOrder
     eta_start?: SortOrder
     eta_end?: SortOrder
+    po_number?: SortOrder
   }
 
   export type ordersAvgOrderByAggregateInput = {
@@ -26006,6 +25981,7 @@ export namespace Prisma {
     delivery_status?: SortOrder
     eta_start?: SortOrder
     eta_end?: SortOrder
+    po_number?: SortOrder
   }
 
   export type ordersMinOrderByAggregateInput = {
@@ -26021,6 +25997,7 @@ export namespace Prisma {
     delivery_status?: SortOrder
     eta_start?: SortOrder
     eta_end?: SortOrder
+    po_number?: SortOrder
   }
 
   export type ordersSumOrderByAggregateInput = {
@@ -26034,9 +26011,9 @@ export namespace Prisma {
     isNot?: new_drumsWhereInput | null
   }
 
-  export type StillScalarRelationFilter = {
-    is?: StillWhereInput
-    isNot?: StillWhereInput
+  export type StillsScalarRelationFilter = {
+    is?: stillsWhereInput
+    isNot?: stillsWhereInput
   }
 
   export type processesCountOrderByAggregateInput = {
@@ -26214,10 +26191,10 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     process_id?: SortOrder
-    direction?: SortOrder
     delivery_id?: SortOrder
     batch_code?: SortOrder
     order_id?: SortOrder
+    direction?: SortOrder
   }
 
   export type transactionsAvgOrderByAggregateInput = {
@@ -26240,10 +26217,10 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     process_id?: SortOrder
-    direction?: SortOrder
     delivery_id?: SortOrder
     batch_code?: SortOrder
     order_id?: SortOrder
+    direction?: SortOrder
   }
 
   export type transactionsMinOrderByAggregateInput = {
@@ -26257,10 +26234,10 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     process_id?: SortOrder
-    direction?: SortOrder
     delivery_id?: SortOrder
     batch_code?: SortOrder
     order_id?: SortOrder
+    direction?: SortOrder
   }
 
   export type transactionsSumOrderByAggregateInput = {
@@ -26277,39 +26254,39 @@ export namespace Prisma {
     not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
   }
 
-  export type StillCountOrderByAggregateInput = {
+  export type stillsCountOrderByAggregateInput = {
     code?: SortOrder
     site?: SortOrder
     power?: SortOrder
     capacity?: SortOrder
-    isVacuum?: SortOrder
-    isOperational?: SortOrder
+    is_vacuum?: SortOrder
+    is_operational?: SortOrder
   }
 
-  export type StillAvgOrderByAggregateInput = {
+  export type stillsAvgOrderByAggregateInput = {
     power?: SortOrder
     capacity?: SortOrder
   }
 
-  export type StillMaxOrderByAggregateInput = {
+  export type stillsMaxOrderByAggregateInput = {
     code?: SortOrder
     site?: SortOrder
     power?: SortOrder
     capacity?: SortOrder
-    isVacuum?: SortOrder
-    isOperational?: SortOrder
+    is_vacuum?: SortOrder
+    is_operational?: SortOrder
   }
 
-  export type StillMinOrderByAggregateInput = {
+  export type stillsMinOrderByAggregateInput = {
     code?: SortOrder
     site?: SortOrder
     power?: SortOrder
     capacity?: SortOrder
-    isVacuum?: SortOrder
-    isOperational?: SortOrder
+    is_vacuum?: SortOrder
+    is_operational?: SortOrder
   }
 
-  export type StillSumOrderByAggregateInput = {
+  export type stillsSumOrderByAggregateInput = {
     power?: SortOrder
     capacity?: SortOrder
   }
@@ -26320,6 +26297,29 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedBoolNullableFilter<$PrismaModel>
     _max?: NestedBoolNullableFilter<$PrismaModel>
+  }
+
+  export type suppliersCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type suppliersAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type suppliersMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type suppliersMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type suppliersSumOrderByAggregateInput = {
+    id?: SortOrder
   }
 
   export type product_pricesCreateNestedManyWithoutBottle_sizesInput = {
@@ -26623,13 +26623,6 @@ export namespace Prisma {
     connect?: batchesWhereUniqueInput | batchesWhereUniqueInput[]
   }
 
-  export type drum_distillationsCreateNestedManyWithoutDistillationsInput = {
-    create?: XOR<drum_distillationsCreateWithoutDistillationsInput, drum_distillationsUncheckedCreateWithoutDistillationsInput> | drum_distillationsCreateWithoutDistillationsInput[] | drum_distillationsUncheckedCreateWithoutDistillationsInput[]
-    connectOrCreate?: drum_distillationsCreateOrConnectWithoutDistillationsInput | drum_distillationsCreateOrConnectWithoutDistillationsInput[]
-    createMany?: drum_distillationsCreateManyDistillationsInputEnvelope
-    connect?: drum_distillationsWhereUniqueInput | drum_distillationsWhereUniqueInput[]
-  }
-
   export type repro_additionsCreateNestedManyWithoutDistillationsInput = {
     create?: XOR<repro_additionsCreateWithoutDistillationsInput, repro_additionsUncheckedCreateWithoutDistillationsInput> | repro_additionsCreateWithoutDistillationsInput[] | repro_additionsUncheckedCreateWithoutDistillationsInput[]
     connectOrCreate?: repro_additionsCreateOrConnectWithoutDistillationsInput | repro_additionsCreateOrConnectWithoutDistillationsInput[]
@@ -26642,13 +26635,6 @@ export namespace Prisma {
     connectOrCreate?: batchesCreateOrConnectWithoutDistillationsInput | batchesCreateOrConnectWithoutDistillationsInput[]
     createMany?: batchesCreateManyDistillationsInputEnvelope
     connect?: batchesWhereUniqueInput | batchesWhereUniqueInput[]
-  }
-
-  export type drum_distillationsUncheckedCreateNestedManyWithoutDistillationsInput = {
-    create?: XOR<drum_distillationsCreateWithoutDistillationsInput, drum_distillationsUncheckedCreateWithoutDistillationsInput> | drum_distillationsCreateWithoutDistillationsInput[] | drum_distillationsUncheckedCreateWithoutDistillationsInput[]
-    connectOrCreate?: drum_distillationsCreateOrConnectWithoutDistillationsInput | drum_distillationsCreateOrConnectWithoutDistillationsInput[]
-    createMany?: drum_distillationsCreateManyDistillationsInputEnvelope
-    connect?: drum_distillationsWhereUniqueInput | drum_distillationsWhereUniqueInput[]
   }
 
   export type repro_additionsUncheckedCreateNestedManyWithoutDistillationsInput = {
@@ -26670,20 +26656,6 @@ export namespace Prisma {
     update?: batchesUpdateWithWhereUniqueWithoutDistillationsInput | batchesUpdateWithWhereUniqueWithoutDistillationsInput[]
     updateMany?: batchesUpdateManyWithWhereWithoutDistillationsInput | batchesUpdateManyWithWhereWithoutDistillationsInput[]
     deleteMany?: batchesScalarWhereInput | batchesScalarWhereInput[]
-  }
-
-  export type drum_distillationsUpdateManyWithoutDistillationsNestedInput = {
-    create?: XOR<drum_distillationsCreateWithoutDistillationsInput, drum_distillationsUncheckedCreateWithoutDistillationsInput> | drum_distillationsCreateWithoutDistillationsInput[] | drum_distillationsUncheckedCreateWithoutDistillationsInput[]
-    connectOrCreate?: drum_distillationsCreateOrConnectWithoutDistillationsInput | drum_distillationsCreateOrConnectWithoutDistillationsInput[]
-    upsert?: drum_distillationsUpsertWithWhereUniqueWithoutDistillationsInput | drum_distillationsUpsertWithWhereUniqueWithoutDistillationsInput[]
-    createMany?: drum_distillationsCreateManyDistillationsInputEnvelope
-    set?: drum_distillationsWhereUniqueInput | drum_distillationsWhereUniqueInput[]
-    disconnect?: drum_distillationsWhereUniqueInput | drum_distillationsWhereUniqueInput[]
-    delete?: drum_distillationsWhereUniqueInput | drum_distillationsWhereUniqueInput[]
-    connect?: drum_distillationsWhereUniqueInput | drum_distillationsWhereUniqueInput[]
-    update?: drum_distillationsUpdateWithWhereUniqueWithoutDistillationsInput | drum_distillationsUpdateWithWhereUniqueWithoutDistillationsInput[]
-    updateMany?: drum_distillationsUpdateManyWithWhereWithoutDistillationsInput | drum_distillationsUpdateManyWithWhereWithoutDistillationsInput[]
-    deleteMany?: drum_distillationsScalarWhereInput | drum_distillationsScalarWhereInput[]
   }
 
   export type repro_additionsUpdateManyWithoutDistillationsNestedInput = {
@@ -26714,20 +26686,6 @@ export namespace Prisma {
     deleteMany?: batchesScalarWhereInput | batchesScalarWhereInput[]
   }
 
-  export type drum_distillationsUncheckedUpdateManyWithoutDistillationsNestedInput = {
-    create?: XOR<drum_distillationsCreateWithoutDistillationsInput, drum_distillationsUncheckedCreateWithoutDistillationsInput> | drum_distillationsCreateWithoutDistillationsInput[] | drum_distillationsUncheckedCreateWithoutDistillationsInput[]
-    connectOrCreate?: drum_distillationsCreateOrConnectWithoutDistillationsInput | drum_distillationsCreateOrConnectWithoutDistillationsInput[]
-    upsert?: drum_distillationsUpsertWithWhereUniqueWithoutDistillationsInput | drum_distillationsUpsertWithWhereUniqueWithoutDistillationsInput[]
-    createMany?: drum_distillationsCreateManyDistillationsInputEnvelope
-    set?: drum_distillationsWhereUniqueInput | drum_distillationsWhereUniqueInput[]
-    disconnect?: drum_distillationsWhereUniqueInput | drum_distillationsWhereUniqueInput[]
-    delete?: drum_distillationsWhereUniqueInput | drum_distillationsWhereUniqueInput[]
-    connect?: drum_distillationsWhereUniqueInput | drum_distillationsWhereUniqueInput[]
-    update?: drum_distillationsUpdateWithWhereUniqueWithoutDistillationsInput | drum_distillationsUpdateWithWhereUniqueWithoutDistillationsInput[]
-    updateMany?: drum_distillationsUpdateManyWithWhereWithoutDistillationsInput | drum_distillationsUpdateManyWithWhereWithoutDistillationsInput[]
-    deleteMany?: drum_distillationsScalarWhereInput | drum_distillationsScalarWhereInput[]
-  }
-
   export type repro_additionsUncheckedUpdateManyWithoutDistillationsNestedInput = {
     create?: XOR<repro_additionsCreateWithoutDistillationsInput, repro_additionsUncheckedCreateWithoutDistillationsInput> | repro_additionsCreateWithoutDistillationsInput[] | repro_additionsUncheckedCreateWithoutDistillationsInput[]
     connectOrCreate?: repro_additionsCreateOrConnectWithoutDistillationsInput | repro_additionsCreateOrConnectWithoutDistillationsInput[]
@@ -26740,41 +26698,6 @@ export namespace Prisma {
     update?: repro_additionsUpdateWithWhereUniqueWithoutDistillationsInput | repro_additionsUpdateWithWhereUniqueWithoutDistillationsInput[]
     updateMany?: repro_additionsUpdateManyWithWhereWithoutDistillationsInput | repro_additionsUpdateManyWithWhereWithoutDistillationsInput[]
     deleteMany?: repro_additionsScalarWhereInput | repro_additionsScalarWhereInput[]
-  }
-
-  export type distillationsCreateNestedOneWithoutDrum_distillationsInput = {
-    create?: XOR<distillationsCreateWithoutDrum_distillationsInput, distillationsUncheckedCreateWithoutDrum_distillationsInput>
-    connectOrCreate?: distillationsCreateOrConnectWithoutDrum_distillationsInput
-    connect?: distillationsWhereUniqueInput
-  }
-
-  export type new_drumsCreateNestedOneWithoutDrum_distillationsInput = {
-    create?: XOR<new_drumsCreateWithoutDrum_distillationsInput, new_drumsUncheckedCreateWithoutDrum_distillationsInput>
-    connectOrCreate?: new_drumsCreateOrConnectWithoutDrum_distillationsInput
-    connect?: new_drumsWhereUniqueInput
-  }
-
-  export type distillationsUpdateOneRequiredWithoutDrum_distillationsNestedInput = {
-    create?: XOR<distillationsCreateWithoutDrum_distillationsInput, distillationsUncheckedCreateWithoutDrum_distillationsInput>
-    connectOrCreate?: distillationsCreateOrConnectWithoutDrum_distillationsInput
-    upsert?: distillationsUpsertWithoutDrum_distillationsInput
-    connect?: distillationsWhereUniqueInput
-    update?: XOR<XOR<distillationsUpdateToOneWithWhereWithoutDrum_distillationsInput, distillationsUpdateWithoutDrum_distillationsInput>, distillationsUncheckedUpdateWithoutDrum_distillationsInput>
-  }
-
-  export type new_drumsUpdateOneRequiredWithoutDrum_distillationsNestedInput = {
-    create?: XOR<new_drumsCreateWithoutDrum_distillationsInput, new_drumsUncheckedCreateWithoutDrum_distillationsInput>
-    connectOrCreate?: new_drumsCreateOrConnectWithoutDrum_distillationsInput
-    upsert?: new_drumsUpsertWithoutDrum_distillationsInput
-    connect?: new_drumsWhereUniqueInput
-    update?: XOR<XOR<new_drumsUpdateToOneWithWhereWithoutDrum_distillationsInput, new_drumsUpdateWithoutDrum_distillationsInput>, new_drumsUncheckedUpdateWithoutDrum_distillationsInput>
-  }
-
-  export type drum_distillationsCreateNestedManyWithoutNew_drumsInput = {
-    create?: XOR<drum_distillationsCreateWithoutNew_drumsInput, drum_distillationsUncheckedCreateWithoutNew_drumsInput> | drum_distillationsCreateWithoutNew_drumsInput[] | drum_distillationsUncheckedCreateWithoutNew_drumsInput[]
-    connectOrCreate?: drum_distillationsCreateOrConnectWithoutNew_drumsInput | drum_distillationsCreateOrConnectWithoutNew_drumsInput[]
-    createMany?: drum_distillationsCreateManyNew_drumsInputEnvelope
-    connect?: drum_distillationsWhereUniqueInput | drum_distillationsWhereUniqueInput[]
   }
 
   export type ordersCreateNestedOneWithoutNew_drumsInput = {
@@ -26797,13 +26720,6 @@ export namespace Prisma {
     connect?: transactionsWhereUniqueInput | transactionsWhereUniqueInput[]
   }
 
-  export type drum_distillationsUncheckedCreateNestedManyWithoutNew_drumsInput = {
-    create?: XOR<drum_distillationsCreateWithoutNew_drumsInput, drum_distillationsUncheckedCreateWithoutNew_drumsInput> | drum_distillationsCreateWithoutNew_drumsInput[] | drum_distillationsUncheckedCreateWithoutNew_drumsInput[]
-    connectOrCreate?: drum_distillationsCreateOrConnectWithoutNew_drumsInput | drum_distillationsCreateOrConnectWithoutNew_drumsInput[]
-    createMany?: drum_distillationsCreateManyNew_drumsInputEnvelope
-    connect?: drum_distillationsWhereUniqueInput | drum_distillationsWhereUniqueInput[]
-  }
-
   export type processesUncheckedCreateNestedManyWithoutNew_drumsInput = {
     create?: XOR<processesCreateWithoutNew_drumsInput, processesUncheckedCreateWithoutNew_drumsInput> | processesCreateWithoutNew_drumsInput[] | processesUncheckedCreateWithoutNew_drumsInput[]
     connectOrCreate?: processesCreateOrConnectWithoutNew_drumsInput | processesCreateOrConnectWithoutNew_drumsInput[]
@@ -26816,20 +26732,6 @@ export namespace Prisma {
     connectOrCreate?: transactionsCreateOrConnectWithoutNew_drumsInput | transactionsCreateOrConnectWithoutNew_drumsInput[]
     createMany?: transactionsCreateManyNew_drumsInputEnvelope
     connect?: transactionsWhereUniqueInput | transactionsWhereUniqueInput[]
-  }
-
-  export type drum_distillationsUpdateManyWithoutNew_drumsNestedInput = {
-    create?: XOR<drum_distillationsCreateWithoutNew_drumsInput, drum_distillationsUncheckedCreateWithoutNew_drumsInput> | drum_distillationsCreateWithoutNew_drumsInput[] | drum_distillationsUncheckedCreateWithoutNew_drumsInput[]
-    connectOrCreate?: drum_distillationsCreateOrConnectWithoutNew_drumsInput | drum_distillationsCreateOrConnectWithoutNew_drumsInput[]
-    upsert?: drum_distillationsUpsertWithWhereUniqueWithoutNew_drumsInput | drum_distillationsUpsertWithWhereUniqueWithoutNew_drumsInput[]
-    createMany?: drum_distillationsCreateManyNew_drumsInputEnvelope
-    set?: drum_distillationsWhereUniqueInput | drum_distillationsWhereUniqueInput[]
-    disconnect?: drum_distillationsWhereUniqueInput | drum_distillationsWhereUniqueInput[]
-    delete?: drum_distillationsWhereUniqueInput | drum_distillationsWhereUniqueInput[]
-    connect?: drum_distillationsWhereUniqueInput | drum_distillationsWhereUniqueInput[]
-    update?: drum_distillationsUpdateWithWhereUniqueWithoutNew_drumsInput | drum_distillationsUpdateWithWhereUniqueWithoutNew_drumsInput[]
-    updateMany?: drum_distillationsUpdateManyWithWhereWithoutNew_drumsInput | drum_distillationsUpdateManyWithWhereWithoutNew_drumsInput[]
-    deleteMany?: drum_distillationsScalarWhereInput | drum_distillationsScalarWhereInput[]
   }
 
   export type ordersUpdateOneWithoutNew_drumsNestedInput = {
@@ -26868,20 +26770,6 @@ export namespace Prisma {
     update?: transactionsUpdateWithWhereUniqueWithoutNew_drumsInput | transactionsUpdateWithWhereUniqueWithoutNew_drumsInput[]
     updateMany?: transactionsUpdateManyWithWhereWithoutNew_drumsInput | transactionsUpdateManyWithWhereWithoutNew_drumsInput[]
     deleteMany?: transactionsScalarWhereInput | transactionsScalarWhereInput[]
-  }
-
-  export type drum_distillationsUncheckedUpdateManyWithoutNew_drumsNestedInput = {
-    create?: XOR<drum_distillationsCreateWithoutNew_drumsInput, drum_distillationsUncheckedCreateWithoutNew_drumsInput> | drum_distillationsCreateWithoutNew_drumsInput[] | drum_distillationsUncheckedCreateWithoutNew_drumsInput[]
-    connectOrCreate?: drum_distillationsCreateOrConnectWithoutNew_drumsInput | drum_distillationsCreateOrConnectWithoutNew_drumsInput[]
-    upsert?: drum_distillationsUpsertWithWhereUniqueWithoutNew_drumsInput | drum_distillationsUpsertWithWhereUniqueWithoutNew_drumsInput[]
-    createMany?: drum_distillationsCreateManyNew_drumsInputEnvelope
-    set?: drum_distillationsWhereUniqueInput | drum_distillationsWhereUniqueInput[]
-    disconnect?: drum_distillationsWhereUniqueInput | drum_distillationsWhereUniqueInput[]
-    delete?: drum_distillationsWhereUniqueInput | drum_distillationsWhereUniqueInput[]
-    connect?: drum_distillationsWhereUniqueInput | drum_distillationsWhereUniqueInput[]
-    update?: drum_distillationsUpdateWithWhereUniqueWithoutNew_drumsInput | drum_distillationsUpdateWithWhereUniqueWithoutNew_drumsInput[]
-    updateMany?: drum_distillationsUpdateManyWithWhereWithoutNew_drumsInput | drum_distillationsUpdateManyWithWhereWithoutNew_drumsInput[]
-    deleteMany?: drum_distillationsScalarWhereInput | drum_distillationsScalarWhereInput[]
   }
 
   export type processesUncheckedUpdateManyWithoutNew_drumsNestedInput = {
@@ -27002,10 +26890,10 @@ export namespace Prisma {
     connect?: new_drumsWhereUniqueInput
   }
 
-  export type StillCreateNestedOneWithoutProcessesInput = {
-    create?: XOR<StillCreateWithoutProcessesInput, StillUncheckedCreateWithoutProcessesInput>
-    connectOrCreate?: StillCreateOrConnectWithoutProcessesInput
-    connect?: StillWhereUniqueInput
+  export type stillsCreateNestedOneWithoutProcessesInput = {
+    create?: XOR<stillsCreateWithoutProcessesInput, stillsUncheckedCreateWithoutProcessesInput>
+    connectOrCreate?: stillsCreateOrConnectWithoutProcessesInput
+    connect?: stillsWhereUniqueInput
   }
 
   export type transactionsCreateNestedManyWithoutProcessesInput = {
@@ -27032,12 +26920,12 @@ export namespace Prisma {
     update?: XOR<XOR<new_drumsUpdateToOneWithWhereWithoutProcessesInput, new_drumsUpdateWithoutProcessesInput>, new_drumsUncheckedUpdateWithoutProcessesInput>
   }
 
-  export type StillUpdateOneRequiredWithoutProcessesNestedInput = {
-    create?: XOR<StillCreateWithoutProcessesInput, StillUncheckedCreateWithoutProcessesInput>
-    connectOrCreate?: StillCreateOrConnectWithoutProcessesInput
-    upsert?: StillUpsertWithoutProcessesInput
-    connect?: StillWhereUniqueInput
-    update?: XOR<XOR<StillUpdateToOneWithWhereWithoutProcessesInput, StillUpdateWithoutProcessesInput>, StillUncheckedUpdateWithoutProcessesInput>
+  export type stillsUpdateOneRequiredWithoutProcessesNestedInput = {
+    create?: XOR<stillsCreateWithoutProcessesInput, stillsUncheckedCreateWithoutProcessesInput>
+    connectOrCreate?: stillsCreateOrConnectWithoutProcessesInput
+    upsert?: stillsUpsertWithoutProcessesInput
+    connect?: stillsWhereUniqueInput
+    update?: XOR<XOR<stillsUpdateToOneWithWhereWithoutProcessesInput, stillsUpdateWithoutProcessesInput>, stillsUncheckedUpdateWithoutProcessesInput>
   }
 
   export type transactionsUpdateManyWithoutProcessesNestedInput = {
@@ -27842,7 +27730,6 @@ export namespace Prisma {
     volume_repro?: Decimal | DecimalJsLike | number | string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
-    drum_distillations?: drum_distillationsCreateNestedManyWithoutDistillationsInput
     repro_additions?: repro_additionsCreateNestedManyWithoutDistillationsInput
   }
 
@@ -27860,7 +27747,6 @@ export namespace Prisma {
     volume_repro?: Decimal | DecimalJsLike | number | string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
-    drum_distillations?: drum_distillationsUncheckedCreateNestedManyWithoutDistillationsInput
     repro_additions?: repro_additionsUncheckedCreateNestedManyWithoutDistillationsInput
   }
 
@@ -27893,7 +27779,6 @@ export namespace Prisma {
     volume_repro?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    drum_distillations?: drum_distillationsUpdateManyWithoutDistillationsNestedInput
     repro_additions?: repro_additionsUpdateManyWithoutDistillationsNestedInput
   }
 
@@ -27911,7 +27796,6 @@ export namespace Prisma {
     volume_repro?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    drum_distillations?: drum_distillationsUncheckedUpdateManyWithoutDistillationsNestedInput
     repro_additions?: repro_additionsUncheckedUpdateManyWithoutDistillationsNestedInput
   }
 
@@ -27927,6 +27811,7 @@ export namespace Prisma {
     delivery_status?: string
     eta_start?: Date | string | null
     eta_end?: Date | string | null
+    po_number?: string | null
     new_drums?: new_drumsCreateNestedManyWithoutOrdersInput
   }
 
@@ -27943,6 +27828,7 @@ export namespace Prisma {
     delivery_status?: string
     eta_start?: Date | string | null
     eta_end?: Date | string | null
+    po_number?: string | null
     new_drums?: new_drumsUncheckedCreateNestedManyWithoutOrdersInput
   }
 
@@ -27956,11 +27842,11 @@ export namespace Prisma {
     tx_date?: Date | string
     material?: string | null
     tx_notes?: string | null
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
-    direction?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
     batch_code?: string | null
     order_id?: number | null
+    direction?: string | null
     new_drums?: new_drumsCreateNestedOneWithoutTransactionsInput
     processes?: processesCreateNestedOneWithoutTransactionsInput
     repro_drums?: repro_drumsCreateNestedOneWithoutTransactionsInput
@@ -27974,12 +27860,12 @@ export namespace Prisma {
     drum_id?: number | null
     repro_id?: number | null
     tx_notes?: string | null
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
     process_id?: number | null
-    direction?: string | null
     batch_code?: string | null
     order_id?: number | null
+    direction?: string | null
   }
 
   export type transactionsCreateOrConnectWithoutDeliveriesInput = {
@@ -28015,6 +27901,7 @@ export namespace Prisma {
     delivery_status?: StringFieldUpdateOperationsInput | string
     eta_start?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     eta_end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    po_number?: NullableStringFieldUpdateOperationsInput | string | null
     new_drums?: new_drumsUpdateManyWithoutOrdersNestedInput
   }
 
@@ -28031,6 +27918,7 @@ export namespace Prisma {
     delivery_status?: StringFieldUpdateOperationsInput | string
     eta_start?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     eta_end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    po_number?: NullableStringFieldUpdateOperationsInput | string | null
     new_drums?: new_drumsUncheckedUpdateManyWithoutOrdersNestedInput
   }
 
@@ -28061,13 +27949,13 @@ export namespace Prisma {
     drum_id?: IntNullableFilter<"transactions"> | number | null
     repro_id?: IntNullableFilter<"transactions"> | number | null
     tx_notes?: StringNullableFilter<"transactions"> | string | null
-    created_at?: DateTimeNullableFilter<"transactions"> | Date | string | null
-    updated_at?: DateTimeNullableFilter<"transactions"> | Date | string | null
+    created_at?: DateTimeFilter<"transactions"> | Date | string
+    updated_at?: DateTimeFilter<"transactions"> | Date | string
     process_id?: IntNullableFilter<"transactions"> | number | null
-    direction?: StringNullableFilter<"transactions"> | string | null
     delivery_id?: IntNullableFilter<"transactions"> | number | null
     batch_code?: StringNullableFilter<"transactions"> | string | null
     order_id?: IntNullableFilter<"transactions"> | number | null
+    direction?: StringNullableFilter<"transactions"> | string | null
   }
 
   export type batchesCreateWithoutDistillationsInput = {
@@ -28096,26 +27984,6 @@ export namespace Prisma {
 
   export type batchesCreateManyDistillationsInputEnvelope = {
     data: batchesCreateManyDistillationsInput | batchesCreateManyDistillationsInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type drum_distillationsCreateWithoutDistillationsInput = {
-    fraction_used?: Decimal | DecimalJsLike | number | string
-    new_drums: new_drumsCreateNestedOneWithoutDrum_distillationsInput
-  }
-
-  export type drum_distillationsUncheckedCreateWithoutDistillationsInput = {
-    drum_id: number
-    fraction_used?: Decimal | DecimalJsLike | number | string
-  }
-
-  export type drum_distillationsCreateOrConnectWithoutDistillationsInput = {
-    where: drum_distillationsWhereUniqueInput
-    create: XOR<drum_distillationsCreateWithoutDistillationsInput, drum_distillationsUncheckedCreateWithoutDistillationsInput>
-  }
-
-  export type drum_distillationsCreateManyDistillationsInputEnvelope = {
-    data: drum_distillationsCreateManyDistillationsInput | drum_distillationsCreateManyDistillationsInput[]
     skipDuplicates?: boolean
   }
 
@@ -28178,31 +28046,6 @@ export namespace Prisma {
     updated_at?: DateTimeNullableFilter<"batches"> | Date | string | null
   }
 
-  export type drum_distillationsUpsertWithWhereUniqueWithoutDistillationsInput = {
-    where: drum_distillationsWhereUniqueInput
-    update: XOR<drum_distillationsUpdateWithoutDistillationsInput, drum_distillationsUncheckedUpdateWithoutDistillationsInput>
-    create: XOR<drum_distillationsCreateWithoutDistillationsInput, drum_distillationsUncheckedCreateWithoutDistillationsInput>
-  }
-
-  export type drum_distillationsUpdateWithWhereUniqueWithoutDistillationsInput = {
-    where: drum_distillationsWhereUniqueInput
-    data: XOR<drum_distillationsUpdateWithoutDistillationsInput, drum_distillationsUncheckedUpdateWithoutDistillationsInput>
-  }
-
-  export type drum_distillationsUpdateManyWithWhereWithoutDistillationsInput = {
-    where: drum_distillationsScalarWhereInput
-    data: XOR<drum_distillationsUpdateManyMutationInput, drum_distillationsUncheckedUpdateManyWithoutDistillationsInput>
-  }
-
-  export type drum_distillationsScalarWhereInput = {
-    AND?: drum_distillationsScalarWhereInput | drum_distillationsScalarWhereInput[]
-    OR?: drum_distillationsScalarWhereInput[]
-    NOT?: drum_distillationsScalarWhereInput | drum_distillationsScalarWhereInput[]
-    drum_id?: IntFilter<"drum_distillations"> | number
-    distillation_id?: IntFilter<"drum_distillations"> | number
-    fraction_used?: DecimalFilter<"drum_distillations"> | Decimal | DecimalJsLike | number | string
-  }
-
   export type repro_additionsUpsertWithWhereUniqueWithoutDistillationsInput = {
     where: repro_additionsWhereUniqueInput
     update: XOR<repro_additionsUpdateWithoutDistillationsInput, repro_additionsUncheckedUpdateWithoutDistillationsInput>
@@ -28233,178 +28076,6 @@ export namespace Prisma {
     updated_at?: DateTimeNullableFilter<"repro_additions"> | Date | string | null
   }
 
-  export type distillationsCreateWithoutDrum_distillationsInput = {
-    loading_date?: Date | string | null
-    start_date?: Date | string | null
-    still_code?: string | null
-    volume_in?: Decimal | DecimalJsLike | number | string | null
-    transporter?: string | null
-    loader?: string | null
-    operator?: string | null
-    completion_date?: Date | string | null
-    volume_in_spec?: Decimal | DecimalJsLike | number | string | null
-    volume_repro?: Decimal | DecimalJsLike | number | string | null
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
-    batches?: batchesCreateNestedManyWithoutDistillationsInput
-    repro_additions?: repro_additionsCreateNestedManyWithoutDistillationsInput
-  }
-
-  export type distillationsUncheckedCreateWithoutDrum_distillationsInput = {
-    distillation_id?: number
-    loading_date?: Date | string | null
-    start_date?: Date | string | null
-    still_code?: string | null
-    volume_in?: Decimal | DecimalJsLike | number | string | null
-    transporter?: string | null
-    loader?: string | null
-    operator?: string | null
-    completion_date?: Date | string | null
-    volume_in_spec?: Decimal | DecimalJsLike | number | string | null
-    volume_repro?: Decimal | DecimalJsLike | number | string | null
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
-    batches?: batchesUncheckedCreateNestedManyWithoutDistillationsInput
-    repro_additions?: repro_additionsUncheckedCreateNestedManyWithoutDistillationsInput
-  }
-
-  export type distillationsCreateOrConnectWithoutDrum_distillationsInput = {
-    where: distillationsWhereUniqueInput
-    create: XOR<distillationsCreateWithoutDrum_distillationsInput, distillationsUncheckedCreateWithoutDrum_distillationsInput>
-  }
-
-  export type new_drumsCreateWithoutDrum_distillationsInput = {
-    material: string
-    date_processed?: Date | string | null
-    status?: string
-    location?: string | null
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
-    orders?: ordersCreateNestedOneWithoutNew_drumsInput
-    processes?: processesCreateNestedManyWithoutNew_drumsInput
-    transactions?: transactionsCreateNestedManyWithoutNew_drumsInput
-  }
-
-  export type new_drumsUncheckedCreateWithoutDrum_distillationsInput = {
-    drum_id?: number
-    material: string
-    date_processed?: Date | string | null
-    status?: string
-    location?: string | null
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
-    order_id?: number | null
-    processes?: processesUncheckedCreateNestedManyWithoutNew_drumsInput
-    transactions?: transactionsUncheckedCreateNestedManyWithoutNew_drumsInput
-  }
-
-  export type new_drumsCreateOrConnectWithoutDrum_distillationsInput = {
-    where: new_drumsWhereUniqueInput
-    create: XOR<new_drumsCreateWithoutDrum_distillationsInput, new_drumsUncheckedCreateWithoutDrum_distillationsInput>
-  }
-
-  export type distillationsUpsertWithoutDrum_distillationsInput = {
-    update: XOR<distillationsUpdateWithoutDrum_distillationsInput, distillationsUncheckedUpdateWithoutDrum_distillationsInput>
-    create: XOR<distillationsCreateWithoutDrum_distillationsInput, distillationsUncheckedCreateWithoutDrum_distillationsInput>
-    where?: distillationsWhereInput
-  }
-
-  export type distillationsUpdateToOneWithWhereWithoutDrum_distillationsInput = {
-    where?: distillationsWhereInput
-    data: XOR<distillationsUpdateWithoutDrum_distillationsInput, distillationsUncheckedUpdateWithoutDrum_distillationsInput>
-  }
-
-  export type distillationsUpdateWithoutDrum_distillationsInput = {
-    loading_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    still_code?: NullableStringFieldUpdateOperationsInput | string | null
-    volume_in?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    transporter?: NullableStringFieldUpdateOperationsInput | string | null
-    loader?: NullableStringFieldUpdateOperationsInput | string | null
-    operator?: NullableStringFieldUpdateOperationsInput | string | null
-    completion_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    volume_in_spec?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    volume_repro?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    batches?: batchesUpdateManyWithoutDistillationsNestedInput
-    repro_additions?: repro_additionsUpdateManyWithoutDistillationsNestedInput
-  }
-
-  export type distillationsUncheckedUpdateWithoutDrum_distillationsInput = {
-    distillation_id?: IntFieldUpdateOperationsInput | number
-    loading_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    still_code?: NullableStringFieldUpdateOperationsInput | string | null
-    volume_in?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    transporter?: NullableStringFieldUpdateOperationsInput | string | null
-    loader?: NullableStringFieldUpdateOperationsInput | string | null
-    operator?: NullableStringFieldUpdateOperationsInput | string | null
-    completion_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    volume_in_spec?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    volume_repro?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    batches?: batchesUncheckedUpdateManyWithoutDistillationsNestedInput
-    repro_additions?: repro_additionsUncheckedUpdateManyWithoutDistillationsNestedInput
-  }
-
-  export type new_drumsUpsertWithoutDrum_distillationsInput = {
-    update: XOR<new_drumsUpdateWithoutDrum_distillationsInput, new_drumsUncheckedUpdateWithoutDrum_distillationsInput>
-    create: XOR<new_drumsCreateWithoutDrum_distillationsInput, new_drumsUncheckedCreateWithoutDrum_distillationsInput>
-    where?: new_drumsWhereInput
-  }
-
-  export type new_drumsUpdateToOneWithWhereWithoutDrum_distillationsInput = {
-    where?: new_drumsWhereInput
-    data: XOR<new_drumsUpdateWithoutDrum_distillationsInput, new_drumsUncheckedUpdateWithoutDrum_distillationsInput>
-  }
-
-  export type new_drumsUpdateWithoutDrum_distillationsInput = {
-    material?: StringFieldUpdateOperationsInput | string
-    date_processed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    status?: StringFieldUpdateOperationsInput | string
-    location?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    orders?: ordersUpdateOneWithoutNew_drumsNestedInput
-    processes?: processesUpdateManyWithoutNew_drumsNestedInput
-    transactions?: transactionsUpdateManyWithoutNew_drumsNestedInput
-  }
-
-  export type new_drumsUncheckedUpdateWithoutDrum_distillationsInput = {
-    drum_id?: IntFieldUpdateOperationsInput | number
-    material?: StringFieldUpdateOperationsInput | string
-    date_processed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    status?: StringFieldUpdateOperationsInput | string
-    location?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    order_id?: NullableIntFieldUpdateOperationsInput | number | null
-    processes?: processesUncheckedUpdateManyWithoutNew_drumsNestedInput
-    transactions?: transactionsUncheckedUpdateManyWithoutNew_drumsNestedInput
-  }
-
-  export type drum_distillationsCreateWithoutNew_drumsInput = {
-    fraction_used?: Decimal | DecimalJsLike | number | string
-    distillations: distillationsCreateNestedOneWithoutDrum_distillationsInput
-  }
-
-  export type drum_distillationsUncheckedCreateWithoutNew_drumsInput = {
-    distillation_id: number
-    fraction_used?: Decimal | DecimalJsLike | number | string
-  }
-
-  export type drum_distillationsCreateOrConnectWithoutNew_drumsInput = {
-    where: drum_distillationsWhereUniqueInput
-    create: XOR<drum_distillationsCreateWithoutNew_drumsInput, drum_distillationsUncheckedCreateWithoutNew_drumsInput>
-  }
-
-  export type drum_distillationsCreateManyNew_drumsInputEnvelope = {
-    data: drum_distillationsCreateManyNew_drumsInput | drum_distillationsCreateManyNew_drumsInput[]
-    skipDuplicates?: boolean
-  }
-
   export type ordersCreateWithoutNew_drumsInput = {
     supplier: string
     material: string
@@ -28417,6 +28088,7 @@ export namespace Prisma {
     delivery_status?: string
     eta_start?: Date | string | null
     eta_end?: Date | string | null
+    po_number?: string | null
     deliveries?: deliveriesCreateNestedManyWithoutOrdersInput
   }
 
@@ -28433,6 +28105,7 @@ export namespace Prisma {
     delivery_status?: string
     eta_start?: Date | string | null
     eta_end?: Date | string | null
+    po_number?: string | null
     deliveries?: deliveriesUncheckedCreateNestedManyWithoutOrdersInput
   }
 
@@ -28448,7 +28121,7 @@ export namespace Prisma {
     loader?: string | null
     transporter?: string | null
     date_processed?: Date | string | null
-    stills: StillCreateNestedOneWithoutProcessesInput
+    stills: stillsCreateNestedOneWithoutProcessesInput
     transactions?: transactionsCreateNestedManyWithoutProcessesInput
   }
 
@@ -28479,11 +28152,11 @@ export namespace Prisma {
     tx_date?: Date | string
     material?: string | null
     tx_notes?: string | null
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
-    direction?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
     batch_code?: string | null
     order_id?: number | null
+    direction?: string | null
     deliveries?: deliveriesCreateNestedOneWithoutTransactionsInput
     processes?: processesCreateNestedOneWithoutTransactionsInput
     repro_drums?: repro_drumsCreateNestedOneWithoutTransactionsInput
@@ -28496,13 +28169,13 @@ export namespace Prisma {
     material?: string | null
     repro_id?: number | null
     tx_notes?: string | null
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
     process_id?: number | null
-    direction?: string | null
     delivery_id?: number | null
     batch_code?: string | null
     order_id?: number | null
+    direction?: string | null
   }
 
   export type transactionsCreateOrConnectWithoutNew_drumsInput = {
@@ -28513,22 +28186,6 @@ export namespace Prisma {
   export type transactionsCreateManyNew_drumsInputEnvelope = {
     data: transactionsCreateManyNew_drumsInput | transactionsCreateManyNew_drumsInput[]
     skipDuplicates?: boolean
-  }
-
-  export type drum_distillationsUpsertWithWhereUniqueWithoutNew_drumsInput = {
-    where: drum_distillationsWhereUniqueInput
-    update: XOR<drum_distillationsUpdateWithoutNew_drumsInput, drum_distillationsUncheckedUpdateWithoutNew_drumsInput>
-    create: XOR<drum_distillationsCreateWithoutNew_drumsInput, drum_distillationsUncheckedCreateWithoutNew_drumsInput>
-  }
-
-  export type drum_distillationsUpdateWithWhereUniqueWithoutNew_drumsInput = {
-    where: drum_distillationsWhereUniqueInput
-    data: XOR<drum_distillationsUpdateWithoutNew_drumsInput, drum_distillationsUncheckedUpdateWithoutNew_drumsInput>
-  }
-
-  export type drum_distillationsUpdateManyWithWhereWithoutNew_drumsInput = {
-    where: drum_distillationsScalarWhereInput
-    data: XOR<drum_distillationsUpdateManyMutationInput, drum_distillationsUncheckedUpdateManyWithoutNew_drumsInput>
   }
 
   export type ordersUpsertWithoutNew_drumsInput = {
@@ -28554,6 +28211,7 @@ export namespace Prisma {
     delivery_status?: StringFieldUpdateOperationsInput | string
     eta_start?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     eta_end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    po_number?: NullableStringFieldUpdateOperationsInput | string | null
     deliveries?: deliveriesUpdateManyWithoutOrdersNestedInput
   }
 
@@ -28570,6 +28228,7 @@ export namespace Prisma {
     delivery_status?: StringFieldUpdateOperationsInput | string
     eta_start?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     eta_end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    po_number?: NullableStringFieldUpdateOperationsInput | string | null
     deliveries?: deliveriesUncheckedUpdateManyWithoutOrdersNestedInput
   }
 
@@ -28660,9 +28319,8 @@ export namespace Prisma {
     date_processed?: Date | string | null
     status?: string
     location?: string | null
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
-    drum_distillations?: drum_distillationsCreateNestedManyWithoutNew_drumsInput
+    created_at?: Date | string
+    updated_at?: Date | string
     processes?: processesCreateNestedManyWithoutNew_drumsInput
     transactions?: transactionsCreateNestedManyWithoutNew_drumsInput
   }
@@ -28673,9 +28331,8 @@ export namespace Prisma {
     date_processed?: Date | string | null
     status?: string
     location?: string | null
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
-    drum_distillations?: drum_distillationsUncheckedCreateNestedManyWithoutNew_drumsInput
+    created_at?: Date | string
+    updated_at?: Date | string
     processes?: processesUncheckedCreateNestedManyWithoutNew_drumsInput
     transactions?: transactionsUncheckedCreateNestedManyWithoutNew_drumsInput
   }
@@ -28747,8 +28404,8 @@ export namespace Prisma {
     date_processed?: DateTimeNullableFilter<"new_drums"> | Date | string | null
     status?: StringFilter<"new_drums"> | string
     location?: StringNullableFilter<"new_drums"> | string | null
-    created_at?: DateTimeNullableFilter<"new_drums"> | Date | string | null
-    updated_at?: DateTimeNullableFilter<"new_drums"> | Date | string | null
+    created_at?: DateTimeFilter<"new_drums"> | Date | string
+    updated_at?: DateTimeFilter<"new_drums"> | Date | string
     order_id?: IntNullableFilter<"new_drums"> | number | null
   }
 
@@ -28757,9 +28414,8 @@ export namespace Prisma {
     date_processed?: Date | string | null
     status?: string
     location?: string | null
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
-    drum_distillations?: drum_distillationsCreateNestedManyWithoutNew_drumsInput
+    created_at?: Date | string
+    updated_at?: Date | string
     orders?: ordersCreateNestedOneWithoutNew_drumsInput
     transactions?: transactionsCreateNestedManyWithoutNew_drumsInput
   }
@@ -28770,10 +28426,9 @@ export namespace Prisma {
     date_processed?: Date | string | null
     status?: string
     location?: string | null
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
     order_id?: number | null
-    drum_distillations?: drum_distillationsUncheckedCreateNestedManyWithoutNew_drumsInput
     transactions?: transactionsUncheckedCreateNestedManyWithoutNew_drumsInput
   }
 
@@ -28782,27 +28437,27 @@ export namespace Prisma {
     create: XOR<new_drumsCreateWithoutProcessesInput, new_drumsUncheckedCreateWithoutProcessesInput>
   }
 
-  export type StillCreateWithoutProcessesInput = {
+  export type stillsCreateWithoutProcessesInput = {
     code: string
     site: string
     power: number
     capacity: number
-    isVacuum?: boolean | null
-    isOperational?: boolean | null
+    is_vacuum?: boolean | null
+    is_operational?: boolean | null
   }
 
-  export type StillUncheckedCreateWithoutProcessesInput = {
+  export type stillsUncheckedCreateWithoutProcessesInput = {
     code: string
     site: string
     power: number
     capacity: number
-    isVacuum?: boolean | null
-    isOperational?: boolean | null
+    is_vacuum?: boolean | null
+    is_operational?: boolean | null
   }
 
-  export type StillCreateOrConnectWithoutProcessesInput = {
-    where: StillWhereUniqueInput
-    create: XOR<StillCreateWithoutProcessesInput, StillUncheckedCreateWithoutProcessesInput>
+  export type stillsCreateOrConnectWithoutProcessesInput = {
+    where: stillsWhereUniqueInput
+    create: XOR<stillsCreateWithoutProcessesInput, stillsUncheckedCreateWithoutProcessesInput>
   }
 
   export type transactionsCreateWithoutProcessesInput = {
@@ -28810,11 +28465,11 @@ export namespace Prisma {
     tx_date?: Date | string
     material?: string | null
     tx_notes?: string | null
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
-    direction?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
     batch_code?: string | null
     order_id?: number | null
+    direction?: string | null
     deliveries?: deliveriesCreateNestedOneWithoutTransactionsInput
     new_drums?: new_drumsCreateNestedOneWithoutTransactionsInput
     repro_drums?: repro_drumsCreateNestedOneWithoutTransactionsInput
@@ -28828,12 +28483,12 @@ export namespace Prisma {
     drum_id?: number | null
     repro_id?: number | null
     tx_notes?: string | null
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
-    direction?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
     delivery_id?: number | null
     batch_code?: string | null
     order_id?: number | null
+    direction?: string | null
   }
 
   export type transactionsCreateOrConnectWithoutProcessesInput = {
@@ -28862,9 +28517,8 @@ export namespace Prisma {
     date_processed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    drum_distillations?: drum_distillationsUpdateManyWithoutNew_drumsNestedInput
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     orders?: ordersUpdateOneWithoutNew_drumsNestedInput
     transactions?: transactionsUpdateManyWithoutNew_drumsNestedInput
   }
@@ -28875,40 +28529,39 @@ export namespace Prisma {
     date_processed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
-    drum_distillations?: drum_distillationsUncheckedUpdateManyWithoutNew_drumsNestedInput
     transactions?: transactionsUncheckedUpdateManyWithoutNew_drumsNestedInput
   }
 
-  export type StillUpsertWithoutProcessesInput = {
-    update: XOR<StillUpdateWithoutProcessesInput, StillUncheckedUpdateWithoutProcessesInput>
-    create: XOR<StillCreateWithoutProcessesInput, StillUncheckedCreateWithoutProcessesInput>
-    where?: StillWhereInput
+  export type stillsUpsertWithoutProcessesInput = {
+    update: XOR<stillsUpdateWithoutProcessesInput, stillsUncheckedUpdateWithoutProcessesInput>
+    create: XOR<stillsCreateWithoutProcessesInput, stillsUncheckedCreateWithoutProcessesInput>
+    where?: stillsWhereInput
   }
 
-  export type StillUpdateToOneWithWhereWithoutProcessesInput = {
-    where?: StillWhereInput
-    data: XOR<StillUpdateWithoutProcessesInput, StillUncheckedUpdateWithoutProcessesInput>
+  export type stillsUpdateToOneWithWhereWithoutProcessesInput = {
+    where?: stillsWhereInput
+    data: XOR<stillsUpdateWithoutProcessesInput, stillsUncheckedUpdateWithoutProcessesInput>
   }
 
-  export type StillUpdateWithoutProcessesInput = {
+  export type stillsUpdateWithoutProcessesInput = {
     code?: StringFieldUpdateOperationsInput | string
     site?: StringFieldUpdateOperationsInput | string
     power?: IntFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
-    isVacuum?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    isOperational?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    is_vacuum?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    is_operational?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
-  export type StillUncheckedUpdateWithoutProcessesInput = {
+  export type stillsUncheckedUpdateWithoutProcessesInput = {
     code?: StringFieldUpdateOperationsInput | string
     site?: StringFieldUpdateOperationsInput | string
     power?: IntFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
-    isVacuum?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    isOperational?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    is_vacuum?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    is_operational?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type transactionsUpsertWithWhereUniqueWithoutProcessesInput = {
@@ -28941,7 +28594,6 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     batches?: batchesCreateNestedManyWithoutDistillationsInput
-    drum_distillations?: drum_distillationsCreateNestedManyWithoutDistillationsInput
   }
 
   export type distillationsUncheckedCreateWithoutRepro_additionsInput = {
@@ -28959,7 +28611,6 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     batches?: batchesUncheckedCreateNestedManyWithoutDistillationsInput
-    drum_distillations?: drum_distillationsUncheckedCreateNestedManyWithoutDistillationsInput
   }
 
   export type distillationsCreateOrConnectWithoutRepro_additionsInput = {
@@ -29026,7 +28677,6 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     batches?: batchesUpdateManyWithoutDistillationsNestedInput
-    drum_distillations?: drum_distillationsUpdateManyWithoutDistillationsNestedInput
   }
 
   export type distillationsUncheckedUpdateWithoutRepro_additionsInput = {
@@ -29044,7 +28694,6 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     batches?: batchesUncheckedUpdateManyWithoutDistillationsNestedInput
-    drum_distillations?: drum_distillationsUncheckedUpdateManyWithoutDistillationsNestedInput
   }
 
   export type repro_drumsUpsertWithoutRepro_additionsInput = {
@@ -29121,11 +28770,11 @@ export namespace Prisma {
     tx_date?: Date | string
     material?: string | null
     tx_notes?: string | null
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
-    direction?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
     batch_code?: string | null
     order_id?: number | null
+    direction?: string | null
     deliveries?: deliveriesCreateNestedOneWithoutTransactionsInput
     new_drums?: new_drumsCreateNestedOneWithoutTransactionsInput
     processes?: processesCreateNestedOneWithoutTransactionsInput
@@ -29138,13 +28787,13 @@ export namespace Prisma {
     material?: string | null
     drum_id?: number | null
     tx_notes?: string | null
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
     process_id?: number | null
-    direction?: string | null
     delivery_id?: number | null
     batch_code?: string | null
     order_id?: number | null
+    direction?: string | null
   }
 
   export type transactionsCreateOrConnectWithoutRepro_drumsInput = {
@@ -29224,9 +28873,8 @@ export namespace Prisma {
     date_processed?: Date | string | null
     status?: string
     location?: string | null
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
-    drum_distillations?: drum_distillationsCreateNestedManyWithoutNew_drumsInput
+    created_at?: Date | string
+    updated_at?: Date | string
     orders?: ordersCreateNestedOneWithoutNew_drumsInput
     processes?: processesCreateNestedManyWithoutNew_drumsInput
   }
@@ -29237,10 +28885,9 @@ export namespace Prisma {
     date_processed?: Date | string | null
     status?: string
     location?: string | null
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
     order_id?: number | null
-    drum_distillations?: drum_distillationsUncheckedCreateNestedManyWithoutNew_drumsInput
     processes?: processesUncheckedCreateNestedManyWithoutNew_drumsInput
   }
 
@@ -29257,7 +28904,7 @@ export namespace Prisma {
     transporter?: string | null
     date_processed?: Date | string | null
     new_drums?: new_drumsCreateNestedOneWithoutProcessesInput
-    stills: StillCreateNestedOneWithoutProcessesInput
+    stills: stillsCreateNestedOneWithoutProcessesInput
   }
 
   export type processesUncheckedCreateWithoutTransactionsInput = {
@@ -29363,9 +29010,8 @@ export namespace Prisma {
     date_processed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    drum_distillations?: drum_distillationsUpdateManyWithoutNew_drumsNestedInput
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     orders?: ordersUpdateOneWithoutNew_drumsNestedInput
     processes?: processesUpdateManyWithoutNew_drumsNestedInput
   }
@@ -29376,10 +29022,9 @@ export namespace Prisma {
     date_processed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
-    drum_distillations?: drum_distillationsUncheckedUpdateManyWithoutNew_drumsNestedInput
     processes?: processesUncheckedUpdateManyWithoutNew_drumsNestedInput
   }
 
@@ -29402,7 +29047,7 @@ export namespace Prisma {
     transporter?: NullableStringFieldUpdateOperationsInput | string | null
     date_processed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     new_drums?: new_drumsUpdateOneWithoutProcessesNestedInput
-    stills?: StillUpdateOneRequiredWithoutProcessesNestedInput
+    stills?: stillsUpdateOneRequiredWithoutProcessesNestedInput
   }
 
   export type processesUncheckedUpdateWithoutTransactionsInput = {
@@ -29583,12 +29228,12 @@ export namespace Prisma {
     drum_id?: number | null
     repro_id?: number | null
     tx_notes?: string | null
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
     process_id?: number | null
-    direction?: string | null
     batch_code?: string | null
     order_id?: number | null
+    direction?: string | null
   }
 
   export type transactionsUpdateWithoutDeliveriesInput = {
@@ -29596,11 +29241,11 @@ export namespace Prisma {
     tx_date?: DateTimeFieldUpdateOperationsInput | Date | string
     material?: NullableStringFieldUpdateOperationsInput | string | null
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    direction?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
+    direction?: NullableStringFieldUpdateOperationsInput | string | null
     new_drums?: new_drumsUpdateOneWithoutTransactionsNestedInput
     processes?: processesUpdateOneWithoutTransactionsNestedInput
     repro_drums?: repro_drumsUpdateOneWithoutTransactionsNestedInput
@@ -29614,12 +29259,12 @@ export namespace Prisma {
     drum_id?: NullableIntFieldUpdateOperationsInput | number | null
     repro_id?: NullableIntFieldUpdateOperationsInput | number | null
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     process_id?: NullableIntFieldUpdateOperationsInput | number | null
-    direction?: NullableStringFieldUpdateOperationsInput | string | null
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
+    direction?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type transactionsUncheckedUpdateManyWithoutDeliveriesInput = {
@@ -29630,12 +29275,12 @@ export namespace Prisma {
     drum_id?: NullableIntFieldUpdateOperationsInput | number | null
     repro_id?: NullableIntFieldUpdateOperationsInput | number | null
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     process_id?: NullableIntFieldUpdateOperationsInput | number | null
-    direction?: NullableStringFieldUpdateOperationsInput | string | null
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
+    direction?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type batchesCreateManyDistillationsInput = {
@@ -29646,11 +29291,6 @@ export namespace Prisma {
     quantity?: Decimal | DecimalJsLike | number | string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
-  }
-
-  export type drum_distillationsCreateManyDistillationsInput = {
-    drum_id: number
-    fraction_used?: Decimal | DecimalJsLike | number | string
   }
 
   export type repro_additionsCreateManyDistillationsInput = {
@@ -29692,21 +29332,6 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type drum_distillationsUpdateWithoutDistillationsInput = {
-    fraction_used?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    new_drums?: new_drumsUpdateOneRequiredWithoutDrum_distillationsNestedInput
-  }
-
-  export type drum_distillationsUncheckedUpdateWithoutDistillationsInput = {
-    drum_id?: IntFieldUpdateOperationsInput | number
-    fraction_used?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-  }
-
-  export type drum_distillationsUncheckedUpdateManyWithoutDistillationsInput = {
-    drum_id?: IntFieldUpdateOperationsInput | number
-    fraction_used?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-  }
-
   export type repro_additionsUpdateWithoutDistillationsInput = {
     date_added?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     volume_added?: IntFieldUpdateOperationsInput | number
@@ -29736,11 +29361,6 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type drum_distillationsCreateManyNew_drumsInput = {
-    distillation_id: number
-    fraction_used?: Decimal | DecimalJsLike | number | string
-  }
-
   export type processesCreateManyNew_drumsInput = {
     process_id?: number
     material?: string | null
@@ -29759,28 +29379,13 @@ export namespace Prisma {
     material?: string | null
     repro_id?: number | null
     tx_notes?: string | null
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
     process_id?: number | null
-    direction?: string | null
     delivery_id?: number | null
     batch_code?: string | null
     order_id?: number | null
-  }
-
-  export type drum_distillationsUpdateWithoutNew_drumsInput = {
-    fraction_used?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    distillations?: distillationsUpdateOneRequiredWithoutDrum_distillationsNestedInput
-  }
-
-  export type drum_distillationsUncheckedUpdateWithoutNew_drumsInput = {
-    distillation_id?: IntFieldUpdateOperationsInput | number
-    fraction_used?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-  }
-
-  export type drum_distillationsUncheckedUpdateManyWithoutNew_drumsInput = {
-    distillation_id?: IntFieldUpdateOperationsInput | number
-    fraction_used?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    direction?: string | null
   }
 
   export type processesUpdateWithoutNew_drumsInput = {
@@ -29790,7 +29395,7 @@ export namespace Prisma {
     loader?: NullableStringFieldUpdateOperationsInput | string | null
     transporter?: NullableStringFieldUpdateOperationsInput | string | null
     date_processed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    stills?: StillUpdateOneRequiredWithoutProcessesNestedInput
+    stills?: stillsUpdateOneRequiredWithoutProcessesNestedInput
     transactions?: transactionsUpdateManyWithoutProcessesNestedInput
   }
 
@@ -29822,11 +29427,11 @@ export namespace Prisma {
     tx_date?: DateTimeFieldUpdateOperationsInput | Date | string
     material?: NullableStringFieldUpdateOperationsInput | string | null
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    direction?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
+    direction?: NullableStringFieldUpdateOperationsInput | string | null
     deliveries?: deliveriesUpdateOneWithoutTransactionsNestedInput
     processes?: processesUpdateOneWithoutTransactionsNestedInput
     repro_drums?: repro_drumsUpdateOneWithoutTransactionsNestedInput
@@ -29839,13 +29444,13 @@ export namespace Prisma {
     material?: NullableStringFieldUpdateOperationsInput | string | null
     repro_id?: NullableIntFieldUpdateOperationsInput | number | null
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     process_id?: NullableIntFieldUpdateOperationsInput | number | null
-    direction?: NullableStringFieldUpdateOperationsInput | string | null
     delivery_id?: NullableIntFieldUpdateOperationsInput | number | null
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
+    direction?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type transactionsUncheckedUpdateManyWithoutNew_drumsInput = {
@@ -29855,13 +29460,13 @@ export namespace Prisma {
     material?: NullableStringFieldUpdateOperationsInput | string | null
     repro_id?: NullableIntFieldUpdateOperationsInput | number | null
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     process_id?: NullableIntFieldUpdateOperationsInput | number | null
-    direction?: NullableStringFieldUpdateOperationsInput | string | null
     delivery_id?: NullableIntFieldUpdateOperationsInput | number | null
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
+    direction?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type deliveriesCreateManyOrdersInput = {
@@ -29882,8 +29487,8 @@ export namespace Prisma {
     date_processed?: Date | string | null
     status?: string
     location?: string | null
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
   }
 
   export type deliveriesUpdateWithoutOrdersInput = {
@@ -29928,9 +29533,8 @@ export namespace Prisma {
     date_processed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    drum_distillations?: drum_distillationsUpdateManyWithoutNew_drumsNestedInput
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     processes?: processesUpdateManyWithoutNew_drumsNestedInput
     transactions?: transactionsUpdateManyWithoutNew_drumsNestedInput
   }
@@ -29941,9 +29545,8 @@ export namespace Prisma {
     date_processed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    drum_distillations?: drum_distillationsUncheckedUpdateManyWithoutNew_drumsNestedInput
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     processes?: processesUncheckedUpdateManyWithoutNew_drumsNestedInput
     transactions?: transactionsUncheckedUpdateManyWithoutNew_drumsNestedInput
   }
@@ -29954,8 +29557,8 @@ export namespace Prisma {
     date_processed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type transactionsCreateManyProcessesInput = {
@@ -29966,12 +29569,12 @@ export namespace Prisma {
     drum_id?: number | null
     repro_id?: number | null
     tx_notes?: string | null
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
-    direction?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
     delivery_id?: number | null
     batch_code?: string | null
     order_id?: number | null
+    direction?: string | null
   }
 
   export type transactionsUpdateWithoutProcessesInput = {
@@ -29979,11 +29582,11 @@ export namespace Prisma {
     tx_date?: DateTimeFieldUpdateOperationsInput | Date | string
     material?: NullableStringFieldUpdateOperationsInput | string | null
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    direction?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
+    direction?: NullableStringFieldUpdateOperationsInput | string | null
     deliveries?: deliveriesUpdateOneWithoutTransactionsNestedInput
     new_drums?: new_drumsUpdateOneWithoutTransactionsNestedInput
     repro_drums?: repro_drumsUpdateOneWithoutTransactionsNestedInput
@@ -29997,12 +29600,12 @@ export namespace Prisma {
     drum_id?: NullableIntFieldUpdateOperationsInput | number | null
     repro_id?: NullableIntFieldUpdateOperationsInput | number | null
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    direction?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     delivery_id?: NullableIntFieldUpdateOperationsInput | number | null
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
+    direction?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type transactionsUncheckedUpdateManyWithoutProcessesInput = {
@@ -30013,12 +29616,12 @@ export namespace Prisma {
     drum_id?: NullableIntFieldUpdateOperationsInput | number | null
     repro_id?: NullableIntFieldUpdateOperationsInput | number | null
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    direction?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     delivery_id?: NullableIntFieldUpdateOperationsInput | number | null
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
+    direction?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type repro_additionsCreateManyRepro_drumsInput = {
@@ -30038,13 +29641,13 @@ export namespace Prisma {
     material?: string | null
     drum_id?: number | null
     tx_notes?: string | null
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
     process_id?: number | null
-    direction?: string | null
     delivery_id?: number | null
     batch_code?: string | null
     order_id?: number | null
+    direction?: string | null
   }
 
   export type repro_additionsUpdateWithoutRepro_drumsInput = {
@@ -30081,11 +29684,11 @@ export namespace Prisma {
     tx_date?: DateTimeFieldUpdateOperationsInput | Date | string
     material?: NullableStringFieldUpdateOperationsInput | string | null
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    direction?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
+    direction?: NullableStringFieldUpdateOperationsInput | string | null
     deliveries?: deliveriesUpdateOneWithoutTransactionsNestedInput
     new_drums?: new_drumsUpdateOneWithoutTransactionsNestedInput
     processes?: processesUpdateOneWithoutTransactionsNestedInput
@@ -30098,13 +29701,13 @@ export namespace Prisma {
     material?: NullableStringFieldUpdateOperationsInput | string | null
     drum_id?: NullableIntFieldUpdateOperationsInput | number | null
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     process_id?: NullableIntFieldUpdateOperationsInput | number | null
-    direction?: NullableStringFieldUpdateOperationsInput | string | null
     delivery_id?: NullableIntFieldUpdateOperationsInput | number | null
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
+    direction?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type transactionsUncheckedUpdateManyWithoutRepro_drumsInput = {
@@ -30114,13 +29717,13 @@ export namespace Prisma {
     material?: NullableStringFieldUpdateOperationsInput | string | null
     drum_id?: NullableIntFieldUpdateOperationsInput | number | null
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     process_id?: NullableIntFieldUpdateOperationsInput | number | null
-    direction?: NullableStringFieldUpdateOperationsInput | string | null
     delivery_id?: NullableIntFieldUpdateOperationsInput | number | null
     batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
+    direction?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type processesCreateManyStillsInput = {

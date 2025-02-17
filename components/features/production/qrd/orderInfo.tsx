@@ -13,8 +13,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from "@/components/ui/Form";
+import { Input } from "@/components/ui/Input";
 import {
   Select,
   SelectContent,

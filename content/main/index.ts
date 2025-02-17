@@ -70,16 +70,6 @@ export const navItems: NavItem[] = [
     ],
   },
   {
-    name: "Manage",
-    links: [
-      {
-        id: 1,
-        name: "Manage",
-        link: "#dashboard",
-      },
-    ],
-  },
-  {
     name: "Products",
     links: [
       {

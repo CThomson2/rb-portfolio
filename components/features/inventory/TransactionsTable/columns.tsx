@@ -3,14 +3,15 @@
 // Import necessary dependencies for table functionality
 import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/Checkbox";
-import { SortableColumn, Actions } from "@/components/shared/table";
+import { SortableColumn } from "@/components/shared/table";
+import { Actions } from "@/components/shared/table/ux/Actions";
 
 // Formatters
 import { format } from "date-fns";
 import { getTxTypeVariant } from "@/lib/utils/formatters";
 
 // UI Components
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/components/ui/Badge";
 
 // import { MoreHorizontal } from "lucide-react";
 import type { Transaction } from "@/types/database/inventory/transactions";
@@ -96,11 +97,11 @@ export const columns: ColumnDef<Transaction>[] = [
     // Actions column for row operations:
     // Expand info | View product Modal
     // Add to cart | Go to Checkout | Favourite
-    accessorKey: "actions",
+    id: "actions",
     header: "Actions",
-    cell: () => (
+    cell: ({ row }) => (
       <div className="min-w-0 overflow-hidden">
-        <Actions />
+        <Actions transaction={row.original} />
       </div>
     ),
   },

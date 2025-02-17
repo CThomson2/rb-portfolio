@@ -6,7 +6,7 @@ import "./globals.css";
 import { Providers } from "@/app/providers";
 import { Sidebar } from "@/components/layout/sidebar/Sidebar";
 import { FloatingNav } from "@/components/ui/FloatingNavbar";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { navItems } from "@/content/main";
 
 const inter = Inter({ subsets: ["latin"] });

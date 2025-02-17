@@ -39,20 +39,18 @@ export const GridModal: React.FC<GridModalProps> = ({
   onClose,
   onOrderUpdate,
 }: GridModalProps) => {
-  // Early return if no order data available
-  if (!order || !isOpen) return null;
-
-  // Single state for ETA form visibility
+  // State declarations must come before any conditional returns
   const [isEditingETA, setIsEditingETA] = useState(false);
-
-  // State for ETA dates
   const [etaStart, setEtaStart] = useState<string>(
-    order.eta_start ? format(new Date(order.eta_start), "yyyy-MM-dd") : ""
+    order?.eta_start ? format(new Date(order.eta_start), "yyyy-MM-dd") : ""
   );
   const [etaEnd, setEtaEnd] = useState<string>(
-    order.eta_end ? format(new Date(order.eta_end), "yyyy-MM-dd") : ""
+    order?.eta_end ? format(new Date(order.eta_end), "yyyy-MM-dd") : ""
   );
-  const [isDateRange, setIsDateRange] = useState(!!order.eta_end);
+  const [isDateRange, setIsDateRange] = useState(!!order?.eta_end);
+
+  // Early return if no order data available
+  if (!order || !isOpen) return null;
 
   // Derived status calculation
   const getETAStatus = (
@@ -332,19 +330,20 @@ export const GridModal: React.FC<GridModalProps> = ({
                 </div>
               )}
             </div>
-
-            {/* Download button */}
-            <div className="pt-4 border-t border-slate-700">
-              <Button
-                onClick={handleGeneratePDF}
-                className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium"
-              >
-                <Download className="mr-2 h-4 w-4" />
-                Download Barcode Labels
-              </Button>
-            </div>
           </div>
         )}
+
+        {/* TODO: Move back into coditional block after scanning barcodes manually */}
+        {/* Download button */}
+        <div className="pt-4 border-t border-slate-700">
+          <Button
+            onClick={handleGeneratePDF}
+            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium"
+          >
+            <Download className="mr-2 h-4 w-4" />
+            Download Barcode Labels
+          </Button>
+        </div>
       </DialogContent>
     </Dialog>
   );

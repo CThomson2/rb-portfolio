@@ -8,7 +8,7 @@ interface DrumLabelProps {
 }
 
 export const DrumLabel: React.FC<DrumLabelProps> = ({
-  order: { order_id, material, supplier },
+  order: { order_id, material, supplier, po_number },
   onError,
 }) => {
   /**
@@ -59,6 +59,10 @@ export const DrumLabel: React.FC<DrumLabelProps> = ({
           <div className="space-y-1">
             <p className="text-slate-400 text-sm">Supplier</p>
             <p className="text-xl font-semibold text-white">{supplier}</p>
+          </div>
+          <div className="space-y-1">
+            <p className="text-slate-400 text-sm">Purchase Order Number</p>
+            <p className="text-xl font-semibold text-white">{po_number}</p>
           </div>
         </div>
       </div>

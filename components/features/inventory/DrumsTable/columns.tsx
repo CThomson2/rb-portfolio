@@ -1,7 +1,7 @@
 // components/features/inventory/DrumsTable/columns.tsx
 import { ColumnDef } from "@tanstack/react-table";
 import { SortableColumn, StatusFilter } from "@/components/shared/table";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Download, FileDown } from "lucide-react";
 import { format } from "date-fns";
