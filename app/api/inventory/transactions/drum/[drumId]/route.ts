@@ -6,6 +6,30 @@ import type {
   TransactionProcessing,
 } from "@/types/database/inventory/transactions";
 
+/**
+ * Fetches transactions associated with a specific drum ID.
+ *
+ * This endpoint returns only 'import' and 'processing' type transactions for the given drum ID,
+ * ordered chronologically by transaction date and ID. It also includes the drum's current status
+ * and material information from the new_drums table.
+ *
+ * @param {Request} req - The incoming HTTP request object
+ * @param {Object} params - The route parameters object
+ * @param {string} params.drumId - The ID of the drum to fetch transactions for
+ *
+ * @returns {Promise<NextResponse>} A response containing:
+ * - On success: JSON with transactions array and success message
+ *   - transactions: Array of TransactionImport | TransactionProcessing objects
+ *   - message: Success confirmation string
+ * - On error: JSON with error message and appropriate status code
+ *   - 400: Invalid drum ID format
+ *   - 404: No transactions found
+ *   - 500: Server error
+ *
+ * Note: This endpoint specifically filters for and returns only 'import' and 'processing'
+ * type transactions. Other transaction types associated with the drum will not be included
+ * in the response.
+ */
 export async function GET(
   req: Request,
   { params }: { params: { drumId: string } }
@@ -20,8 +44,8 @@ export async function GET(
       );
     }
 
-    // Get all transactions for this drum, ordered by date
-    // Include the drum's current status from new_drums table
+    // Get all import and processing transactions for this drum, ordered by date
+    // Include the drum's current status and material from new_drums table
     const transactions = await prisma.$queryRaw`
       WITH DrumInfo AS (
         SELECT 
@@ -49,7 +73,7 @@ export async function GET(
       );
     }
 
-    // Type the transactions based on their tx_type
+    // Cast and filter transactions to only include import and processing types
     const newDrumTransactions = (transactions as Transaction[])
       .map((tx) => {
         if (tx.tx_type === "import") return tx as TransactionImport;

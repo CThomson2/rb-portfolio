@@ -57,7 +57,7 @@ interface ActionModalProps {
   action: ActionType;
   transaction: Transaction;
 }
-
+/*
 const titles = {
   view: "Transaction Details",
   edit: "Edit Transaction",
@@ -69,6 +69,7 @@ const descriptions = {
   edit: "Modify the details of this transaction.",
   assign: "Assign this transaction for production.",
 } as const;
+*/
 
 interface ProgressStageProps {
   number: number;
@@ -78,13 +79,25 @@ interface ProgressStageProps {
   label: string;
 }
 
+/**
+ * A component that renders a single stage in a progress tracker.
+ *
+ * @component
+ * @param {Object} props - The component props
+ * @param {number} props.number - The stage number to display
+ * @param {boolean} props.isCompleted - Whether this stage has been completed
+ * @param {boolean} props.isClickable - Whether this stage can be clicked
+ * @param {() => void} [props.onClick] - Optional click handler for clickable stages
+ * @param {string} props.label - Text label displayed below the stage number
+ * @returns {JSX.Element} A progress stage with number, completion state and label
+ */
 function ProgressStage({
   number,
   isCompleted,
   isClickable,
   onClick,
   label,
-}: ProgressStageProps) {
+}: ProgressStageProps): JSX.Element {
   return (
     <div className="flex flex-col items-center">
       <div className="h-10 flex items-center">
@@ -94,13 +107,16 @@ function ProgressStage({
             isCompleted
               ? "text-primary-foreground bg-primary"
               : "text-muted-foreground bg-muted",
-            isClickable && "hover:bg-primary/90 cursor-pointer",
-            !isClickable && "cursor-default"
+            number === 2 && isClickable && "ring-2 ring-white",
+            isClickable
+              ? "hover:bg-primary/90 cursor-pointer"
+              : "cursor-default"
           )}
           onClick={isClickable ? onClick : undefined}
           disabled={!isClickable}
         >
-          {number}
+          {/* {number} */}
+          {isClickable && <CheckCircle2 className="h-4 w-4" />}
         </button>
       </div>
       <span className="text-xs mt-2 text-muted-foreground">{label}</span>
@@ -113,6 +129,17 @@ interface ProgressTrackerProps {
   onNavigateToTransaction?: (txId: number) => void;
 }
 
+/**
+ * A component that displays a progress tracker for drum transactions.
+ * Shows the progression of a drum through different transaction stages (import -> processing -> batch).
+ * Allows navigation between related transactions of the same drum.
+ *
+ * @component
+ * @param {Object} props - The component props
+ * @param {TransactionImport | TransactionProcessing} props.currentTransaction - The currently displayed transaction
+ * @param {(txId: number) => void} [props.onNavigateToTransaction] - Optional callback when navigating to a different transaction
+ * @returns {JSX.Element} A progress tracker showing the drum's transaction stages
+ */
 function ProgressTracker({
   currentTransaction,
   onNavigateToTransaction,
@@ -123,7 +150,7 @@ function ProgressTracker({
   }>({});
   const [isLoading, setIsLoading] = useState(false);
 
-  // Fetch related transactions when the component mounts
+  // Fetch and organize related transactions for this drum when component mounts
   useEffect(() => {
     const fetchRelatedTransactions = async () => {
       console.log(
@@ -168,6 +195,7 @@ function ProgressTracker({
     fetchRelatedTransactions();
   }, [currentTransaction.drum_id]);
 
+  // Determine current stage and stage navigation logic
   const latestTxType = currentTransaction.tx_type.toLowerCase();
   const isProcessingStage = latestTxType === "processing";
 
@@ -178,6 +206,7 @@ function ProgressTracker({
     setIsLoading(false);
   };
 
+  // Render progress tracker UI with stages and connecting lines
   return (
     <div className="mt-8 pt-4 border-t">
       <h3 className="text-lg font-semibold mb-6">
@@ -217,7 +246,7 @@ function ProgressTracker({
           number={3}
           isCompleted={false}
           isClickable={false}
-          label="Future"
+          label="Distillation"
         />
       </div>
     </div>
@@ -232,6 +261,11 @@ function ActionModal({
 }: ActionModalProps) {
   const [currentTx, setCurrentTx] = useState(transaction);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Reset currentTx when a new transaction is passed in
+  useEffect(() => {
+    setCurrentTx(transaction);
+  }, [transaction]);
 
   const handleNavigateToTransaction = useCallback(async (txId: number) => {
     console.log("Navigating to transaction:", txId);
@@ -306,69 +340,69 @@ function ActionModal({
               {renderDetailItem(
                 <Calendar className="h-4 w-4" />,
                 "Recorded Date",
-                format(new Date(transaction.tx_date), "PPP")
+                format(new Date(currentTx.tx_date), "PPP")
               )}
               {renderDetailItem(
                 <ScanBarcode className="h-4 w-4" />,
                 "Time of Scan",
-                format(new Date(transaction.updated_at), "PPP 'at' pp")
+                format(new Date(currentTx.updated_at), "PPP 'at' pp")
               )}
               {renderDetailItem(
                 <ArrowRightLeft className="h-4 w-4" />,
                 "Direction",
                 <Badge
                   variant={
-                    transaction.direction === "IN" ? "success" : "destructive"
+                    currentTx.direction === "IN" ? "success" : "destructive"
                   }
                 >
-                  {transaction.direction}
+                  {currentTx.direction}
                 </Badge>
               )}
-              {transaction.material &&
+              {currentTx.material &&
                 renderDetailItem(
                   <Atom className="h-4 w-4" />,
                   "Material",
-                  transaction.material
+                  currentTx.material
                 )}
             </div>
 
             <div className="space-y-4">
               <h3 className="text-lg font-semibold">Related Information</h3>
-              {transaction.batch_code &&
+              {currentTx.batch_code &&
                 renderDetailItem(
                   <Hash className="h-4 w-4" />,
                   "Batch Code",
-                  transaction.batch_code
+                  currentTx.batch_code
                 )}
-              {transaction.tx_notes &&
+              {currentTx.tx_notes &&
                 renderDetailItem(
                   <FileText className="h-4 w-4" />,
                   "Notes",
-                  transaction.tx_notes
+                  currentTx.tx_notes
                 )}
-              {transaction.delivery_id &&
+              {currentTx.delivery_id &&
                 renderDetailItem(
                   <Truck className="h-4 w-4" />,
                   "Delivery ID",
-                  transaction.delivery_id
+                  currentTx.delivery_id
                 )}
-              {transaction.drum_id &&
+              {currentTx.drum_id &&
                 renderDetailItem(
                   <Disc3 className="h-4 w-4" />,
                   "Drum ID",
-                  transaction.drum_id
+                  currentTx.drum_id
                 )}
-              {transaction.repro_id &&
+              {currentTx.repro_id &&
                 renderDetailItem(
                   <Recycle className="h-4 w-4" />,
                   "Repro ID",
-                  transaction.repro_id
+                  currentTx.repro_id
                 )}
-              {transaction.process_id &&
+              {currentTx.process_id &&
                 renderDetailItem(
                   <FlaskRound className="h-4 w-4" />,
                   "Process ID",
-                  transaction.process_id
+                  currentTx.process_id
                 )}
             </div>
           </div>
@@ -392,7 +426,17 @@ interface ActionsProps {
   transaction: Transaction;
 }
 
+/**
+ * Actions component that provides a dropdown menu with various actions for a transaction.
+ * Includes options to view details, edit, and assign for production.
+ *
+ * @component
+ * @param {Object} props - Component props
+ * @param {Transaction} props.transaction - The transaction to perform actions on
+ * @returns {JSX.Element} Dropdown menu with action buttons and associated modal
+ */
 export function Actions({ transaction }: ActionsProps) {
+  // State for controlling the action modal visibility and current action
   const [modalState, setModalState] = useState<{
     isOpen: boolean;
     action: ActionType;
@@ -401,18 +445,21 @@ export function Actions({ transaction }: ActionsProps) {
     action: null,
   });
 
+  // State for controlling the dropdown menu visibility
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
+  // Handler for when an action is selected from the dropdown
   const handleAction = useCallback((action: ActionType) => {
     setModalState({ isOpen: true, action });
-    setDropdownOpen(false);
+    setDropdownOpen(false); // Close dropdown after selection
   }, []);
 
+  // Handler for modal open state changes
   const handleOpenChange = useCallback((open: boolean) => {
     setModalState((prev) => ({
       ...prev,
       isOpen: open,
-      action: open ? prev.action : null,
+      action: open ? prev.action : null, // Clear action when closing
     }));
   }, []);
 
