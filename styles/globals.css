@@ -8,21 +8,12 @@
   transition: filter 1s ease-out;
 }
 
-/* Custom scrollbar for the process cards */
+/* Hide scrollbars across all browsers */
 .custom-scrollbar {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(59, 130, 246, 0.5) transparent;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
 }
 
 .custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: rgba(59, 130, 246, 0.5);
-  border-radius: 3px;
+  display: none; /* Chrome, Safari, Opera */
 }

@@ -196,7 +196,7 @@ export const queries = {
       data: {
         tx_type,
         tx_date,
-        material,
+        material: material ?? "",
         delivery_id,
         drum_id,
         repro_id,

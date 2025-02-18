@@ -25,7 +25,7 @@ export async function GET() {
     const orderLetter = letterMap[todayOrdersCount] || "X";
 
     // Generate PO number in format YY-MM-DD-A-RS
-    const poNumber = `${format(today, "yy-MM-dd")}-${orderLetter}-RS`;
+    const poNumber = `${format(today, "dd-MM-yy")}-${orderLetter}-RS`;
 
     return NextResponse.json({ poNumber });
   } catch (error) {

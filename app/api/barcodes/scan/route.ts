@@ -123,6 +123,16 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       orderBy: { updated_at: "desc" },
     });
 
+    const material =
+      (
+        await prisma.orders.findUnique({
+          where: { order_id: orderId },
+          select: {
+            material: true,
+          },
+        })
+      )?.material ?? "";
+
     const now = new Date();
     if (lastScan) {
       const timeSinceLastScan = Math.floor(
@@ -134,6 +144,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         const cancelledTransaction = await prisma.transactions.create({
           data: {
             tx_type: "cancelled",
+            material: material,
             // tx_date: now,
             drum_id: drumId,
             order_id: orderId,
@@ -179,6 +190,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         const importTransaction = await prisma.transactions.create({
           data: {
             tx_type: "import",
+            material: material,
             // tx_date: now,
             drum_id: drumId,
             order_id: orderId,
@@ -244,6 +256,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         const processingTransaction = await prisma.transactions.create({
           data: {
             tx_type: "processing",
+            material: material,
             tx_date: now,
             drum_id: drumId,
             tx_notes: "Scanned out of inventory - staged for production",

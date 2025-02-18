@@ -29,7 +29,6 @@ export const FloatingNav = ({
   const { scrollYProgress } = useScroll();
   const [visible, setVisible] = useState(true);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-
   // Only add scroll event listener if not static
   if (!isStatic) {
     useMotionValueEvent(scrollYProgress, "change", (current) => {

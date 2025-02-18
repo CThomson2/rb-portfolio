@@ -123,17 +123,28 @@
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
+
+  * {
+    @apply border-border !scroll-smooth;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+
+  *::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+
+  body {
+    @apply bg-background text-foreground overflow-x-hidden;
+  }
 }
 
 @layer base {
   * {
-    @apply border-border !scroll-smooth;
+    @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
-  }
-  button {
-    @apply active:outline-none;
   }
 }
 
@@ -180,13 +191,5 @@
   .hover-effect:focus {
     outline: none;
     box-shadow: 0 0 0 4px rgba(128, 90, 213, 0.5);
-  }
-}
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
   }
 }
