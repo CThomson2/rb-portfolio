@@ -1,6 +1,6 @@
 "use client";
 
-import { DashboardLayout } from "@/components/dashboard/layout/DashboardLayout";
+// import { DashboardLayout } from "@/components/dashboard/layout/DashboardLayout";
 import { InventoryWidget } from "@/components/dashboard/widgets/InventoryWidget";
 import { ProductionWidget } from "@/components/dashboard/widgets/ProductionWidget";
 import { RecentOrdersWidget } from "@/components/dashboard/widgets/RecentOrdersWidget";
