@@ -48,24 +48,44 @@ export const navItems: NavItem[] = [
     links: [
       {
         id: 1,
-        name: "Record New Order",
-        // link: "/inventory/orders?form=new", // TODO: change route to this for the form page, replace the separate sub-page for this routing method
-        link: "/inventory/orders/create",
-      },
-      {
-        id: 2,
-        name: "View Barcode Labels",
-        link: "/inventory/orders",
-      },
-      {
-        id: 3,
         name: "Drum Inventory",
         link: "/inventory",
       },
       {
+        id: 2,
+        name: "New Order Form",
+        // link: "/inventory/orders?form=new", // TODO: change route to this for the form page, replace the separate sub-page for this routing method
+        link: "/inventory/orders/create",
+      },
+      {
+        id: 3,
+        name: "Purchase Order History",
+        link: "/inventory/orders",
+      },
+      {
         id: 4,
-        name: "Inventory Events",
+        name: "Barcode Scan Log",
         link: "/inventory/transactions",
+      },
+    ],
+  },
+  {
+    name: "Production",
+    links: [
+      {
+        id: 1,
+        name: "Weekly Schedule",
+        link: "/production/schedule?form=new",
+      },
+      {
+        id: 2,
+        name: "Active Production",
+        link: "/production/active",
+      },
+      {
+        id: 3,
+        name: "View Records",
+        link: "/production/records",
       },
     ],
   },
@@ -99,46 +119,26 @@ export const navItems: NavItem[] = [
       },
     ],
   },
-  {
-    name: "Inventory",
-    links: [
-      {
-        id: 1,
-        name: "New Drums",
-        link: "/inventory",
-      },
-      {
-        id: 2,
-        name: "Reprocessing Drums",
-        link: "/inventory/reprocessing",
-      },
-      {
-        id: 3,
-        name: "Finished Goods",
-        link: "/inventory/warehouse",
-      },
-    ],
-  },
-  {
-    name: "Production",
-    links: [
-      {
-        id: 1,
-        name: "Weekly Schedule",
-        link: "/production/schedule?form=new",
-      },
-      {
-        id: 2,
-        name: "Active Production",
-        link: "/production/active",
-      },
-      {
-        id: 3,
-        name: "View Records",
-        link: "/production/records",
-      },
-    ],
-  },
+  // {
+  //   name: "Inventory",
+  //   links: [
+  //     {
+  //       id: 1,
+  //       name: "New Drums",
+  //       link: "/inventory",
+  //     },
+  //     {
+  //       id: 2,
+  //       name: "Reprocessing Drums",
+  //       link: "/inventory/reprocessing",
+  //     },
+  //     {
+  //       id: 3,
+  //       name: "Finished Goods",
+  //       link: "/inventory/warehouse",
+  //     },
+  //   ],
+  // },
 ];
 
 /*

@@ -33,7 +33,7 @@ import type {
 export async function GET(
   req: Request,
   { params }: { params: { drumId: string } }
-) {
+): Promise<NextResponse> {
   try {
     const drumId = parseInt(params.drumId);
 

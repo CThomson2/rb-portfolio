@@ -1,31 +1,29 @@
 "use client";
 
-import { navItems } from "@/content/main";
+import { DashboardLayout } from "@/components/dashboard/layout/DashboardLayout";
+import { InventoryWidget } from "@/components/dashboard/widgets/InventoryWidget";
+import { ProductionWidget } from "@/components/dashboard/widgets/ProductionWidget";
+import { RecentOrdersWidget } from "@/components/dashboard/widgets/RecentOrdersWidget";
+import { StatsWidget } from "@/components/dashboard/widgets/StatsWidget";
 
-import Hero from "@/components/home/Hero";
-import Grid from "@/components/home/Grid";
-import Footer from "@/components/home/Footer";
-import Clients from "@/components/home/Clients";
-import ApproachGrid from "@/components/home/Approach";
-import Experience from "@/components/home/Experience";
-import QueryForms from "@/components/home/RecentProjects";
-import UserDashboard from "@/components/home/UserDashboard";
-
-const Home = () => {
+export default function Home() {
   return (
-    <main className="relative bg-black-100 flex justify-center items-center flex-col overflow-hidden mx-auto sm:px-10 px-5">
-      <div className="max-w-7xl w-full">
-        <Hero />
-        <Experience />
-        {/* <QueryForms /> */}
-        {/* <Grid /> */}
-        {/* <Clients /> */}
-        {/* <UserDashboard /> */}
-        {/* <ApproachGrid /> */}
-        <Footer />
+    <main className="min-h-screen bg-background">
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex items-center justify-between mb-8">
+          <h1 className="text-4xl font-bold">Dashboard</h1>
+          <div className="flex items-center gap-4">
+            {/* Add dashboard controls here later */}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <StatsWidget />
+          <InventoryWidget />
+          <ProductionWidget />
+          <RecentOrdersWidget />
+        </div>
       </div>
     </main>
   );
-};
-
-export default Home;
+}

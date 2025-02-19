@@ -78,7 +78,7 @@ export async function PATCH(
       if (
         updatedOrder.eta_end &&
         now > updatedOrder.eta_end &&
-        updatedOrder.delivery_status === "pending"
+        updatedOrder.status === "pending"
       ) {
         eta_status = "overdue";
       }

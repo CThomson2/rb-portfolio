@@ -115,8 +115,8 @@ function ProgressStage({
           onClick={isClickable ? onClick : undefined}
           disabled={!isClickable}
         >
-          {/* {number} */}
-          {isClickable && <CheckCircle2 className="h-4 w-4" />}
+          {number}
+          {/* {isClickable && <CheckCircle2 className="h-4 w-4" />} */}
         </button>
       </div>
       <span className="text-xs mt-2 text-muted-foreground">{label}</span>
@@ -143,7 +143,7 @@ interface ProgressTrackerProps {
 function ProgressTracker({
   currentTransaction,
   onNavigateToTransaction,
-}: ProgressTrackerProps) {
+}: ProgressTrackerProps): JSX.Element {
   const [relatedTransactions, setRelatedTransactions] = useState<{
     import?: TransactionImport;
     processing?: TransactionProcessing;
@@ -232,7 +232,11 @@ function ProgressTracker({
           number={2}
           isCompleted={isProcessingStage}
           isClickable={
+            // Stage 2 is only clickable when we're on stage 1 (!isProcessingStage)
             !isProcessingStage &&
+            // AND a processing transaction actually exists (!!relatedTransactions.processing)
+            !!relatedTransactions.processing &&
+            // AND it's not the current transaction
             relatedTransactions.processing?.tx_id !== currentTransaction.tx_id
           }
           onClick={() =>
@@ -435,7 +439,7 @@ interface ActionsProps {
  * @param {Transaction} props.transaction - The transaction to perform actions on
  * @returns {JSX.Element} Dropdown menu with action buttons and associated modal
  */
-export function Actions({ transaction }: ActionsProps) {
+export function Actions({ transaction }: ActionsProps): JSX.Element {
   // State for controlling the action modal visibility and current action
   const [modalState, setModalState] = useState<{
     isOpen: boolean;

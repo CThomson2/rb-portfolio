@@ -6,6 +6,8 @@ import styles from "./form.module.css";
 import { cn } from "@/lib/utils";
 // import { Combobox } from "@/components/ui/Combobox";
 import { Dropdown } from "./Dropdown";
+import { Loader2 } from "lucide-react";
+
 export const CreateForm = ({
   onOrderCreated,
 }: {
@@ -26,6 +28,7 @@ export const CreateForm = ({
     quantity: boolean;
     poNumber: boolean;
   }>({ material: true, supplier: false, quantity: false, poNumber: false });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Minimum characters required for search
   // const MIN_SEARCH_CHARS = 3;
@@ -81,7 +84,9 @@ export const CreateForm = ({
 
     try {
       const response = await fetch(
-        `/api/inventory/suppliers/suggestions?q=${encodeURIComponent(query)}`
+        `/api/inventory/suppliers/suggestions?q=${encodeURIComponent(
+          query
+        )}&material=${encodeURIComponent(material)}`
       );
       const data = await response.json();
       console.log("Suppliers API response:", data);
@@ -105,6 +110,13 @@ export const CreateForm = ({
       setIsLoadingSuppliers(false);
     }
   };
+
+  // Fetch initial supplier suggestions when material changes
+  useEffect(() => {
+    if (material) {
+      fetchSupplierSuggestions("");
+    }
+  }, [material]);
 
   const handleMaterialChange = (value: string) => {
     setMaterial(value);
@@ -177,21 +189,36 @@ export const CreateForm = ({
     }
   };
 
+  const resetForm = useCallback(() => {
+    setMaterial("");
+    setSupplier("");
+    setQuantity(0);
+    setActiveField({
+      material: true,
+      supplier: false,
+      quantity: false,
+      poNumber: false,
+    });
+    // Don't reset PO number - it will be updated by the API
+  }, []);
+
   /**
    * Handles form submission.
    * Validates required fields and calls onOrderCreated callback with form data if valid.
    */
   const handleSubmit = async () => {
-    if (material && supplier && quantity > 0) {
-      onOrderCreated({
-        material,
-        supplier,
-        quantity,
-        po_number: poNumber.replace(/-/g, "") || null,
-      });
+    if (material && supplier && quantity > 0 && !isSubmitting) {
+      setIsSubmitting(true);
 
-      // Fetch new PO number for next order
       try {
+        await onOrderCreated({
+          material,
+          supplier,
+          quantity,
+          po_number: poNumber.replace(/-/g, "") || null,
+        });
+
+        // Fetch new PO number for next order
         const response = await fetch("/api/inventory/orders/next-po-number");
         const data = await response.json();
 
@@ -200,11 +227,14 @@ export const CreateForm = ({
         }
 
         setPoNumber(data.poNumber);
+        resetForm();
       } catch (error) {
-        console.error("Failed to fetch next PO number:", error);
+        console.error("Failed to create order:", error);
         setError(
-          error instanceof Error ? error.message : "Failed to fetch PO number"
+          error instanceof Error ? error.message : "Failed to create order"
         );
+      } finally {
+        setIsSubmitting(false);
       }
     }
   };
@@ -283,11 +313,21 @@ export const CreateForm = ({
         </div>
 
         <button
-          className={cn(styles["button"])}
+          className={cn(
+            styles["button"],
+            isSubmitting && "opacity-50 cursor-not-allowed"
+          )}
           onClick={handleSubmit}
-          disabled={!material || !supplier || quantity <= 0}
+          disabled={!material || !supplier || quantity <= 0 || isSubmitting}
         >
-          Submit Order
+          {isSubmitting ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Creating Order...
+            </>
+          ) : (
+            "Submit Order"
+          )}
         </button>
       </div>
     </div>

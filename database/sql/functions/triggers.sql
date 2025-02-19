@@ -14,7 +14,7 @@
 --         IF total_received = 0 THEN
 --             -- If no quantity has been received, set the order status to 'pending'
 --             UPDATE inventory.orders
---             SET delivery_status = 'pending',
+--             SET status = 'pending',
 --                 updated_at = CURRENT_TIMESTAMP
 --             WHERE order_id = NEW.order_id;
 --         ELSIF total_received < (
@@ -24,13 +24,13 @@
 --             WHERE order_id = NEW.order_id
 --         ) THEN
 --             UPDATE inventory.orders
---             SET delivery_status = 'partial',
+--             SET status = 'partial',
 --                 updated_at = CURRENT_TIMESTAMP
 --             WHERE order_id = NEW.order_id;
 --         ELSE
 --             -- If the received quantity meets or exceeds the ordered quantity, set status to 'complete'
 --             UPDATE inventory.orders
---             SET delivery_status = 'complete',
+--             SET status = 'complete',
 --                 updated_at = CURRENT_TIMESTAMP
 --             WHERE order_id = NEW.order_id;
 --         END IF;
@@ -86,11 +86,11 @@ When a delivery is recorded (INSERT) or modified (UPDATE):
 
 Tables affected:
 - inventory.deliveries (trigger source)
-- inventory.orders (updates quantity_received and delivery_status)
+- inventory.orders (updates quantity_received and status)
 - inventory.new_drums (updates drum status)
 */
 
-CREATE OR REPLACE FUNCTION inventory.update_order_delivery_status()
+CREATE OR REPLACE FUNCTION inventory.update_order_status()
 RETURNS TRIGGER AS $$
 DECLARE total_received INT; -- Declare the variable here
 BEGIN
@@ -104,7 +104,7 @@ BEGIN
     UPDATE inventory.orders 
     SET 
         quantity_received = total_received,
-        delivery_status = CASE 
+        status = CASE 
             WHEN total_received = quantity THEN 'complete'
             WHEN total_received < quantity THEN 'partial'
             ELSE 'pending'
@@ -130,10 +130,10 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER trigger_update_order_delivery_status
+CREATE TRIGGER trigger_update_order_status
 AFTER INSERT OR UPDATE ON inventory.deliveries
 FOR EACH ROW
-EXECUTE FUNCTION inventory.update_order_delivery_status();
+EXECUTE FUNCTION inventory.update_order_status();
 
 --
 
@@ -147,10 +147,10 @@ EXECUTE FUNCTION inventory.update_order_delivery_status();
 --         FROM inventory.deliveries
 --         WHERE order_id = NEW.order_id
 --     ),
---     delivery_status = CASE 
+--     status = CASE 
 --         WHEN quantity_received = quantity THEN 'complete'
 --         WHEN quantity_received < quantity THEN 'partial'
---         ELSE delivery_status
+--         ELSE status
 --     END,
 --     updated_at = CURRENT_TIMESTAMP
 --     WHERE order_id = NEW.order_id;
@@ -159,17 +159,17 @@ EXECUTE FUNCTION inventory.update_order_delivery_status();
 -- END;
 -- $$ LANGUAGE plpgsql;
 
--- CREATE TRIGGER trigger_update_order_delivery_status
+-- CREATE TRIGGER trigger_update_order_status
 -- AFTER INSERT OR UPDATE ON inventory.deliveries
 -- FOR EACH ROW
--- EXECUTE FUNCTION inventory.update_order_delivery_status();
+-- EXECUTE FUNCTION inventory.update_order_status();
 
 /*
 This is a trigger function on the deliveries table to enforce the following constraints:
 
 1.	Ensure quantity_received does not exceed the quantity field in the related orders record.
 
-2.	Prevent new deliveries records from being created when the delivery_status of the corresponding orders record is complete.
+2.	Prevent new deliveries records from being created when the status of the corresponding orders record is complete.
 */
 
 CREATE OR REPLACE FUNCTION prevent_excess_deliveries()
@@ -177,17 +177,17 @@ RETURNS TRIGGER AS $$
 DECLARE
     total_received INT;
     order_quantity INT;
-    delivery_status TEXT;
+    status TEXT;
     quantity_remaining INT;
 BEGIN
     -- Get the current total received and order details
     SELECT COALESCE(SUM(d.quantity_received), 0) AS total_received,
         o.quantity AS order_quantity,
-        o.delivery_status AS delivery_status
+        o.status AS status
     INTO
         total_received,
         order_quantity,
-        delivery_status
+        status
     FROM
         inventory.orders o
     LEFT JOIN
@@ -196,13 +196,13 @@ BEGIN
         o.order_id = d.order_id
     WHERE
         o.order_id = NEW.order_id
-    GROUP BY o.quantity, o.delivery_status;
+    GROUP BY o.quantity, o.status;
 
     -- Calculate the quantity remaining to be delivered
     quantity_remaining := order_quantity - total_received;
 
     -- Check if the order is already complete
-    IF delivery_status = 'complete' THEN
+    IF status = 'complete' THEN
         RAISE EXCEPTION 'Cannot add new deliveries. The order has been completely fulfilled.';
     END IF;
 
@@ -230,7 +230,7 @@ CHECK (
     NOT EXISTS (
         SELECT 1
         FROM inventory.orders
-        WHERE orders.order_id = new_drums.order_id AND delivery_status = 'complete'
+        WHERE orders.order_id = new_drums.order_id AND status = 'complete'
     )
 );
 

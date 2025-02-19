@@ -58,7 +58,7 @@ BEGIN
             WHERE delivery_id = existing_delivery_id;
 
             UPDATE inventory.orders
-            SET delivery_status = 'complete',
+            SET status = 'complete',
                 updated_at = CURRENT_TIMESTAMP
             WHERE order_id = NEW.order_id;
         END IF;

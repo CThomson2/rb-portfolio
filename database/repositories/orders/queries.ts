@@ -32,9 +32,10 @@ export const queries = {
       quantity: row.quantity,
       date_ordered: row.date_ordered?.toISOString(),
       quantity_received: row.quantity_received,
-      delivery_status: row.delivery_status as OrderStatusType,
+      status: row.status as OrderStatusType,
       created_at: row.created_at?.toISOString(),
       updated_at: row.updated_at?.toISOString(),
+      po_number: row.po_number,
     }));
 
     return { orders, total };
@@ -50,7 +51,7 @@ export const queries = {
     return prisma.orders.create({
       data: {
         ...data,
-        delivery_status: "pending",
+        status: "pending",
         quantity_received: 0,
       },
     });
@@ -81,7 +82,7 @@ export const queries = {
   getActiveOrders: async () => {
     return prisma.orders.findMany({
       where: {
-        delivery_status: {
+        status: {
           in: ["pending", "partial"],
         },
       },
@@ -94,7 +95,8 @@ export const queries = {
         material: true,
         quantity: true,
         quantity_received: true,
-        delivery_status: true,
+        status: true,
+        po_number: true,
       },
     });
   },
@@ -105,7 +107,7 @@ export const queries = {
         order_id: orderId,
       },
       data: {
-        delivery_status: status,
+        status: status,
       },
     });
   },

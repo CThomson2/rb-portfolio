@@ -4,7 +4,7 @@ $$
 DECLARE
     total_received       INT;
     order_quantity       INT;
-    delivery_status      TEXT;
+    status      TEXT;
     quantity_remaining   INT;
     existing_import_tx   INT;
 BEGIN
@@ -32,14 +32,14 @@ BEGIN
          */
         SELECT COALESCE(SUM(d.quantity_received), 0) AS total_received,
                o.quantity AS order_quantity,
-               o.delivery_status AS delivery_status
-        INTO total_received, order_quantity, delivery_status
+               o.status AS status
+        INTO total_received, order_quantity, status
         FROM inventory.orders o
         LEFT JOIN inventory.deliveries d ON o.order_id = d.order_id
         WHERE o.order_id = NEW.order_id
-        GROUP BY o.quantity, o.delivery_status;
+        GROUP BY o.quantity, o.status;
 
-        IF delivery_status = 'complete' THEN
+        IF status = 'complete' THEN
             RAISE EXCEPTION 'Cannot add new deliveries. The order is already complete.';
         END IF;
 

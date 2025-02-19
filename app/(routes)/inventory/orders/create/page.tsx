@@ -17,7 +17,7 @@ import { OrderFormData } from "@/types/database/inventory/orders";
 import { CreateForm } from "@/components/features/inventory/CreateForm";
 import { DrumLabel } from "@/components/features/barcodes/DrumLabel";
 import { cn } from "@/lib/utils";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Loader2 } from "lucide-react";
 
 // import { Form } from "@/components/shared/form";
 
@@ -38,9 +38,9 @@ interface FormValues {
  * @returns {JSX.Element} The rendered OrderCreationPage component
  */
 function OrderCreationPage(): JSX.Element {
-  // Change to array of orders instead of single order
   const [orders, setOrders] = useState<OrderFormData[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [isGenerating, setIsGenerating] = useState(false);
 
   /**
    * Handles the creation of a new order by submitting form data to the API.
@@ -51,6 +51,8 @@ function OrderCreationPage(): JSX.Element {
   const handleCreateOrder = async (formValues: FormValues): Promise<void> => {
     try {
       setError(null);
+      setIsGenerating(true);
+
       const res = await fetch("/api/inventory/orders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -64,12 +66,13 @@ function OrderCreationPage(): JSX.Element {
       }
 
       if (data.success) {
-        // Add new order to the beginning of the array
         setOrders((prevOrders) => [data.order, ...prevOrders]);
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred");
       console.error("Order creation failed:", err);
+    } finally {
+      setIsGenerating(false);
     }
   };
 
@@ -107,6 +110,17 @@ function OrderCreationPage(): JSX.Element {
 
             <div className="flex-1 p-6 overflow-auto">
               <div className="space-y-6">
+                {isGenerating && (
+                  <div className="bg-slate-800 rounded-lg shadow-xl p-8">
+                    <div className="flex flex-col items-center justify-center space-y-4">
+                      <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
+                      <p className="text-slate-400">
+                        Generating Barcode Labels...
+                      </p>
+                    </div>
+                  </div>
+                )}
+
                 {orders.map((order, index) => (
                   <div
                     key={order.order_id}
@@ -136,7 +150,7 @@ function OrderCreationPage(): JSX.Element {
                   </div>
                 ))}
 
-                {orders.length === 0 && (
+                {!isGenerating && orders.length === 0 && (
                   <div className="text-center text-slate-400 py-12">
                     No orders created yet. Use the form to create a new order.
                   </div>

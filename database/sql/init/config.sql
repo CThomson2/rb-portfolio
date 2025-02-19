@@ -1,12 +1,12 @@
 -- Modify orders table to track delivery status by adding:
 -- 1. quantity_received: tracks total quantity received across all deliveries for this order
--- 2. delivery_status: tracks overall delivery status ('pending', 'partial', 'complete')
+-- 2. status: tracks overall delivery status ('pending', 'partial', 'complete')
 -- Note: character varying is the standard SQL type name, VARCHAR is an alias
 ALTER TABLE inventory.orders 
 ADD COLUMN quantity_received integer DEFAULT 0,
-ADD COLUMN delivery_status character varying(20) 
+ADD COLUMN status character varying(20) 
     DEFAULT 'pending'::character varying 
-    CHECK (delivery_status IN ('pending', 'partial', 'complete'));
+    CHECK (status IN ('pending', 'partial', 'complete'));
 
 -- Create deliveries table to track individual delivery records for orders
 -- Each delivery record contains:
@@ -40,7 +40,7 @@ CREATE TABLE inventory.deliveries (
 --
 -- The NOT EXISTS clause checks if there are any matching rows in the orders table where:
 -- - The order_id matches the drum's order_id
--- - AND the delivery_status is 'complete'
+-- - AND the status is 'complete'
 -- If no such row exists (NOT EXISTS is true), then the order is not complete
 -- This effectively prevents drums from having 'pending' status when their order is complete
 ALTER TABLE inventory.new_drums
@@ -50,18 +50,18 @@ CHECK (
     NOT EXISTS (
         SELECT 1
         FROM inventory.orders
-        WHERE orders.order_id = new_drums.order_id AND delivery_status = 'complete'
+        WHERE orders.order_id = new_drums.order_id AND status = 'complete'
     )
 );
 -- Create function that automatically updates order status when deliveries change
 -- This function:
 -- 1. Recalculates total quantity_received by summing all deliveries
--- 2. Updates delivery_status based on received vs ordered quantity:
+-- 2. Updates status based on received vs ordered quantity:
 --    - 'complete' when all ordered quantity received
 --    - 'partial' when some quantity received
 --    - keeps current status otherwise
 -- 3. Updates the order's updated_at timestamp
-CREATE OR REPLACE FUNCTION inventory.update_order_delivery_status()
+CREATE OR REPLACE FUNCTION inventory.update_order_status()
 RETURNS TRIGGER AS $$
 BEGIN
     -- Update quantity_received in orders
@@ -71,10 +71,10 @@ BEGIN
         FROM public.deliveries
         WHERE order_id = NEW.order_id
     ),
-    delivery_status = CASE 
+    status = CASE 
         WHEN quantity_received = quantity THEN 'complete'
         WHEN quantity_received < quantity THEN 'partial'
-        ELSE delivery_status
+        ELSE status
     END,
     updated_at = CURRENT_TIMESTAMP
     WHERE order_id = NEW.order_id;
@@ -85,10 +85,10 @@ $$ LANGUAGE plpgsql;
 
 -- Create trigger that runs the update function after any insert/update on deliveries
 -- This ensures order status stays in sync with its deliveries automatically
-CREATE TRIGGER trigger_update_order_delivery_status
+CREATE TRIGGER trigger_update_order_status
 AFTER INSERT OR UPDATE ON public.deliveries
 FOR EACH ROW
-EXECUTE FUNCTION public.update_order_delivery_status();
+EXECUTE FUNCTION public.update_order_status();
 
 ---
 

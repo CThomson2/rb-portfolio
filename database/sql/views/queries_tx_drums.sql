@@ -114,7 +114,7 @@ SELECT
     quantity,
     date_ordered,
     quantity_received,
-    delivery_status
+    status
 FROM
     inventory.orders
 ORDER BY

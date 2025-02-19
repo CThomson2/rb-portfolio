@@ -61,11 +61,7 @@ export const GridModal: React.FC<GridModalProps> = ({
     const startDate = start instanceof Date ? start : new Date(start);
     const endDate = end instanceof Date ? end : end ? new Date(end) : null;
 
-    if (
-      endDate &&
-      new Date() > endDate &&
-      order.delivery_status === "pending"
-    ) {
+    if (endDate && new Date() > endDate && order.status === "pending") {
       return "overdue";
     }
     return "confirmed";
@@ -114,9 +110,7 @@ export const GridModal: React.FC<GridModalProps> = ({
   };
 
   // Helper to determine if order is pending or partially delivered
-  const isPendingArrival = ["pending", "partial"].includes(
-    order.delivery_status
-  );
+  const isPendingArrival = ["pending", "partial"].includes(order.status);
   const etaStatus = getETAStatus(
     order.eta_start ? new Date(order.eta_start) : null,
     order.eta_end ? new Date(order.eta_end) : null
@@ -167,12 +161,12 @@ export const GridModal: React.FC<GridModalProps> = ({
                 </h3>
                 <p
                   className={cn("text-lg font-semibold", {
-                    "text-green-400": order.delivery_status === "complete",
-                    "text-yellow-400": order.delivery_status === "partial",
-                    "text-slate-300": order.delivery_status === "pending",
+                    "text-green-400": order.status === "complete",
+                    "text-yellow-400": order.status === "partial",
+                    "text-slate-300": order.status === "pending",
                   })}
                 >
-                  {order.delivery_status}
+                  {order.status}
                 </p>
               </div>
               <div className="flex flex-col justify-center text-center items-center">

@@ -327,7 +327,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
 /* EMAIL NOTIFICATIONS */
 /*
-if (dbOrder && dbOrder.delivery_status === "complete") {
+if (dbOrder && dbOrder.status === "complete") {
   console.log("Order is complete, preparing email notification");
 
   // Calculate eta_status
@@ -349,8 +349,8 @@ if (dbOrder && dbOrder.delivery_status === "complete") {
     material: dbOrder.material,
     quantity: dbOrder.quantity,
     quantity_received: dbOrder.quantity_received,
-    delivery_status:
-      dbOrder.delivery_status as Order["delivery_status"],
+    status:
+      dbOrder.status as Order["status"],
     notes: dbOrder.notes || undefined,
     eta_status,
     date_ordered: dbOrder.date_ordered?.toISOString(),

@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { queries } from "@/database/repositories/orders/queries";
 import { BentoGrid } from "@/components/ui/BentoGrid";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { SortingState } from "@tanstack/react-table";
@@ -18,7 +17,7 @@ const filterOptions = [
   { label: "All", value: "all" },
   { label: "By Material", value: "material" },
   { label: "By Supplier", value: "supplier" },
-  { label: "By Status", value: "delivery_status" },
+  { label: "By Status", value: "status" },
 ];
 
 const OrdersGrid = () => {
@@ -288,17 +287,20 @@ const OrdersGrid = () => {
                   <strong>Received:</strong> {order.quantity_received || 0}
                 </p>
                 <p>
+                  <strong>PO Number:</strong> {order.po_number || ""}
+                </p>
+                <p>
                   <strong>Status:</strong>{" "}
                   <span
                     className={`${
-                      order.delivery_status === "complete"
+                      order.status === "complete"
                         ? "text-green-400"
-                        : order.delivery_status === "partial"
+                        : order.status === "partial"
                         ? "text-yellow-400"
                         : "text-slate-300"
                     } font-medium`}
                   >
-                    {order.delivery_status}
+                    {order.status}
                   </span>
                 </p>
               </div>

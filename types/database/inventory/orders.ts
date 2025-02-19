@@ -15,7 +15,8 @@ export interface OrderGridItem {
   quantity: number;
   date_ordered: string;
   quantity_received: number;
-  delivery_status: OrderStatusType;
+  status: OrderStatusType;
+  po_number?: string | null;
 }
 
 export interface Order {
@@ -28,10 +29,11 @@ export interface Order {
   created_at?: string;
   updated_at?: string;
   quantity_received: number;
-  delivery_status: OrderStatusType;
+  status: OrderStatusType;
   eta_start?: Date | string | null;
   eta_end?: Date | string | null;
   eta_status?: "tbc" | "confirmed" | "overdue";
+  po_number?: string | null;
 }
 
 export interface OrderQueryParams {
@@ -62,7 +64,7 @@ export interface OrderFormData {
   created_at: Date | string | null;
   updated_at: Date | string | null;
   quantity_received: number;
-  delivery_status: string;
+  status: string;
   po_number: string | null;
 }
 
@@ -72,5 +74,5 @@ export interface OrderPostResponse extends OrderFormData {
 
 export interface OrderPostRequest extends OrderFormData {
   drumIds: number[];
-  status: 200 | 201 | 400 | 404 | 500;
+  status_code: 200 | 201 | 400 | 404 | 500;
 }

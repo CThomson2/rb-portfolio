@@ -36,12 +36,12 @@ CREATE TABLE
 -- Create function that automatically updates order status when deliveries change
 -- This function:
 -- 1. Recalculates total quantity_received by summing all deliveries
--- 2. Updates delivery_status based on received vs ordered quantity:
+-- 2. Updates status based on received vs ordered quantity:
 --    - 'complete' when all ordered quantity received
 --    - 'partial' when some quantity received
 --    - keeps current status otherwise
 -- 3. Updates the order's updated_at timestamp
-CREATE OR REPLACE FUNCTION public.update_order_delivery_status()
+CREATE OR REPLACE FUNCTION public.update_order_status()
 RETURNS TRIGGER AS $$
 BEGIN
     -- Update quantity_received in orders
@@ -65,7 +65,7 @@ $$ LANGUAGE plpgsql;
 
 -- Create trigger that runs the update function after any insert/update on deliveries
 -- This ensures order status stays in sync with its deliveries automatically
-CREATE TRIGGER trigger_update_order_delivery_status
+CREATE TRIGGER trigger_update_order_status
 AFTER INSERT OR UPDATE ON public.deliveries
 FOR EACH ROW
-EXECUTE FUNCTION public.update_order_delivery_status();
+EXECUTE FUNCTION public.update_order_status();
