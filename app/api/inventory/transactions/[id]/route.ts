@@ -2,8 +2,8 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/database/client";
 import type {
   Transaction,
-  TransactionImport,
-  TransactionProcessing,
+  TransactionIntake,
+  TransactionProcessed,
 } from "@/types/database/inventory/transactions";
 
 export async function GET(

@@ -57,6 +57,10 @@ function ActivityIcon({ status }: { status: ActivityItem["status"] }) {
   }
 }
 
+interface ProductionWidgetProps {
+  id: string;
+}
+
 /**
  * Production status widget that displays:
  * - Summary metrics for active and completed batches
@@ -67,9 +71,9 @@ function ActivityIcon({ status }: { status: ActivityItem["status"] }) {
  * - Blue: In Progress
  * - Yellow: Needs Attention
  */
-export function ProductionWidget() {
+export function ProductionWidget({ id }: ProductionWidgetProps) {
   return (
-    <BaseWidget title="Production Status">
+    <BaseWidget id={id} title="Production Status">
       <div className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <div>

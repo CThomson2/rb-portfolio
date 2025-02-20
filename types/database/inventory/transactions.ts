@@ -22,13 +22,14 @@ export interface Transaction {
   updated_at: Date;
 }
 
-export interface TransactionImport extends Transaction {
+export interface TransactionIntake extends Transaction {
   direction: "IN";
-  drum_id: number; // TODO: Update all import records without a drum_id (the first 362 records from tx_id = 1 and upwards) to use drum ID of 0, for the drums which represents all the drums in-stock prior to the new system implmentation. I.e. create that record in `deliveries` first, then assign transactions with tx_type = 'import' to that delivery_id.
+  drum_id: number; // TODO: Update all intake records without a drum_id (the first 362 records from tx_id = 1 and upwards) to use drum ID of 0, for the drums which represents all the drums in-stock prior to the new system implmentation. I.e. create that record in `deliveries` first, then assign transactions with tx_type = 'intake' to that delivery_id.
   delivery_id: number;
 }
 
-export interface TransactionProcessing extends Transaction {
+// TODO: Switch for `scheduled` tx_type, then add other types
+export interface TransactionProcessed extends Transaction {
   direction: "OUT";
   drum_id: number;
   // TODO: Change `process_id` to REFERENCE the distillation records table in the `production` schema once that table is completed.

@@ -23,5 +23,16 @@
       "left": "20mm"
     }
   },
-  "css.styleSheets": ["app/**/*.css", "app/**/*.scss"]
+  "css.styleSheets": ["app/**/*.css", "app/**/*.scss"],
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "inventory-queries",
+      "database": "rathburn-2025",
+      "username": "postgres"
+    }
+  ]
 }

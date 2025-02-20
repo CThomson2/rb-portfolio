@@ -44,8 +44,8 @@ import { ScrollArea } from "@/components/ui/ScrollArea";
 import { getTxTypeVariant } from "@/lib/utils/formatters";
 import type {
   Transaction,
-  TransactionImport,
-  TransactionProcessing,
+  TransactionIntake,
+  TransactionProcessed,
 } from "@/types/database/inventory/transactions";
 import { cn } from "@/lib/utils";
 
@@ -125,18 +125,18 @@ function ProgressStage({
 }
 
 interface ProgressTrackerProps {
-  currentTransaction: TransactionImport | TransactionProcessing;
+  currentTransaction: TransactionIntake | TransactionProcessed;
   onNavigateToTransaction?: (txId: number) => void;
 }
 
 /**
  * A component that displays a progress tracker for drum transactions.
- * Shows the progression of a drum through different transaction stages (import -> processing -> batch).
+ * Shows the progression of a drum through different transaction stages (intake -> processed -> batch).
  * Allows navigation between related transactions of the same drum.
  *
  * @component
  * @param {Object} props - The component props
- * @param {TransactionImport | TransactionProcessing} props.currentTransaction - The currently displayed transaction
+ * @param {TransactionIntake | TransactionProcessed} props.currentTransaction - The currently displayed transaction
  * @param {(txId: number) => void} [props.onNavigateToTransaction] - Optional callback when navigating to a different transaction
  * @returns {JSX.Element} A progress tracker showing the drum's transaction stages
  */
@@ -145,8 +145,8 @@ function ProgressTracker({
   onNavigateToTransaction,
 }: ProgressTrackerProps): JSX.Element {
   const [relatedTransactions, setRelatedTransactions] = useState<{
-    import?: TransactionImport;
-    processing?: TransactionProcessing;
+    intake?: TransactionIntake;
+    processed?: TransactionProcessed;
   }>({});
   const [isLoading, setIsLoading] = useState(false);
 
@@ -168,17 +168,17 @@ function ProgressTracker({
         const transactions = data.transactions.reduce(
           (
             acc: {
-              import?: TransactionImport;
-              processing?: TransactionProcessing;
+              intake?: TransactionIntake;
+              processed?: TransactionProcessed;
             },
             tx: Transaction
           ) => {
-            if (tx.tx_type === "import") {
-              console.log("Found import transaction:", tx.tx_id);
-              acc.import = tx as TransactionImport;
-            } else if (tx.tx_type === "processing") {
-              console.log("Found processing transaction:", tx.tx_id);
-              acc.processing = tx as TransactionProcessing;
+            if (tx.tx_type === "intake") {
+              console.log("Found intake transaction:", tx.tx_id);
+              acc.intake = tx as TransactionIntake;
+            } else if (tx.tx_type === "processed") {
+              console.log("Found processed transaction:", tx.tx_id);
+              acc.processed = tx as TransactionProcessed;
             }
             return acc;
           },
@@ -197,7 +197,7 @@ function ProgressTracker({
 
   // Determine current stage and stage navigation logic
   const latestTxType = currentTransaction.tx_type.toLowerCase();
-  const isProcessingStage = latestTxType === "processing";
+  const isProcessedStage = latestTxType === "processed";
 
   const handleStageClick = async (txId: number) => {
     console.log("Clicked stage for transaction:", txId);
@@ -218,32 +218,32 @@ function ProgressTracker({
           number={1}
           isCompleted={true}
           isClickable={
-            isProcessingStage &&
-            relatedTransactions.import?.tx_id !== currentTransaction.tx_id
+            isProcessedStage &&
+            relatedTransactions.intake?.tx_id !== currentTransaction.tx_id
           }
           onClick={() =>
-            relatedTransactions.import &&
-            handleStageClick(relatedTransactions.import.tx_id)
+            relatedTransactions.intake &&
+            handleStageClick(relatedTransactions.intake.tx_id)
           }
-          label="Import"
+          label="Intake"
         />
         <div className="w-16 h-[2px] bg-muted self-center -mt-6" />
         <ProgressStage
           number={2}
-          isCompleted={isProcessingStage}
+          isCompleted={isProcessedStage}
           isClickable={
-            // Stage 2 is only clickable when we're on stage 1 (!isProcessingStage)
-            !isProcessingStage &&
-            // AND a processing transaction actually exists (!!relatedTransactions.processing)
-            !!relatedTransactions.processing &&
+            // Stage 2 is only clickable when we're on stage 1 (!isProcessedStage)
+            !isProcessedStage &&
+            // AND a processed transaction actually exists (!!relatedTransactions.processed)
+            !!relatedTransactions.processed &&
             // AND it's not the current transaction
-            relatedTransactions.processing?.tx_id !== currentTransaction.tx_id
+            relatedTransactions.processed?.tx_id !== currentTransaction.tx_id
           }
           onClick={() =>
-            relatedTransactions.processing &&
-            handleStageClick(relatedTransactions.processing.tx_id)
+            relatedTransactions.processed &&
+            handleStageClick(relatedTransactions.processed.tx_id)
           }
-          label="Processing"
+          label="Processed"
         />
         <div className="w-16 h-[2px] bg-muted self-center -mt-6" />
         <ProgressStage
@@ -287,9 +287,9 @@ function ActionModal({
 
       // Cast the transaction based on its type
       const tx = data.transaction as Transaction;
-      if (tx.tx_type === "import" || tx.tx_type === "processing") {
+      if (tx.tx_type === "intake" || tx.tx_type === "processed") {
         console.log("Updating current transaction to:", tx);
-        setCurrentTx(tx as TransactionImport | TransactionProcessing);
+        setCurrentTx(tx as TransactionIntake | TransactionProcessed);
       }
     } catch (error) {
       console.error("Failed to fetch transaction:", error);
@@ -355,9 +355,7 @@ function ActionModal({
                 <ArrowRightLeft className="h-4 w-4" />,
                 "Direction",
                 <Badge
-                  variant={
-                    currentTx.direction === "IN" ? "success" : "destructive"
-                  }
+                  variant={currentTx.direction === "IN" ? "active" : "default"}
                 >
                   {currentTx.direction}
                 </Badge>
@@ -411,11 +409,11 @@ function ActionModal({
             </div>
           </div>
 
-          {(currentTx.tx_type === "import" ||
-            currentTx.tx_type === "processing") && (
+          {(currentTx.tx_type === "intake" ||
+            currentTx.tx_type === "processed") && (
             <ProgressTracker
               currentTransaction={
-                currentTx as TransactionImport | TransactionProcessing
+                currentTx as TransactionIntake | TransactionProcessed
               }
               onNavigateToTransaction={handleNavigateToTransaction}
             />

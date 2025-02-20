@@ -189,7 +189,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         console.log("Creating import transaction for drum:", drumId);
         const importTransaction = await prisma.transactions.create({
           data: {
-            tx_type: "import",
+            tx_type: "intake",
             material: material,
             // tx_date: now,
             drum_id: drumId,

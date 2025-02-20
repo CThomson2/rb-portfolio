@@ -55,6 +55,10 @@ function StatItem({ label, value, change, changeLabel }: StatItemProps) {
   );
 }
 
+interface StatsWidgetProps {
+  id: string;
+}
+
 /**
  * A widget that displays key business metrics in a grid layout
  *
@@ -67,7 +71,7 @@ function StatItem({ label, value, change, changeLabel }: StatItemProps) {
  * The metrics are displayed in a responsive grid that adjusts based on screen size.
  * Change indicators use green/red colors and up/down arrows to show positive/negative changes.
  */
-export function StatsWidget() {
+export function StatsWidget({ id }: StatsWidgetProps) {
   // Mock data - would typically come from an API or database
   const stats = [
     {
@@ -91,7 +95,7 @@ export function StatsWidget() {
   ];
 
   return (
-    <BaseWidget title="Key Metrics" className="col-span-full">
+    <BaseWidget id={id} title="Key Metrics" className="col-span-full">
       <div className="grid gap-4 md:grid-cols-3">
         {stats.map((stat) => (
           <StatItem key={stat.label} {...stat} />

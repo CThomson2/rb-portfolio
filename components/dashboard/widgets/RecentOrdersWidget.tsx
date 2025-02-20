@@ -1,121 +1,181 @@
 "use client";
 
+import { useEffect, useState, useCallback } from "react";
 import { BaseWidget } from "./BaseWidget";
 import { cn } from "@/lib/utils";
-import type { Order as OrderRecord } from "@/types/database/inventory/orders";
+import { Search } from "lucide-react";
+import type { Order } from "@/types/database/inventory/orders";
+import debounce from "lodash/debounce";
 
-/**
- * Represents an order in the system
- */
-interface Order {
-  /** Unique order identifier */
-  id: number;
-  /** Purchase order number */
-  po_number: string;
-  /** Name of the supplier */
-  supplier: string;
-  /** Material ordered */
-  material: string;
-  /** Current status of the order */
-  status: "pending" | "processing" | "completed" | "shipped";
-  /** Total order amount with currency symbol */
-  amount: string;
-  /** Date the order was placed */
-  date: string;
+interface OrderStatus {
+  label: string;
+  value: string;
+  className: string;
 }
 
-/**
- * Mock order data for demonstration
- * In a real app, this would come from an API/database
- */
-const orders: Order[] = [
-  {
-    id: 1,
-    po_number: "ORD-001",
-    supplier: "Acme Labs",
-    material: "Hexane",
-    status: "shipped",
-    amount: "$2,400",
-    date: "2024-02-19",
+const orderStatuses: Record<string, OrderStatus> = {
+  pending: {
+    label: "Pending",
+    value: "pending",
+    className: "bg-yellow-100 text-yellow-700",
   },
-  {
-    id: 2,
-    po_number: "ORD-002",
-    supplier: "BioTech Inc",
-    material: "Methanol",
-    status: "processing",
-    amount: "$1,800",
-    date: "2024-02-18",
+  partial: {
+    label: "Partial",
+    value: "partial",
+    className: "bg-blue-100 text-blue-700",
   },
-  {
-    id: 3,
-    po_number: "ORD-003",
-    supplier: "ChemCorp",
-    material: "Isopropanol",
-    status: "pending",
-    amount: "$3,200",
-    date: "2024-02-18",
+  complete: {
+    label: "Complete",
+    value: "complete",
+    className: "bg-green-100 text-green-700",
   },
-];
+};
 
-/**
- * Displays a status badge with appropriate color coding based on order status
- */
-function OrderStatus({ status }: { status: Order["status"] }) {
+function OrderStatusBadge({ status }: { status: string }) {
+  const statusConfig = orderStatuses[status] || {
+    label: status.charAt(0).toUpperCase() + status.slice(1),
+    value: status,
+    className: "bg-gray-100 text-gray-700",
+  };
+
   return (
     <span
       className={cn(
         "inline-flex items-center rounded-full px-2 py-1 text-xs font-medium",
-        {
-          "bg-green-100 text-green-700": status === "shipped",
-          "bg-blue-100 text-blue-700": status === "processing",
-          "bg-yellow-100 text-yellow-700": status === "pending",
-          "bg-gray-100 text-gray-700": status === "completed",
-        }
+        statusConfig.className
       )}
     >
-      {status.charAt(0).toUpperCase() + status.slice(1)}
+      {statusConfig.label}
     </span>
   );
+}
+
+interface RecentOrdersWidgetProps {
+  id: string;
 }
 
 /**
  * Widget that displays a list of recent orders with their status
  *
  * Features:
- * - Shows customer name and order ID
+ * - Shows supplier name and order ID
  * - Color-coded status badges
- * - Order amount and date
+ * - Order quantity and date
  * - Responsive layout that works on all screen sizes
  */
-export function RecentOrdersWidget() {
+export function RecentOrdersWidget({ id }: RecentOrdersWidgetProps) {
+  const [orders, setOrders] = useState<Order[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [filter, setFilter] = useState("");
+
+  /**
+   * Fetches recent orders from the database
+   * @param searchTerm Optional search term to filter orders by supplier or material
+   */
+  const fetchOrders = async (searchTerm?: string) => {
+    try {
+      setIsLoading(true);
+      const params = new URLSearchParams();
+      if (searchTerm) {
+        // Try to match against both supplier and material
+        params.append("q", searchTerm);
+      }
+
+      const response = await fetch(`/api/inventory/orders/recent?${params}`);
+      if (!response.ok) throw new Error("Failed to fetch orders");
+
+      const data = await response.json();
+      setOrders(data.orders);
+      setError(null);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to fetch orders");
+      setOrders([]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Create a debounced version of fetchOrders
+  const debouncedFetch = useCallback(
+    debounce((searchTerm: string) => {
+      fetchOrders(searchTerm);
+    }, 300),
+    []
+  );
+
+  useEffect(() => {
+    fetchOrders();
+    // Cleanup debounced function on unmount
+    return () => {
+      debouncedFetch.cancel();
+    };
+  }, []);
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setFilter(value);
+    debouncedFetch(value);
+  };
+
   return (
-    <BaseWidget title="Recent Orders">
+    <BaseWidget id={id} title="Recent Orders">
       <div className="space-y-4">
-        <div className="rounded-md border">
-          <div className="divide-y">
-            {orders.map((order) => (
-              <div
-                key={order.id}
-                className="flex items-center justify-between p-4"
-              >
-                <div className="space-y-1">
-                  <p className="text-sm font-medium">{order.supplier}</p>
-                  <p className="text-xs text-muted-foreground">{order.id}</p>
-                </div>
-                <div className="flex items-center gap-4">
-                  <OrderStatus status={order.status} />
-                  <div className="text-right">
-                    <p className="text-sm font-medium">{order.amount}</p>
+        {/* Search input */}
+        <div className="relative">
+          <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+          <input
+            placeholder="Search by supplier or material..."
+            value={filter}
+            onChange={handleSearch}
+            className="w-full rounded-md border border-input pl-8 pr-2 py-2 text-sm 
+              bg-background ring-offset-background placeholder:text-muted-foreground 
+              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          />
+        </div>
+
+        {isLoading ? (
+          <div className="text-center py-4 text-muted-foreground">
+            Loading...
+          </div>
+        ) : error ? (
+          <div className="text-center py-4 text-red-500">{error}</div>
+        ) : orders.length === 0 ? (
+          <div className="text-center py-4 text-muted-foreground">
+            No orders found
+          </div>
+        ) : (
+          <div className="rounded-md border">
+            <div className="divide-y">
+              {orders.map((order) => (
+                <div
+                  key={order.order_id}
+                  className="flex items-center justify-between p-4"
+                >
+                  <div className="space-y-1">
+                    <p className="text-sm font-medium">{order.material}</p>
                     <p className="text-xs text-muted-foreground">
-                      {order.date}
+                      {order.supplier}
                     </p>
                   </div>
+                  <div className="flex items-center gap-4">
+                    <OrderStatusBadge status={order.status} />
+                    <div className="text-right">
+                      <p className="text-sm font-medium">
+                        {order.quantity_received}/{order.quantity}
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        {order.date_ordered
+                          ? new Date(order.date_ordered).toLocaleDateString()
+                          : "No date"}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </BaseWidget>
   );

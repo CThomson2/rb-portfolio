@@ -1,10 +1,14 @@
 // const map for transaction types
 export const TransactionVariant = {
-  IMPORT: "import",
-  PROCESSING: "processing",
-  REPROCESSING: "reprocessing",
-  DISPOSAL: "disposal",
-  LOSS: "loss",
+  INTAKE: "intake",
+  SCHEDULED: "scheduled",
+  LOADED: "loaded",
+  PROCESSED: "processed",
+  FAILED: "failed",
+  REQUEUED: "requeued",
+  DISPOSED: "disposed",
+  LOST: "lost",
+  CANCELLED: "cancelled",
 } as const;
 
 export type TransactionVariantType =
