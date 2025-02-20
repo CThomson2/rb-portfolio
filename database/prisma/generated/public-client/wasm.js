@@ -142,7 +142,7 @@ exports.Prisma.ProductsScalarFieldEnum = {
 };
 
 exports.Prisma.Raw_materialsScalarFieldEnum = {
-  raw_material_id: 'raw_material_id',
+  id: 'id',
   name: 'name',
   cas_number: 'cas_number',
   chemical_group: 'chemical_group',
@@ -189,20 +189,6 @@ exports.Prisma.DistillationsScalarFieldEnum = {
   volume_repro: 'volume_repro',
   created_at: 'created_at',
   updated_at: 'updated_at'
-};
-
-exports.Prisma.ImportsScalarFieldEnum = {
-  import_id: 'import_id',
-  supplier_name: 'supplier_name',
-  material_type: 'material_type',
-  quantity: 'quantity',
-  supplier_batch_code: 'supplier_batch_code',
-  date_ordered: 'date_ordered',
-  date_received: 'date_received',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  notes: 'notes',
-  location: 'location'
 };
 
 exports.Prisma.New_drumsScalarFieldEnum = {
@@ -281,7 +267,6 @@ exports.Prisma.TransactionsScalarFieldEnum = {
   updated_at: 'updated_at',
   process_id: 'process_id',
   delivery_id: 'delivery_id',
-  batch_code: 'batch_code',
   order_id: 'order_id',
   direction: 'direction'
 };
@@ -325,7 +310,6 @@ exports.Prisma.ModelName = {
   batches: 'batches',
   deliveries: 'deliveries',
   distillations: 'distillations',
-  imports: 'imports',
   new_drums: 'new_drums',
   orders: 'orders',
   processes: 'processes',

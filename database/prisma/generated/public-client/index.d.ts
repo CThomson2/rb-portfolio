@@ -54,11 +54,6 @@ export type deliveries = $Result.DefaultSelection<Prisma.$deliveriesPayload>
  */
 export type distillations = $Result.DefaultSelection<Prisma.$distillationsPayload>
 /**
- * Model imports
- * This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
- */
-export type imports = $Result.DefaultSelection<Prisma.$importsPayload>
-/**
  * Model new_drums
  * 
  */
@@ -303,16 +298,6 @@ export class PrismaClient<
     * ```
     */
   get distillations(): Prisma.distillationsDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.imports`: Exposes CRUD operations for the **imports** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Imports
-    * const imports = await prisma.imports.findMany()
-    * ```
-    */
-  get imports(): Prisma.importsDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.new_drums`: Exposes CRUD operations for the **new_drums** model.
@@ -841,7 +826,6 @@ export namespace Prisma {
     batches: 'batches',
     deliveries: 'deliveries',
     distillations: 'distillations',
-    imports: 'imports',
     new_drums: 'new_drums',
     orders: 'orders',
     processes: 'processes',
@@ -865,7 +849,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "bottle_sizes" | "chemical_groups" | "product_prices" | "products" | "raw_materials" | "batches" | "deliveries" | "distillations" | "imports" | "new_drums" | "orders" | "processes" | "repro_additions" | "repro_drums" | "transactions" | "stills" | "suppliers"
+      modelProps: "bottle_sizes" | "chemical_groups" | "product_prices" | "products" | "raw_materials" | "batches" | "deliveries" | "distillations" | "new_drums" | "orders" | "processes" | "repro_additions" | "repro_drums" | "transactions" | "stills" | "suppliers"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1458,80 +1442,6 @@ export namespace Prisma {
           count: {
             args: Prisma.distillationsCountArgs<ExtArgs>
             result: $Utils.Optional<DistillationsCountAggregateOutputType> | number
-          }
-        }
-      }
-      imports: {
-        payload: Prisma.$importsPayload<ExtArgs>
-        fields: Prisma.importsFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.importsFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$importsPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.importsFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$importsPayload>
-          }
-          findFirst: {
-            args: Prisma.importsFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$importsPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.importsFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$importsPayload>
-          }
-          findMany: {
-            args: Prisma.importsFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$importsPayload>[]
-          }
-          create: {
-            args: Prisma.importsCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$importsPayload>
-          }
-          createMany: {
-            args: Prisma.importsCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.importsCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$importsPayload>[]
-          }
-          delete: {
-            args: Prisma.importsDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$importsPayload>
-          }
-          update: {
-            args: Prisma.importsUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$importsPayload>
-          }
-          deleteMany: {
-            args: Prisma.importsDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.importsUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.importsUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$importsPayload>[]
-          }
-          upsert: {
-            args: Prisma.importsUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$importsPayload>
-          }
-          aggregate: {
-            args: Prisma.ImportsAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateImports>
-          }
-          groupBy: {
-            args: Prisma.importsGroupByArgs<ExtArgs>
-            result: $Utils.Optional<ImportsGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.importsCountArgs<ExtArgs>
-            result: $Utils.Optional<ImportsCountAggregateOutputType> | number
           }
         }
       }
@@ -2219,7 +2129,6 @@ export namespace Prisma {
     batches?: batchesOmit
     deliveries?: deliveriesOmit
     distillations?: distillationsOmit
-    imports?: importsOmit
     new_drums?: new_drumsOmit
     orders?: ordersOmit
     processes?: processesOmit
@@ -6962,17 +6871,17 @@ export namespace Prisma {
   }
 
   export type Raw_materialsAvgAggregateOutputType = {
-    raw_material_id: number | null
+    id: number | null
     flash_point: number | null
   }
 
   export type Raw_materialsSumAggregateOutputType = {
-    raw_material_id: number | null
+    id: number | null
     flash_point: number | null
   }
 
   export type Raw_materialsMinAggregateOutputType = {
-    raw_material_id: number | null
+    id: number | null
     name: string | null
     cas_number: string | null
     chemical_group: string | null
@@ -6982,7 +6891,7 @@ export namespace Prisma {
   }
 
   export type Raw_materialsMaxAggregateOutputType = {
-    raw_material_id: number | null
+    id: number | null
     name: string | null
     cas_number: string | null
     chemical_group: string | null
@@ -6992,7 +6901,7 @@ export namespace Prisma {
   }
 
   export type Raw_materialsCountAggregateOutputType = {
-    raw_material_id: number
+    id: number
     name: number
     cas_number: number
     chemical_group: number
@@ -7004,17 +6913,17 @@ export namespace Prisma {
 
 
   export type Raw_materialsAvgAggregateInputType = {
-    raw_material_id?: true
+    id?: true
     flash_point?: true
   }
 
   export type Raw_materialsSumAggregateInputType = {
-    raw_material_id?: true
+    id?: true
     flash_point?: true
   }
 
   export type Raw_materialsMinAggregateInputType = {
-    raw_material_id?: true
+    id?: true
     name?: true
     cas_number?: true
     chemical_group?: true
@@ -7024,7 +6933,7 @@ export namespace Prisma {
   }
 
   export type Raw_materialsMaxAggregateInputType = {
-    raw_material_id?: true
+    id?: true
     name?: true
     cas_number?: true
     chemical_group?: true
@@ -7034,7 +6943,7 @@ export namespace Prisma {
   }
 
   export type Raw_materialsCountAggregateInputType = {
-    raw_material_id?: true
+    id?: true
     name?: true
     cas_number?: true
     chemical_group?: true
@@ -7131,7 +7040,7 @@ export namespace Prisma {
   }
 
   export type Raw_materialsGroupByOutputType = {
-    raw_material_id: number
+    id: number
     name: string
     cas_number: string
     chemical_group: string | null
@@ -7160,7 +7069,7 @@ export namespace Prisma {
 
 
   export type raw_materialsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    raw_material_id?: boolean
+    id?: boolean
     name?: boolean
     cas_number?: boolean
     chemical_group?: boolean
@@ -7172,7 +7081,7 @@ export namespace Prisma {
   }, ExtArgs["result"]["raw_materials"]>
 
   export type raw_materialsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    raw_material_id?: boolean
+    id?: boolean
     name?: boolean
     cas_number?: boolean
     chemical_group?: boolean
@@ -7182,7 +7091,7 @@ export namespace Prisma {
   }, ExtArgs["result"]["raw_materials"]>
 
   export type raw_materialsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    raw_material_id?: boolean
+    id?: boolean
     name?: boolean
     cas_number?: boolean
     chemical_group?: boolean
@@ -7192,7 +7101,7 @@ export namespace Prisma {
   }, ExtArgs["result"]["raw_materials"]>
 
   export type raw_materialsSelectScalar = {
-    raw_material_id?: boolean
+    id?: boolean
     name?: boolean
     cas_number?: boolean
     chemical_group?: boolean
@@ -7201,7 +7110,7 @@ export namespace Prisma {
     flash_point?: boolean
   }
 
-  export type raw_materialsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"raw_material_id" | "name" | "cas_number" | "chemical_group" | "description" | "un_code" | "flash_point", ExtArgs["result"]["raw_materials"]>
+  export type raw_materialsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "cas_number" | "chemical_group" | "description" | "un_code" | "flash_point", ExtArgs["result"]["raw_materials"]>
   export type raw_materialsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     products?: boolean | raw_materials$productsArgs<ExtArgs>
     _count?: boolean | Raw_materialsCountOutputTypeDefaultArgs<ExtArgs>
@@ -7215,7 +7124,7 @@ export namespace Prisma {
       products: Prisma.$productsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      raw_material_id: number
+      id: number
       name: string
       cas_number: string
       chemical_group: string | null
@@ -7305,8 +7214,8 @@ export namespace Prisma {
      * // Get first 10 Raw_materials
      * const raw_materials = await prisma.raw_materials.findMany({ take: 10 })
      * 
-     * // Only select the `raw_material_id`
-     * const raw_materialsWithRaw_material_idOnly = await prisma.raw_materials.findMany({ select: { raw_material_id: true } })
+     * // Only select the `id`
+     * const raw_materialsWithIdOnly = await prisma.raw_materials.findMany({ select: { id: true } })
      * 
      */
     findMany<T extends raw_materialsFindManyArgs>(args?: SelectSubset<T, raw_materialsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$raw_materialsPayload<ExtArgs>, T, "findMany", ClientOptions>>
@@ -7350,9 +7259,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Create many Raw_materials and only return the `raw_material_id`
-     * const raw_materialsWithRaw_material_idOnly = await prisma.raw_materials.createManyAndReturn({
-     *   select: { raw_material_id: true },
+     * // Create many Raw_materials and only return the `id`
+     * const raw_materialsWithIdOnly = await prisma.raw_materials.createManyAndReturn({
+     *   select: { id: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -7441,9 +7350,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Raw_materials and only return the `raw_material_id`
-     * const raw_materialsWithRaw_material_idOnly = await prisma.raw_materials.updateManyAndReturn({
-     *   select: { raw_material_id: true },
+     * // Update zero or more Raw_materials and only return the `id`
+     * const raw_materialsWithIdOnly = await prisma.raw_materials.updateManyAndReturn({
+     *   select: { id: true },
      *   where: {
      *     // ... provide filter here
      *   },
@@ -7646,7 +7555,7 @@ export namespace Prisma {
    * Fields of the raw_materials model
    */ 
   interface raw_materialsFieldRefs {
-    readonly raw_material_id: FieldRef<"raw_materials", 'Int'>
+    readonly id: FieldRef<"raw_materials", 'Int'>
     readonly name: FieldRef<"raw_materials", 'String'>
     readonly cas_number: FieldRef<"raw_materials", 'String'>
     readonly chemical_group: FieldRef<"raw_materials", 'String'>
@@ -11681,1117 +11590,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: distillationsInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model imports
-   */
-
-  export type AggregateImports = {
-    _count: ImportsCountAggregateOutputType | null
-    _avg: ImportsAvgAggregateOutputType | null
-    _sum: ImportsSumAggregateOutputType | null
-    _min: ImportsMinAggregateOutputType | null
-    _max: ImportsMaxAggregateOutputType | null
-  }
-
-  export type ImportsAvgAggregateOutputType = {
-    import_id: number | null
-    quantity: number | null
-  }
-
-  export type ImportsSumAggregateOutputType = {
-    import_id: number | null
-    quantity: number | null
-  }
-
-  export type ImportsMinAggregateOutputType = {
-    import_id: number | null
-    supplier_name: string | null
-    material_type: string | null
-    quantity: number | null
-    supplier_batch_code: string | null
-    date_ordered: Date | null
-    date_received: Date | null
-    created_at: Date | null
-    updated_at: Date | null
-    notes: string | null
-    location: string | null
-  }
-
-  export type ImportsMaxAggregateOutputType = {
-    import_id: number | null
-    supplier_name: string | null
-    material_type: string | null
-    quantity: number | null
-    supplier_batch_code: string | null
-    date_ordered: Date | null
-    date_received: Date | null
-    created_at: Date | null
-    updated_at: Date | null
-    notes: string | null
-    location: string | null
-  }
-
-  export type ImportsCountAggregateOutputType = {
-    import_id: number
-    supplier_name: number
-    material_type: number
-    quantity: number
-    supplier_batch_code: number
-    date_ordered: number
-    date_received: number
-    created_at: number
-    updated_at: number
-    notes: number
-    location: number
-    _all: number
-  }
-
-
-  export type ImportsAvgAggregateInputType = {
-    import_id?: true
-    quantity?: true
-  }
-
-  export type ImportsSumAggregateInputType = {
-    import_id?: true
-    quantity?: true
-  }
-
-  export type ImportsMinAggregateInputType = {
-    import_id?: true
-    supplier_name?: true
-    material_type?: true
-    quantity?: true
-    supplier_batch_code?: true
-    date_ordered?: true
-    date_received?: true
-    created_at?: true
-    updated_at?: true
-    notes?: true
-    location?: true
-  }
-
-  export type ImportsMaxAggregateInputType = {
-    import_id?: true
-    supplier_name?: true
-    material_type?: true
-    quantity?: true
-    supplier_batch_code?: true
-    date_ordered?: true
-    date_received?: true
-    created_at?: true
-    updated_at?: true
-    notes?: true
-    location?: true
-  }
-
-  export type ImportsCountAggregateInputType = {
-    import_id?: true
-    supplier_name?: true
-    material_type?: true
-    quantity?: true
-    supplier_batch_code?: true
-    date_ordered?: true
-    date_received?: true
-    created_at?: true
-    updated_at?: true
-    notes?: true
-    location?: true
-    _all?: true
-  }
-
-  export type ImportsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which imports to aggregate.
-     */
-    where?: importsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of imports to fetch.
-     */
-    orderBy?: importsOrderByWithRelationInput | importsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: importsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` imports from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` imports.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned imports
-    **/
-    _count?: true | ImportsCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: ImportsAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: ImportsSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: ImportsMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: ImportsMaxAggregateInputType
-  }
-
-  export type GetImportsAggregateType<T extends ImportsAggregateArgs> = {
-        [P in keyof T & keyof AggregateImports]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateImports[P]>
-      : GetScalarType<T[P], AggregateImports[P]>
-  }
-
-
-
-
-  export type importsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: importsWhereInput
-    orderBy?: importsOrderByWithAggregationInput | importsOrderByWithAggregationInput[]
-    by: ImportsScalarFieldEnum[] | ImportsScalarFieldEnum
-    having?: importsScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: ImportsCountAggregateInputType | true
-    _avg?: ImportsAvgAggregateInputType
-    _sum?: ImportsSumAggregateInputType
-    _min?: ImportsMinAggregateInputType
-    _max?: ImportsMaxAggregateInputType
-  }
-
-  export type ImportsGroupByOutputType = {
-    import_id: number
-    supplier_name: string
-    material_type: string
-    quantity: number
-    supplier_batch_code: string | null
-    date_ordered: Date | null
-    date_received: Date
-    created_at: Date | null
-    updated_at: Date | null
-    notes: string | null
-    location: string | null
-    _count: ImportsCountAggregateOutputType | null
-    _avg: ImportsAvgAggregateOutputType | null
-    _sum: ImportsSumAggregateOutputType | null
-    _min: ImportsMinAggregateOutputType | null
-    _max: ImportsMaxAggregateOutputType | null
-  }
-
-  type GetImportsGroupByPayload<T extends importsGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<ImportsGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof ImportsGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], ImportsGroupByOutputType[P]>
-            : GetScalarType<T[P], ImportsGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type importsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    import_id?: boolean
-    supplier_name?: boolean
-    material_type?: boolean
-    quantity?: boolean
-    supplier_batch_code?: boolean
-    date_ordered?: boolean
-    date_received?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    notes?: boolean
-    location?: boolean
-  }, ExtArgs["result"]["imports"]>
-
-  export type importsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    import_id?: boolean
-    supplier_name?: boolean
-    material_type?: boolean
-    quantity?: boolean
-    supplier_batch_code?: boolean
-    date_ordered?: boolean
-    date_received?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    notes?: boolean
-    location?: boolean
-  }, ExtArgs["result"]["imports"]>
-
-  export type importsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    import_id?: boolean
-    supplier_name?: boolean
-    material_type?: boolean
-    quantity?: boolean
-    supplier_batch_code?: boolean
-    date_ordered?: boolean
-    date_received?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    notes?: boolean
-    location?: boolean
-  }, ExtArgs["result"]["imports"]>
-
-  export type importsSelectScalar = {
-    import_id?: boolean
-    supplier_name?: boolean
-    material_type?: boolean
-    quantity?: boolean
-    supplier_batch_code?: boolean
-    date_ordered?: boolean
-    date_received?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    notes?: boolean
-    location?: boolean
-  }
-
-  export type importsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"import_id" | "supplier_name" | "material_type" | "quantity" | "supplier_batch_code" | "date_ordered" | "date_received" | "created_at" | "updated_at" | "notes" | "location", ExtArgs["result"]["imports"]>
-
-  export type $importsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "imports"
-    objects: {}
-    scalars: $Extensions.GetPayloadResult<{
-      import_id: number
-      supplier_name: string
-      material_type: string
-      quantity: number
-      supplier_batch_code: string | null
-      date_ordered: Date | null
-      date_received: Date
-      created_at: Date | null
-      updated_at: Date | null
-      notes: string | null
-      location: string | null
-    }, ExtArgs["result"]["imports"]>
-    composites: {}
-  }
-
-  type importsGetPayload<S extends boolean | null | undefined | importsDefaultArgs> = $Result.GetResult<Prisma.$importsPayload, S>
-
-  type importsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<importsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: ImportsCountAggregateInputType | true
-    }
-
-  export interface importsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['imports'], meta: { name: 'imports' } }
-    /**
-     * Find zero or one Imports that matches the filter.
-     * @param {importsFindUniqueArgs} args - Arguments to find a Imports
-     * @example
-     * // Get one Imports
-     * const imports = await prisma.imports.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends importsFindUniqueArgs>(args: SelectSubset<T, importsFindUniqueArgs<ExtArgs>>): Prisma__importsClient<$Result.GetResult<Prisma.$importsPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
-
-    /**
-     * Find one Imports that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {importsFindUniqueOrThrowArgs} args - Arguments to find a Imports
-     * @example
-     * // Get one Imports
-     * const imports = await prisma.imports.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends importsFindUniqueOrThrowArgs>(args: SelectSubset<T, importsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__importsClient<$Result.GetResult<Prisma.$importsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Find the first Imports that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {importsFindFirstArgs} args - Arguments to find a Imports
-     * @example
-     * // Get one Imports
-     * const imports = await prisma.imports.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends importsFindFirstArgs>(args?: SelectSubset<T, importsFindFirstArgs<ExtArgs>>): Prisma__importsClient<$Result.GetResult<Prisma.$importsPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
-
-    /**
-     * Find the first Imports that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {importsFindFirstOrThrowArgs} args - Arguments to find a Imports
-     * @example
-     * // Get one Imports
-     * const imports = await prisma.imports.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends importsFindFirstOrThrowArgs>(args?: SelectSubset<T, importsFindFirstOrThrowArgs<ExtArgs>>): Prisma__importsClient<$Result.GetResult<Prisma.$importsPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Find zero or more Imports that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {importsFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Imports
-     * const imports = await prisma.imports.findMany()
-     * 
-     * // Get first 10 Imports
-     * const imports = await prisma.imports.findMany({ take: 10 })
-     * 
-     * // Only select the `import_id`
-     * const importsWithImport_idOnly = await prisma.imports.findMany({ select: { import_id: true } })
-     * 
-     */
-    findMany<T extends importsFindManyArgs>(args?: SelectSubset<T, importsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$importsPayload<ExtArgs>, T, "findMany", ClientOptions>>
-
-    /**
-     * Create a Imports.
-     * @param {importsCreateArgs} args - Arguments to create a Imports.
-     * @example
-     * // Create one Imports
-     * const Imports = await prisma.imports.create({
-     *   data: {
-     *     // ... data to create a Imports
-     *   }
-     * })
-     * 
-     */
-    create<T extends importsCreateArgs>(args: SelectSubset<T, importsCreateArgs<ExtArgs>>): Prisma__importsClient<$Result.GetResult<Prisma.$importsPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Create many Imports.
-     * @param {importsCreateManyArgs} args - Arguments to create many Imports.
-     * @example
-     * // Create many Imports
-     * const imports = await prisma.imports.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends importsCreateManyArgs>(args?: SelectSubset<T, importsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Imports and returns the data saved in the database.
-     * @param {importsCreateManyAndReturnArgs} args - Arguments to create many Imports.
-     * @example
-     * // Create many Imports
-     * const imports = await prisma.imports.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Imports and only return the `import_id`
-     * const importsWithImport_idOnly = await prisma.imports.createManyAndReturn({
-     *   select: { import_id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends importsCreateManyAndReturnArgs>(args?: SelectSubset<T, importsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$importsPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
-
-    /**
-     * Delete a Imports.
-     * @param {importsDeleteArgs} args - Arguments to delete one Imports.
-     * @example
-     * // Delete one Imports
-     * const Imports = await prisma.imports.delete({
-     *   where: {
-     *     // ... filter to delete one Imports
-     *   }
-     * })
-     * 
-     */
-    delete<T extends importsDeleteArgs>(args: SelectSubset<T, importsDeleteArgs<ExtArgs>>): Prisma__importsClient<$Result.GetResult<Prisma.$importsPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Update one Imports.
-     * @param {importsUpdateArgs} args - Arguments to update one Imports.
-     * @example
-     * // Update one Imports
-     * const imports = await prisma.imports.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends importsUpdateArgs>(args: SelectSubset<T, importsUpdateArgs<ExtArgs>>): Prisma__importsClient<$Result.GetResult<Prisma.$importsPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Delete zero or more Imports.
-     * @param {importsDeleteManyArgs} args - Arguments to filter Imports to delete.
-     * @example
-     * // Delete a few Imports
-     * const { count } = await prisma.imports.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends importsDeleteManyArgs>(args?: SelectSubset<T, importsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Imports.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {importsUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Imports
-     * const imports = await prisma.imports.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends importsUpdateManyArgs>(args: SelectSubset<T, importsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Imports and returns the data updated in the database.
-     * @param {importsUpdateManyAndReturnArgs} args - Arguments to update many Imports.
-     * @example
-     * // Update many Imports
-     * const imports = await prisma.imports.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Imports and only return the `import_id`
-     * const importsWithImport_idOnly = await prisma.imports.updateManyAndReturn({
-     *   select: { import_id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends importsUpdateManyAndReturnArgs>(args: SelectSubset<T, importsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$importsPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
-
-    /**
-     * Create or update one Imports.
-     * @param {importsUpsertArgs} args - Arguments to update or create a Imports.
-     * @example
-     * // Update or create a Imports
-     * const imports = await prisma.imports.upsert({
-     *   create: {
-     *     // ... data to create a Imports
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Imports we want to update
-     *   }
-     * })
-     */
-    upsert<T extends importsUpsertArgs>(args: SelectSubset<T, importsUpsertArgs<ExtArgs>>): Prisma__importsClient<$Result.GetResult<Prisma.$importsPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
-
-
-    /**
-     * Count the number of Imports.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {importsCountArgs} args - Arguments to filter Imports to count.
-     * @example
-     * // Count the number of Imports
-     * const count = await prisma.imports.count({
-     *   where: {
-     *     // ... the filter for the Imports we want to count
-     *   }
-     * })
-    **/
-    count<T extends importsCountArgs>(
-      args?: Subset<T, importsCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], ImportsCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Imports.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ImportsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends ImportsAggregateArgs>(args: Subset<T, ImportsAggregateArgs>): Prisma.PrismaPromise<GetImportsAggregateType<T>>
-
-    /**
-     * Group by Imports.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {importsGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends importsGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: importsGroupByArgs['orderBy'] }
-        : { orderBy?: importsGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, importsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetImportsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the imports model
-   */
-  readonly fields: importsFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for imports.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__importsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the imports model
-   */ 
-  interface importsFieldRefs {
-    readonly import_id: FieldRef<"imports", 'Int'>
-    readonly supplier_name: FieldRef<"imports", 'String'>
-    readonly material_type: FieldRef<"imports", 'String'>
-    readonly quantity: FieldRef<"imports", 'Int'>
-    readonly supplier_batch_code: FieldRef<"imports", 'String'>
-    readonly date_ordered: FieldRef<"imports", 'DateTime'>
-    readonly date_received: FieldRef<"imports", 'DateTime'>
-    readonly created_at: FieldRef<"imports", 'DateTime'>
-    readonly updated_at: FieldRef<"imports", 'DateTime'>
-    readonly notes: FieldRef<"imports", 'String'>
-    readonly location: FieldRef<"imports", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * imports findUnique
-   */
-  export type importsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the imports
-     */
-    select?: importsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the imports
-     */
-    omit?: importsOmit<ExtArgs> | null
-    /**
-     * Filter, which imports to fetch.
-     */
-    where: importsWhereUniqueInput
-  }
-
-  /**
-   * imports findUniqueOrThrow
-   */
-  export type importsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the imports
-     */
-    select?: importsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the imports
-     */
-    omit?: importsOmit<ExtArgs> | null
-    /**
-     * Filter, which imports to fetch.
-     */
-    where: importsWhereUniqueInput
-  }
-
-  /**
-   * imports findFirst
-   */
-  export type importsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the imports
-     */
-    select?: importsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the imports
-     */
-    omit?: importsOmit<ExtArgs> | null
-    /**
-     * Filter, which imports to fetch.
-     */
-    where?: importsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of imports to fetch.
-     */
-    orderBy?: importsOrderByWithRelationInput | importsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for imports.
-     */
-    cursor?: importsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` imports from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` imports.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of imports.
-     */
-    distinct?: ImportsScalarFieldEnum | ImportsScalarFieldEnum[]
-  }
-
-  /**
-   * imports findFirstOrThrow
-   */
-  export type importsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the imports
-     */
-    select?: importsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the imports
-     */
-    omit?: importsOmit<ExtArgs> | null
-    /**
-     * Filter, which imports to fetch.
-     */
-    where?: importsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of imports to fetch.
-     */
-    orderBy?: importsOrderByWithRelationInput | importsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for imports.
-     */
-    cursor?: importsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` imports from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` imports.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of imports.
-     */
-    distinct?: ImportsScalarFieldEnum | ImportsScalarFieldEnum[]
-  }
-
-  /**
-   * imports findMany
-   */
-  export type importsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the imports
-     */
-    select?: importsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the imports
-     */
-    omit?: importsOmit<ExtArgs> | null
-    /**
-     * Filter, which imports to fetch.
-     */
-    where?: importsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of imports to fetch.
-     */
-    orderBy?: importsOrderByWithRelationInput | importsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing imports.
-     */
-    cursor?: importsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` imports from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` imports.
-     */
-    skip?: number
-    distinct?: ImportsScalarFieldEnum | ImportsScalarFieldEnum[]
-  }
-
-  /**
-   * imports create
-   */
-  export type importsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the imports
-     */
-    select?: importsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the imports
-     */
-    omit?: importsOmit<ExtArgs> | null
-    /**
-     * The data needed to create a imports.
-     */
-    data: XOR<importsCreateInput, importsUncheckedCreateInput>
-  }
-
-  /**
-   * imports createMany
-   */
-  export type importsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many imports.
-     */
-    data: importsCreateManyInput | importsCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * imports createManyAndReturn
-   */
-  export type importsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the imports
-     */
-    select?: importsSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the imports
-     */
-    omit?: importsOmit<ExtArgs> | null
-    /**
-     * The data used to create many imports.
-     */
-    data: importsCreateManyInput | importsCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * imports update
-   */
-  export type importsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the imports
-     */
-    select?: importsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the imports
-     */
-    omit?: importsOmit<ExtArgs> | null
-    /**
-     * The data needed to update a imports.
-     */
-    data: XOR<importsUpdateInput, importsUncheckedUpdateInput>
-    /**
-     * Choose, which imports to update.
-     */
-    where: importsWhereUniqueInput
-  }
-
-  /**
-   * imports updateMany
-   */
-  export type importsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update imports.
-     */
-    data: XOR<importsUpdateManyMutationInput, importsUncheckedUpdateManyInput>
-    /**
-     * Filter which imports to update
-     */
-    where?: importsWhereInput
-    /**
-     * Limit how many imports to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * imports updateManyAndReturn
-   */
-  export type importsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the imports
-     */
-    select?: importsSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the imports
-     */
-    omit?: importsOmit<ExtArgs> | null
-    /**
-     * The data used to update imports.
-     */
-    data: XOR<importsUpdateManyMutationInput, importsUncheckedUpdateManyInput>
-    /**
-     * Filter which imports to update
-     */
-    where?: importsWhereInput
-    /**
-     * Limit how many imports to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * imports upsert
-   */
-  export type importsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the imports
-     */
-    select?: importsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the imports
-     */
-    omit?: importsOmit<ExtArgs> | null
-    /**
-     * The filter to search for the imports to update in case it exists.
-     */
-    where: importsWhereUniqueInput
-    /**
-     * In case the imports found by the `where` argument doesn't exist, create a new imports with this data.
-     */
-    create: XOR<importsCreateInput, importsUncheckedCreateInput>
-    /**
-     * In case the imports was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<importsUpdateInput, importsUncheckedUpdateInput>
-  }
-
-  /**
-   * imports delete
-   */
-  export type importsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the imports
-     */
-    select?: importsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the imports
-     */
-    omit?: importsOmit<ExtArgs> | null
-    /**
-     * Filter which imports to delete.
-     */
-    where: importsWhereUniqueInput
-  }
-
-  /**
-   * imports deleteMany
-   */
-  export type importsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which imports to delete
-     */
-    where?: importsWhereInput
-    /**
-     * Limit how many imports to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * imports without action
-   */
-  export type importsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the imports
-     */
-    select?: importsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the imports
-     */
-    omit?: importsOmit<ExtArgs> | null
   }
 
 
@@ -18909,7 +17707,6 @@ export namespace Prisma {
     updated_at: Date | null
     process_id: number | null
     delivery_id: number | null
-    batch_code: string | null
     order_id: number | null
     direction: string | null
   }
@@ -18926,7 +17723,6 @@ export namespace Prisma {
     updated_at: Date | null
     process_id: number | null
     delivery_id: number | null
-    batch_code: string | null
     order_id: number | null
     direction: string | null
   }
@@ -18943,7 +17739,6 @@ export namespace Prisma {
     updated_at: number
     process_id: number
     delivery_id: number
-    batch_code: number
     order_id: number
     direction: number
     _all: number
@@ -18980,7 +17775,6 @@ export namespace Prisma {
     updated_at?: true
     process_id?: true
     delivery_id?: true
-    batch_code?: true
     order_id?: true
     direction?: true
   }
@@ -18997,7 +17791,6 @@ export namespace Prisma {
     updated_at?: true
     process_id?: true
     delivery_id?: true
-    batch_code?: true
     order_id?: true
     direction?: true
   }
@@ -19014,7 +17807,6 @@ export namespace Prisma {
     updated_at?: true
     process_id?: true
     delivery_id?: true
-    batch_code?: true
     order_id?: true
     direction?: true
     _all?: true
@@ -19118,7 +17910,6 @@ export namespace Prisma {
     updated_at: Date
     process_id: number | null
     delivery_id: number | null
-    batch_code: string | null
     order_id: number | null
     direction: string | null
     _count: TransactionsCountAggregateOutputType | null
@@ -19154,7 +17945,6 @@ export namespace Prisma {
     updated_at?: boolean
     process_id?: boolean
     delivery_id?: boolean
-    batch_code?: boolean
     order_id?: boolean
     direction?: boolean
     deliveries?: boolean | transactions$deliveriesArgs<ExtArgs>
@@ -19175,7 +17965,6 @@ export namespace Prisma {
     updated_at?: boolean
     process_id?: boolean
     delivery_id?: boolean
-    batch_code?: boolean
     order_id?: boolean
     direction?: boolean
     deliveries?: boolean | transactions$deliveriesArgs<ExtArgs>
@@ -19196,7 +17985,6 @@ export namespace Prisma {
     updated_at?: boolean
     process_id?: boolean
     delivery_id?: boolean
-    batch_code?: boolean
     order_id?: boolean
     direction?: boolean
     deliveries?: boolean | transactions$deliveriesArgs<ExtArgs>
@@ -19217,12 +18005,11 @@ export namespace Prisma {
     updated_at?: boolean
     process_id?: boolean
     delivery_id?: boolean
-    batch_code?: boolean
     order_id?: boolean
     direction?: boolean
   }
 
-  export type transactionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"tx_id" | "tx_type" | "tx_date" | "material" | "drum_id" | "repro_id" | "tx_notes" | "created_at" | "updated_at" | "process_id" | "delivery_id" | "batch_code" | "order_id" | "direction", ExtArgs["result"]["transactions"]>
+  export type transactionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"tx_id" | "tx_type" | "tx_date" | "material" | "drum_id" | "repro_id" | "tx_notes" | "created_at" | "updated_at" | "process_id" | "delivery_id" | "order_id" | "direction", ExtArgs["result"]["transactions"]>
   export type transactionsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     deliveries?: boolean | transactions$deliveriesArgs<ExtArgs>
     new_drums?: boolean | transactions$new_drumsArgs<ExtArgs>
@@ -19262,7 +18049,6 @@ export namespace Prisma {
       updated_at: Date
       process_id: number | null
       delivery_id: number | null
-      batch_code: string | null
       order_id: number | null
       direction: string | null
     }, ExtArgs["result"]["transactions"]>
@@ -19703,7 +18489,6 @@ export namespace Prisma {
     readonly updated_at: FieldRef<"transactions", 'DateTime'>
     readonly process_id: FieldRef<"transactions", 'Int'>
     readonly delivery_id: FieldRef<"transactions", 'Int'>
-    readonly batch_code: FieldRef<"transactions", 'String'>
     readonly order_id: FieldRef<"transactions", 'Int'>
     readonly direction: FieldRef<"transactions", 'String'>
   }
@@ -22358,7 +21143,7 @@ export namespace Prisma {
 
 
   export const Raw_materialsScalarFieldEnum: {
-    raw_material_id: 'raw_material_id',
+    id: 'id',
     name: 'name',
     cas_number: 'cas_number',
     chemical_group: 'chemical_group',
@@ -22417,23 +21202,6 @@ export namespace Prisma {
   };
 
   export type DistillationsScalarFieldEnum = (typeof DistillationsScalarFieldEnum)[keyof typeof DistillationsScalarFieldEnum]
-
-
-  export const ImportsScalarFieldEnum: {
-    import_id: 'import_id',
-    supplier_name: 'supplier_name',
-    material_type: 'material_type',
-    quantity: 'quantity',
-    supplier_batch_code: 'supplier_batch_code',
-    date_ordered: 'date_ordered',
-    date_received: 'date_received',
-    created_at: 'created_at',
-    updated_at: 'updated_at',
-    notes: 'notes',
-    location: 'location'
-  };
-
-  export type ImportsScalarFieldEnum = (typeof ImportsScalarFieldEnum)[keyof typeof ImportsScalarFieldEnum]
 
 
   export const New_drumsScalarFieldEnum: {
@@ -22527,7 +21295,6 @@ export namespace Prisma {
     updated_at: 'updated_at',
     process_id: 'process_id',
     delivery_id: 'delivery_id',
-    batch_code: 'batch_code',
     order_id: 'order_id',
     direction: 'direction'
   };
@@ -22860,7 +21627,7 @@ export namespace Prisma {
     AND?: raw_materialsWhereInput | raw_materialsWhereInput[]
     OR?: raw_materialsWhereInput[]
     NOT?: raw_materialsWhereInput | raw_materialsWhereInput[]
-    raw_material_id?: IntFilter<"raw_materials"> | number
+    id?: IntFilter<"raw_materials"> | number
     name?: StringFilter<"raw_materials"> | string
     cas_number?: StringFilter<"raw_materials"> | string
     chemical_group?: StringNullableFilter<"raw_materials"> | string | null
@@ -22871,7 +21638,7 @@ export namespace Prisma {
   }
 
   export type raw_materialsOrderByWithRelationInput = {
-    raw_material_id?: SortOrder
+    id?: SortOrder
     name?: SortOrder
     cas_number?: SortOrder
     chemical_group?: SortOrderInput | SortOrder
@@ -22882,7 +21649,7 @@ export namespace Prisma {
   }
 
   export type raw_materialsWhereUniqueInput = Prisma.AtLeast<{
-    raw_material_id?: number
+    id?: number
     AND?: raw_materialsWhereInput | raw_materialsWhereInput[]
     OR?: raw_materialsWhereInput[]
     NOT?: raw_materialsWhereInput | raw_materialsWhereInput[]
@@ -22893,10 +21660,10 @@ export namespace Prisma {
     un_code?: StringNullableFilter<"raw_materials"> | string | null
     flash_point?: IntNullableFilter<"raw_materials"> | number | null
     products?: ProductsListRelationFilter
-  }, "raw_material_id">
+  }, "id">
 
   export type raw_materialsOrderByWithAggregationInput = {
-    raw_material_id?: SortOrder
+    id?: SortOrder
     name?: SortOrder
     cas_number?: SortOrder
     chemical_group?: SortOrderInput | SortOrder
@@ -22914,7 +21681,7 @@ export namespace Prisma {
     AND?: raw_materialsScalarWhereWithAggregatesInput | raw_materialsScalarWhereWithAggregatesInput[]
     OR?: raw_materialsScalarWhereWithAggregatesInput[]
     NOT?: raw_materialsScalarWhereWithAggregatesInput | raw_materialsScalarWhereWithAggregatesInput[]
-    raw_material_id?: IntWithAggregatesFilter<"raw_materials"> | number
+    id?: IntWithAggregatesFilter<"raw_materials"> | number
     name?: StringWithAggregatesFilter<"raw_materials"> | string
     cas_number?: StringWithAggregatesFilter<"raw_materials"> | string
     chemical_group?: StringNullableWithAggregatesFilter<"raw_materials"> | string | null
@@ -23179,90 +21946,6 @@ export namespace Prisma {
     volume_repro?: DecimalNullableWithAggregatesFilter<"distillations"> | Decimal | DecimalJsLike | number | string | null
     created_at?: DateTimeNullableWithAggregatesFilter<"distillations"> | Date | string | null
     updated_at?: DateTimeNullableWithAggregatesFilter<"distillations"> | Date | string | null
-  }
-
-  export type importsWhereInput = {
-    AND?: importsWhereInput | importsWhereInput[]
-    OR?: importsWhereInput[]
-    NOT?: importsWhereInput | importsWhereInput[]
-    import_id?: IntFilter<"imports"> | number
-    supplier_name?: StringFilter<"imports"> | string
-    material_type?: StringFilter<"imports"> | string
-    quantity?: IntFilter<"imports"> | number
-    supplier_batch_code?: StringNullableFilter<"imports"> | string | null
-    date_ordered?: DateTimeNullableFilter<"imports"> | Date | string | null
-    date_received?: DateTimeFilter<"imports"> | Date | string
-    created_at?: DateTimeNullableFilter<"imports"> | Date | string | null
-    updated_at?: DateTimeNullableFilter<"imports"> | Date | string | null
-    notes?: StringNullableFilter<"imports"> | string | null
-    location?: StringNullableFilter<"imports"> | string | null
-  }
-
-  export type importsOrderByWithRelationInput = {
-    import_id?: SortOrder
-    supplier_name?: SortOrder
-    material_type?: SortOrder
-    quantity?: SortOrder
-    supplier_batch_code?: SortOrderInput | SortOrder
-    date_ordered?: SortOrderInput | SortOrder
-    date_received?: SortOrder
-    created_at?: SortOrderInput | SortOrder
-    updated_at?: SortOrderInput | SortOrder
-    notes?: SortOrderInput | SortOrder
-    location?: SortOrderInput | SortOrder
-  }
-
-  export type importsWhereUniqueInput = Prisma.AtLeast<{
-    import_id?: number
-    supplier_batch_code?: string
-    AND?: importsWhereInput | importsWhereInput[]
-    OR?: importsWhereInput[]
-    NOT?: importsWhereInput | importsWhereInput[]
-    supplier_name?: StringFilter<"imports"> | string
-    material_type?: StringFilter<"imports"> | string
-    quantity?: IntFilter<"imports"> | number
-    date_ordered?: DateTimeNullableFilter<"imports"> | Date | string | null
-    date_received?: DateTimeFilter<"imports"> | Date | string
-    created_at?: DateTimeNullableFilter<"imports"> | Date | string | null
-    updated_at?: DateTimeNullableFilter<"imports"> | Date | string | null
-    notes?: StringNullableFilter<"imports"> | string | null
-    location?: StringNullableFilter<"imports"> | string | null
-  }, "import_id" | "supplier_batch_code">
-
-  export type importsOrderByWithAggregationInput = {
-    import_id?: SortOrder
-    supplier_name?: SortOrder
-    material_type?: SortOrder
-    quantity?: SortOrder
-    supplier_batch_code?: SortOrderInput | SortOrder
-    date_ordered?: SortOrderInput | SortOrder
-    date_received?: SortOrder
-    created_at?: SortOrderInput | SortOrder
-    updated_at?: SortOrderInput | SortOrder
-    notes?: SortOrderInput | SortOrder
-    location?: SortOrderInput | SortOrder
-    _count?: importsCountOrderByAggregateInput
-    _avg?: importsAvgOrderByAggregateInput
-    _max?: importsMaxOrderByAggregateInput
-    _min?: importsMinOrderByAggregateInput
-    _sum?: importsSumOrderByAggregateInput
-  }
-
-  export type importsScalarWhereWithAggregatesInput = {
-    AND?: importsScalarWhereWithAggregatesInput | importsScalarWhereWithAggregatesInput[]
-    OR?: importsScalarWhereWithAggregatesInput[]
-    NOT?: importsScalarWhereWithAggregatesInput | importsScalarWhereWithAggregatesInput[]
-    import_id?: IntWithAggregatesFilter<"imports"> | number
-    supplier_name?: StringWithAggregatesFilter<"imports"> | string
-    material_type?: StringWithAggregatesFilter<"imports"> | string
-    quantity?: IntWithAggregatesFilter<"imports"> | number
-    supplier_batch_code?: StringNullableWithAggregatesFilter<"imports"> | string | null
-    date_ordered?: DateTimeNullableWithAggregatesFilter<"imports"> | Date | string | null
-    date_received?: DateTimeWithAggregatesFilter<"imports"> | Date | string
-    created_at?: DateTimeNullableWithAggregatesFilter<"imports"> | Date | string | null
-    updated_at?: DateTimeNullableWithAggregatesFilter<"imports"> | Date | string | null
-    notes?: StringNullableWithAggregatesFilter<"imports"> | string | null
-    location?: StringNullableWithAggregatesFilter<"imports"> | string | null
   }
 
   export type new_drumsWhereInput = {
@@ -23706,7 +22389,6 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"transactions"> | Date | string
     process_id?: IntNullableFilter<"transactions"> | number | null
     delivery_id?: IntNullableFilter<"transactions"> | number | null
-    batch_code?: StringNullableFilter<"transactions"> | string | null
     order_id?: IntNullableFilter<"transactions"> | number | null
     direction?: StringNullableFilter<"transactions"> | string | null
     deliveries?: XOR<DeliveriesNullableScalarRelationFilter, deliveriesWhereInput> | null
@@ -23727,7 +22409,6 @@ export namespace Prisma {
     updated_at?: SortOrder
     process_id?: SortOrderInput | SortOrder
     delivery_id?: SortOrderInput | SortOrder
-    batch_code?: SortOrderInput | SortOrder
     order_id?: SortOrderInput | SortOrder
     direction?: SortOrderInput | SortOrder
     deliveries?: deliveriesOrderByWithRelationInput
@@ -23751,7 +22432,6 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"transactions"> | Date | string
     process_id?: IntNullableFilter<"transactions"> | number | null
     delivery_id?: IntNullableFilter<"transactions"> | number | null
-    batch_code?: StringNullableFilter<"transactions"> | string | null
     order_id?: IntNullableFilter<"transactions"> | number | null
     direction?: StringNullableFilter<"transactions"> | string | null
     deliveries?: XOR<DeliveriesNullableScalarRelationFilter, deliveriesWhereInput> | null
@@ -23772,7 +22452,6 @@ export namespace Prisma {
     updated_at?: SortOrder
     process_id?: SortOrderInput | SortOrder
     delivery_id?: SortOrderInput | SortOrder
-    batch_code?: SortOrderInput | SortOrder
     order_id?: SortOrderInput | SortOrder
     direction?: SortOrderInput | SortOrder
     _count?: transactionsCountOrderByAggregateInput
@@ -23797,7 +22476,6 @@ export namespace Prisma {
     updated_at?: DateTimeWithAggregatesFilter<"transactions"> | Date | string
     process_id?: IntNullableWithAggregatesFilter<"transactions"> | number | null
     delivery_id?: IntNullableWithAggregatesFilter<"transactions"> | number | null
-    batch_code?: StringNullableWithAggregatesFilter<"transactions"> | string | null
     order_id?: IntNullableWithAggregatesFilter<"transactions"> | number | null
     direction?: StringNullableWithAggregatesFilter<"transactions"> | string | null
   }
@@ -24078,7 +22756,7 @@ export namespace Prisma {
   }
 
   export type raw_materialsUncheckedCreateInput = {
-    raw_material_id?: number
+    id?: number
     name: string
     cas_number: string
     chemical_group?: string | null
@@ -24099,7 +22777,7 @@ export namespace Prisma {
   }
 
   export type raw_materialsUncheckedUpdateInput = {
-    raw_material_id?: IntFieldUpdateOperationsInput | number
+    id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     cas_number?: StringFieldUpdateOperationsInput | string
     chemical_group?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24110,7 +22788,7 @@ export namespace Prisma {
   }
 
   export type raw_materialsCreateManyInput = {
-    raw_material_id?: number
+    id?: number
     name: string
     cas_number: string
     chemical_group?: string | null
@@ -24129,7 +22807,7 @@ export namespace Prisma {
   }
 
   export type raw_materialsUncheckedUpdateManyInput = {
-    raw_material_id?: IntFieldUpdateOperationsInput | number
+    id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     cas_number?: StringFieldUpdateOperationsInput | string
     chemical_group?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24417,101 +23095,6 @@ export namespace Prisma {
     volume_repro?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type importsCreateInput = {
-    supplier_name: string
-    material_type: string
-    quantity: number
-    supplier_batch_code?: string | null
-    date_ordered?: Date | string | null
-    date_received: Date | string
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
-    notes?: string | null
-    location?: string | null
-  }
-
-  export type importsUncheckedCreateInput = {
-    import_id?: number
-    supplier_name: string
-    material_type: string
-    quantity: number
-    supplier_batch_code?: string | null
-    date_ordered?: Date | string | null
-    date_received: Date | string
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
-    notes?: string | null
-    location?: string | null
-  }
-
-  export type importsUpdateInput = {
-    supplier_name?: StringFieldUpdateOperationsInput | string
-    material_type?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    supplier_batch_code?: NullableStringFieldUpdateOperationsInput | string | null
-    date_ordered?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    date_received?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type importsUncheckedUpdateInput = {
-    import_id?: IntFieldUpdateOperationsInput | number
-    supplier_name?: StringFieldUpdateOperationsInput | string
-    material_type?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    supplier_batch_code?: NullableStringFieldUpdateOperationsInput | string | null
-    date_ordered?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    date_received?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type importsCreateManyInput = {
-    import_id?: number
-    supplier_name: string
-    material_type: string
-    quantity: number
-    supplier_batch_code?: string | null
-    date_ordered?: Date | string | null
-    date_received: Date | string
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
-    notes?: string | null
-    location?: string | null
-  }
-
-  export type importsUpdateManyMutationInput = {
-    supplier_name?: StringFieldUpdateOperationsInput | string
-    material_type?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    supplier_batch_code?: NullableStringFieldUpdateOperationsInput | string | null
-    date_ordered?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    date_received?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type importsUncheckedUpdateManyInput = {
-    import_id?: IntFieldUpdateOperationsInput | number
-    supplier_name?: StringFieldUpdateOperationsInput | string
-    material_type?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    supplier_batch_code?: NullableStringFieldUpdateOperationsInput | string | null
-    date_ordered?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    date_received?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type new_drumsCreateInput = {
@@ -24977,7 +23560,6 @@ export namespace Prisma {
     tx_notes?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    batch_code?: string | null
     order_id?: number | null
     direction?: string | null
     deliveries?: deliveriesCreateNestedOneWithoutTransactionsInput
@@ -24998,7 +23580,6 @@ export namespace Prisma {
     updated_at?: Date | string
     process_id?: number | null
     delivery_id?: number | null
-    batch_code?: string | null
     order_id?: number | null
     direction?: string | null
   }
@@ -25010,7 +23591,6 @@ export namespace Prisma {
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
     direction?: NullableStringFieldUpdateOperationsInput | string | null
     deliveries?: deliveriesUpdateOneWithoutTransactionsNestedInput
@@ -25031,7 +23611,6 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     process_id?: NullableIntFieldUpdateOperationsInput | number | null
     delivery_id?: NullableIntFieldUpdateOperationsInput | number | null
-    batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
     direction?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -25048,7 +23627,6 @@ export namespace Prisma {
     updated_at?: Date | string
     process_id?: number | null
     delivery_id?: number | null
-    batch_code?: string | null
     order_id?: number | null
     direction?: string | null
   }
@@ -25060,7 +23638,6 @@ export namespace Prisma {
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
     direction?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -25077,7 +23654,6 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     process_id?: NullableIntFieldUpdateOperationsInput | number | null
     delivery_id?: NullableIntFieldUpdateOperationsInput | number | null
-    batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
     direction?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -25466,7 +24042,7 @@ export namespace Prisma {
   }
 
   export type raw_materialsCountOrderByAggregateInput = {
-    raw_material_id?: SortOrder
+    id?: SortOrder
     name?: SortOrder
     cas_number?: SortOrder
     chemical_group?: SortOrder
@@ -25476,12 +24052,12 @@ export namespace Prisma {
   }
 
   export type raw_materialsAvgOrderByAggregateInput = {
-    raw_material_id?: SortOrder
+    id?: SortOrder
     flash_point?: SortOrder
   }
 
   export type raw_materialsMaxOrderByAggregateInput = {
-    raw_material_id?: SortOrder
+    id?: SortOrder
     name?: SortOrder
     cas_number?: SortOrder
     chemical_group?: SortOrder
@@ -25491,7 +24067,7 @@ export namespace Prisma {
   }
 
   export type raw_materialsMinOrderByAggregateInput = {
-    raw_material_id?: SortOrder
+    id?: SortOrder
     name?: SortOrder
     cas_number?: SortOrder
     chemical_group?: SortOrder
@@ -25501,7 +24077,7 @@ export namespace Prisma {
   }
 
   export type raw_materialsSumOrderByAggregateInput = {
-    raw_material_id?: SortOrder
+    id?: SortOrder
     flash_point?: SortOrder
   }
 
@@ -25814,58 +24390,6 @@ export namespace Prisma {
     volume_in?: SortOrder
     volume_in_spec?: SortOrder
     volume_repro?: SortOrder
-  }
-
-  export type importsCountOrderByAggregateInput = {
-    import_id?: SortOrder
-    supplier_name?: SortOrder
-    material_type?: SortOrder
-    quantity?: SortOrder
-    supplier_batch_code?: SortOrder
-    date_ordered?: SortOrder
-    date_received?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    notes?: SortOrder
-    location?: SortOrder
-  }
-
-  export type importsAvgOrderByAggregateInput = {
-    import_id?: SortOrder
-    quantity?: SortOrder
-  }
-
-  export type importsMaxOrderByAggregateInput = {
-    import_id?: SortOrder
-    supplier_name?: SortOrder
-    material_type?: SortOrder
-    quantity?: SortOrder
-    supplier_batch_code?: SortOrder
-    date_ordered?: SortOrder
-    date_received?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    notes?: SortOrder
-    location?: SortOrder
-  }
-
-  export type importsMinOrderByAggregateInput = {
-    import_id?: SortOrder
-    supplier_name?: SortOrder
-    material_type?: SortOrder
-    quantity?: SortOrder
-    supplier_batch_code?: SortOrder
-    date_ordered?: SortOrder
-    date_received?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    notes?: SortOrder
-    location?: SortOrder
-  }
-
-  export type importsSumOrderByAggregateInput = {
-    import_id?: SortOrder
-    quantity?: SortOrder
   }
 
   export type OrdersNullableScalarRelationFilter = {
@@ -26192,7 +24716,6 @@ export namespace Prisma {
     updated_at?: SortOrder
     process_id?: SortOrder
     delivery_id?: SortOrder
-    batch_code?: SortOrder
     order_id?: SortOrder
     direction?: SortOrder
   }
@@ -26218,7 +24741,6 @@ export namespace Prisma {
     updated_at?: SortOrder
     process_id?: SortOrder
     delivery_id?: SortOrder
-    batch_code?: SortOrder
     order_id?: SortOrder
     direction?: SortOrder
   }
@@ -26235,7 +24757,6 @@ export namespace Prisma {
     updated_at?: SortOrder
     process_id?: SortOrder
     delivery_id?: SortOrder
-    batch_code?: SortOrder
     order_id?: SortOrder
     direction?: SortOrder
   }
@@ -27605,7 +26126,7 @@ export namespace Prisma {
   }
 
   export type raw_materialsUncheckedCreateWithoutProductsInput = {
-    raw_material_id?: number
+    id?: number
     name: string
     cas_number: string
     chemical_group?: string | null
@@ -27656,7 +26177,7 @@ export namespace Prisma {
   }
 
   export type raw_materialsUncheckedUpdateWithoutProductsInput = {
-    raw_material_id?: IntFieldUpdateOperationsInput | number
+    id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     cas_number?: StringFieldUpdateOperationsInput | string
     chemical_group?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27844,7 +26365,6 @@ export namespace Prisma {
     tx_notes?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    batch_code?: string | null
     order_id?: number | null
     direction?: string | null
     new_drums?: new_drumsCreateNestedOneWithoutTransactionsInput
@@ -27863,7 +26383,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     process_id?: number | null
-    batch_code?: string | null
     order_id?: number | null
     direction?: string | null
   }
@@ -27953,7 +26472,6 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"transactions"> | Date | string
     process_id?: IntNullableFilter<"transactions"> | number | null
     delivery_id?: IntNullableFilter<"transactions"> | number | null
-    batch_code?: StringNullableFilter<"transactions"> | string | null
     order_id?: IntNullableFilter<"transactions"> | number | null
     direction?: StringNullableFilter<"transactions"> | string | null
   }
@@ -28154,7 +26672,6 @@ export namespace Prisma {
     tx_notes?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    batch_code?: string | null
     order_id?: number | null
     direction?: string | null
     deliveries?: deliveriesCreateNestedOneWithoutTransactionsInput
@@ -28173,7 +26690,6 @@ export namespace Prisma {
     updated_at?: Date | string
     process_id?: number | null
     delivery_id?: number | null
-    batch_code?: string | null
     order_id?: number | null
     direction?: string | null
   }
@@ -28467,7 +26983,6 @@ export namespace Prisma {
     tx_notes?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    batch_code?: string | null
     order_id?: number | null
     direction?: string | null
     deliveries?: deliveriesCreateNestedOneWithoutTransactionsInput
@@ -28486,7 +27001,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     delivery_id?: number | null
-    batch_code?: string | null
     order_id?: number | null
     direction?: string | null
   }
@@ -28772,7 +27286,6 @@ export namespace Prisma {
     tx_notes?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    batch_code?: string | null
     order_id?: number | null
     direction?: string | null
     deliveries?: deliveriesCreateNestedOneWithoutTransactionsInput
@@ -28791,7 +27304,6 @@ export namespace Prisma {
     updated_at?: Date | string
     process_id?: number | null
     delivery_id?: number | null
-    batch_code?: string | null
     order_id?: number | null
     direction?: string | null
   }
@@ -29231,7 +27743,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     process_id?: number | null
-    batch_code?: string | null
     order_id?: number | null
     direction?: string | null
   }
@@ -29243,7 +27754,6 @@ export namespace Prisma {
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
     direction?: NullableStringFieldUpdateOperationsInput | string | null
     new_drums?: new_drumsUpdateOneWithoutTransactionsNestedInput
@@ -29262,7 +27772,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     process_id?: NullableIntFieldUpdateOperationsInput | number | null
-    batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
     direction?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -29278,7 +27787,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     process_id?: NullableIntFieldUpdateOperationsInput | number | null
-    batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
     direction?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -29383,7 +27891,6 @@ export namespace Prisma {
     updated_at?: Date | string
     process_id?: number | null
     delivery_id?: number | null
-    batch_code?: string | null
     order_id?: number | null
     direction?: string | null
   }
@@ -29429,7 +27936,6 @@ export namespace Prisma {
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
     direction?: NullableStringFieldUpdateOperationsInput | string | null
     deliveries?: deliveriesUpdateOneWithoutTransactionsNestedInput
@@ -29448,7 +27954,6 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     process_id?: NullableIntFieldUpdateOperationsInput | number | null
     delivery_id?: NullableIntFieldUpdateOperationsInput | number | null
-    batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
     direction?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -29464,7 +27969,6 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     process_id?: NullableIntFieldUpdateOperationsInput | number | null
     delivery_id?: NullableIntFieldUpdateOperationsInput | number | null
-    batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
     direction?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -29572,7 +28076,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     delivery_id?: number | null
-    batch_code?: string | null
     order_id?: number | null
     direction?: string | null
   }
@@ -29584,7 +28087,6 @@ export namespace Prisma {
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
     direction?: NullableStringFieldUpdateOperationsInput | string | null
     deliveries?: deliveriesUpdateOneWithoutTransactionsNestedInput
@@ -29603,7 +28105,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     delivery_id?: NullableIntFieldUpdateOperationsInput | number | null
-    batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
     direction?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -29619,7 +28120,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     delivery_id?: NullableIntFieldUpdateOperationsInput | number | null
-    batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
     direction?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -29645,7 +28145,6 @@ export namespace Prisma {
     updated_at?: Date | string
     process_id?: number | null
     delivery_id?: number | null
-    batch_code?: string | null
     order_id?: number | null
     direction?: string | null
   }
@@ -29686,7 +28185,6 @@ export namespace Prisma {
     tx_notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
     direction?: NullableStringFieldUpdateOperationsInput | string | null
     deliveries?: deliveriesUpdateOneWithoutTransactionsNestedInput
@@ -29705,7 +28203,6 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     process_id?: NullableIntFieldUpdateOperationsInput | number | null
     delivery_id?: NullableIntFieldUpdateOperationsInput | number | null
-    batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
     direction?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -29721,7 +28218,6 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     process_id?: NullableIntFieldUpdateOperationsInput | number | null
     delivery_id?: NullableIntFieldUpdateOperationsInput | number | null
-    batch_code?: NullableStringFieldUpdateOperationsInput | string | null
     order_id?: NullableIntFieldUpdateOperationsInput | number | null
     direction?: NullableStringFieldUpdateOperationsInput | string | null
   }

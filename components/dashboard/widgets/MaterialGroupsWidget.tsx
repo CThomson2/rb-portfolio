@@ -16,6 +16,7 @@ interface MaterialGroupsWidgetProps {
 }
 
 interface Material {
+  id: string;
   name: string;
   stock: number;
   cas_number: string;
@@ -129,11 +130,9 @@ export function MaterialGroupsWidget({ id }: MaterialGroupsWidgetProps) {
   }
 
   const content = (
-    // <Card>
-    <CardContent className="space-y-6">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Pie Chart */}
-        <div className="h-[400px] relative">
+    <CardContent className="space-y-2">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div className="lg:col-span-2 h-[400px] relative">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
@@ -142,7 +141,7 @@ export function MaterialGroupsWidget({ id }: MaterialGroupsWidgetProps) {
                 nameKey="chemical_group"
                 cx="50%"
                 cy="50%"
-                outerRadius={160}
+                outerRadius={140}
                 label={({
                   cx,
                   cy,
@@ -154,7 +153,7 @@ export function MaterialGroupsWidget({ id }: MaterialGroupsWidgetProps) {
                 }) => {
                   const RADIAN = Math.PI / 180;
                   const radius =
-                    innerRadius + (outerRadius - innerRadius) * 1.6;
+                    innerRadius + (outerRadius - innerRadius) * 1.4;
                   const x = cx + radius * Math.cos(-midAngle * RADIAN);
                   const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
@@ -165,7 +164,7 @@ export function MaterialGroupsWidget({ id }: MaterialGroupsWidgetProps) {
                       fill="#888888"
                       textAnchor={x > cx ? "start" : "end"}
                       dominantBaseline="central"
-                      className="text-sm font-medium"
+                      className="text-xs font-medium"
                     >
                       {chemical_group} ({percentage}%)
                     </text>
@@ -204,8 +203,7 @@ export function MaterialGroupsWidget({ id }: MaterialGroupsWidgetProps) {
           </ResponsiveContainer>
         </div>
 
-        {/* Group Details */}
-        <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2">
+        <div className="space-y-4 h-[400px] overflow-y-auto pr-2">
           {data.groups.map((group, index) => (
             <div
               key={group.chemical_group}
@@ -214,7 +212,9 @@ export function MaterialGroupsWidget({ id }: MaterialGroupsWidgetProps) {
               <div className="flex items-center gap-3 mb-2">
                 <div
                   className="w-4 h-4 rounded-full"
-                  style={{ backgroundColor: COLORS[index % COLORS.length] }}
+                  style={{
+                    backgroundColor: COLORS[index % COLORS.length],
+                  }}
                 />
                 <h4 className="font-medium text-base">
                   {group.chemical_group}
@@ -234,7 +234,7 @@ export function MaterialGroupsWidget({ id }: MaterialGroupsWidgetProps) {
                       .sort((a, b) => b.stock - a.stock)
                       .map((material) => (
                         <li
-                          key={material.cas_number}
+                          key={material.id}
                           className="flex justify-between items-center hover:text-foreground transition-colors"
                         >
                           <span>{material.name}</span>
@@ -249,15 +249,14 @@ export function MaterialGroupsWidget({ id }: MaterialGroupsWidgetProps) {
         </div>
       </div>
     </CardContent>
-    // </Card>
   );
 
   return (
     <BaseWidget id={id} title="Material Groups" className="col-span-2">
       <div className="space-y-2">
-        <p className="text-sm text-muted-foreground">
+        {/* <p className="text-sm text-muted-foreground">
           Distribution of {data?.totalStock || 0} drums across chemical groups
-        </p>
+        </p> */}
         {content}
       </div>
     </BaseWidget>

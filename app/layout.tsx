@@ -47,7 +47,7 @@ export default function RootLayout({
             <FloatingNav navItems={navItems} />
 
             {/* Main content area */}
-            <main className="pt-14">{children}</main>
+            <main className="min-h-screen bg-background">{children}</main>
 
             {/* Sidebar is included globally but controlled via a client component */}
             <Sidebar />

@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 export const FloatingNav = ({
   navItems,
   className,
-  isStatic = false, // Add new prop with default false
+  isStatic = false,
 }: {
   navItems: {
     name: string;
@@ -24,20 +24,18 @@ export const FloatingNav = ({
     icon?: JSX.Element;
   }[];
   className?: string;
-  isStatic?: boolean; // Add type for new prop
+  isStatic?: boolean;
 }) => {
   const { scrollYProgress } = useScroll();
   const [visible, setVisible] = useState(true);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  // Only add scroll event listener if not static
+
   if (!isStatic) {
     useMotionValueEvent(scrollYProgress, "change", (current) => {
-      // Check if current is not undefined and is a number
       if (typeof current === "number") {
         let direction = current! - scrollYProgress.getPrevious()!;
 
         if (scrollYProgress.get() < 0.05) {
-          // also set true for the initial state
           setVisible(true);
         } else {
           if (direction < 0) {
@@ -83,22 +81,16 @@ export const FloatingNav = ({
           }
           className={cn(
             "flex max-w-fit md:min-w-[70vw] lg:min-w-fit mx-auto mt-10 px-10 py-5 rounded-lg items-center justify-center space-x-4",
+            "bg-gray-800/75 dark:bg-gray-900/75 backdrop-blur-lg border border-gray-700/50",
+            "pointer-events-none", // Prevents interaction blocking
             className
           )}
-          style={{
-            backdropFilter: "blur(16px) saturate(180%)",
-            backgroundColor: "rgba(17, 25, 40, 0.75)",
-            borderRadius: "12px",
-            border: "1px solid rgba(255, 255, 255, 0.125)",
-          }}
         >
           {navItems.map((navItem: any, idx: number) => (
             <div key={`nav-item-${idx}`} className="relative">
               <button
                 onClick={() => handleNavItemClick(navItem.name)}
-                className={cn(
-                  "relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500"
-                )}
+                className="relative text-white items-center flex space-x-1 hover:text-gray-200"
               >
                 <span className="block sm:hidden">{navItem.icon}</span>
                 <span className="text-sm !cursor-pointer">{navItem.name}</span>
@@ -112,7 +104,7 @@ export const FloatingNav = ({
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5"
+                    className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-gray-800 dark:bg-gray-900 ring-1 ring-black ring-opacity-5"
                   >
                     <div
                       className="py-1"
@@ -123,7 +115,7 @@ export const FloatingNav = ({
                         <a
                           key={id}
                           href={link.link}
-                          className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700"
+                          className="block px-4 py-2 text-sm text-white hover:bg-gray-700 dark:hover:bg-gray-800"
                           role="menuitem"
                         >
                           {link.name}

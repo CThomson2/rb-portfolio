@@ -43,20 +43,20 @@ model products {
   raw_material_id Int?
   grade           String           @db.VarChar(10)
   product_prices  product_prices[]
-  raw_materials   raw_materials?   @relation(fields: [raw_material_id], references: [raw_material_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_raw_material")
+  raw_materials   raw_materials?   @relation(fields: [raw_material_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_raw_material")
 
   @@schema("public")
 }
 
 model raw_materials {
-  raw_material_id Int        @id @default(autoincrement())
-  name            String     @db.VarChar(100)
-  cas_number      String     @db.VarChar(20)
-  chemical_group  String?    @default("Hydrocarbon") @db.VarChar(50)
-  description     String?    @db.VarChar(150)
-  un_code         String?    @db.Char(4)
-  flash_point     Int?
-  products        products[]
+  id             Int        @id @default(autoincrement())
+  name           String     @db.VarChar(100)
+  cas_number     String     @db.VarChar(20)
+  chemical_group String?    @default("Hydrocarbon") @db.VarChar(50)
+  description    String?    @db.VarChar(150)
+  un_code        String?    @db.Char(4)
+  flash_point    Int?
+  products       products[]
 
   @@schema("public")
 }
@@ -110,23 +110,6 @@ model distillations {
   updated_at      DateTime?         @default(now()) @db.Timestamptz(6)
   batches         batches[]
   repro_additions repro_additions[]
-
-  @@schema("inventory")
-}
-
-/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
-model imports {
-  import_id           Int       @id @default(autoincrement())
-  supplier_name       String    @db.VarChar(100)
-  material_type       String    @db.VarChar(100)
-  quantity            Int
-  supplier_batch_code String?   @unique(map: "unique_supplier_batch_code") @db.VarChar(50)
-  date_ordered        DateTime? @db.Date
-  date_received       DateTime  @db.Date
-  created_at          DateTime? @default(now()) @db.Timestamptz(6)
-  updated_at          DateTime? @default(now()) @db.Timestamptz(6)
-  notes               String?   @db.VarChar(100)
-  location            String?   @db.VarChar(10)
 
   @@schema("inventory")
 }
@@ -235,7 +218,6 @@ model transactions {
   updated_at  DateTime     @default(now()) @db.Timestamptz(6)
   process_id  Int?
   delivery_id Int?
-  batch_code  String?      @db.VarChar(50)
   order_id    Int?
   direction   String?      @default(dbgenerated("\nCASE tx_type\n    WHEN 'intake'::text THEN 'IN'::text\n    WHEN 'scheduled'::text THEN NULL::text\n    WHEN 'loaded'::text THEN 'OUT'::text\n    WHEN 'processed'::text THEN NULL::text\n    WHEN 'failed'::text THEN 'IN'::text\n    WHEN 'requeued'::text THEN 'IN'::text\n    WHEN 'disposed'::text THEN 'OUT'::text\n    WHEN 'lost'::text THEN 'OUT'::text\n    WHEN 'cancelled'::text THEN NULL::text\n    ELSE NULL::text\nEND"))
   deliveries  deliveries?  @relation(fields: [delivery_id], references: [delivery_id], onDelete: Cascade, onUpdate: NoAction)

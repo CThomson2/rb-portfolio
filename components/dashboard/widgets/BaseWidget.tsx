@@ -36,11 +36,16 @@ export function BaseWidget({
   return (
     <div
       className={cn(
-        "rounded-lg border bg-card text-card-foreground shadow-sm",
+        "rounded-lg border bg-card text-card-foreground",
+        "bg-gradient-to-b from-slate-950/10 to-slate-950/20",
+        "shadow-[0_8px_30px_rgb(0,0,0,0.12)]",
+        "backdrop-blur-[2px]",
+        "hover:shadow-[0_8px_30px_rgb(0,0,0,0.15)]",
+        "transition-all duration-300",
         className
       )}
     >
-      <div className="flex items-center justify-between p-6 pb-4">
+      <div className="flex items-center justify-between p-4 pb-2 bg-slate-950/5">
         <h3 className="text-lg font-semibold">{title}</h3>
         <button
           onClick={() => toggleFavorite(id)}
@@ -54,7 +59,7 @@ export function BaseWidget({
           </span>
         </button>
       </div>
-      <div className="p-6 pt-0">{children}</div>
+      <div className="p-4 pt-0">{children}</div>
     </div>
   );
 }

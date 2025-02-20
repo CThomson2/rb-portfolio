@@ -24,8 +24,8 @@ const widgets = [
     component: <MaterialGroupsWidget id="material-groups" />,
     className: "col-span-full lg:col-span-2",
   },
-  { id: "production", component: <ProductionWidget id="production" /> },
   { id: "recent-orders", component: <RecentOrdersWidget id="recent-orders" /> },
+  { id: "production", component: <ProductionWidget id="production" /> },
 ];
 
 function DashboardContent() {
@@ -38,32 +38,32 @@ function DashboardContent() {
       : widgets.filter((widget) => favorites.includes(widget.id));
 
   return (
-    <main className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="text-4xl font-bold">Dashboard</h1>
-          <ViewToggle />
-        </div>
-
-        {view === "favorites" && visibleWidgets.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-lg text-muted-foreground">
-              No favorite widgets added yet. Customise your dashboard by
-              clicking the star icon in the "All Widgets" view.
-            </p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {visibleWidgets.map(({ id, component, className }) => (
-              <div key={id} className={className || ""}>
-                {/* React.cloneElement allows us to clone a React element and pass additional props to it */}
-                {React.cloneElement(component as React.ReactElement, { id })}
-              </div>
-            ))}
-          </div>
-        )}
+    // <main className="min-h-screen bg-background">
+    <div className="container mx-auto px-4 py-8">
+      <div className="flex items-center justify-between mb-8">
+        <h1 className="text-4xl font-bold">Dashboard</h1>
+        <ViewToggle />
       </div>
-    </main>
+
+      {view === "favorites" && visibleWidgets.length === 0 ? (
+        <div className="text-center py-12">
+          <p className="text-lg text-muted-foreground">
+            No favorite widgets added yet. Customise your dashboard by clicking
+            the star icon in the "All Widgets" view.
+          </p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {visibleWidgets.map(({ id, component, className }) => (
+            <div key={id} className={className || ""}>
+              {/* React.cloneElement allows us to clone a React element and pass additional props to it */}
+              {React.cloneElement(component as React.ReactElement, { id })}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+    // </main>
   );
 }
 
