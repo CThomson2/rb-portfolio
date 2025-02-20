@@ -142,16 +142,10 @@ model orders {
   created_at        DateTime?    @default(now()) @db.Timestamptz(6)
   updated_at        DateTime?    @default(now()) @db.Timestamptz(6)
   quantity_received Int          @default(0)
-<<<<<<< HEAD
-  delivery_status   String       @default("pending") @db.VarChar(20)
-  eta_start         DateTime?    @db.Date
-  eta_end           DateTime?    @db.Date
-=======
   status            String       @default("pending") @db.VarChar(20)
   eta_start         DateTime?    @db.Date
   eta_end           DateTime?    @db.Date
   po_number         String?      @db.VarChar(10)
->>>>>>> lint/production-build
   deliveries        deliveries[]
   new_drums         new_drums[]
 

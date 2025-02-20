@@ -50,6 +50,8 @@ project_tree.pdf
 # database
 database/generated/
 database/sessions/
+database/prisma/generated/
+*.dylib.node
 barcodes_test.pdf
 
 # documentation

@@ -3,11 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
 import SidebarListItem from "./SidebarListItem";
-<<<<<<< HEAD
-import type { Order } from "@/types/database/orders";
-=======
 import type { Order, OrderETAStatus } from "@/types/database/inventory/orders";
->>>>>>> lint/production-build
 
 export default function ActiveOrders() {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -21,31 +17,8 @@ export default function ActiveOrders() {
         if (!res.ok) throw new Error(await res.text());
         return res.json();
       })
-<<<<<<< HEAD
-      .then((data) => {
-        // Process orders to check for overdue status
-        const processedOrders = data.map((order: Order) => {
-          let etaStatus = order.eta_status;
-
-          // Check for overdue status
-          if (etaStatus === "confirmed" && order.eta_end) {
-            const etaEndDate = new Date(order.eta_end);
-            if (etaEndDate < new Date()) {
-              etaStatus = "overdue";
-            }
-          }
-
-          return {
-            ...order,
-            eta_status: etaStatus,
-          };
-        });
-        setOrders(processedOrders);
-        setError("");
-=======
       .then((orders: Order[]) => {
         setOrders(orders);
->>>>>>> lint/production-build
       })
       .catch((err) => setError(err.message))
       .finally(() => setIsLoading(false));
@@ -81,11 +54,7 @@ export default function ActiveOrders() {
           eta={{
             startDate: order.eta_start ? new Date(order.eta_start) : undefined,
             endDate: order.eta_end ? new Date(order.eta_end) : undefined,
-<<<<<<< HEAD
-            status: order.eta_status,
-=======
             status: order.eta_status ?? "tbc",
->>>>>>> lint/production-build
           }}
         />
       ))}

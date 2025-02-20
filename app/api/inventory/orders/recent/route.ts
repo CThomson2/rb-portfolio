@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/database/client";
-import type { Order } from "@/types/database/inventory/orders";
-import { Prisma } from "@/database/prisma/generated/public-client";
 
 /**
  * Fetches the three most recent orders, optionally filtered by supplier and/or material.
