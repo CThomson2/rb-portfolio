@@ -1,11 +1,9 @@
-import { flexRender } from "@tanstack/react-table";
-
+import { Table, flexRender } from "@tanstack/react-table";
 import {
   TableHead,
   TableHeader as ShadTableHeader,
   TableRow,
 } from "@/components/ui/Table";
-import { Table } from "@tanstack/react-table";
 import { cn } from "@/lib/utils";
 
 /**

@@ -151,21 +151,17 @@ export const queries = {
         }
         break;
 
-      case "reprocessed":
+      case "failed":
         // reprocessed => repro_id & process_id required, delivery_id & drum_id must be null
         if (!repro_id) {
-          throw new Error(
-            "repro_id is required for 'reprocessed' transactions."
-          );
+          throw new Error("repro_id is required for 'failed' transactions.");
         }
         if (!process_id) {
-          throw new Error(
-            "process_id is required for 'reprocessed' transactions."
-          );
+          throw new Error("process_id is required for 'failed' transactions.");
         }
         if (delivery_id || drum_id) {
           throw new Error(
-            "delivery_id and drum_id must be null for 'reprocessed' transactions."
+            "delivery_id and drum_id must be null for 'failed' transactions."
           );
         }
         break;
@@ -202,7 +198,6 @@ export const queries = {
         repro_id,
         process_id,
         tx_notes,
-        batch_code,
       },
     });
 

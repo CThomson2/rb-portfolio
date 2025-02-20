@@ -69,11 +69,8 @@ export function RecentOrdersWidget({ id }: RecentOrdersWidgetProps) {
   const [error, setError] = useState<string | null>(null);
   const [filter, setFilter] = useState("");
 
-  /**
-   * Fetches recent orders from the database
-   * @param searchTerm Optional search term to filter orders by supplier or material
-   */
-  const fetchOrders = async (searchTerm?: string) => {
+  // Memoize fetchOrders
+  const fetchOrders = useCallback(async (searchTerm?: string) => {
     try {
       setIsLoading(true);
       const params = new URLSearchParams();
@@ -94,23 +91,28 @@ export function RecentOrdersWidget({ id }: RecentOrdersWidgetProps) {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []); // Empty deps array since state setters are stable
 
-  // Create a debounced version of fetchOrders
+  // Memoize debouncedFetch with fetchOrders as dependency
   const debouncedFetch = useCallback(
-    debounce((searchTerm: string) => {
-      fetchOrders(searchTerm);
-    }, 300),
-    []
+    (searchTerm: string) => {
+      const debouncedFn = debounce((term: string) => {
+        fetchOrders(term);
+      }, 300);
+      debouncedFn(searchTerm);
+      return () => debouncedFn.cancel();
+    },
+    [fetchOrders]
   );
 
+  // Now it's safe to include fetchOrders in useEffect deps
   useEffect(() => {
     fetchOrders();
     // Cleanup debounced function on unmount
     return () => {
-      debouncedFetch.cancel();
+      debouncedFetch("");
     };
-  }, []);
+  }, [fetchOrders, debouncedFetch]);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;

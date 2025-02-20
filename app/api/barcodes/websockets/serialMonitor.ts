@@ -67,7 +67,7 @@ wss.on("connection", (ws) => {
 
   // Handle ping-pong for connection health check
   ws.on("pong", () => {
-    ws.isAlive = true;
+    (ws as WebSocket & { isAlive?: boolean }).isAlive = true; // Type assertion to add isAlive property
   });
 
   ws.on("close", () => {

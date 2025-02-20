@@ -1,15 +1,17 @@
 "use client";
 
-import React from "react";
+import { cloneElement } from "react";
 
-import { DashboardProvider } from "@/components/dashboard/context/DashboardContext";
+import {
+  DashboardProvider,
+  useDashboard,
+} from "@/components/dashboard/context/DashboardContext";
 import { ViewToggle } from "@/components/dashboard/layout/ViewToggle";
 import { InventoryWidget } from "@/components/dashboard/widgets/InventoryWidget";
 import { MaterialGroupsWidget } from "@/components/dashboard/widgets/MaterialGroupsWidget";
 import { ProductionWidget } from "@/components/dashboard/widgets/ProductionWidget";
 import { RecentOrdersWidget } from "@/components/dashboard/widgets/RecentOrdersWidget";
 import { StatsWidget } from "@/components/dashboard/widgets/StatsWidget";
-import { useDashboard } from "@/components/dashboard/context/DashboardContext";
 
 // Define widget configurations with layout classes
 const widgets = [
@@ -49,7 +51,7 @@ function DashboardContent() {
         <div className="text-center py-12">
           <p className="text-lg text-muted-foreground">
             No favorite widgets added yet. Customise your dashboard by clicking
-            the star icon in the "All Widgets" view.
+            the star icon in the &quot;All Widgets&quot; view.
           </p>
         </div>
       ) : (
@@ -57,7 +59,7 @@ function DashboardContent() {
           {visibleWidgets.map(({ id, component, className }) => (
             <div key={id} className={className || ""}>
               {/* React.cloneElement allows us to clone a React element and pass additional props to it */}
-              {React.cloneElement(component as React.ReactElement, { id })}
+              {cloneElement(component as React.ReactElement, { id })}
             </div>
           ))}
         </div>

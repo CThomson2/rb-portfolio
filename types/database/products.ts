@@ -8,7 +8,7 @@ export interface BaseProduct {
   product_id: number;
   name: string;
   sku: string;
-  grade: GradeType;
+  grade: string;
 }
 
 export interface ProductTableRow extends BaseProduct {

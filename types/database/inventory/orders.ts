@@ -32,9 +32,11 @@ export interface Order {
   status: OrderStatusType;
   eta_start?: Date | string | null;
   eta_end?: Date | string | null;
-  eta_status?: "tbc" | "confirmed" | "overdue";
   po_number?: string | null;
+  eta_status?: OrderETAStatus;
 }
+
+export type OrderETAStatus = "tbc" | "confirmed" | "overdue";
 
 export interface OrderQueryParams {
   page: number;

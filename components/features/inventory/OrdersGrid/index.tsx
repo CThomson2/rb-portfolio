@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import { BentoGrid } from "@/components/ui/BentoGrid";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { SortingState } from "@tanstack/react-table";
 import Link from "next/link";
 import { ActionButton, SearchBar } from "@/components/shared/table";
@@ -11,7 +11,6 @@ import type {
   Order,
   OrderGetResponse,
 } from "@/types/database/inventory/orders";
-import { useQueryClient } from "@tanstack/react-query";
 
 const filterOptions = [
   { label: "All", value: "all" },

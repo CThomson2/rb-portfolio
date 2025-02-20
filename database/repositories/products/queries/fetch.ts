@@ -1,5 +1,5 @@
 import { prisma } from "@/database/client";
-import { ProductTableRow } from "@/types/components/products";
+import { ProductTableRow } from "@/types/database/products";
 
 export async function fetchProducts(): Promise<ProductTableRow[]> {
   const products = await prisma.products.findMany({

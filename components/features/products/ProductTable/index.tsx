@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import { DataTable } from "@/components/shared/table";
 import { ColumnDef, SortingState } from "@tanstack/react-table";
 import type { ProductTableRow } from "@/types/database/products";
@@ -16,87 +16,85 @@ const filterOptions = [
   { label: "By CAS Number", value: "cas_number" },
 ];
 
-const ProductTable = Object.assign(
-  React.memo(({ columns, data }: DataTableProps) => {
-    // React Table state
-    const [sorting, setSorting] = React.useState<SortingState>([]);
-    const [rowSelection, setRowSelection] = React.useState({});
-    // Specific filter for grades - currently only filtering by grade is supported
-    const [activeFilter, setActiveFilter] = React.useState<string>("All");
+const ProductTable = memo(function ProductTable({
+  columns,
+  data,
+}: DataTableProps) {
+  // React Table state
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const [rowSelection, setRowSelection] = useState({});
+  // Specific filter for grades - currently only filtering by grade is supported
+  const [activeFilter, setActiveFilter] = useState<string>("All");
 
-    // Search and Filtering
-    // `selectedFilter` is used for the general search bar which can search by name, lot number, or CAS number
-    const [selectedFilter, setSelectedFilter] = useState<string>("All");
-    const [searchQuery, setSearchQuery] = useState("");
+  // Search and Filtering
+  // `selectedFilter` is used for the general search bar which can search by name, lot number, or CAS number
+  const [selectedFilter, setSelectedFilter] = useState<string>("All");
+  const [searchQuery, setSearchQuery] = useState("");
 
-    // Log the search query to the console when it changes
-    useEffect(() => {
-      console.log("ProductTable.tsx - search query:", searchQuery);
-    }, [searchQuery]);
+  // Log the search query to the console when it changes
+  useEffect(() => {
+    console.log("ProductTable.tsx - search query:", searchQuery);
+  }, [searchQuery]);
 
-    return (
-      <DataTable
-        columns={columns}
-        data={data}
-        filterOptions={filterOptions}
-        newButtonText="New Product"
-        newButtonHref="/products/new"
-        filterFunction={(data, searchQuery, selectedFilter) => {
-          if (searchQuery.length >= 3) {
-            if (selectedFilter === "All") {
-              return data.filter((product) =>
-                filterOptions.some((option) => {
-                  const value = product[option.value as keyof ProductTableRow];
-                  return value
-                    ?.toString()
-                    .toLowerCase()
-                    .includes(searchQuery.toLowerCase());
-                })
-              );
-            } else {
-              return data.filter((product) => {
-                const value = product[selectedFilter as keyof ProductTableRow];
+  return (
+    <DataTable
+      columns={columns}
+      data={data}
+      filterOptions={filterOptions}
+      newButtonText="New Product"
+      newButtonHref="/products/new"
+      filterFunction={(data, searchQuery, selectedFilter) => {
+        if (searchQuery.length >= 3) {
+          if (selectedFilter === "All") {
+            return data.filter((product) =>
+              filterOptions.some((option) => {
+                const value = product[option.value as keyof ProductTableRow];
                 return value
                   ?.toString()
                   .toLowerCase()
                   .includes(searchQuery.toLowerCase());
-              });
-            }
+              })
+            );
+          } else {
+            return data.filter((product) => {
+              const value = product[selectedFilter as keyof ProductTableRow];
+              return value
+                ?.toString()
+                .toLowerCase()
+                .includes(searchQuery.toLowerCase());
+            });
           }
+        }
 
-          // Then handle grade filtering
-          if (activeFilter !== "All") {
-            return data.filter((product) => product.grade === activeFilter);
-          }
+        // Then handle grade filtering
+        if (activeFilter !== "All") {
+          return data.filter((product) => product.grade === activeFilter);
+        }
 
-          return data;
-        }}
-        stateProps={{
-          sorting,
-          setSorting,
-          rowSelection,
-          setRowSelection,
-          searchQuery,
-          setSearchQuery,
-          selectedFilter,
-          setSelectedFilter,
-          activeFilter,
-          setActiveFilter,
-        }}
-      />
-    );
-  }),
-  {
-    displayName: "ProductTable",
-  }
-);
+        return data;
+      }}
+      stateProps={{
+        sorting,
+        setSorting,
+        rowSelection,
+        setRowSelection,
+        searchQuery,
+        setSearchQuery,
+        selectedFilter,
+        setSelectedFilter,
+        activeFilter,
+        setActiveFilter,
+      }}
+    />
+  );
+});
 
 /*
-export const DataTable = React.memo(({ columns, data }: DataTableProps) => {
+export const DataTable = memo(({ columns, data }: DataTableProps) => {
   // React Table state
-  const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [rowSelection, setRowSelection] = React.useState({});
-  const [filter, setFilter] = React.useState<GRADE | "All">("All");
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const [rowSelection, setRowSelection] = useState({});
+  const [filter, setFilter] = useState<GRADE | "All">("All");
 
   // Search and Filtering
   const [selectedFilter, setSelectedFilter] = useState("All");

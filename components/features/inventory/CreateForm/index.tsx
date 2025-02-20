@@ -77,46 +77,50 @@ export const CreateForm = ({
     }
   };
 
-  const fetchSupplierSuggestions = async (query: string) => {
-    console.log("Fetching supplier suggestions for:", query);
-    setIsLoadingSuppliers(true);
-    setError(null);
+  // Memoize fetchSupplierSuggestions
+  const fetchSupplierSuggestions = useCallback(
+    async (query: string) => {
+      console.log("Fetching supplier suggestions for:", query);
+      setIsLoadingSuppliers(true);
+      setError(null);
 
-    try {
-      const response = await fetch(
-        `/api/inventory/suppliers/suggestions?q=${encodeURIComponent(
-          query
-        )}&material=${encodeURIComponent(material)}`
-      );
-      const data = await response.json();
-      console.log("Suppliers API response:", data);
+      try {
+        const response = await fetch(
+          `/api/inventory/suppliers/suggestions?q=${encodeURIComponent(
+            query
+          )}&material=${encodeURIComponent(material)}`
+        );
+        const data = await response.json();
+        console.log("Suppliers API response:", data);
 
-      if (!response.ok) {
-        throw new Error(data.error || "Failed to fetch suggestions");
+        if (!response.ok) {
+          throw new Error(data.error || "Failed to fetch suggestions");
+        }
+
+        const suggestions = Array.isArray(data.suggestions)
+          ? data.suggestions
+          : [];
+        console.log("Setting supplier suggestions:", suggestions);
+        setSupplierSuggestions(suggestions);
+      } catch (error) {
+        console.error("Failed to fetch supplier suggestions:", error);
+        setError(
+          error instanceof Error ? error.message : "Failed to fetch suggestions"
+        );
+        setSupplierSuggestions([]);
+      } finally {
+        setIsLoadingSuppliers(false);
       }
+    },
+    [material]
+  );
 
-      const suggestions = Array.isArray(data.suggestions)
-        ? data.suggestions
-        : [];
-      console.log("Setting supplier suggestions:", suggestions);
-      setSupplierSuggestions(suggestions);
-    } catch (error) {
-      console.error("Failed to fetch supplier suggestions:", error);
-      setError(
-        error instanceof Error ? error.message : "Failed to fetch suggestions"
-      );
-      setSupplierSuggestions([]);
-    } finally {
-      setIsLoadingSuppliers(false);
-    }
-  };
-
-  // Fetch initial supplier suggestions when material changes
+  // Now it's safe to include in useEffect deps
   useEffect(() => {
     if (material) {
       fetchSupplierSuggestions("");
     }
-  }, [material]);
+  }, [material, fetchSupplierSuggestions]);
 
   const handleMaterialChange = (value: string) => {
     setMaterial(value);
