@@ -1,6 +1,6 @@
 import { prisma } from "@/database/client";
 
-const uniqueProducts = async () => {
+export const uniqueProducts = async () => {
   const products = await prisma.products.findMany({
     select: {
       name: true,

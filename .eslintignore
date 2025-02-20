@@ -1,0 +1,8 @@
+**/node_modules/**
+**/.next/**
+**/dist/**
+database/prisma/generated/**
+
+lib/email/orderNotifications.ts
+
+components/ui/**

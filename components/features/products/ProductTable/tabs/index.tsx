@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Grade, GradeType } from "@/types/constant/products";
+import { Grade, GradeType } from "@/types/constant/public/products";
 import TabItem from "./TabItem";
 
 interface GradeCounts {

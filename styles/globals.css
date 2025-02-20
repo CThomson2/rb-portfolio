@@ -1,0 +1,19 @@
+/* Process completion background effect */
+:root {
+  --process-completion: 0%;
+}
+
+.process-background {
+  filter: saturate(calc(0.3 + (var(--process-completion) * 0.007)));
+  transition: filter 1s ease-out;
+}
+
+/* Hide scrollbars across all browsers */
+.custom-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}

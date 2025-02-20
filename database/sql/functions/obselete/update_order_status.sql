@@ -12,7 +12,7 @@ BEGIN
     UPDATE inventory.orders 
     SET 
         quantity_received = total_received,
-        delivery_status = CASE 
+        status = CASE 
             WHEN total_received = quantity THEN 'complete'
             WHEN total_received < quantity THEN 'partial'
             ELSE 'pending'

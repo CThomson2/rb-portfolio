@@ -43,20 +43,20 @@ model products {
   raw_material_id Int?
   grade           String           @db.VarChar(10)
   product_prices  product_prices[]
-  raw_materials   raw_materials?   @relation(fields: [raw_material_id], references: [raw_material_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_raw_material")
+  raw_materials   raw_materials?   @relation(fields: [raw_material_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_raw_material")
 
   @@schema("public")
 }
 
 model raw_materials {
-  raw_material_id Int        @id @default(autoincrement())
-  name            String     @db.VarChar(100)
-  cas_number      String     @db.VarChar(20)
-  chemical_group  String?    @default("Hydrocarbon") @db.VarChar(50)
-  description     String?    @db.VarChar(150)
-  un_code         String?    @db.Char(4)
-  flash_point     Int?
-  products        products[]
+  id             Int        @id @default(autoincrement())
+  name           String     @db.VarChar(100)
+  cas_number     String     @db.VarChar(20)
+  chemical_group String?    @default("Hydrocarbon") @db.VarChar(50)
+  description    String?    @db.VarChar(150)
+  un_code        String?    @db.Char(4)
+  flash_point    Int?
+  products       products[]
 
   @@schema("public")
 }
@@ -95,68 +95,37 @@ model deliveries {
 }
 
 model distillations {
-  distillation_id    Int                  @id @default(autoincrement())
-  loading_date       DateTime?            @default(dbgenerated("CURRENT_DATE")) @db.Date
-  start_date         DateTime?            @db.Date
-  still_code         String?              @db.Char(1)
-  volume_in          Decimal?             @default(200) @db.Decimal
-  transporter        String?              @db.Char(2)
-  loader             String?              @db.Char(2)
-  operator           String?              @db.Char(2)
-  completion_date    DateTime?            @db.Date
-  volume_in_spec     Decimal?             @default(0) @db.Decimal
-  volume_repro       Decimal?             @default(0) @db.Decimal
-  created_at         DateTime?            @default(now()) @db.Timestamptz(6)
-  updated_at         DateTime?            @default(now()) @db.Timestamptz(6)
-  batches            batches[]
-  drum_distillations drum_distillations[]
-  repro_additions    repro_additions[]
-
-  @@schema("inventory")
-}
-
-/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
-model drum_distillations {
-  drum_id         Int
-  distillation_id Int
-  fraction_used   Decimal       @default(1) @db.Decimal
-  distillations   distillations @relation(fields: [distillation_id], references: [distillation_id], onDelete: NoAction, onUpdate: NoAction)
-  new_drums       new_drums     @relation(fields: [drum_id], references: [drum_id], onDelete: NoAction, onUpdate: NoAction)
-
-  @@id([drum_id, distillation_id])
-  @@schema("inventory")
-}
-
-/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
-model imports {
-  import_id           Int       @id @default(autoincrement())
-  supplier_name       String    @db.VarChar(100)
-  material_type       String    @db.VarChar(100)
-  quantity            Int
-  supplier_batch_code String?   @unique(map: "unique_supplier_batch_code") @db.VarChar(50)
-  date_ordered        DateTime? @db.Date
-  date_received       DateTime  @db.Date
-  created_at          DateTime? @default(now()) @db.Timestamptz(6)
-  updated_at          DateTime? @default(now()) @db.Timestamptz(6)
-  notes               String?   @db.VarChar(100)
-  location            String?   @db.VarChar(10)
+  distillation_id Int               @id @default(autoincrement())
+  loading_date    DateTime?         @default(dbgenerated("CURRENT_DATE")) @db.Date
+  start_date      DateTime?         @db.Date
+  still_code      String?           @db.Char(1)
+  volume_in       Decimal?          @default(200) @db.Decimal
+  transporter     String?           @db.Char(2)
+  loader          String?           @db.Char(2)
+  operator        String?           @db.Char(2)
+  completion_date DateTime?         @db.Date
+  volume_in_spec  Decimal?          @default(0) @db.Decimal
+  volume_repro    Decimal?          @default(0) @db.Decimal
+  created_at      DateTime?         @default(now()) @db.Timestamptz(6)
+  updated_at      DateTime?         @default(now()) @db.Timestamptz(6)
+  batches         batches[]
+  repro_additions repro_additions[]
 
   @@schema("inventory")
 }
 
 model new_drums {
-  drum_id            Int                  @id(map: "drums_pkey") @default(autoincrement())
-  material           String               @db.VarChar(100)
-  date_processed     DateTime?            @db.Date
-  status             String               @default("pending") @db.VarChar(20)
-  location           String?              @default("new-site") @db.VarChar(20)
-  created_at         DateTime?            @default(now()) @db.Timestamptz(6)
-  updated_at         DateTime?            @default(now()) @db.Timestamptz(6)
-  order_id           Int?
-  drum_distillations drum_distillations[]
-  orders             orders?              @relation(fields: [order_id], references: [order_id], onDelete: Cascade, onUpdate: NoAction)
-  processes          processes[]
-  transactions       transactions[]
+  drum_id        Int            @id(map: "drums_pkey") @default(autoincrement())
+  material       String         @db.VarChar(100)
+  date_processed DateTime?      @db.Date
+  status         String         @default("pending") @db.VarChar(20)
+  location       String?        @default("new-site") @db.VarChar(20)
+  created_at     DateTime       @default(now()) @db.Timestamptz(6)
+  updated_at     DateTime       @default(now()) @db.Timestamptz(6)
+  order_id       Int?
+  orders         orders?        @relation(fields: [order_id], references: [order_id], onDelete: Cascade, onUpdate: NoAction)
+  processes      processes[]
+  transactions   transactions[]
 
   @@index([material], map: "idx_drums_material_type")
   @@index([status], map: "idx_drums_status")
@@ -173,9 +142,16 @@ model orders {
   created_at        DateTime?    @default(now()) @db.Timestamptz(6)
   updated_at        DateTime?    @default(now()) @db.Timestamptz(6)
   quantity_received Int          @default(0)
+<<<<<<< HEAD
   delivery_status   String       @default("pending") @db.VarChar(20)
   eta_start         DateTime?    @db.Date
   eta_end           DateTime?    @db.Date
+=======
+  status            String       @default("pending") @db.VarChar(20)
+  eta_start         DateTime?    @db.Date
+  eta_end           DateTime?    @db.Date
+  po_number         String?      @db.VarChar(10)
+>>>>>>> lint/production-build
   deliveries        deliveries[]
   new_drums         new_drums[]
 
@@ -193,7 +169,7 @@ model processes {
   transporter    String?        @db.VarChar(10)
   date_processed DateTime?      @db.Timestamp(6)
   new_drums      new_drums?     @relation(fields: [drum_id], references: [drum_id], onDelete: NoAction, onUpdate: NoAction, map: "records_drum_id_fkey")
-  stills         Still          @relation(fields: [still_code], references: [code], onDelete: NoAction, onUpdate: NoAction, map: "records_still_code_fkey")
+  stills         stills         @relation(fields: [still_code], references: [code], onDelete: NoAction, onUpdate: NoAction, map: "records_still_code_fkey")
   transactions   transactions[]
 
   @@schema("inventory")
@@ -240,17 +216,16 @@ model transactions {
   tx_id       Int          @id @default(autoincrement())
   tx_type     String       @default("import") @db.VarChar(20)
   tx_date     DateTime     @default(dbgenerated("CURRENT_DATE")) @db.Date
-  material    String?      @db.VarChar(100)
+  material    String       @db.VarChar(100)
   drum_id     Int?
   repro_id    Int?
   tx_notes    String?
-  created_at  DateTime?    @default(now()) @db.Timestamptz(6)
-  updated_at  DateTime?    @default(now()) @db.Timestamptz(6)
+  created_at  DateTime     @default(now()) @db.Timestamptz(6)
+  updated_at  DateTime     @default(now()) @db.Timestamptz(6)
   process_id  Int?
-  direction   String?      @default(dbgenerated("\nCASE tx_type\n    WHEN 'import'::text THEN 'IN'::text\n    WHEN 'processing'::text THEN 'OUT'::text\n    WHEN 'reprocessing'::text THEN 'OUT'::text\n    WHEN 'disposal'::text THEN 'OUT'::text\n    WHEN 'loss'::text THEN 'OUT'::text\n    ELSE NULL::text\nEND")) @db.VarChar(3)
   delivery_id Int?
-  batch_code  String?      @db.VarChar(50)
   order_id    Int?
+  direction   String?      @default(dbgenerated("\nCASE tx_type\n    WHEN 'intake'::text THEN 'IN'::text\n    WHEN 'scheduled'::text THEN NULL::text\n    WHEN 'loaded'::text THEN 'OUT'::text\n    WHEN 'processed'::text THEN NULL::text\n    WHEN 'failed'::text THEN 'IN'::text\n    WHEN 'requeued'::text THEN 'IN'::text\n    WHEN 'disposed'::text THEN 'OUT'::text\n    WHEN 'lost'::text THEN 'OUT'::text\n    WHEN 'cancelled'::text THEN NULL::text\n    ELSE NULL::text\nEND"))
   deliveries  deliveries?  @relation(fields: [delivery_id], references: [delivery_id], onDelete: Cascade, onUpdate: NoAction)
   new_drums   new_drums?   @relation(fields: [drum_id], references: [drum_id], onDelete: NoAction, onUpdate: NoAction)
   processes   processes?   @relation(fields: [process_id], references: [process_id], onDelete: NoAction, onUpdate: NoAction)
@@ -260,15 +235,21 @@ model transactions {
 }
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
-model Still {
-  code          String      @id @unique(map: "stills_still_code_key") @db.Char
-  site          String      @db.Char(2)
-  power         Int
-  capacity      Int
-  isVacuum      Boolean?    @default(false) @map("is_vacuum")
-  isOperational Boolean?    @default(true) @map("is_operational")
-  processes     processes[]
+model stills {
+  code           String      @id @unique(map: "stills_still_code_key") @db.Char
+  site           String      @db.Char(2)
+  power          Int
+  capacity       Int
+  is_vacuum      Boolean?    @default(false)
+  is_operational Boolean?    @default(true)
+  processes      processes[]
 
-  @@map("stills")
-  @@schema("inventory")
+  @@schema("public")
+}
+
+model suppliers {
+  id   Int    @id @default(autoincrement())
+  name String @db.VarChar(50)
+
+  @@schema("public")
 }

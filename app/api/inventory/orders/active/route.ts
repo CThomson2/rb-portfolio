@@ -5,7 +5,7 @@ import type {
   OrderFormData,
   OrderGetResponse,
   OrderQueryParams,
-} from "@/types/database/orders";
+} from "@/types/database/inventory/orders";
 import { PrismaClientKnownRequestError } from "@/database/prisma/generated/public-client/runtime/library";
 
 export async function GET(req: Request) {

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FormContent } from "./FormContent";
-import { HttpMethodType, HttpMethod } from "@/types/constant/form";
+import { HttpMethodType, HttpMethod } from "@/types/constant/http";
 
 const Form = () => {
   const [isOpen, setIsOpen] = useState(false);

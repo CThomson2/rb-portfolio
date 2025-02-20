@@ -32,7 +32,7 @@
  * 4. Once Sidebar is improved, integrate it with the table by using hover and spotlight effects of table rows that user is focusing on in the sidebar
  */
 
-import React, { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, memo } from "react";
 import Link from "next/link";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
@@ -45,13 +45,15 @@ import {
 } from "@tanstack/react-table";
 import { createColumns } from "./columns";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/Table";
-import { TableHeader } from "@/components/shared/table/ux/TableHeader";
-import { TableFooter } from "@/components/shared/table";
-import { SearchBar } from "@/components/shared/table";
-import { ActionButton } from "@/components/shared/table";
-import { DrumStatus, DrumStatusType } from "@/types/constant/drums";
+import {
+  TableHeader,
+  TableFooter,
+  SearchBar,
+  ActionButton,
+} from "@/components/shared/table";
+import { DrumStatus, DrumStatusType } from "@/types/constant/inventory/drums";
 import { cn } from "@/lib/utils";
-import type { DrumsResponse } from "@/types/database/drums";
+import type { DrumsResponse } from "@/types/database/inventory/drums";
 
 // Filter options for the search bar dropdown
 const filterOptions = [
@@ -62,7 +64,7 @@ const filterOptions = [
   { label: "By Status", value: "status" },
 ];
 
-export const DrumsTable = React.memo(() => {
+export const DrumsTable = memo(function DrumsTable() {
   const queryClient = useQueryClient();
 
   // Pagination state used by useQuery and useReactTable
@@ -348,10 +350,7 @@ export const DrumsTable = React.memo(() => {
 
       <div className="rounded-lg border border-slate-600 bg-slate-800 shadow-xl overflow-hidden">
         <Table>
-          <TableHeader
-            table={table}
-            className="bg-slate-700 text-base font-medium"
-          />
+          <TableHeader table={table} />
           <TableBody>
             {table.getRowModel().rows.map((row, index) => (
               <TableRow

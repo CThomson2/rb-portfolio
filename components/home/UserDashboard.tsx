@@ -1,12 +1,11 @@
-import React from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { CanvasRevealEffect } from "@/components/ui/CanvasRevealEffect";
 import { userDashboard } from "@/content/main";
-import styles from "./grid.module.css";
+import styles from "./Experience.module.css";
 import { TextGenerateEffect } from "@/components/ui/TextGenerateEffect";
 import { Spotlight } from "@/components/ui/Spotlight";
-import Image from "next/image";
 
 const DashboardGrid = () => {
   return (
@@ -24,8 +23,7 @@ const DashboardGrid = () => {
       />
       <Spotlight className="h-[80vh] w-[50vw] top-10 left-full" fill="purple" />
       <Spotlight className="left-80 top-28 h-[80vh] w-[50vw]" fill="blue" />
-      {/* <div className="my-20 grid grid-cols-1 md:grid-cols-2 gap-4 w-full"> */}
-      <div className={`my-20 ${styles.grid} w-full`}>
+      <div className="my-20 grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
         {userDashboard.map((option) => (
           <Card
             key={option.id}
@@ -74,7 +72,7 @@ const Card = ({
   // thumbnail: string;
   children?: React.ReactNode;
 }) => {
-  const [hovered, setHovered] = React.useState(false);
+  const [hovered, setHovered] = useState(false);
 
   return (
     <div
@@ -137,7 +135,7 @@ const Card = ({
          group-hover/canvas-card:-translate-y-2 transition duration-200 h-full"
               style={{ color: "#E4ECFF" }}
             >
-              <ul className={`list-none flex flex-col ${styles["card-links"]}`}>
+              <ul className={`list-none flex flex-col`}>
                 {content.map((item) => (
                   <Link href={item.link} key={item.id}>
                     <li className="my-2 cursor-pointer transition-colors duration-200 flex-grow">

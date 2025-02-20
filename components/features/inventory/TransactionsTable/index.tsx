@@ -1,9 +1,8 @@
 // components/features/inventory/TransactionTable/index.tsx
 "use client";
-import React from "react";
+import { useState, useMemo, useRef, memo } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useQuery } from "@tanstack/react-query";
-import { useState, useMemo, useRef } from "react";
 import {
   useReactTable,
   getCoreRowModel,
@@ -20,7 +19,7 @@ import {
   SearchBar,
   ActionButton,
 } from "@/components/shared/table";
-import type { TransactionRow } from "@/types/database/transactions";
+import type { Transaction } from "@/types/database/inventory/transactions";
 import { cn } from "@/lib/utils";
 
 const ROW_HEIGHT = 30; // Adjust this value as needed
@@ -32,7 +31,7 @@ const filterOptions = [
   { label: "By Date", value: "date" },
 ];
 
-export const TransactionsTable = React.memo(() => {
+export const TransactionsTable = memo(function TransactionsTable() {
   // State management
   const [sorting, setSorting] = useState<SortingState>([
     { id: "tx_date", desc: true },
@@ -54,7 +53,7 @@ export const TransactionsTable = React.memo(() => {
       );
       if (!response.ok) throw new Error("Failed to fetch transactions");
       return response.json() as Promise<{
-        rows: TransactionRow[];
+        rows: Transaction[];
         total: number;
       }>;
     },

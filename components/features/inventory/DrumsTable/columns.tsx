@@ -1,12 +1,12 @@
 // components/features/inventory/DrumsTable/columns.tsx
 import { ColumnDef } from "@tanstack/react-table";
 import { SortableColumn, StatusFilter } from "@/components/shared/table";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Download, FileDown } from "lucide-react";
 import { format } from "date-fns";
-import type { NewDrum } from "@/types/database/drums";
-import { DrumStatusType } from "@/types/constant/drums";
+import type { NewDrum } from "@/types/database/inventory/drums";
+import { DrumStatusType } from "@/types/constant/inventory/drums";
 
 // Add props for status filter state
 interface ColumnProps {

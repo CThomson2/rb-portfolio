@@ -7,6 +7,12 @@
   align-items: center;
   background-color: #1a1a1a;
   padding: 2rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.outer-container::-webkit-scrollbar {
+  display: none;
 }
 
 .form-container {
@@ -22,6 +28,12 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.form-container::-webkit-scrollbar {
+  display: none;
 }
 
 .form {

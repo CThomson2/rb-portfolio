@@ -9,7 +9,7 @@ import { ActionButton } from "./header/ActionButton";
 
 import { SortableColumn } from "./ux/SortableColumn";
 import { StatusFilter } from "./ux/StatusFilter";
-import { ProjectActions as Actions } from "./ux/Actions";
+import { Actions } from "../../features/inventory/TransactionsTable/Actions";
 
 export {
   DataTable,

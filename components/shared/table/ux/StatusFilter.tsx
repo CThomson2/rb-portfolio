@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { DrumStatus, DrumStatusType } from "@/types/constant/drums";
+import { DrumStatus, DrumStatusType } from "@/types/constant/inventory/drums";
 import { Checkbox } from "@/components/ui/Checkbox";
 import {
   DropdownMenu,

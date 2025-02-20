@@ -21,7 +21,7 @@ import { workExperience } from "@/content/main";
 import { Button } from "../ui/MovingBorders";
 import { TextGenerateEffect } from "../ui/TextGenerateEffect";
 
-import styles from "./grid.module.css";
+import styles from "./Experience.module.css";
 
 const Experience = () => {
   // Track which card is currently expanded (null if none)
@@ -123,7 +123,7 @@ const Experience = () => {
                 {activeCardId === card.id ? (
                   // Expanded state: show action items list
                   <ul
-                    className={`text-start text-white-100 mt-3 font-semibold ${styles["card-links"]}`}
+                    className={"text-start text-white-100 mt-3 font-semibold"}
                   >
                     {card.content.map((item) => (
                       <Link href={item.link} key={item.id}>

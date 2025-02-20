@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import Barcode from "react-barcode";
-import { OrderFormData } from "@/types/database/orders";
+import { OrderFormData } from "@/types/database/inventory/orders";
 
 interface BarcodeLabelProps {
   order: OrderFormData;

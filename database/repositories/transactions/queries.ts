@@ -1,16 +1,13 @@
 // database/repositories/products/queries.ts
 import { prisma } from "@/database/client";
-import type {
-  Transaction,
-  TransactionRow,
-} from "@/types/database/transactions";
+import type { Transaction } from "@/types/database/inventory/transactions";
 import {
   TransactionVariant,
   type TransactionVariantType,
-} from "@/types/constant/transactions";
+} from "@/types/constant/inventory/transactions";
 
 interface CreateTransactionInput {
-  tx_type: TransactionVariantType; // "import" | "processing" | "reprocessing" | "disposal" | "loss"
+  tx_type: TransactionVariantType; // "intake" | "processed" | "reprocessed" | "disposed" | "lost"
   tx_date?: Date; // optional, if defaulting to CURRENT_DATE
   material?: string | null;
   delivery_id?: number | null;
@@ -24,7 +21,7 @@ interface CreateTransactionInput {
 export const queries = {
   /**
    * Gets the 100 most recent inventory transactions with material names.
-   * Joins with imports, new drums, and repro drums tables to get the material name
+   * Joins with intakes, new drums, and repro drums tables to get the material name
    * based on which ID is present in the transaction.
    * @returns Promise resolving to array of transactions with material names
   
@@ -32,7 +29,7 @@ export const queries = {
   getTransactions: async (
     page = 1,
     limit = 50
-  ): Promise<{ rows: TransactionRow[]; total: number }> => {
+  ): Promise<{ rows: Transaction[]; total: number }> => {
     const offset = (page - 1) * limit;
 
     // Get the total number of transactions
@@ -61,7 +58,7 @@ export const queries = {
   `;
 
     return {
-      rows: result as TransactionRow[],
+      rows: result as Transaction[],
       total,
     };
 
@@ -123,74 +120,70 @@ export const queries = {
 
     // Basic validation logic to enforce which fields must be present vs. null
     switch (tx_type) {
-      case "import":
-        // import => delivery_id required, drum_id & repro_id must be null
+      case "intake":
+        // intake => delivery_id required, drum_id & repro_id must be null
         if (!delivery_id) {
-          throw new Error("delivery_id is required for 'import' transactions.");
+          throw new Error("delivery_id is required for 'intake' transactions.");
         }
         if (drum_id || repro_id) {
           throw new Error(
-            "drum_id and repro_id must be null for 'import' transactions."
+            "drum_id and repro_id must be null for 'intake' transactions."
           );
         }
         // direction can be left to DB if it’s stored or derived,
         // but you can also do direction = 'IN' here if needed
         break;
 
-      case "processing":
-        // processing => drum_id & process_id required, delivery_id & repro_id must be null
+      case "processed":
+        // processed => drum_id & process_id required, delivery_id & repro_id must be null
         if (!drum_id) {
-          throw new Error("drum_id is required for 'processing' transactions.");
+          throw new Error("drum_id is required for 'processed' transactions.");
         }
         if (!process_id) {
           throw new Error(
-            "process_id is required for 'processing' transactions."
+            "process_id is required for 'processed' transactions."
           );
         }
         if (delivery_id || repro_id) {
           throw new Error(
-            "delivery_id and repro_id must be null for 'processing' transactions."
+            "delivery_id and repro_id must be null for 'processed' transactions."
           );
         }
         break;
 
-      case "reprocessing":
-        // reprocessing => repro_id & process_id required, delivery_id & drum_id must be null
+      case "failed":
+        // reprocessed => repro_id & process_id required, delivery_id & drum_id must be null
         if (!repro_id) {
-          throw new Error(
-            "repro_id is required for 'reprocessing' transactions."
-          );
+          throw new Error("repro_id is required for 'failed' transactions.");
         }
         if (!process_id) {
-          throw new Error(
-            "process_id is required for 'reprocessing' transactions."
-          );
+          throw new Error("process_id is required for 'failed' transactions.");
         }
         if (delivery_id || drum_id) {
           throw new Error(
-            "delivery_id and drum_id must be null for 'reprocessing' transactions."
+            "delivery_id and drum_id must be null for 'failed' transactions."
           );
         }
         break;
 
-      case "disposal":
-      case "loss":
-        // disposal/loss => often requires a drum_id to know which drum we’re disposing
+      case "disposed":
+      case "lost":
+        // disposed/lost => often requires a drum_id to know which drum we’re disposing
         // (if your DB logic requires that, specify it here)
         if (!drum_id) {
           throw new Error(`drum_id is required for '${tx_type}' transactions.`);
         }
-        // For disposal/loss, confirm other fields are null if that’s your rule
+        // For disposed/lost, confirm other fields are null if that’s your rule
         if (delivery_id || repro_id || process_id) {
           throw new Error(
-            "delivery_id, repro_id, and process_id must be null for disposal/loss transactions."
+            "delivery_id, repro_id, and process_id must be null for disposed/lost transactions."
           );
         }
         break;
 
       default:
         throw new Error(
-          `Invalid tx_type "${tx_type}". Valid types: import, processing, reprocessing, disposal, loss.`
+          `Invalid tx_type "${tx_type}". Valid types: import, processed, reprocessed, disposed, lost.`
         );
     }
 
@@ -199,13 +192,12 @@ export const queries = {
       data: {
         tx_type,
         tx_date,
-        material,
+        material: material ?? "",
         delivery_id,
         drum_id,
         repro_id,
         process_id,
         tx_notes,
-        batch_code,
       },
     });
 

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import { DataTable } from "@/components/shared/table";
 import { ColumnDef, SortingState } from "@tanstack/react-table";
 import type { ProductTableRow } from "@/types/database/products";
@@ -16,12 +16,15 @@ const filterOptions = [
   { label: "By CAS Number", value: "cas_number" },
 ];
 
-const ProductTable = React.memo(({ columns, data }: DataTableProps) => {
+const ProductTable = memo(function ProductTable({
+  columns,
+  data,
+}: DataTableProps) {
   // React Table state
-  const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [rowSelection, setRowSelection] = React.useState({});
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const [rowSelection, setRowSelection] = useState({});
   // Specific filter for grades - currently only filtering by grade is supported
-  const [activeFilter, setActiveFilter] = React.useState<string>("All");
+  const [activeFilter, setActiveFilter] = useState<string>("All");
 
   // Search and Filtering
   // `selectedFilter` is used for the general search bar which can search by name, lot number, or CAS number
@@ -87,11 +90,11 @@ const ProductTable = React.memo(({ columns, data }: DataTableProps) => {
 });
 
 /*
-export const DataTable = React.memo(({ columns, data }: DataTableProps) => {
+export const DataTable = memo(({ columns, data }: DataTableProps) => {
   // React Table state
-  const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [rowSelection, setRowSelection] = React.useState({});
-  const [filter, setFilter] = React.useState<GRADE | "All">("All");
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const [rowSelection, setRowSelection] = useState({});
+  const [filter, setFilter] = useState<GRADE | "All">("All");
 
   // Search and Filtering
   const [selectedFilter, setSelectedFilter] = useState("All");

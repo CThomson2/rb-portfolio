@@ -16,36 +16,62 @@ export function hexToRgb(hex: string) {
 }
 
 // Helper function to format currency values
-function formatCurrency(amount: number) {
+export function formatCurrency(amount: number) {
   if (amount >= 1000) {
     return `US$ ${(amount / 1000).toFixed(1)}k`;
   }
   return `US$ ${amount}`;
 }
 
-type TxType = "import" | "processing" | "reprocessing" | "disposal" | "loss";
+type TxType =
+  | "intake"
+  | "scheduled"
+  | "loaded"
+  | "processed"
+  | "requeued"
+  | "failed"
+  | "disposed"
+  | "lost"
+  | "cancelled";
 
 export function getTxTypeColor(txType: TxType): string {
   const styles: Record<TxType, string> = {
-    import: "bg-emerald-100 text-emerald-800",
-    processing: "bg-blue-100 text-blue-800",
-    reprocessing: "bg-yellow-100 text-yellow-800",
-    disposal: "bg-red-100 text-red-800",
-    loss: "bg-gray-100 text-gray-800",
+    intake: "bg-emerald-100 text-emerald-800",
+    scheduled: "bg-blue-100 text-blue-800",
+    loaded: "bg-yellow-100 text-yellow-800",
+    processed: "bg-green-100 text-green-800",
+    requeued: "bg-gray-100 text-gray-800",
+    failed: "bg-red-100 text-red-800",
+    disposed: "bg-red-100 text-red-800",
+    lost: "bg-red-100 text-red-800",
+    cancelled: "bg-red-100 text-red-800",
   };
   return styles[txType] || "bg-gray-100 text-gray-800";
 }
 
+// TODO: Add more variants
 export function getTxTypeVariant(
   txType: TxType
-): "default" | "secondary" | "outline" {
+): "default" | "secondary" | "outline" | "destructive" {
   switch (txType.toLowerCase()) {
-    case "import":
+    case "intake":
       return "default";
-    case "processing":
+    case "scheduled":
       return "secondary";
-    case "reprocessing":
+    case "loaded":
       return "outline";
+    case "processed":
+      return "outline";
+    case "requeued":
+      return "destructive";
+    case "failed":
+      return "destructive";
+    case "disposed":
+      return "destructive";
+    case "lost":
+      return "destructive";
+    case "cancelled":
+      return "destructive";
     default:
       return "default";
   }

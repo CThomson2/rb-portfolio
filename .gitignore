@@ -30,8 +30,8 @@ yarn-error.log*
 .ignore/*
 
 # local env files
-# .env
-# .env*.local
+.env
+.env*.local
 
 # vercel
 .vercel
@@ -63,3 +63,8 @@ public/rathburn/
 
 app/api/barcodes/scan/_drumsOnlyRoute.ts
 app/api/drums/sse/_drumsOnlyRoute.ts
+.env
+.env
+
+# Sentry Config File
+.env.sentry-build-plugin

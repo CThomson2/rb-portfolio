@@ -247,7 +247,7 @@ tx_notes String?
 created_at DateTime? @default(now()) @db.Timestamptz(6)
 updated_at DateTime? @default(now()) @db.Timestamptz(6)
 process_id Int?
-direction String? @default(dbgenerated("\nCASE tx_type\n WHEN 'import'::text THEN 'IN'::text\n WHEN 'processing'::text THEN 'OUT'::text\n WHEN 'reprocessing'::text THEN 'OUT'::text\n WHEN 'disposal'::text THEN 'OUT'::text\n WHEN 'loss'::text THEN 'OUT'::text\n ELSE NULL::text\nEND")) @db.VarChar(3)
+direction String? @default(dbgenerated("\nCASE tx_type\n WHEN 'intake'::text THEN 'IN'::text\n WHEN 'processing'::text THEN 'OUT'::text\n WHEN 'reprocessing'::text THEN 'OUT'::text\n WHEN 'disposal'::text THEN 'OUT'::text\n WHEN 'loss'::text THEN 'OUT'::text\n ELSE NULL::text\nEND")) @db.VarChar(3)
 delivery_id Int?
 batch_code String? @db.VarChar(50)
 deliveries deliveries? @relation(fields: [delivery_id], references: [delivery_id], onDelete: NoAction, onUpdate: NoAction)

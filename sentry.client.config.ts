@@ -5,26 +5,32 @@
 import * as Sentry from "@sentry/nextjs";
 
 Sentry.init({
-  dsn: "https://1c3b297800b191a905dfe5a579b6876a@o4508574640570368.ingest.de.sentry.io/4508574661738576",
+  dsn: "https://57da6eeb902440ba586a6eda3cabfd18@o4508852211875840.ingest.de.sentry.io/4508852215873616",
 
-  // Adjust this value in production, or use tracesSampler for greater control
-  tracesSampleRate: 1,
-
-  // Setting this option to true will print useful information to the console while you're setting up Sentry.
-  debug: false,
-
-  replaysOnErrorSampleRate: 1.0,
-
-  // This sets the sample rate to be 10%. You may want this to be 100% while
-  // in development and sample at a lower rate in production
-  replaysSessionSampleRate: 0.1,
-
-  // You can remove this option if you're not planning to use the Sentry Session Replay feature:
+  // Add optional integrations for additional features
   integrations: [
     Sentry.replayIntegration({
-      // Additional Replay configuration goes in here, for example:
+      // Minimize data collection
       maskAllText: true,
       blockAllMedia: true,
     }),
   ],
+
+  // Define how likely traces are sampled. Adjust this value in production, or use tracesSampler for greater control.
+  tracesSampleRate: 0.1,
+
+  // Define how likely Replay events are sampled.
+  // This sets the sample rate to be 10%. You may want this to be 100% while
+  // in development and sample at a lower rate in production
+  replaysSessionSampleRate: 0.05,
+
+  // Define how likely Replay events are sampled when an error occurs.
+  replaysOnErrorSampleRate: 1.0,
+
+  // Setting this option to true will print useful information to the console while you're setting up Sentry.
+  debug: false,
+
+  // Optimize payload size
+  maxBreadcrumbs: 50, // Default is 100
+  attachStacktrace: false, // Unless you need full stack traces
 });

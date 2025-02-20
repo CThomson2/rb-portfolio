@@ -21,17 +21,17 @@ BEGIN
     -- Update the order status based on the drum counts
     IF available_drums = 0 THEN
         UPDATE inventory.orders
-        SET delivery_status = 'pending',
+        SET status = 'pending',
             updated_at = CURRENT_TIMESTAMP
         WHERE order_id = NEW.order_id;
     ELSIF available_drums < total_drums THEN
         UPDATE inventory.orders
-        SET delivery_status = 'partial',
+        SET status = 'partial',
             updated_at = CURRENT_TIMESTAMP
         WHERE order_id = NEW.order_id;
     ELSE
         UPDATE inventory.orders
-        SET delivery_status = 'complete',
+        SET status = 'complete',
             updated_at = CURRENT_TIMESTAMP
         WHERE order_id = NEW.order_id;
     END IF;

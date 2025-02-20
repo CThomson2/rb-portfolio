@@ -3,17 +3,18 @@
 // Import necessary dependencies for table functionality
 import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/Checkbox";
-import { SortableColumn, Actions } from "@/components/shared/table";
+import { SortableColumn } from "@/components/shared/table";
+import { Actions } from "./Actions";
 
 // Formatters
 import { format } from "date-fns";
-import { getTxTypeVariant } from "@/lib/utils/formatters";
+import { getTxTypeVariant, getTxTypeColor } from "@/lib/utils/formatters";
 
 // UI Components
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/components/ui/Badge";
 
 // import { MoreHorizontal } from "lucide-react";
-import type { Transaction } from "@/types/database/transactions";
+import type { Transaction } from "@/types/database/inventory/transactions";
 
 // components/features/inventory/TransactionTable/columns.tsx
 
@@ -83,24 +84,29 @@ export const columns: ColumnDef<Transaction>[] = [
     header: ({ column }) => (
       <SortableColumn column={column} title="Direction" />
     ),
-    cell: ({ row }) => (
-      <Badge
-        variant={row.getValue("direction") === "IN" ? "success" : "destructive"}
-      >
-        {row.getValue<string>("direction")}
-      </Badge>
-    ),
+    cell: ({ row }) => {
+      const direction = row.getValue<string>("direction");
+      let variant: "active" | "default" | undefined;
+
+      if (direction === "IN") {
+        variant = "active"; // This will use primary background
+      } else if (direction === "OUT") {
+        variant = "default"; // This will use blue-600 background
+      }
+
+      return direction ? <Badge variant={variant}>{direction}</Badge> : null;
+    },
     enableSorting: true,
   },
   {
     // Actions column for row operations:
     // Expand info | View product Modal
     // Add to cart | Go to Checkout | Favourite
-    accessorKey: "actions",
+    id: "actions",
     header: "Actions",
-    cell: () => (
+    cell: ({ row }) => (
       <div className="min-w-0 overflow-hidden">
-        <Actions />
+        <Actions transaction={row.original} />
       </div>
     ),
   },

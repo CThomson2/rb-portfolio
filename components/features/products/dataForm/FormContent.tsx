@@ -1,4 +1,4 @@
-import { HttpMethodType } from "@/types/constant/form";
+import { HttpMethodType } from "@/types/constant/http";
 import { formConfigurations } from "./formConfigurations";
 
 interface FormField {
@@ -12,7 +12,7 @@ export const FormContent = ({
   activeForm,
   setServerResponse,
 }: {
-  activeForm: HttpMethodType;
+  activeForm: "GET" | "POST" | "PATCH" | "DELETE";
   setServerResponse: React.Dispatch<React.SetStateAction<string>>;
 }) => {
   const formConfig = formConfigurations[activeForm];

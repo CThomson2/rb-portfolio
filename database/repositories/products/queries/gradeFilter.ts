@@ -1,8 +1,8 @@
 // database/repositories/products/queries.ts
 import { prisma } from "@/database/client";
 import type { ProductTableRow } from "@/types/database/products";
-import { Grade } from "@/types/constant/products";
-import type { GradeType } from "@/types/constant/products";
+import { Grade } from "@/types/constant/public/products";
+import type { GradeType } from "@/types/constant/public/products";
 
 // interface FetchProductsOptions {
 //   grade?: string;

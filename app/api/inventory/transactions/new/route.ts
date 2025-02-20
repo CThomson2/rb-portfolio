@@ -16,7 +16,7 @@ import { queries } from "@/database/repositories/transactions";
 export async function POST(req: Request) {
   try {
     // 1) Extract body
-    const transactionData = await req.json(); // e.g., { tx_type: 'import', delivery_id: 123, ... }
+    const transactionData = await req.json(); // e.g., { tx_type: 'intake', delivery_id: 123, ... }
 
     // 2) Create a new record
     const newTx = await queries.createTransaction(transactionData);

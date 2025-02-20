@@ -68,7 +68,7 @@ export async function GET(
 
       // Add a new page for each drum's label
       const page = pdfDoc.addPage([PAGE_WIDTH, PAGE_HEIGHT]);
-      const barcodeImage = await pdfDoc.embedPng(barcodeBuffer);
+      const barcodeImage = await pdfDoc.embedPng(new Uint8Array(barcodeBuffer)); // Fix: Convert buffer to Uint8Array
 
       // Add Supplier and Material text in bold
       page.drawText(`Supplier: ${supplier}`, {

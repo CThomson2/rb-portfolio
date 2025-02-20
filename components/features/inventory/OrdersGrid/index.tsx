@@ -1,21 +1,22 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { queries } from "@/database/repositories/orders/queries";
+import { useState, useEffect, memo } from "react";
 import { BentoGrid } from "@/components/ui/BentoGrid";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { SortingState } from "@tanstack/react-table";
 import Link from "next/link";
 import { ActionButton, SearchBar } from "@/components/shared/table";
 import { GridModal } from "./GridModal";
-import type { Order, OrderGetResponse } from "@/types/database/orders";
-import { useQueryClient } from "@tanstack/react-query";
+import type {
+  Order,
+  OrderGetResponse,
+} from "@/types/database/inventory/orders";
 
 const filterOptions = [
   { label: "All", value: "all" },
   { label: "By Material", value: "material" },
   { label: "By Supplier", value: "supplier" },
-  { label: "By Status", value: "delivery_status" },
+  { label: "By Status", value: "status" },
 ];
 
 const OrdersGrid = () => {
@@ -285,17 +286,20 @@ const OrdersGrid = () => {
                   <strong>Received:</strong> {order.quantity_received || 0}
                 </p>
                 <p>
+                  <strong>PO Number:</strong> {order.po_number || ""}
+                </p>
+                <p>
                   <strong>Status:</strong>{" "}
                   <span
                     className={`${
-                      order.delivery_status === "complete"
+                      order.status === "complete"
                         ? "text-green-400"
-                        : order.delivery_status === "partial"
+                        : order.status === "partial"
                         ? "text-yellow-400"
                         : "text-slate-300"
                     } font-medium`}
                   >
-                    {order.delivery_status}
+                    {order.status}
                   </span>
                 </p>
               </div>
@@ -316,6 +320,26 @@ const OrdersGrid = () => {
         order={selectedOrder}
         isOpen={isModalOpen}
         onClose={handleCloseModal}
+        onOrderUpdate={(updatedOrder) => {
+          // Update the selected order
+          setSelectedOrder(updatedOrder);
+
+          // Update the order in the grid data
+          queryClient.setQueryData<{ rows: Order[]; total: number }>(
+            ["orders", pageIndex, pageSize],
+            (old) => {
+              if (!old) return old;
+              return {
+                ...old,
+                rows: old.rows.map((order) =>
+                  order.order_id === updatedOrder.order_id
+                    ? updatedOrder
+                    : order
+                ),
+              };
+            }
+          );
+        }}
       />
     </div>
   );

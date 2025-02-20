@@ -11,7 +11,7 @@ import ProductGrade from "@/components/features/products/ProductTable/table-data
 import ProductStockLevel from "@/components/features/products/ProductTable/table-data/ProductStockLevel";
 
 import ProjectLastUpdate from "@/components/shared/projects/LastUpdate";
-import { ProjectActions } from "@/components/shared/table/ux/Actions";
+import { Actions } from "@/components/features/inventory/TransactionsTable/Actions";
 import type { ProductTableRow } from "@/types/database/products";
 
 /*
@@ -134,18 +134,18 @@ export const columns: ColumnDef<ProductTableRow>[] = [
     ),
     enableSorting: true,
   },
-  {
-    // Actions column for row operations:
-    // Expand info | View product Modal
-    // Add to cart | Go to Checkout | Favourite
-    accessorKey: "actions",
-    header: "Actions",
-    cell: () => (
-      <div className="min-w-0 overflow-hidden">
-        <ProjectActions />
-      </div>
-    ),
-  },
+  // {
+  //   // Actions column for row operations:
+  //   // Expand info | View product Modal
+  //   // Add to cart | Go to Checkout | Favourite
+  //   accessorKey: "actions",
+  //   header: "Actions",
+  //   cell: () => (
+  //     <div className="min-w-0 overflow-hidden">
+  //       <Actions />
+  //     </div>
+  //   ),
+  // },
   {
     // Status column - can be enhanced with status-based filtering
     accessorKey: "stock_level",

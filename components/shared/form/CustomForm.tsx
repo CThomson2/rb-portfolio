@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import type { FormField } from "@/types/content/form";
-import type { HttpMethodType } from "@/types/constant/form";
+import type { HttpMethodType } from "@/types/constant/http";
 
 export interface CustomFormProps {
   /** The title of the form */

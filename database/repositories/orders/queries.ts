@@ -1,7 +1,12 @@
 import { prisma } from "@/database/client";
-import type { NewOrder, OrderGetResponse } from "@/types/database/orders";
-import { OrderStatus } from "../shared/types";
-import type { OrderQueryParams } from "@/types/database/orders";
+import type {
+  NewOrder,
+  OrderGetResponse,
+  OrderETAStatus,
+} from "@/types/database/inventory/orders";
+import { OrderStatusType } from "@/types/constant/inventory/orders";
+import type { OrderQueryParams } from "@/types/database/inventory/orders";
+
 export const queries = {
   getOrders: async ({
     page = 1,
@@ -28,9 +33,12 @@ export const queries = {
       quantity: row.quantity,
       date_ordered: row.date_ordered?.toISOString(),
       quantity_received: row.quantity_received,
-      delivery_status: row.delivery_status as OrderStatus,
+      status: row.status as OrderStatusType,
       created_at: row.created_at?.toISOString(),
       updated_at: row.updated_at?.toISOString(),
+      po_number: row.po_number,
+      eta_start: row.eta_start?.toISOString(),
+      eta_end: row.eta_end?.toISOString(),
     }));
 
     return { orders, total };
@@ -46,7 +54,7 @@ export const queries = {
     return prisma.orders.create({
       data: {
         ...data,
-        delivery_status: "pending",
+        status: "pending",
         quantity_received: 0,
       },
     });
@@ -75,9 +83,9 @@ export const queries = {
    * @returns An array of orders with a delivery status of "pending"
    */
   getActiveOrders: async () => {
-    return prisma.orders.findMany({
+    const orders = await prisma.orders.findMany({
       where: {
-        delivery_status: {
+        status: {
           in: ["pending", "partial"],
         },
       },
@@ -90,18 +98,42 @@ export const queries = {
         material: true,
         quantity: true,
         quantity_received: true,
-        delivery_status: true,
+        status: true,
+        eta_start: true,
+        eta_end: true,
+        po_number: true,
       },
+    });
+
+    // Calculate eta_status for each order
+    return orders.map((order) => {
+      let eta_status: OrderETAStatus = "tbc";
+
+      if (order.eta_start) {
+        eta_status = "confirmed";
+        if (
+          order.eta_end &&
+          new Date() > order.eta_end &&
+          order.status === "pending"
+        ) {
+          eta_status = "overdue";
+        }
+      }
+
+      return {
+        ...order,
+        eta_status,
+      };
     });
   },
 
-  updateDeliveryStatus: async (orderId: number, status: OrderStatus) => {
+  updateDeliveryStatus: async (orderId: number, status: OrderStatusType) => {
     return prisma.orders.update({
       where: {
         order_id: orderId,
       },
       data: {
-        delivery_status: status,
+        status: status,
       },
     });
   },

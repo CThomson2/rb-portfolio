@@ -3,10 +3,10 @@ import { Inter } from "next/font/google";
 import { Menu } from "lucide-react";
 
 import "./globals.css";
-import { Providers } from "./providers";
+import { Providers } from "@/app/providers";
 import { Sidebar } from "@/components/layout/sidebar/Sidebar";
 import { FloatingNav } from "@/components/ui/FloatingNavbar";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { navItems } from "@/content/main";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -47,7 +47,7 @@ export default function RootLayout({
             <FloatingNav navItems={navItems} />
 
             {/* Main content area */}
-            <main className="pt-14">{children}</main>
+            <main className="min-h-screen bg-background">{children}</main>
 
             {/* Sidebar is included globally but controlled via a client component */}
             <Sidebar />
