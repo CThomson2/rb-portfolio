@@ -7,7 +7,7 @@ import {
   SortingState,
   flexRender,
 } from "@tanstack/react-table";
-import { Table, TableBody, TableCell, TableRow } from "@/components/ui/Table";
+import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import {
   TableHeader,
   TableFooter,

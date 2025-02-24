@@ -23,24 +23,24 @@ import {
   CheckCircle2,
   Circle,
 } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/LButton";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/Dialog";
+} from "@/components/ui/LDialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/DropdownMenu";
+} from "@/components/ui/LDropdownMenu";
 import { format } from "date-fns";
-import { Badge } from "@/components/ui/Badge";
-import { Separator } from "@/components/ui/Separator";
-import { ScrollArea } from "@/components/ui/ScrollArea";
+import { Badge } from "@/components/ui/LBadge";
+import { Separator } from "@/components/ui/LSeparator";
+import { ScrollArea } from "@/components/ui/LScrollArea";
 import { getTxTypeVariant } from "@/lib/utils/formatters";
 import type {
   Transaction,

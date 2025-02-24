@@ -12,7 +12,7 @@ import {
   flexRender,
 } from "@tanstack/react-table";
 import { columns } from "./columns";
-import { Table, TableBody, TableCell, TableRow } from "@/components/ui/Table";
+import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import {
   TableHeader,
   TableFooter,

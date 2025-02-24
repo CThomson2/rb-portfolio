@@ -5,8 +5,8 @@ import { Menu } from "lucide-react";
 import "./globals.css";
 import { Providers } from "@/app/providers";
 import { Sidebar } from "@/components/layout/sidebar/Sidebar";
-import { FloatingNav } from "@/components/ui/FloatingNavbar";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { FloatingNav } from "@/components/ui/LFloatingNavbar";
+import { ThemeToggle } from "@/components/ui/LThemeToggle";
 import { navItems } from "@/content/main";
 
 const inter = Inter({ subsets: ["latin"] });
